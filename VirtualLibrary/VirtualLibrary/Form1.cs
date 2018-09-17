@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace VirtualLibrary
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form     //Pagrindinis Langas, reikes veliau gal padaryt forgot password arba login with username UI
     {
         private LogicController LogicC = new LogicController();
         public Form1()

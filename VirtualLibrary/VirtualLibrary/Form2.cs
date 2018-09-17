@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace VirtualLibrary
 {
-    public partial class Form2 : Form
+    public partial class Form2 : Form    //Register Langas, padarysiu irgi su face recognition
     {
         private LogicController LogicC;
         public Form2(LogicController LogicC)

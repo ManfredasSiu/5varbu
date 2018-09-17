@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VirtualLibrary
 {
-    static class StaticData  
+    static class StaticData  //Visi uzkrauti duomenys
     {
 
 
