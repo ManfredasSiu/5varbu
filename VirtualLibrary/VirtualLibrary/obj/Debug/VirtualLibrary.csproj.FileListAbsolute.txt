@@ -1,0 +1,11 @@
+C:\Users\manfr\source\repos\VirtualLibrary\VirtualLibrary\bin\Debug\VirtualLibrary.exe.config
+C:\Users\manfr\source\repos\VirtualLibrary\VirtualLibrary\bin\Debug\VirtualLibrary.exe
+C:\Users\manfr\source\repos\VirtualLibrary\VirtualLibrary\bin\Debug\VirtualLibrary.pdb
+C:\Users\manfr\source\repos\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.csprojAssemblyReference.cache
+C:\Users\manfr\source\repos\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.Form1.resources
+C:\Users\manfr\source\repos\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.Properties.Resources.resources
+C:\Users\manfr\source\repos\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.csproj.GenerateResource.cache
+C:\Users\manfr\source\repos\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.csproj.CoreCompileInputs.cache
+C:\Users\manfr\source\repos\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.exe
+C:\Users\manfr\source\repos\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.pdb
+C:\Users\manfr\source\repos\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.Form2.resources
