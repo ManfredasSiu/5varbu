@@ -24,3 +24,20 @@ C:\Users\manfr\OneDrive\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\bi
 C:\Users\manfr\OneDrive\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\bin\Debug\Emgu.CV.UI.xml
 C:\Users\manfr\OneDrive\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\bin\Debug\Emgu.Util.xml
 C:\Users\manfr\OneDrive\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.csproj.CopyComplete
+<<<<<<< HEAD
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\bin\Debug\VirtualLibrary.exe.config
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\bin\Debug\VirtualLibrary.exe
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\bin\Debug\Emgu.CV.xml
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\bin\Debug\Emgu.CV.UI.xml
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\bin\Debug\Emgu.Util.xml
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.csprojAssemblyReference.cache
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.Form1.resources
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.Form2.resources
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.Properties.Resources.resources
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.csproj.GenerateResource.cache
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.csproj.CoreCompileInputs.cache
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.csproj.CopyComplete
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.exe
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.pdb
+=======
+>>>>>>> 547a7d98d56009b1280c76ab5a91f77261b87a02
