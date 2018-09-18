@@ -41,3 +41,5 @@ C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\V
 C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.pdb
 =======
 >>>>>>> 547a7d98d56009b1280c76ab5a91f77261b87a02
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\bin\Debug\VirtualLibrary.pdb
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.MainWindow.resources

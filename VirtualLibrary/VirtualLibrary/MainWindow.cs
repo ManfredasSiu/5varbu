@@ -12,6 +12,11 @@ namespace VirtualLibrary
 {
     public partial class MainWindow : Form
     {
+        private void ShowMyBooks(object sender, EventArgs e)
+        {
+            MessageBox.Show("pavyko");
+        }
+
         private LogicController logicC;
         public MainWindow(LogicController logicC)
         {

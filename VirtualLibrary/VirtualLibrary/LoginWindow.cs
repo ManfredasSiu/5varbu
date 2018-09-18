@@ -21,6 +21,8 @@ namespace VirtualLibrary
 
         public void FaceRecognition()
         {
+
+
             if (true)//Kolkas, Kol neidejau face Recognitiono
             {
                 this.Hide();
