@@ -65,7 +65,7 @@ namespace VirtualLibrary
                 if (StaticData.training.ToArray().Length != 0)
                 {
                     MCvTermCriteria termCriteria = new MCvTermCriteria(StaticData.numLablels, 0.001);
-                    EigenObjectRecognizer recognizer = new EigenObjectRecognizer(StaticData.training.ToArray(), StaticData.labels.ToArray(), 1500, ref termCriteria);
+                    EigenObjectRecognizer recognizer = new EigenObjectRecognizer(StaticData.training.ToArray(), StaticData.labels.ToArray(), 2000, ref termCriteria);
                     name = recognizer.Recognize(result);
                     frame.Draw(name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Red));
                 }
@@ -109,7 +109,7 @@ namespace VirtualLibrary
             User thisUser = new User(textBox1.Text, textBox2.Text);
             StaticData.CurrentUser = thisUser;
             LogicC.SaveFaceData();
-            this.Close();
+           // this.Close();
             /*File.WriteAllText(Application.StartupPath + "/faces/faces.txt", StaticData.training.ToArray().Length + ",");
             for (int i = 1; i <= StaticData.numLablels; i++)
             {
