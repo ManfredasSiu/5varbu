@@ -13,9 +13,12 @@ namespace VirtualLibrary
     public partial class LoginWindow : Form
     {
         private LogicController logicC;
-        public LoginWindow(LogicController logicC)
+        private Form1 main;
+
+        public LoginWindow(LogicController logicC, Form1 main)
         {
             InitializeComponent();
+            this.main = main;
             this.logicC = logicC;
         }
 

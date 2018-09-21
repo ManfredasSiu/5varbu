@@ -54,6 +54,7 @@
             this.RegisterButt.TabIndex = 3;
             this.RegisterButt.Text = "Register";
             this.RegisterButt.UseVisualStyleBackColor = true;
+            this.RegisterButt.Click += new System.EventHandler(this.RegisterButton_CLicked);
             // 
             // textBox1
             // 

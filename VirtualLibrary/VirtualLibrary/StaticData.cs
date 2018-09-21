@@ -12,6 +12,8 @@ namespace VirtualLibrary
     {
         public static List<Image<Gray, byte>> training = new List<Image<Gray, byte>>();
         public static List<string> labels = new List<string>();
+        public static int numLablels;
+        public static User CurrentUser;
         //labas
     }
 }

@@ -68,8 +68,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.ImageList imageList2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
     }

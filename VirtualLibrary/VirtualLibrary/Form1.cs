@@ -21,14 +21,14 @@ namespace VirtualLibrary
         private void RegisterButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Form2 registerFaceWindow = new Form2(LogicC);
+            Form2 registerFaceWindow = new Form2(LogicC, this);
             registerFaceWindow.Show();
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var LoginW = new LoginWindow(LogicC);
+            var LoginW = new LoginWindow(LogicC, this);
             LoginW.Show();
             LoginW.FaceRecognition();
         }
