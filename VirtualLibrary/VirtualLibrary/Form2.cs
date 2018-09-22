@@ -50,10 +50,14 @@ namespace VirtualLibrary
         private void OnCloseRequest(object sender, EventArgs e)
         {
             main.Show();
+            cam.Dispose();
+            Application.Idle -= FrameProcedure;
         }
 
         private void FrameProcedure(object sender, EventArgs e)
         {
+            if (cam.Equals(null))
+                return;
             frame = cam.QueryFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
             imageBox1.Image = frame;
             GrayFace = frame.Convert<Gray, Byte>();
@@ -109,7 +113,12 @@ namespace VirtualLibrary
             User thisUser = new User(textBox1.Text, textBox2.Text);
             StaticData.CurrentUser = thisUser;
             LogicC.SaveFaceData();
-           // this.Close();
+            
+            //this.Close();
+            //cam.Dispose();
+            //Application.Idle -= FrameProcedure;
+                 //Sitie reikalingi
+            
             /*File.WriteAllText(Application.StartupPath + "/faces/faces.txt", StaticData.training.ToArray().Length + ",");
             for (int i = 1; i <= StaticData.numLablels; i++)
             {
