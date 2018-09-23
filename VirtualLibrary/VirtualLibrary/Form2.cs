@@ -79,12 +79,12 @@ namespace VirtualLibrary
 
         private void RegisterButton_CLicked(object sender, EventArgs e)
         {
-            if(textBox1.Text == "" || textBox2.Text == "")
+            if (textBox1.Text == "" || textBox2.Text == "")
             {
                 MessageBox.Show("Username or password is left empty");
                 return;
             }
-            else if(textBox1.Text[0] == ' ' || textBox2.Text[0] == ' ')
+            else if (textBox1.Text[0] == ' ' || textBox2.Text[0] == ' ')
             {
                 MessageBox.Show("Username or pasword can't start with a space");
                 return;
@@ -100,7 +100,10 @@ namespace VirtualLibrary
             GrayFace = cam.QueryGrayFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
             MCvAvgComp[][] DetectedFaces = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
             if (DetectedFaces[0].Length == 0)
+            { 
+                MessageBox.Show("Veidas nerastas, bandykite dar karta");
                 return;
+            }
             foreach (MCvAvgComp f in DetectedFaces[0])
             {
                 TrainImg = frame.Copy(f.rect).Convert<Gray, byte>();

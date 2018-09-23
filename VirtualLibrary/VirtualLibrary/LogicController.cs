@@ -12,12 +12,12 @@ namespace VirtualLibrary
 {
     public class LogicController//TODO:Reikia metodu failu su duomenim sukurimui ir loadinimui i kazkokius tai listus, parametras - prisijungimo vardas
     {//TODO: duomenis krauti i StaticData klase, sukurti ten reikiamus duomenu tipus
-        public LogicController()
+        public LogicController() //TODO: LOAD USER DATA; LOAD ALL BOOKS ;; SAVE USER DATA; SAVE ALL BOOKS
         {
-            LoadFaceData(); //Veidu loadinimui skirtas metodas, papildysiu pats - Manfredas
+            LoadFaceData(); 
         }
 
-        public void LoadFaceData()
+        public void LoadFaceData()//Loadina veidus
         {
             try
             {

@@ -30,7 +30,6 @@ namespace VirtualLibrary
             this.Hide();
             var LoginW = new LoginWindow(LogicC, this);
             LoginW.Show();
-            LoginW.FaceRecognition();
         }
     }
 }

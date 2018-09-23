@@ -10,6 +10,9 @@ namespace VirtualLibrary
     {
         private String userName, passWord, email;
 
+        private Book userBooks;
+
+
         public User(String userName, String passWord)
         {
             this.userName = userName;
