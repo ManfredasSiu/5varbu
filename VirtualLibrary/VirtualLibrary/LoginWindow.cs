@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace VirtualLibrary
 {
     public partial class LoginWindow : Form
@@ -41,7 +42,7 @@ namespace VirtualLibrary
         private void OnCloseRequest(object sender, EventArgs e)
         {
             main.Show();
-            MessageBox.Show("Didn't find your face :( Try again, or Register");
+            MessageBox.Show("Didn't find your face :( Try again or Register");
             cam.Dispose();
             Application.Idle -= FaceRecognition;
         }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Speech.Recognition;
 
 namespace VirtualLibrary
 {
@@ -16,20 +17,31 @@ namespace VirtualLibrary
         public Form1()
         {
             InitializeComponent();
+            //VoiceRecognition VRec = new VoiceRecognition(this);
         }
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Form2 registerFaceWindow = new Form2(LogicC, this);
-            registerFaceWindow.Show();
+            Register();
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
+            Login();
+        }
+
+        public void Login()
+        {
             this.Hide();
             var LoginW = new LoginWindow(LogicC, this);
             LoginW.Show();
+        }
+
+        public void Register()
+        {
+            this.Hide();
+            Form2 registerFaceWindow = new Form2(LogicC, this);
+            registerFaceWindow.Show();
         }
     }
 }
