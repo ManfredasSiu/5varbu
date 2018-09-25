@@ -37,9 +37,7 @@ namespace VirtualLibrary
             }
             catch(Exception e)
             {
-                TransitionToMainW("debug");
-                StaticData.CurrentUser = new User("Debug", "Debug");
-                return;
+                cam = null;
             }
                 this.logicC = logicC;
             faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
@@ -72,6 +70,12 @@ namespace VirtualLibrary
                  MainWindow registerFaceWindow = new MainWindow(logicC);
                  registerFaceWindow.Show();
              }*/
+             if(cam == null)
+             {
+                StaticData.CurrentUser = new User("Debug", "Debug");
+                TransitionToMainW("debug");
+                return;
+             }
             frame = cam.QueryFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
             Camera.Image = frame;
             GrayFace = frame.Convert<Gray, Byte>();
@@ -89,7 +93,6 @@ namespace VirtualLibrary
                     {
                         StaticData.CurrentUser = new User(name, "fsdfsdgsd");
                         TransitionToMainW(name);
-                        Application.Idle -= FaceRecognition;
                     }
                     frame.Draw(name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Red));
                 }
