@@ -52,7 +52,7 @@ namespace VirtualLibrary
             main.Show();
             MessageBox.Show("Didn't find your face :( Try again or Register");
             cam.Dispose();
-            Application.Idle -= FaceRecognition;
+            
         }
 
         private void TransitionToMainW(string name)
@@ -88,6 +88,7 @@ namespace VirtualLibrary
                     {
                         StaticData.CurrentUser = new User(name, "fsdfsdgsd");
                         TransitionToMainW(name);
+                        Application.Idle -= FaceRecognition;
                     }
                     frame.Draw(name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Red));
                 }
