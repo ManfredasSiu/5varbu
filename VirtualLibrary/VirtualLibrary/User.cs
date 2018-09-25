@@ -19,5 +19,10 @@ namespace VirtualLibrary
             this.passWord = passWord;
         }
 
+        public String getuserName()
+        {
+            return this.userName;
+        }
+
     }
 }

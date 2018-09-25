@@ -47,7 +47,7 @@ namespace VirtualLibrary
             Application.Idle -= FaceRecognition;
         }
 
-        private void TransitionToMainW()
+        private void TransitionToMainW(string name)
         {
             this.Hide();
             mainW = new MainWindow(logicC);
@@ -78,7 +78,8 @@ namespace VirtualLibrary
                     name = recognizer.Recognize(result);
                     if (!name.Equals(""))
                     {
-                        TransitionToMainW();
+                        StaticData.CurrentUser = new User(name, "fsdfsdgsd");
+                        TransitionToMainW(name);
                     }
                     frame.Draw(name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Red));
                 }

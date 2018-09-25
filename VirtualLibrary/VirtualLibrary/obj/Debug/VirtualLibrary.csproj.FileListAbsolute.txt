@@ -58,3 +58,4 @@ C:\Users\manfr\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\V
 C:\Users\manfr\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.pdb
 C:\Users\manfr\OneDrive\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.LoginWindow.resources
 C:\Users\manfr\OneDrive\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.MainWindow.resources
+C:\Users\manta\Documents\GitHub\5varbu\VirtualLibrary\VirtualLibrary\obj\Debug\VirtualLibrary.LoginWindow.resources

@@ -48,7 +48,7 @@
             // 
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F);
-            this.button2.Location = new System.Drawing.Point(41, 184);
+            this.button2.Location = new System.Drawing.Point(42, 160);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(238, 77);
             this.button2.TabIndex = 1;
@@ -58,7 +58,7 @@
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(321, 444);
+            this.ClientSize = new System.Drawing.Size(335, 444);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "Form1";

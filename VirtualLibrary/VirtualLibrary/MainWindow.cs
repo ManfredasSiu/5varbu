@@ -12,6 +12,8 @@ namespace VirtualLibrary
 {
     public partial class MainWindow : Form
     {
+    
+
         private void ShowMyBooks(object sender, EventArgs e)
         {
             MessageBox.Show("pavyko");
@@ -21,7 +23,13 @@ namespace VirtualLibrary
         public MainWindow(LogicController logicC)
         {
             InitializeComponent();
+            label2.Text = ("Hello, " + StaticData.CurrentUser.getuserName() + "!");
             this.logicC = logicC;
+        }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+       
         }
     }
 }

@@ -48,7 +48,7 @@
             // 
             // RegisterButt
             // 
-            this.RegisterButt.Location = new System.Drawing.Point(12, 24);
+            this.RegisterButt.Location = new System.Drawing.Point(384, 25);
             this.RegisterButt.Name = "RegisterButt";
             this.RegisterButt.Size = new System.Drawing.Size(75, 23);
             this.RegisterButt.TabIndex = 3;
