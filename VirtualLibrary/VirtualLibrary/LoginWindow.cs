@@ -38,6 +38,7 @@ namespace VirtualLibrary
             catch(Exception e)
             {
                 TransitionToMainW("debug");
+                StaticData.CurrentUser = new User("Debug", "Debug");
                 return;
             }
                 this.logicC = logicC;
