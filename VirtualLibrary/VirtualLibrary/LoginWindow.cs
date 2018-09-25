@@ -18,7 +18,7 @@ namespace VirtualLibrary
         private LogicController logicC;
         private Form1 main;
         Image<Gray, byte> GrayFace = null;
-        Image<Bgr, Byte> frame;
+        Image<Bgr, Byte> frame= null;
         string name = "";
         Capture cam;
         HaarCascade faceDetect;
@@ -39,7 +39,7 @@ namespace VirtualLibrary
             {
                 cam = null;
             }
-                this.logicC = logicC;
+            this.logicC = logicC;
             faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
             StartTime = DateTime.Now.TimeOfDay.Seconds;
             this.FormClosing += OnCloseRequest;
@@ -49,9 +49,9 @@ namespace VirtualLibrary
         private void OnCloseRequest(object sender, EventArgs e)
         {
             main.Show();
-            MessageBox.Show("Didn't find your face :( Try again or Register");
+            MessageBox.Show("Didn't find your face :( \n Try again or Register");
             cam.Dispose();
-            
+            Application.Idle -= FaceRecognition;
         }
 
         private void TransitionToMainW(string name)
@@ -80,6 +80,10 @@ namespace VirtualLibrary
             Camera.Image = frame;
             GrayFace = frame.Convert<Gray, Byte>();
             MCvAvgComp[][] facesDetectedNow = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(640 / 4, 480 / 4));
+            if (facesDetectedNow[0].Length > 1)
+            {
+                MessageBox.Show("Too many faces");
+            }
             foreach (MCvAvgComp f in facesDetectedNow[0])
             {
                 result = frame.Copy(f.rect).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
@@ -87,7 +91,7 @@ namespace VirtualLibrary
                 if (StaticData.training.ToArray().Length != 0)
                 {
                     MCvTermCriteria termCriteria = new MCvTermCriteria(StaticData.numLablels, 0.001);
-                    EigenObjectRecognizer recognizer = new EigenObjectRecognizer(StaticData.training.ToArray(), StaticData.labels.ToArray(), 2000, ref termCriteria);
+                    EigenObjectRecognizer recognizer = new EigenObjectRecognizer(StaticData.training.ToArray(), StaticData.labels.ToArray(), 1000, ref termCriteria);
                     name = recognizer.Recognize(result);
                     if (!name.Equals(""))
                     {
@@ -99,8 +103,11 @@ namespace VirtualLibrary
             }
             Camera.Image = frame;
             EndTime = DateTime.Now.TimeOfDay.Seconds;
-            if (EndTime - StartTime == 10 || EndTime - StartTime == -50)
+            if (EndTime - StartTime >= 10 || (EndTime - StartTime >= -50 && EndTime - StartTime < 0))
+            {
+                this.Hide();
                 Close();
+            }
         }
     }
 }

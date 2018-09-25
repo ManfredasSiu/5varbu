@@ -24,21 +24,17 @@ namespace VirtualLibrary
         Image<Gray, byte> TrainImg = null;
         Image<Gray, byte> GrayFace = null;
 
+        string name;
 
-        // List<string> users = new List<string>();
-        //  int count = 0, numLablels, t;
-        string name, names = null;
-
+        private int Hei = 640, Len = 480;
         private LogicController LogicC;
         private Form1 main;
 
         public Form2(LogicController LogicC, Form1 main)
         {
             InitializeComponent();
-
             this.main = main;
             this.LogicC = LogicC;
-
             faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
             this.FormClosing += OnCloseRequest;
             cam = new Capture();
@@ -74,11 +70,20 @@ namespace VirtualLibrary
                     frame.Draw(name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Red));
                 }
             }
-            imageBox1.Image = frame;
+            imageBox1.Image = frame.Resize(Hei, Len, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
         }
 
         private void RegisterButton_CLicked(object sender, EventArgs e)
         {
+            /*var redDot = new PictureBox
+            {
+                Name = "RedDot",
+                Size = new Size(640,640),
+                Image = Image.FromFile(Application.StartupPath + "/Images/RedPoint.png"),
+            };
+            this.Controls.Add(redDot);
+            Console.WriteLine(this.Height + " " + this.Width);
+            redDot.Location = new Point(600, 0);*/
             if (textBox1.Text == "" || textBox2.Text == "")
             {
                 MessageBox.Show("Username or password is left empty");
@@ -97,6 +102,7 @@ namespace VirtualLibrary
                     // return;
                 }
             }
+            
             GrayFace = cam.QueryGrayFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
             MCvAvgComp[][] DetectedFaces = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
             if (DetectedFaces[0].Length == 0)
@@ -104,6 +110,17 @@ namespace VirtualLibrary
                 MessageBox.Show("Veidas nerastas, bandykite dar karta");
                 return;
             }
+            else if(DetectedFaces[0].Length > 1)
+            {
+                MessageBox.Show("Kadre perdaug veidu");
+                return;
+            }
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
+            panel1.Hide();
+            imageBox1.Location = new Point(imageBox1.Location.X, imageBox1.Location.Y - 50);
+            Hei = 320; Len = 240;
+           
             foreach (MCvAvgComp f in DetectedFaces[0])
             {
                 TrainImg = frame.Copy(f.rect).Convert<Gray, byte>();
@@ -116,20 +133,11 @@ namespace VirtualLibrary
             User thisUser = new User(textBox1.Text, textBox2.Text);
             StaticData.CurrentUser = thisUser;
             LogicC.SaveFaceData();
-            
-            //this.Close();
-            //cam.Dispose();
-            //Application.Idle -= FrameProcedure;
-                 //Sitie reikalingi
-            
-            /*File.WriteAllText(Application.StartupPath + "/faces/faces.txt", StaticData.training.ToArray().Length + ",");
-            for (int i = 1; i <= StaticData.numLablels; i++)
-            {
-                StaticData.training.ToArray()[i - 1].Save(Application.StartupPath + "/faces/face" + i + ".bmp");
-                File.AppendAllText(Application.StartupPath + "/faces/faces.txt", StaticData.labels.ToArray()[i - 1] + ",");
-            }*/
+        }
 
-            //MessageBox.Show(textBox1.Text + ", Welcome.");
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
