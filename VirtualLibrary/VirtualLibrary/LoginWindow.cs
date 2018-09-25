@@ -31,8 +31,16 @@ namespace VirtualLibrary
         {
             InitializeComponent();
             this.main = main;
-            cam = new Capture();
-            this.logicC = logicC;
+            try
+            {
+                cam = new Capture();
+            }
+            catch(Exception e)
+            {
+                TransitionToMainW("debug");
+                return;
+            }
+                this.logicC = logicC;
             faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
             StartTime = DateTime.Now.TimeOfDay.Seconds;
             this.FormClosing += OnCloseRequest;
