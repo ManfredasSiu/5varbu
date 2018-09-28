@@ -47,7 +47,8 @@ namespace VirtualLibrary
 
         private void OnCloseRequest(object sender, EventArgs e)
         {
-            main.Show();
+            if(StaticData.CurrentUser == null)
+                main.Show();
             cam.Dispose();
             Application.Idle -= FrameProcedure;
         }
