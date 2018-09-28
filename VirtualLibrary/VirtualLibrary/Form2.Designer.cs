@@ -38,6 +38,7 @@
             this.Cancel = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Information = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -115,11 +116,22 @@
             this.panel1.Size = new System.Drawing.Size(346, 69);
             this.panel1.TabIndex = 10;
             // 
+            // Information
+            // 
+            this.Information.AutoSize = true;
+            this.Information.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.Information.ForeColor = System.Drawing.Color.Black;
+            this.Information.Location = new System.Drawing.Point(12, 350);
+            this.Information.Name = "Information";
+            this.Information.Size = new System.Drawing.Size(0, 36);
+            this.Information.TabIndex = 12;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Information);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.imageBox1);
             this.Name = "Form2";
@@ -128,6 +140,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -142,5 +155,6 @@
         private System.Windows.Forms.Button Cancel;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label Information;
     }
 }
