@@ -64,13 +64,6 @@ namespace VirtualLibrary
             {
                 result = frame.Copy(f.rect).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
                 frame.Draw(f.rect, new Bgr(Color.Green), 3);
-                if (StaticData.training.ToArray().Length != 0)
-                {
-                    MCvTermCriteria termCriteria = new MCvTermCriteria(StaticData.numLablels, 0.001);
-                    EigenObjectRecognizer recognizer = new EigenObjectRecognizer(StaticData.training.ToArray(), StaticData.labels.ToArray(), 2000, ref termCriteria);
-                    //name = recognizer.Recognize(result);
-                    //frame.Draw(name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Red));
-                }
             }
             imageBox1.Image = frame.Resize(Hei, Len, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
         }
@@ -101,7 +94,7 @@ namespace VirtualLibrary
 
             User thisUser = new User(textBox1.Text, textBox2.Text);
             StaticData.CurrentUser = thisUser;
-            /*
+            /* // Palikau jei kas neveiktu. bet greit istrinsiu
             if (textBox1.Text == "" || textBox2.Text == "")
             {
                 MessageBox.Show("Username or password is left empty");
@@ -222,8 +215,6 @@ namespace VirtualLibrary
             int iterator = 0;
             while (iterator < 10)
             {
-                //GrayFace = cam.QueryGrayFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-                //MCvAvgComp[][] DetectedFaces = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
                 if (facesDetectedNow[0].Length == 1)
                 {
                     Information.Invoke(new ChangeText(ChText), "Sekite Taska");
@@ -260,6 +251,7 @@ namespace VirtualLibrary
 
         private void closeThisFormFromAnotherThread()
         {
+            main.OpenMainWindow();
             this.Close();
         }
 

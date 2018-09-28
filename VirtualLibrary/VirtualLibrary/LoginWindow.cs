@@ -48,33 +48,27 @@ namespace VirtualLibrary
 
         private void OnCloseRequest(object sender, EventArgs e)
         {
-            main.Show();
-            if(StaticData.CurrentUser == null)
+            if (StaticData.CurrentUser == null)
+            {
+                main.Show();
                 MessageBox.Show("Didn't find your face :( \n Try again or Register");
+            }
             cam.Dispose();
             Application.Idle -= FaceRecognition;
         }
 
-        private void TransitionToMainW(string name)
+        private void TransitionToMainW()
         {
-            this.Hide();
-            mainW = new MainWindow(logicC);
-            mainW.Show();
-            Application.Idle -= FaceRecognition;
+            main.OpenMainWindow();
+            this.Close();
         }
 
         public void FaceRecognition(object sender, EventArgs e)
-        {                       // Jeigu neleidzia prisijungti atkomentuokit zemiau esanti if bloka
-            /* if (true)//Kolkas, Kol neidejau face Recognitiono
-             {
-                 this.Hide();
-                 MainWindow registerFaceWindow = new MainWindow(logicC);
-                 registerFaceWindow.Show();
-             }*/
+        {                      
              if(cam == null)
              {
                 StaticData.CurrentUser = new User("Debug", "Debug");
-                TransitionToMainW("debug");
+                TransitionToMainW();
                 return;
              }
             frame = cam.QueryFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
@@ -97,7 +91,7 @@ namespace VirtualLibrary
                     if (!name.Equals(""))
                     {
                         StaticData.CurrentUser = new User(name, "fsdfsdgsd");
-                        TransitionToMainW(name);
+                        TransitionToMainW();
                     }
                     frame.Draw(name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Red));
                 }

@@ -14,6 +14,8 @@ namespace VirtualLibrary
     public partial class Form1 : Form     //Pagrindinis Langas, reikes veliau gal padaryt forgot password arba login with username UI
     {
         private LogicController LogicC = new LogicController();
+        private MainWindow mainW;
+
         public Form1()
         {
             InitializeComponent();
@@ -28,6 +30,13 @@ namespace VirtualLibrary
         private void LoginButton_Click(object sender, EventArgs e)
         {
             Login();
+        }
+
+        public void OpenMainWindow()
+        {
+            this.Hide();
+            mainW = new MainWindow(LogicC);
+            mainW.Show();
         }
 
         public void Login()
