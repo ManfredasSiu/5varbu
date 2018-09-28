@@ -49,7 +49,8 @@ namespace VirtualLibrary
         private void OnCloseRequest(object sender, EventArgs e)
         {
             main.Show();
-            MessageBox.Show("Didn't find your face :( \n Try again or Register");
+            if(StaticData.CurrentUser == null)
+                MessageBox.Show("Didn't find your face :( \n Try again or Register");
             cam.Dispose();
             Application.Idle -= FaceRecognition;
         }

@@ -24,6 +24,7 @@ namespace VirtualLibrary
         Image<Gray, byte> TrainImg = null;
         Image<Gray, byte> GrayFace = null;
         PictureBox redDot = new PictureBox();
+        MCvAvgComp[][] facesDetectedNow;
 
         string name;
 
@@ -58,7 +59,7 @@ namespace VirtualLibrary
             frame = cam.QueryFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
             imageBox1.Image = frame;
             GrayFace = frame.Convert<Gray, Byte>();
-            MCvAvgComp[][] facesDetectedNow = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(640/4, 480/4));
+            facesDetectedNow = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(640/4, 480/4));
             foreach (MCvAvgComp f in facesDetectedNow[0])
             {
                 result = frame.Copy(f.rect).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
@@ -67,8 +68,8 @@ namespace VirtualLibrary
                 {
                     MCvTermCriteria termCriteria = new MCvTermCriteria(StaticData.numLablels, 0.001);
                     EigenObjectRecognizer recognizer = new EigenObjectRecognizer(StaticData.training.ToArray(), StaticData.labels.ToArray(), 2000, ref termCriteria);
-                    name = recognizer.Recognize(result);
-                    frame.Draw(name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Red));
+                    //name = recognizer.Recognize(result);
+                    //frame.Draw(name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Red));
                 }
             }
             imageBox1.Image = frame.Resize(Hei, Len, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
@@ -77,15 +78,15 @@ namespace VirtualLibrary
         private void RegisterButton_CLicked(object sender, EventArgs e)
         {
             if(CheckTheTB() == 1) return;
-
-            GrayFace = cam.QueryGrayFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-            MCvAvgComp[][] DetectedFaces = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
-            if (DetectedFaces[0].Length == 0)
+            //GrayFace = cam.QueryGrayFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+            //facesDetectedNow = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
+            
+            if (facesDetectedNow[0].Length == 0)
             {
                 MessageBox.Show("Veidas nerastas, bandykite dar karta");
                 return;
             }
-            else if (DetectedFaces[0].Length > 1)
+            else if (facesDetectedNow[0].Length > 1)
             {
                 MessageBox.Show("Kadre perdaug veidu");
                 return;
@@ -221,14 +222,15 @@ namespace VirtualLibrary
             int iterator = 0;
             while (iterator < 10)
             {
-                GrayFace = cam.QueryGrayFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-                MCvAvgComp[][] DetectedFaces = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
-                if (DetectedFaces[0].Length == 1)
+                //GrayFace = cam.QueryGrayFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+                //MCvAvgComp[][] DetectedFaces = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
+                if (facesDetectedNow[0].Length == 1)
                 {
                     Information.Invoke(new ChangeText(ChText), "Sekite Taska");
-                    foreach (MCvAvgComp f in DetectedFaces[0])
+                    foreach (MCvAvgComp f in facesDetectedNow[0])
                     {
                         StaticData.training.Add(frame.Copy(f.rect).Convert<Gray, byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC));
+                        StaticData.labels.Add(textBox1.Text);
                         StaticData.numLablels++;
                         iterator++;
                         break;
@@ -251,6 +253,13 @@ namespace VirtualLibrary
                 else { Information.Invoke(new ChangeText(ChText), "Kadras netinkamas registracijai"); }
             }
             LogicC.SaveFaceData();
+            this.Invoke(new closeForm(closeThisFormFromAnotherThread));
+        }
+
+        public delegate void closeForm();
+
+        private void closeThisFormFromAnotherThread()
+        {
             this.Close();
         }
 
