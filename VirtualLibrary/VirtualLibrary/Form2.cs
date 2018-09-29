@@ -39,9 +39,24 @@ namespace VirtualLibrary
             this.LogicC = LogicC;
             faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
             this.FormClosing += OnCloseRequest;
-            cam = new Capture();
-            cam.QueryFrame();
-            Application.Idle += new EventHandler(FrameProcedure);
+            try
+            {
+                cam = new Capture();
+            }
+            catch(Exception e)
+            {
+                cam = null;
+            }
+            if (cam != null)
+            {
+                cam.QueryFrame();
+                Application.Idle += new EventHandler(FrameProcedure);
+            }
+            else
+            {
+                MessageBox.Show("Neturi kameros, arba ji blogai prijungta, registracija negalima");
+                this.Close();
+            }
         }
 
 
@@ -72,8 +87,6 @@ namespace VirtualLibrary
         private void RegisterButton_CLicked(object sender, EventArgs e)
         {
             if(CheckTheTB() == 1) return;
-            //GrayFace = cam.QueryGrayFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-            //facesDetectedNow = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
             
             if (facesDetectedNow[0].Length == 0)
             {
@@ -216,9 +229,12 @@ namespace VirtualLibrary
             int iterator = 0;
             while (iterator < 10)
             {
+                this.Invoke(new ChangeBackColor(ChangeColor), Color.Green);
                 if (facesDetectedNow[0].Length == 1)
                 {
                     Information.Invoke(new ChangeText(ChText), "Sekite Taska");
+                    if (iterator == 0)
+                        Thread.Sleep(3000);
                     foreach (MCvAvgComp f in facesDetectedNow[0])
                     {
                         StaticData.training.Add(frame.Copy(f.rect).Convert<Gray, byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC));
@@ -242,10 +258,21 @@ namespace VirtualLibrary
                         Thread.Sleep(3000);
                     }
                 }
-                else { Information.Invoke(new ChangeText(ChText), "Kadras netinkamas registracijai"); }
+                else
+                {
+                    Information.Invoke(new ChangeText(ChText), "Kadras netinkamas registracijai");
+                    this.Invoke(new ChangeBackColor(ChangeColor), Color.Red);
+                }
             }
             LogicC.SaveFaceData();
             this.Invoke(new closeForm(closeThisFormFromAnotherThread));
+        }
+
+        public delegate void ChangeBackColor(Color color);
+            
+        private void ChangeColor(Color color)
+        {
+            this.BackColor = color;
         }
 
         public delegate void closeForm();

@@ -10,7 +10,7 @@ namespace VirtualLibrary
     {
         private String userName, passWord, email;
 
-        private Book userBooks;
+        private List<Book> UserBooks;
 
 
         public User(String userName, String passWord)
