@@ -29,6 +29,8 @@ namespace VirtualLibrary
         string name;
 
         private int Hei = 640, Len = 480;
+        private bool InProgress = false;
+
         private LogicController LogicC;
         private Form1 main;
 
@@ -76,6 +78,16 @@ namespace VirtualLibrary
             imageBox1.Image = frame;
             GrayFace = frame.Convert<Gray, Byte>();
             facesDetectedNow = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(640/4, 480/4));
+            if (InProgress == true && facesDetectedNow[0].Length != 1)
+            {
+                this.BackColor = Color.Red;
+                Information.Text = "Kadras netinkamas registracijai";
+            }
+            else if(InProgress == true)
+            {
+                Information.Text = "Sekite Taska";
+                this.BackColor = Color.Green;
+            }
             foreach (MCvAvgComp f in facesDetectedNow[0])
             {
                 result = frame.Copy(f.rect).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
@@ -226,13 +238,12 @@ namespace VirtualLibrary
 
         public void RegisterProcess()
         {
+            InProgress = true;
             int iterator = 0;
             while (iterator < 10)
             {
-                this.Invoke(new ChangeBackColor(ChangeColor), Color.Green);
                 if (facesDetectedNow[0].Length == 1)
                 {
-                    Information.Invoke(new ChangeText(ChText), "Sekite Taska");
                     if (iterator == 0)
                         Thread.Sleep(3000);
                     foreach (MCvAvgComp f in facesDetectedNow[0])
@@ -257,11 +268,6 @@ namespace VirtualLibrary
                             redDot.Invoke(new MoveDot(MoveRedDot), new Point(redDot.Location.X, 64));
                         Thread.Sleep(3000);
                     }
-                }
-                else
-                {
-                    Information.Invoke(new ChangeText(ChText), "Kadras netinkamas registracijai");
-                    this.Invoke(new ChangeBackColor(ChangeColor), Color.Red);
                 }
             }
             LogicC.SaveFaceData();
