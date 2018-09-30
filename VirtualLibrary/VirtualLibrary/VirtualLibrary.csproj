@@ -68,6 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Book.cs" />
+    <Compile Include="MainTry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainTry.Designer.cs">
+      <DependentUpon>MainTry.cs</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
