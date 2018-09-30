@@ -18,7 +18,7 @@ namespace VirtualLibrary
         private LogicController logicC;
         private Form1 main;
         Image<Gray, byte> GrayFace = null;
-        Image<Bgr, Byte> frame;
+        Image<Bgr, Byte> frame= null;
         string name = "";
         Capture cam;
         HaarCascade faceDetect;
@@ -31,7 +31,14 @@ namespace VirtualLibrary
         {
             InitializeComponent();
             this.main = main;
-            cam = new Capture();
+            try
+            {
+                cam = new Capture();
+            }
+            catch(Exception e)
+            {
+                cam = null;
+            }
             this.logicC = logicC;
             faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
             StartTime = DateTime.Now.TimeOfDay.Seconds;
@@ -41,32 +48,37 @@ namespace VirtualLibrary
 
         private void OnCloseRequest(object sender, EventArgs e)
         {
-            main.Show();
-            MessageBox.Show("Didn't find your face :( Try again or Register");
+            if (StaticData.CurrentUser == null)
+            {
+                main.Show();
+                MessageBox.Show("Didn't find your face :( \n Try again or Register");
+            }
             cam.Dispose();
             Application.Idle -= FaceRecognition;
         }
 
-        private void TransitionToMainW(string name)
+        private void TransitionToMainW()
         {
-            this.Hide();
-            mainW = new MainWindow(logicC);
-            mainW.Show();
-            Application.Idle -= FaceRecognition;
+            main.OpenMainWindow();
+            this.Close();
         }
 
         public void FaceRecognition(object sender, EventArgs e)
-        {                       // Jeigu neleidzia prisijungti atkomentuokit zemiau esanti if bloka
-            /* if (true)//Kolkas, Kol neidejau face Recognitiono
+        {                      
+             if(cam == null)
              {
-                 this.Hide();
-                 MainWindow registerFaceWindow = new MainWindow(logicC);
-                 registerFaceWindow.Show();
-             }*/
+                StaticData.CurrentUser = new User("Debug", "Debug");
+                TransitionToMainW();
+                return;
+             }
             frame = cam.QueryFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
             Camera.Image = frame;
             GrayFace = frame.Convert<Gray, Byte>();
             MCvAvgComp[][] facesDetectedNow = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(640 / 4, 480 / 4));
+            if (facesDetectedNow[0].Length > 1)
+            {
+                MessageBox.Show("Too many faces");
+            }
             foreach (MCvAvgComp f in facesDetectedNow[0])
             {
                 result = frame.Copy(f.rect).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
@@ -79,15 +91,18 @@ namespace VirtualLibrary
                     if (!name.Equals(""))
                     {
                         StaticData.CurrentUser = new User(name, "fsdfsdgsd");
-                        TransitionToMainW(name);
+                        TransitionToMainW();
                     }
-                    frame.Draw(name, ref font, new Point(f.rect.X - 2, f.rect.Y - 2), new Bgr(Color.Red));
                 }
+                break;
             }
             Camera.Image = frame;
             EndTime = DateTime.Now.TimeOfDay.Seconds;
-            if (EndTime - StartTime == 10 || EndTime - StartTime == -50)
+            if (EndTime - StartTime >= 10 || (EndTime - StartTime >= -50 && EndTime - StartTime < 0))
+            {
+                this.Hide();
                 Close();
+            }
         }
     }
 }

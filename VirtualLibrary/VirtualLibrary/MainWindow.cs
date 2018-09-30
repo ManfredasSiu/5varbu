@@ -20,11 +20,18 @@ namespace VirtualLibrary
         }
 
         private LogicController logicC;
+
         public MainWindow(LogicController logicC)
         {
             InitializeComponent();
             label2.Text = ("Hello, " + StaticData.CurrentUser.getuserName() + "!");
             this.logicC = logicC;
+            FormClosed += OnCloseRequest;
+        }
+
+        private void OnCloseRequest(Object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
