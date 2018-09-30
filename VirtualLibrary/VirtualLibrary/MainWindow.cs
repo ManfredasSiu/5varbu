@@ -25,8 +25,11 @@ namespace VirtualLibrary
         {
             InitializeComponent();
             label2.Text = ("Hello, " + StaticData.CurrentUser.getuserName() + "!");
+
+
             this.logicC = logicC;
             FormClosed += OnCloseRequest;
+
         }
 
         private void OnCloseRequest(Object sender, FormClosedEventArgs e)
@@ -36,7 +39,18 @@ namespace VirtualLibrary
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-       
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Knygos autorius ");
+            dt.Columns.Add("Pavadinimas ");
+            dt.Rows.Add("A", "B");
+            dt.Rows.Add("C", "D");
+            dataGridView1.DataSource = dt;
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
