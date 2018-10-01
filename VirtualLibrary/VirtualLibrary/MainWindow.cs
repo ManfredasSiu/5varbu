@@ -39,16 +39,7 @@ namespace VirtualLibrary
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Knygos autorius ");
-            dt.Columns.Add("Pavadinimas ");
-            dt.Columns.Add("Kodas ");
-            dt.Columns.Add("0/1 ");
-            for (int x = 0; x < StaticData.Books.Count; x=+4)
-            {
-                dt.Rows.Add(StaticData.Books[x], StaticData.Books[x+1], StaticData.Books[x+2], StaticData.Books[x+3]);
-            }
-            dataGridView1.DataSource = dt;
+         
 
         }
 

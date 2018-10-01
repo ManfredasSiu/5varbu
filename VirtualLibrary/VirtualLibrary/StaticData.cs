@@ -14,7 +14,7 @@ namespace VirtualLibrary
         public static List<string> labels = new List<string>();
         public static int numLablels;
         public static User CurrentUser;
-        public static List<Book> Books;
+        public static List<Book> Books = new List<Book>();
         //labas
     }
 }
