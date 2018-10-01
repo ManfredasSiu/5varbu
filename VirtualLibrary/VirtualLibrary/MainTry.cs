@@ -12,9 +12,12 @@ namespace VirtualLibrary
 {
     public partial class MainTry : Form
     {
-        public MainTry()
+        private LogicController logicC;
+
+        public MainTry(LogicController logicC)
         {
             InitializeComponent();
+            this.logicC = logicC;
         }
 
         private void button1_Click(object sender, EventArgs e)
