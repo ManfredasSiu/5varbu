@@ -98,7 +98,7 @@ namespace VirtualLibrary
             }
             Camera.Image = frame;
             EndTime = DateTime.Now.TimeOfDay.Seconds;
-            if (EndTime - StartTime >= 10 || (EndTime - StartTime >= -50 && EndTime - StartTime < 0))
+            if (EndTime - StartTime >= 20 || (EndTime - StartTime >= -40 && EndTime - StartTime < 0))
             {
                 this.Hide();
                 Close();

@@ -28,6 +28,7 @@ namespace VirtualLibrary
 
         string name;
 
+        private Thread RegProcess;
         private int Hei = 640, Len = 480;
         private bool InProgress = false;
 
@@ -67,6 +68,8 @@ namespace VirtualLibrary
             if(StaticData.CurrentUser == null)
                 main.Show();
             cam.Dispose();
+            if(InProgress == true)
+                RegProcess.Abort();
             Application.Idle -= FrameProcedure;
         }
 
@@ -115,11 +118,9 @@ namespace VirtualLibrary
 
             InstantiateRedDot();
 
-            Thread RegProcess = new Thread(new ThreadStart(RegisterProcess));
+            RegProcess = new Thread(new ThreadStart(RegisterProcess));
             RegProcess.Start();
 
-            User thisUser = new User(textBox1.Text, textBox2.Text);
-            StaticData.CurrentUser = thisUser;
             /* // Palikau jei kas neveiktu. bet greit istrinsiu
             if (textBox1.Text == "" || textBox2.Text == "")
             {
@@ -270,8 +271,12 @@ namespace VirtualLibrary
                     }
                 }
             }
+            User thisUser = new User(textBox1.Text, textBox2.Text);
+            StaticData.CurrentUser = thisUser;
             LogicC.SaveFaceData();
+            InProgress = false;
             this.Invoke(new closeForm(closeThisFormFromAnotherThread));
+
         }
 
         public delegate void ChangeBackColor(Color color);

@@ -38,7 +38,7 @@
             // 
             this.Camera.Location = new System.Drawing.Point(27, 47);
             this.Camera.Name = "Camera";
-            this.Camera.Size = new System.Drawing.Size(738, 280);
+            this.Camera.Size = new System.Drawing.Size(738, 361);
             this.Camera.TabIndex = 2;
             this.Camera.TabStop = false;
             // 
