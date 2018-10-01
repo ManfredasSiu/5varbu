@@ -23,6 +23,7 @@ namespace VirtualLibrary
             {
                 string labelsInf = File.ReadAllText(Application.StartupPath + "/faces/faces.txt");
                 string[] Labels = labelsInf.Split(',');
+
                 int.TryParse(Labels[0], out StaticData.numLablels);
                 string FacesLoad;
                 for (int i = 1; i <= StaticData.numLablels; i++)
@@ -45,6 +46,16 @@ namespace VirtualLibrary
             {
                 StaticData.training.ToArray()[i - 1].Save(Application.StartupPath + "/faces/face" + i + ".bmp");
                 File.AppendAllText(Application.StartupPath + "/faces/faces.txt", StaticData.labels.ToArray()[i - 1] + ",");
+            }
+        }
+
+        public void LoadBooksData()
+        {
+            string labelsInfo = File.ReadAllText(Application.StartupPath + "/books/books.txt");
+            string[] Labels = labelsInfo.Split(',');
+            for (int x = 0; x < Labels.Count(); x = +4)
+            {
+                StaticData.Books.Add(new Book(Labels[x], Labels[x+1], Labels[x+2], Labels[x+3]));
             }
         }
 
