@@ -40,6 +40,7 @@ namespace VirtualLibrary
                     await faceServiceClient.AddPersonFaceInPersonGroupAsync(_groupId, person.PersonId, s);
                 }
             }
+            await faceServiceClient.TrainPersonGroupAsync(_groupId);
         }
 
         private async Task<Face[]> UploadAndDetetFaces(string imageFilePath)
@@ -64,6 +65,30 @@ namespace VirtualLibrary
                 MessageBox.Show(ex.Message);
                 return new Face[0];
             }
+        }
+
+        public async Task<String> RecognitionAsync(String TempImgPath)
+        {
+
+            Face[] faces = await UploadAndDetetFaces(TempImgPath);
+            var faceIds = faces.Select(face => face.FaceId).ToArray();
+
+            foreach (var identifyResult in await faceServiceClient.IdentifyAsync(_groupId, faceIds))
+            {
+                if (identifyResult.Candidates.Length != 0)
+                {
+                    var candidateId = identifyResult.Candidates[0].PersonId;
+                    var person = await faceServiceClient.GetPersonInPersonGroupAsync(_groupId, candidateId);
+                    return person.Name;
+                    // user identificated: person.name is the associated name
+                }
+                else
+                {
+                    // user not recognized
+                }
+            }
+            return null;
+
         }
 
     }

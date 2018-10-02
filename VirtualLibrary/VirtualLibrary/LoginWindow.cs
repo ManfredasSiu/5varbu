@@ -43,7 +43,7 @@ namespace VirtualLibrary
             faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
             StartTime = DateTime.Now.TimeOfDay.Seconds;
             this.FormClosing += OnCloseRequest;
-            Application.Idle += new EventHandler(FaceRecognition);
+            Application.Idle += new EventHandler(FaceRecognitionAsync);
         }
 
         private void OnCloseRequest(object sender, EventArgs e)
@@ -54,7 +54,7 @@ namespace VirtualLibrary
                 MessageBox.Show("Didn't find your face :( \n Try again or Register");
             }
             cam.Dispose();
-            Application.Idle -= FaceRecognition;
+            Application.Idle -= FaceRecognitionAsync;
         }
 
         private void TransitionToMainW()
@@ -63,7 +63,7 @@ namespace VirtualLibrary
             this.Close();
         }
 
-        public void FaceRecognition(object sender, EventArgs e)
+        public async void FaceRecognitionAsync(object sender, EventArgs e)
         {                      
              if(cam == null)
              {
@@ -79,7 +79,14 @@ namespace VirtualLibrary
             {
                 MessageBox.Show("Too many faces");
             }
-            foreach (MCvAvgComp f in facesDetectedNow[0])
+            else if(facesDetectedNow[0].Length != 0)
+            {
+                cam.QueryFrame().Save(Application.StartupPath + "TempImg.jpg");
+                FaceApiCalls FAC = new FaceApiCalls();
+                StaticData.CurrentUser = new User(await FAC.RecognitionAsync(Application.StartupPath + "TempImg.jpg"), "fsdfsdgsd");
+                TransitionToMainW();
+            }
+            /*foreach (MCvAvgComp f in facesDetectedNow[0])
             {
                 result = frame.Copy(f.rect).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
                 frame.Draw(f.rect, new Bgr(Color.Green), 3);
@@ -95,7 +102,7 @@ namespace VirtualLibrary
                     }
                 }
                 break;
-            }
+            }*/
             Camera.Image = frame;
             EndTime = DateTime.Now.TimeOfDay.Seconds;
             if (EndTime - StartTime >= 20 || (EndTime - StartTime >= -40 && EndTime - StartTime < 0))

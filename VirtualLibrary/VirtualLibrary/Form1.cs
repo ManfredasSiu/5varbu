@@ -41,10 +41,10 @@ namespace VirtualLibrary
 
         public void Login()
         {
-            OpenMainWindow();
-            /*this.Hide();
+            //OpenMainWindow();
+            this.Hide();
             var LoginW = new LoginWindow(LogicC, this);
-            LoginW.Show();*/
+            LoginW.Show();
         }
 
         public void Register()
