@@ -14,10 +14,10 @@ namespace VirtualLibrary
     {//TODO: duomenis krauti i StaticData klase, sukurti ten reikiamus duomenu tipus
         public LogicController() //TODO: LOAD USER DATA; LOAD ALL BOOKS ;; SAVE USER DATA; SAVE ALL BOOKS
         {
-            //LoadFaceData(); 
+            
         }
 
-        public void LoadFaceData()//Loadina veidus
+        /*public void LoadFaceData()//Loadina veidus
         {
             try
             {
@@ -47,7 +47,7 @@ namespace VirtualLibrary
                 StaticData.training.ToArray()[i - 1].Save(Application.StartupPath + "/faces/face" + i + ".bmp");
                 File.AppendAllText(Application.StartupPath + "/faces/faces.txt", StaticData.labels.ToArray()[i - 1] + ",");
             }
-        }
+        }*///NOT USABLE. PRIVATE ZONE, BACK OFF, I HAVE ASSEMBLY AGAINST YOU
 
         public void LoadBooksData()
         {

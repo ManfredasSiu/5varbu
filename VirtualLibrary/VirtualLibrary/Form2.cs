@@ -141,7 +141,7 @@ namespace VirtualLibrary
                 if (StaticData.labels.Contains(textBox1.Text))
                 {
                     MessageBox.Show("Username is already taken");
-                    // return 1;
+                    return 1;
                 }
             }
             return 0;
@@ -184,12 +184,12 @@ namespace VirtualLibrary
                 if (facesDetectedNow[0].Length == 1)
                 {
                     if (iterator == 0)
-                        Thread.Sleep(3000);
+                        Thread.Sleep(1000);
                     Directory.CreateDirectory(Application.StartupPath + "/" + textBox1.Text + "Temp");
                     cam.QueryFrame().Save(Application.StartupPath + "/" + textBox1.Text + "Temp" + "/"+ textBox1.Text + "" + iterator +".jpg");
                     iterator++;
                     if (iterator % 2 == 1)
-                        Thread.Sleep(100);
+                        Thread.Sleep(1000);
                     else
                     {
                         if (iterator == 2)
@@ -200,7 +200,7 @@ namespace VirtualLibrary
                             redDot.Invoke(new MoveDot(MoveRedDot), new Point(this.Width / 2, this.Height - 64));
                         else if (iterator == 8)
                             redDot.Invoke(new MoveDot(MoveRedDot), new Point(redDot.Location.X, 64));
-                        Thread.Sleep(3000);
+                        Thread.Sleep(1000);
                     }
                 }
             }
@@ -208,10 +208,8 @@ namespace VirtualLibrary
             StaticData.CurrentUser = thisUser;
             FaceApiCalls FAC = new FaceApiCalls();
             FAC.FaceSave(textBox1.Text);
-           // LogicC.SaveFaceData();
             InProgress = false;
             this.Invoke(new closeForm(closeThisFormFromAnotherThread));
-
         }
 
         public delegate void ChangeBackColor(Color color);
