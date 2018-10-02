@@ -208,6 +208,7 @@ namespace VirtualLibrary
             StaticData.CurrentUser = thisUser;
             FaceApiCalls FAC = new FaceApiCalls();
             FAC.FaceSave(textBox1.Text);
+            File.AppendAllText(Application.StartupPath + "/names.txt","" + textBox1.Text + ",");
             InProgress = false;
             this.Invoke(new closeForm(closeThisFormFromAnotherThread));
         }

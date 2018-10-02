@@ -10,9 +10,7 @@ namespace VirtualLibrary
 {
     static class StaticData  //Visi uzkrauti duomenys
     {
-        public static List<Image<Gray, byte>> training = new List<Image<Gray, byte>>();
-        public static List<string> labels = new List<string>();
-        public static int numLablels;
+        public static string[] labels;
         public static User CurrentUser;
         public static List<Book> Books = new List<Book>();
         //labas
