@@ -101,6 +101,8 @@ namespace VirtualLibrary
 
         private void RegisterButton_CLicked(object sender, EventArgs e)
         {
+            
+            
             if(CheckTheTB() == 1) return;
             
             if (facesDetectedNow[0].Length == 0)
@@ -113,77 +115,13 @@ namespace VirtualLibrary
                 MessageBox.Show("Kadre perdaug veidu");
                 return;
             }
-
+            
             PrepareForRegister();
 
             InstantiateRedDot();
 
             RegProcess = new Thread(new ThreadStart(RegisterProcess));
             RegProcess.Start();
-
-            /* // Palikau jei kas neveiktu. bet greit istrinsiu
-            if (textBox1.Text == "" || textBox2.Text == "")
-            {
-                MessageBox.Show("Username or password is left empty");
-                return;
-            }
-            else if (textBox1.Text[0] == ' ' || textBox2.Text[0] == ' ')
-            {
-                MessageBox.Show("Username or pasword can't start with a space");
-                return;
-            }
-            else
-            {
-                if (StaticData.labels.Contains(textBox1.Text))
-                {
-                    MessageBox.Show("Username is already taken");
-                    // return;
-                }
-            }
-            GrayFace = cam.QueryGrayFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-            MCvAvgComp[][] DetectedFaces = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
-            if (DetectedFaces[0].Length == 0)
-            { 
-                MessageBox.Show("Veidas nerastas, bandykite dar karta");
-                return;
-            }
-            else if(DetectedFaces[0].Length > 1)
-            {
-                MessageBox.Show("Kadre perdaug veidu");
-                return;
-            }
-
-            FormBorderStyle = FormBorderStyle.None;
-            WindowState = FormWindowState.Maximized;
-            panel1.Hide();
-            imageBox1.Location = new Point(imageBox1.Location.X, imageBox1.Location.Y - 50);
-            Hei = 320; Len = 240;
-
-            //Raudonas taskas
-            Bitmap bim = new Bitmap(Image.FromFile(Application.StartupPath + "/Images/RedPoint.png"), 64, 64);
-            var redDot = new PictureBox
-            {
-                Name = "RedDot",
-                Size = new Size(64, 64),
-                Image = bim,
-            };
-            this.Controls.Add(redDot);
-            Console.WriteLine(this.Height + " " + this.Width);
-            redDot.Location = new Point(this.Width / 2, this.Height / 2);
-            redDot.BringToFront();
-
-            foreach (MCvAvgComp f in DetectedFaces[0])
-            {
-                TrainImg = frame.Copy(f.rect).Convert<Gray, byte>();
-                break;
-            }
-            StaticData.numLablels++;
-            TrainImg = TrainImg.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-            StaticData.training.Add(TrainImg);
-            StaticData.labels.Add(textBox1.Text);
-            User thisUser = new User(textBox1.Text, textBox2.Text);
-            StaticData.CurrentUser = thisUser;
-            LogicC.SaveFaceData();*/
         }
 
         private int CheckTheTB()
@@ -247,14 +185,14 @@ namespace VirtualLibrary
                 {
                     if (iterator == 0)
                         Thread.Sleep(3000);
-                    foreach (MCvAvgComp f in facesDetectedNow[0])
+                    /*foreach (MCvAvgComp f in facesDetectedNow[0])
                     {
                         StaticData.training.Add(frame.Copy(f.rect).Convert<Gray, byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC));
                         StaticData.labels.Add(textBox1.Text);
                         StaticData.numLablels++;
                         iterator++;
                         break;
-                    }
+                    }*/
                     if (iterator % 2 == 1)
                         Thread.Sleep(100);
                     else
