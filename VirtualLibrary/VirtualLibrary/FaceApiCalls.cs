@@ -33,7 +33,7 @@ namespace VirtualLibrary
         public async void FaceSave(String vardas)
         { 
             CreatePersonResult person = await faceServiceClient.CreatePersonInPersonGroupAsync(_groupId, vardas);
-            foreach (string imagePath in Directory.GetFiles(Application.StartupPath + "/" + vardas))
+            foreach (string imagePath in Directory.GetFiles(Application.StartupPath + "/" + vardas + "TEMP"))
             {
                 using (Stream s = File.OpenRead(imagePath))
                 {

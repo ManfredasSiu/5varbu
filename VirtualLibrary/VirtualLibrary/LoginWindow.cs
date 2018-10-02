@@ -26,6 +26,7 @@ namespace VirtualLibrary
         int StartTime, EndTime;
         MainWindow mainW;
         MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.6d, 0.6d);
+        public Object locket = null;
 
         public LoginWindow(LogicController logicC, Form1 main)
         {
@@ -63,6 +64,19 @@ namespace VirtualLibrary
             this.Close();
         }
 
+        private bool block = false;
+
+        public async Task<string> startRecAsync()
+        {
+            block = true;
+            FaceApiCalls FAC = new FaceApiCalls();
+            var name = await FAC.RecognitionAsync(Application.StartupPath + "TempImg.jpg");
+            if (name != null)
+                StaticData.CurrentUser = new User(name, "gsgsdgs");
+            else this.Close();
+            return name;
+        }
+
         public async void FaceRecognitionAsync(object sender, EventArgs e)
         {                      
              if(cam == null)
@@ -82,27 +96,20 @@ namespace VirtualLibrary
             else if(facesDetectedNow[0].Length != 0)
             {
                 cam.QueryFrame().Save(Application.StartupPath + "TempImg.jpg");
-                FaceApiCalls FAC = new FaceApiCalls();
-                StaticData.CurrentUser = new User(await FAC.RecognitionAsync(Application.StartupPath + "TempImg.jpg"), "fsdfsdgsd");
-                TransitionToMainW();
-            }
-            /*foreach (MCvAvgComp f in facesDetectedNow[0])
-            {
-                result = frame.Copy(f.rect).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-                frame.Draw(f.rect, new Bgr(Color.Green), 3);
-                if (StaticData.training.ToArray().Length != 0)
+                
+                if (StaticData.CurrentUser == null)
                 {
-                    MCvTermCriteria termCriteria = new MCvTermCriteria(StaticData.numLablels, 0.001);
-                    EigenObjectRecognizer recognizer = new EigenObjectRecognizer(StaticData.training.ToArray(), StaticData.labels.ToArray(), 1500, ref termCriteria);
-                    name = recognizer.Recognize(result);
-                    if (!name.Equals(""))
+                    if (block == false)
                     {
-                        StaticData.CurrentUser = new User(name, "fsdfsdgsd");
-                        TransitionToMainW();
+                        string name = null;
+                        name = await startRecAsync();
+                        if (StaticData.CurrentUser != null)
+                        {
+                            TransitionToMainW();
+                        }
                     }
                 }
-                break;
-            }*/
+            }
             Camera.Image = frame;
             EndTime = DateTime.Now.TimeOfDay.Seconds;
             if (EndTime - StartTime >= 20 || (EndTime - StartTime >= -40 && EndTime - StartTime < 0))

@@ -28,7 +28,7 @@ namespace VirtualLibrary
                 dt.Rows.Add(StaticData.Books[x], StaticData.Books[x + 1], StaticData.Books[x + 2], StaticData.Books[x + 3]);
             }
             dataGridView1.DataSource = dt;
-
+            UserName.Text = StaticData.CurrentUser.getuserName();
         }
 
         private void button1_Click(object sender, EventArgs e)

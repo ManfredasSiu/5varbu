@@ -185,15 +185,6 @@ namespace VirtualLibrary
                 {
                     if (iterator == 0)
                         Thread.Sleep(3000);
-
-                    /*foreach (MCvAvgComp f in facesDetectedNow[0])
-                    {
-                        StaticData.training.Add(frame.Copy(f.rect).Convert<Gray, byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC));
-                        StaticData.labels.Add(textBox1.Text);
-                        StaticData.numLablels++;
-                        iterator++;
-                        break;
-                    }*/
                     Directory.CreateDirectory(Application.StartupPath + "/" + textBox1.Text + "Temp");
                     cam.QueryFrame().Save(Application.StartupPath + "/" + textBox1.Text + "Temp" + "/"+ textBox1.Text + "" + iterator +".jpg");
                     iterator++;
