@@ -185,6 +185,7 @@ namespace VirtualLibrary
                 {
                     if (iterator == 0)
                         Thread.Sleep(3000);
+
                     /*foreach (MCvAvgComp f in facesDetectedNow[0])
                     {
                         StaticData.training.Add(frame.Copy(f.rect).Convert<Gray, byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC));
@@ -193,6 +194,9 @@ namespace VirtualLibrary
                         iterator++;
                         break;
                     }*/
+                    Directory.CreateDirectory(Application.StartupPath + "/" + textBox1.Text + "Temp");
+                    cam.QueryFrame().Save(Application.StartupPath + "/" + textBox1.Text + "Temp" + "/"+ textBox1.Text + "" + iterator +".jpg");
+                    iterator++;
                     if (iterator % 2 == 1)
                         Thread.Sleep(100);
                     else
@@ -211,7 +215,9 @@ namespace VirtualLibrary
             }
             User thisUser = new User(textBox1.Text, textBox2.Text);
             StaticData.CurrentUser = thisUser;
-            LogicC.SaveFaceData();
+            FaceApiCalls FAC = new FaceApiCalls();
+            FAC.FaceSave(textBox1.Text);
+           // LogicC.SaveFaceData();
             InProgress = false;
             this.Invoke(new closeForm(closeThisFormFromAnotherThread));
 
