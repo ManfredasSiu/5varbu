@@ -120,7 +120,7 @@ namespace VirtualLibrary
 
             InstantiateRedDot();
 
-            RegProcess = new Thread(new ThreadStart(RegisterProcess));
+            RegProcess = new Thread(new ThreadStart(RegisterProcessAsync));
             RegProcess.Start();
         }
 
@@ -155,7 +155,6 @@ namespace VirtualLibrary
             redDot.Size = new Size(64, 64);
             redDot.Image = bim;
             this.Controls.Add(redDot);
-            Console.WriteLine(this.Height + " " + this.Width);
             redDot.Location = new Point(this.Width / 2, this.Height / 2);
             redDot.BringToFront();
         }
@@ -175,7 +174,7 @@ namespace VirtualLibrary
             this.Close();
         }
 
-        public void RegisterProcess()
+        public async void RegisterProcessAsync()
         {
             InProgress = true;
             int iterator = 0;
@@ -207,7 +206,10 @@ namespace VirtualLibrary
             User thisUser = new User(textBox1.Text, textBox2.Text);
             StaticData.CurrentUser = thisUser;
             FaceApiCalls FAC = new FaceApiCalls();
-            FAC.FaceSave(textBox1.Text);
+            if (await FAC.FaceSave(textBox1.Text))
+            {
+                
+            }
             InProgress = false;
             this.Invoke(new closeForm(closeThisFormFromAnotherThread));
         }

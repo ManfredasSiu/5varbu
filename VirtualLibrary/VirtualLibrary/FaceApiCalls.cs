@@ -30,17 +30,33 @@ namespace VirtualLibrary
 
 
 
-        public async void FaceSave(String vardas)
+        public async Task<bool> FaceSave(String vardas)
         { 
             CreatePersonResult person = await faceServiceClient.CreatePersonInPersonGroupAsync(_groupId, vardas);
             foreach (string imagePath in Directory.GetFiles(Application.StartupPath + "/" + vardas + "TEMP"))
             {
                 using (Stream s = File.OpenRead(imagePath))
                 {
-                    await faceServiceClient.AddPersonFaceInPersonGroupAsync(_groupId, person.PersonId, s);
+                    try
+                    {
+                        await faceServiceClient.AddPersonFaceInPersonGroupAsync(_groupId, person.PersonId, s);
+                        return true;
+                    }
+                    catch(Exception e)
+                    {
+                        return false;
+                    }
                 }
             }
-            await faceServiceClient.TrainPersonGroupAsync(_groupId);
+            try
+            {
+                await faceServiceClient.TrainPersonGroupAsync(_groupId);
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
         }
 
         private async Task<Face[]> UploadAndDetetFaces(string imageFilePath)
