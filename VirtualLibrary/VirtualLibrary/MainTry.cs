@@ -28,7 +28,13 @@ namespace VirtualLibrary
                 dt.Rows.Add(StaticData.Books[x], StaticData.Books[x + 1], StaticData.Books[x + 2], StaticData.Books[x + 3]);
             }
             dataGridView1.DataSource = dt;
+            this.FormClosing += OnCloseReq;
             UserName.Text = StaticData.CurrentUser.getuserName();
+        }
+
+        private void OnCloseReq(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,12 +44,9 @@ namespace VirtualLibrary
 
         private void button5_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.Close();
         }
 
-        private void MainTry_Load(object sender, EventArgs e)
-        {
-          
-        }
+       
     }
 }
