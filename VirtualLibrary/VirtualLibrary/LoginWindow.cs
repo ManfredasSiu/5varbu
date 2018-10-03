@@ -67,11 +67,21 @@ namespace VirtualLibrary
         {
             block = true;
             FaceApiCalls FAC = new FaceApiCalls();
-            var name = await FAC.RecognitionAsync(Application.StartupPath + "TempImg.jpg");
-            if (name != null)
-                StaticData.CurrentUser = new User(name, "gsgsdgs");
-            else this.Close();
-            return name;
+            try
+            {
+                var name = await FAC.RecognitionAsync(Application.StartupPath + "TempImg.jpg");
+                if (name != null)
+                    StaticData.CurrentUser = new User(name, "gsgsdgs");
+                else this.Close();
+                return name;
+            }
+            catch(Exception e)
+            {
+                StaticData.CurrentUser = null;
+                this.Close();
+                return null;
+            }
+            
         }
 
         public async void FaceRecognitionAsync(object sender, EventArgs e)

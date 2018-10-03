@@ -42,79 +42,81 @@ namespace VirtualLibrary
             this.LogicC = LogicC;
             faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
             this.FormClosing += OnCloseRequest;
+            //Tikrinama ar turima kamera
             try
             {
                 cam = new Capture();
+                Application.Idle += new EventHandler(FrameProcedure);
             }
             catch(Exception e)
             {
                 cam = null;
-            }
-            if (cam != null)
-            {
-                cam.QueryFrame();
-                Application.Idle += new EventHandler(FrameProcedure);
-            }
-            else
-            {
                 MessageBox.Show("Neturi kameros, arba ji blogai prijungta, registracija negalima");
-                this.Close();
+                this.Close(); //Uzdaromas langas, kamera nerasta
             }
         }
 
 
-        private void OnCloseRequest(object sender, EventArgs e)
+        private void OnCloseRequest(object sender, EventArgs e) //Metodas iskvieciamas pries uzdarant langa.
         {
-            if(StaticData.CurrentUser == null)
+            if(StaticData.CurrentUser == null)  //Jei registracija nepavyko gryztam
                 main.Show();
             cam.Dispose();
-            if(InProgress == true)
+            if(InProgress == true)              //Jei registracija vyksta ir isjungiamas langas pvz alt+f4
                 RegProcess.Abort();
             Application.Idle -= FrameProcedure;
         }
 
-        private void FrameProcedure(object sender, EventArgs e)
+        private void BackGroundColorChange()
         {
-            if (cam.Equals(null))
-                return;
-            frame = cam.QueryFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-            imageBox1.Image = frame;
-            GrayFace = frame.Convert<Gray, Byte>();
-            facesDetectedNow = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(640/4, 480/4));
             if (InProgress == true && facesDetectedNow[0].Length != 1)
             {
                 this.BackColor = Color.Red;
                 Information.Text = "Kadras netinkamas registracijai";
             }
-            else if(InProgress == true)
+            else if (InProgress == true)
             {
                 Information.Text = "Sekite Taska";
                 this.BackColor = Color.Green;
             }
+        }
+
+        private void FrameProcedure(object sender, EventArgs e)  //Kameros freimai atsiranda imageboxe
+        {
+            if (cam.Equals(null))
+                return;
+            frame = cam.QueryFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+            GrayFace = frame.Convert<Gray, Byte>();
+            facesDetectedNow = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(640/4, 480/4));
+            BackGroundColorChange();
             foreach (MCvAvgComp f in facesDetectedNow[0])
             {
                 result = frame.Copy(f.rect).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
                 frame.Draw(f.rect, new Bgr(Color.Green), 3);
             }
-            imageBox1.Image = frame.Resize(Hei, Len, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+            imageBox1.Image = frame.Resize(Hei, Len, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC); //Freimai perdaromi ir atsiranda imageboxe
         }
 
-        private void RegisterButton_CLicked(object sender, EventArgs e)
+        private int CheckHowManyFaces()
         {
-            
-            
-            if(CheckTheTB() == 1) return;
-            
             if (facesDetectedNow[0].Length == 0)
             {
                 MessageBox.Show("Veidas nerastas, bandykite dar karta");
-                return;
+                return 1;
             }
             else if (facesDetectedNow[0].Length > 1)
             {
                 MessageBox.Show("Kadre perdaug veidu");
-                return;
+                return 1;
             }
+            return 0;
+        }
+
+        private void RegisterButton_CLicked(object sender, EventArgs e)
+        {
+            if(CheckTheTB() == 1) return;
+
+            if(CheckHowManyFaces() == 1) return;
             
             PrepareForRegister();
 
@@ -154,19 +156,26 @@ namespace VirtualLibrary
             redDot.Name = "RedDot";
             redDot.Size = new Size(64, 64);
             redDot.Image = bim;
+
             this.Controls.Add(redDot);
+
             redDot.Location = new Point(this.Width / 2, this.Height / 2);
             redDot.BringToFront();
         }
 
         private void PrepareForRegister()
         {
+            //Langas maximizuojamas
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
-            panel1.Hide();
-            imageBox1.Location = new Point(imageBox1.Location.X, imageBox1.Location.Y - 50);
+
+            panel1.Hide(); //Paslepiame register is Login laukus
+
+            imageBox1.Location = new Point(imageBox1.Location.X, imageBox1.Location.Y - 50); //Imagebox vieta pastumiama i virsu
+
+            //Pakeiciamas imagebox dydis
             Hei = 320; Len = 240;
-            imageBox1.Size = new Size(320, 240);
+            imageBox1.Size = new Size(321, 241);
         }
 
         private void Cancel_Click(object sender, EventArgs e)
@@ -183,14 +192,17 @@ namespace VirtualLibrary
                 if (facesDetectedNow[0].Length == 1)
                 {
                     if (iterator == 0)
-                        Thread.Sleep(1000);
-                    Directory.CreateDirectory(Application.StartupPath + "/" + textBox1.Text + "Temp");
-                    cam.QueryFrame().Save(Application.StartupPath + "/" + textBox1.Text + "Temp" + "/"+ textBox1.Text + "" + iterator +".jpg");
+                        Thread.Sleep(1000); //Laikas klientui susiprasti, kad reikia sekti taska.
+                    if (LogicC.TempDirectoryController("Create", textBox1.Text, cam.QueryFrame().ToBitmap(), iterator) == 1) //Sukuriu direktorija arba ne
+                    {
+                        MessageBox.Show("Neuztenka vietos diske");
+                        this.Close();
+                    }
                     iterator++;
                     if (iterator % 2 == 1)
                         Thread.Sleep(1000);
                     else
-                    {
+                    {   //Judinamas taskas, pagal nuotrauku skaiciu
                         if (iterator == 2)
                             redDot.Invoke(new MoveDot(MoveRedDot), new Point(64, redDot.Location.Y));
                         else if (iterator == 4)
@@ -199,19 +211,25 @@ namespace VirtualLibrary
                             redDot.Invoke(new MoveDot(MoveRedDot), new Point(this.Width / 2, this.Height - 64));
                         else if (iterator == 8)
                             redDot.Invoke(new MoveDot(MoveRedDot), new Point(redDot.Location.X, 64));
-                        Thread.Sleep(1000);
+                        Thread.Sleep(500);
                     }
                 }
             }
+            FaceApiCalls FAC = new FaceApiCalls();
+            if (!await FAC.FaceSave(textBox1.Text))
+            {
+                StaticData.CurrentUser = null;
+                MessageBox.Show("Registracija nepavyko\nPerdaug veidu kadre\nArba serveris uzimtas");
+                this.Close();
+                return;
+            }
             User thisUser = new User(textBox1.Text, textBox2.Text);
             StaticData.CurrentUser = thisUser;
-            FaceApiCalls FAC = new FaceApiCalls();
-            if (await FAC.FaceSave(textBox1.Text))
+            if (LogicC.TempDirectoryController("Delete", textBox1.Text, null, 0) == 1)
             {
-                
+                this.Close();
             }
             File.AppendAllText(Application.StartupPath + "/names.txt","" + textBox1.Text + ",");
-
             InProgress = false;
             this.Invoke(new closeForm(closeThisFormFromAnotherThread));
         }

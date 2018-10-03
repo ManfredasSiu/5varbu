@@ -2,6 +2,7 @@
 using Emgu.CV.Structure;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,37 +24,36 @@ namespace VirtualLibrary
             StaticData.labels = labs.Split(',');
         }
 
-        /*public void LoadFaceData()//Loadina veidus
+        public int TempDirectoryController(string action, string name, Bitmap face, int iterator)
         {
-            try
+            if (action == "Create")
             {
-                string labelsInf = File.ReadAllText(Application.StartupPath + "/faces/faces.txt");
-                string[] Labels = labelsInf.Split(',');
-
-                int.TryParse(Labels[0], out StaticData.numLablels);
-                string FacesLoad;
-                for (int i = 1; i <= StaticData.numLablels; i++)
+                try
                 {
-                    FacesLoad = "face" + i + ".bmp";
-                    StaticData.training.Add(new Image<Gray, byte>(Application.StartupPath + $"/faces/{FacesLoad}"));
-                    StaticData.labels.Add(Labels[i]);
+                    Directory.CreateDirectory(Application.StartupPath + "/" + name + "Temp");
+                    face.Save(Application.StartupPath + "/" + name + "Temp" + "/" + name + "" + iterator + ".jpg");
+
+                }
+                catch (Exception e)
+                {
+                    return 1;
                 }
             }
-            catch (Exception ex)
+            else if(action == "Delete")
             {
-                MessageBox.Show("Nothing in the database");
+                try
+                {
+                    Directory.Delete(Application.StartupPath + "/" + name + "Temp");
+                }
+                catch(Exception e)
+                {
+                    return 1;
+                }
             }
+            return 0;
         }
 
-        public void SaveFaceData()
-        {
-            File.WriteAllText(Application.StartupPath + "/faces/faces.txt", StaticData.training.ToArray().Length + ",");
-            for (int i = 1; i <= StaticData.numLablels; i++)
-            {
-                StaticData.training.ToArray()[i - 1].Save(Application.StartupPath + "/faces/face" + i + ".bmp");
-                File.AppendAllText(Application.StartupPath + "/faces/faces.txt", StaticData.labels.ToArray()[i - 1] + ",");
-            }
-        }*///NOT USABLE. PRIVATE ZONE, BACK OFF, I HAVE ASSEMBLY AGAINST YOU
+        
 
         public void LoadBooksData()
         {
