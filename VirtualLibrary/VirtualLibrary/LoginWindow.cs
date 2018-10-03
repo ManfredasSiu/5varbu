@@ -19,12 +19,9 @@ namespace VirtualLibrary
         private Form1 main;
         Image<Gray, byte> GrayFace = null;
         Image<Bgr, Byte> frame= null;
-        string name = "";
         Capture cam;
         HaarCascade faceDetect;
-        Image<Gray, byte> result;
         int StartTime, EndTime;
-        MainWindow mainW;
         MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.6d, 0.6d);
         public Object locket = null;
 

@@ -210,6 +210,8 @@ namespace VirtualLibrary
             {
                 
             }
+            File.AppendAllText(Application.StartupPath + "/names.txt","" + textBox1.Text + ",");
+
             InProgress = false;
             this.Invoke(new closeForm(closeThisFormFromAnotherThread));
         }

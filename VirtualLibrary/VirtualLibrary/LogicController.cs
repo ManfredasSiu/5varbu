@@ -14,7 +14,13 @@ namespace VirtualLibrary
     {//TODO: duomenis krauti i StaticData klase, sukurti ten reikiamus duomenu tipus
         public LogicController() //TODO: LOAD USER DATA; LOAD ALL BOOKS ;; SAVE USER DATA; SAVE ALL BOOKS
         {
-            
+            LoadUsernames();
+        }
+
+        private void LoadUsernames()
+        {
+            string labs = File.ReadAllText(Application.StartupPath + "/names.txt");
+            StaticData.labels = labs.Split(',');
         }
 
         /*public void LoadFaceData()//Loadina veidus
