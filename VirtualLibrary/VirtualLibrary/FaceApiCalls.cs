@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace VirtualLibrary
 {
-    class FaceApiCalls
+    class FaceApiCalls : ICallAzureAPI
     {
         string _imagePath;
         String _groupName = "Users", _groupId = "users";
@@ -59,7 +59,7 @@ namespace VirtualLibrary
             }
         }
 
-        private async Task<Face[]> UploadAndDetetFaces(string imageFilePath)
+        public async Task<Face[]> UploadAndDetetFaces(string imageFilePath)
         {
             try
             {
@@ -104,7 +104,6 @@ namespace VirtualLibrary
                 }
             }
             return null;
-
         }
 
     }
