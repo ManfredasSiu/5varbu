@@ -132,6 +132,7 @@
     <Compile Include="Book.cs" />
     <Compile Include="CurrentUserStatistics.cs" />
     <Compile Include="FaceApiCalls.cs" />
+    <Compile Include="ICallAzureAPI.cs" />
     <Compile Include="MainTry.cs">
       <SubType>Form</SubType>
     </Compile>
