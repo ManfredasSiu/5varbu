@@ -8,7 +8,7 @@ namespace VirtualLibrary
 {
     class Book
     {
-        private String name, auth, code, or;
+        private String name, auth, code, or, type, pages;
 
         public Book (String name, String auth, String code, String or)
         {
