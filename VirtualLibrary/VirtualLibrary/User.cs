@@ -10,9 +10,9 @@ namespace VirtualLibrary
     {
         private String userName, passWord, email;
 
-        private List<Book> UserBooks;
+        private List<Book> UserBooks = new List<Book>();
 
-        private List<Book> BooksRead;
+        private List<Book> BooksRead = new List<Book>();
 
         public User(String userName, String passWord)
         {
@@ -31,6 +31,26 @@ namespace VirtualLibrary
         public String getuserName()
         {
             return this.userName;
+        }
+
+        public List<Book> getUserBooks()
+        {
+            return UserBooks;
+        }
+
+        public void AddReadBook(Book b)
+        {
+            BooksRead.Add(b);
+        }
+
+        public void AddTakenBook(Book b)
+        {
+            UserBooks.Add(b);
+        }
+
+        public List<Book> getBooksRead()
+        {
+            return BooksRead;
         }
 
     }
