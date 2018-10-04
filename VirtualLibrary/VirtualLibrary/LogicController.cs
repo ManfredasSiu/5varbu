@@ -42,11 +42,12 @@ namespace VirtualLibrary
             else if(action == "Delete")
             {
                 try
-                {
-                    Directory.Delete(Application.StartupPath + "/" + name + "Temp");
+                {   
+                    Directory.Delete(Application.StartupPath + "/" + name + "Temp", true);
                 }
                 catch(Exception e)
                 {
+                    MessageBox.Show(e.Message);
                     return 1;
                 }
             }

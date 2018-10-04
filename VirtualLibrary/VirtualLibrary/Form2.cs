@@ -227,7 +227,8 @@ namespace VirtualLibrary
             StaticData.CurrentUser = thisUser;
             if (LogicC.TempDirectoryController("Delete", textBox1.Text, null, 0) == 1)
             {
-                this.Close();
+                this.Invoke(new closeForm(closeThisFormFromAnotherThread));
+                return;
             }
             File.AppendAllText(Application.StartupPath + "/names.txt","" + textBox1.Text + ",");
             InProgress = false;
