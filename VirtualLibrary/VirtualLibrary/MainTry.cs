@@ -37,16 +37,54 @@ namespace VirtualLibrary
             Application.Exit();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
 
+
+        private void moveSidePanel(Control btn)
+        {
+            panelSide.Top = btn.Top;
+            panelSide.Height = btn.Height;
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void AddControlsToPanel(Control c)
+        {
+            c.Dock = DockStyle.Fill;
+            panelControls.Controls.Clear();
+            panelControls.Controls.Add(c);
+        }
+
+        private void buttonHome_Click(object sender, EventArgs e)
+        {
+            moveSidePanel(buttonHome);
+            UserControlHome uch = new UserControlHome();
+            AddControlsToPanel(uch);
+        }
+
+        private void buttonMyBooks_Click(object sender, EventArgs e)
+        {
+            moveSidePanel(buttonMyBooks);
+            UserControlMyBooks ucmb = new UserControlMyBooks();
+            AddControlsToPanel(ucmb);
+        }
+
+        private void buttonLibrary_Click(object sender, EventArgs e)
+        {
+            moveSidePanel(buttonLibrary);
+            UserControlLibrary ucl = new UserControlLibrary();
+            AddControlsToPanel(ucl);
+        }
+
+
+        private void buttonRecom_Click(object sender, EventArgs e)
+        {
+            moveSidePanel(buttonRecom);
+            UserControlRecom ucr = new UserControlRecom();
+            AddControlsToPanel(ucr);
+        }
+        
+        private void buttonShutDown_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-       
+        
     }
 }
