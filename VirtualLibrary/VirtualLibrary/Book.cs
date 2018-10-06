@@ -10,6 +10,8 @@ namespace VirtualLibrary
     {
         private String name, auth, code, or;
 
+        public int ID;
+
         public Book (String name, String auth, String code, String or)
         {
             this.name = name;

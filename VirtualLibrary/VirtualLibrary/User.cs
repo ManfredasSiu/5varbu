@@ -10,6 +10,8 @@ namespace VirtualLibrary
     {
         private String userName, passWord, email;
 
+        public int ID;
+
         private List<Book> UserBooks;
 
 
