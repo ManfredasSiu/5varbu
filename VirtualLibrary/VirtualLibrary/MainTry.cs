@@ -14,9 +14,16 @@ namespace VirtualLibrary
     {
         private LogicController logicC;
 
+        int PanelWidth;
+        bool isCollapsed;
+
         public MainTry(LogicController logicC)
         {
             InitializeComponent();
+            timer2.Start();
+            PanelWidth = panelLeft.Width;
+            isCollapsed = false;
+
             this.logicC = logicC;
             DataTable dt = new DataTable();
             dt.Columns.Add("Knygos autorius ");
@@ -37,16 +44,88 @@ namespace VirtualLibrary
             Application.Exit();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
 
+
+        private void moveSidePanel(Control btn)
+        {
+            panelSide.Top = btn.Top;
+            panelSide.Height = btn.Height;
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void AddControlsToPanel(Control c)
+        {
+            c.Dock = DockStyle.Fill;
+            panelControls.Controls.Clear();
+            panelControls.Controls.Add(c);
+        }
+
+        private void buttonHome_Click(object sender, EventArgs e)
+        {
+            moveSidePanel(buttonHome);
+            UserControlHome uch = new UserControlHome();
+            AddControlsToPanel(uch);
+        }
+
+        private void buttonMyBooks_Click(object sender, EventArgs e)
+        {
+            moveSidePanel(buttonMyBooks);
+            UserControlMyBooks ucmb = new UserControlMyBooks();
+            AddControlsToPanel(ucmb);
+        }
+
+        private void buttonLibrary_Click(object sender, EventArgs e)
+        {
+            moveSidePanel(buttonLibrary);
+            UserControlLibrary ucl = new UserControlLibrary();
+            AddControlsToPanel(ucl);
+        }
+
+
+        private void buttonRecom_Click(object sender, EventArgs e)
+        {
+            moveSidePanel(buttonRecom);
+            UserControlRecom ucr = new UserControlRecom();
+            AddControlsToPanel(ucr);
+        }
+        
+        private void buttonShutDown_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-       
+        private void button2_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (isCollapsed)
+            {
+                panelLeft.Width = panelLeft.Width + 10;
+                if (panelLeft.Width >= PanelWidth)
+                {
+                    timer1.Stop();
+                    isCollapsed = false;
+                    this.Refresh();
+                }
+            }
+            else
+            {
+                panelLeft.Width = panelLeft.Width - 10;
+                if (panelLeft.Width <= 85)
+                {
+                    timer1.Stop();
+                    isCollapsed = true;
+                    this.Refresh();
+                }
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            DateTime dateTime = DateTime.UtcNow.Date;
+            labelDate.Text = dateTime.ToString("yyyy-MM-dd");
+        }
     }
 }
