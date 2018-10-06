@@ -56,6 +56,9 @@ namespace VirtualLibrary
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.buttonReturn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,6 +101,8 @@ namespace VirtualLibrary
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(68)))), ((int)(((byte)(33)))));
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.buttonReturn);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(20, 20);
             this.panel4.Name = "panel4";
@@ -113,6 +118,29 @@ namespace VirtualLibrary
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // buttonReturn
+            // 
+            this.buttonReturn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonReturn.FlatAppearance.BorderSize = 0;
+            this.buttonReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonReturn.Image = global::VirtualLibrary.Properties.Resources.icons8_return_book_32;
+            this.buttonReturn.Location = new System.Drawing.Point(769, 0);
+            this.buttonReturn.Name = "buttonReturn";
+            this.buttonReturn.Size = new System.Drawing.Size(151, 65);
+            this.buttonReturn.TabIndex = 14;
+            this.buttonReturn.Text = "Return Book";
+            this.buttonReturn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.buttonReturn.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(33, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 21);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "My Books";
+            // 
             // UserControlMyBooks
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -126,6 +154,8 @@ namespace VirtualLibrary
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "UserControlMyBooks";
             this.Size = new System.Drawing.Size(960, 560);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -139,5 +169,7 @@ namespace VirtualLibrary
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button buttonReturn;
+        private System.Windows.Forms.Label label1;
     }
 }

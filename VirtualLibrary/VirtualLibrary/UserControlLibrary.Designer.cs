@@ -58,7 +58,10 @@ namespace VirtualLibrary
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.buttonTake = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,6 +77,8 @@ namespace VirtualLibrary
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(68)))), ((int)(((byte)(33)))));
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.buttonTake);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(20, 20);
             this.panel4.Name = "panel4";
@@ -125,6 +130,29 @@ namespace VirtualLibrary
             this.dataGridView2.TabIndex = 12;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
+            // buttonTake
+            // 
+            this.buttonTake.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonTake.FlatAppearance.BorderSize = 0;
+            this.buttonTake.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTake.Image = global::VirtualLibrary.Properties.Resources.icons8_return_book_32;
+            this.buttonTake.Location = new System.Drawing.Point(769, 0);
+            this.buttonTake.Name = "buttonTake";
+            this.buttonTake.Size = new System.Drawing.Size(151, 65);
+            this.buttonTake.TabIndex = 13;
+            this.buttonTake.Text = "Borrow Book";
+            this.buttonTake.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.buttonTake.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(30, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 21);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Library";
+            // 
             // UserControlLibrary
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -139,6 +167,8 @@ namespace VirtualLibrary
             this.Name = "UserControlLibrary";
             this.Size = new System.Drawing.Size(960, 560);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
@@ -153,5 +183,7 @@ namespace VirtualLibrary
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button buttonTake;
+        private System.Windows.Forms.Label label1;
     }
 }

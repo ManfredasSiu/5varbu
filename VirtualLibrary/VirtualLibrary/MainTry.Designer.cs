@@ -30,7 +30,6 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelSide = new System.Windows.Forms.Panel();
-            this.buttonRecom = new System.Windows.Forms.Button();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -46,6 +45,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.buttonShutDown = new System.Windows.Forms.Button();
+            this.buttonRecom = new System.Windows.Forms.Button();
             this.buttonLibrary = new System.Windows.Forms.Button();
             this.buttonMyBooks = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
@@ -82,23 +82,6 @@
             this.panelSide.Name = "panelSide";
             this.panelSide.Size = new System.Drawing.Size(10, 90);
             this.panelSide.TabIndex = 2;
-            // 
-            // buttonRecom
-            // 
-            this.buttonRecom.FlatAppearance.BorderSize = 0;
-            this.buttonRecom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRecom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRecom.ForeColor = System.Drawing.Color.White;
-            this.buttonRecom.Image = global::VirtualLibrary.Properties.Resources.icons8_hint_641;
-            this.buttonRecom.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonRecom.Location = new System.Drawing.Point(10, 480);
-            this.buttonRecom.Name = "buttonRecom";
-            this.buttonRecom.Size = new System.Drawing.Size(230, 90);
-            this.buttonRecom.TabIndex = 3;
-            this.buttonRecom.Text = "   Recommended";
-            this.buttonRecom.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonRecom.UseVisualStyleBackColor = true;
-            this.buttonRecom.Click += new System.EventHandler(this.buttonRecom_Click);
             // 
             // panelLogo
             // 
@@ -218,9 +201,9 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Location = new System.Drawing.Point(119, 108);
+            this.dataGridView1.Location = new System.Drawing.Point(56, 68);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(823, 452);
             this.dataGridView1.TabIndex = 0;
             // 
             // button1
@@ -262,6 +245,23 @@
             this.buttonShutDown.TabIndex = 2;
             this.buttonShutDown.UseVisualStyleBackColor = true;
             this.buttonShutDown.Click += new System.EventHandler(this.buttonShutDown_Click);
+            // 
+            // buttonRecom
+            // 
+            this.buttonRecom.FlatAppearance.BorderSize = 0;
+            this.buttonRecom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRecom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRecom.ForeColor = System.Drawing.Color.White;
+            this.buttonRecom.Image = global::VirtualLibrary.Properties.Resources.icons8_hint_641;
+            this.buttonRecom.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonRecom.Location = new System.Drawing.Point(10, 480);
+            this.buttonRecom.Name = "buttonRecom";
+            this.buttonRecom.Size = new System.Drawing.Size(230, 90);
+            this.buttonRecom.TabIndex = 3;
+            this.buttonRecom.Text = "   Recommended";
+            this.buttonRecom.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonRecom.UseVisualStyleBackColor = true;
+            this.buttonRecom.Click += new System.EventHandler(this.buttonRecom_Click);
             // 
             // buttonLibrary
             // 
@@ -337,7 +337,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainTry";
             this.Text = "MainTry";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
