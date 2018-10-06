@@ -115,16 +115,19 @@ namespace VirtualLibrary
                 {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("Select * from [dbo].[user] ");
+                    sb.Append("Select * from [dbo].[User] ");
                     sb.Append("WHERE name = '" + name + "';");
                     String sql = sb.ToString();
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            String[] userData = { reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3) };
-                            connection.Close();
-                            return userData;
+                            if (reader.Read())
+                            {
+                                StaticData.CurrentUser = new User((int)reader.GetValue(0), (string)reader.GetValue(1), (string)reader.GetValue(2), null, (string)reader.GetValue(4), null, null);
+                                connection.Close();
+                                return null;//userData;
+                            }
                         }
                     }
                 }
@@ -134,6 +137,7 @@ namespace VirtualLibrary
                 MessageBox.Show(e.Message);
                 return null;
             }
+            return null;
         }
 
         public int AddUserBook(Book addThis)

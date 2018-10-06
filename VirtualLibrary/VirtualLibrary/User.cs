@@ -30,8 +30,9 @@ namespace VirtualLibrary
             this.BooksRead = BooksRead;
         }
 
-        public User(String userName, String passWord, String email, String permission, List<Book> UserBooks, List<Book> BooksRead)
+        public User(int ID, String userName, String passWord, String email, String permission, List<Book> UserBooks, List<Book> BooksRead)
         {
+            this.ID = ID;
             this.userName = userName;
             this.passWord = passWord;
             this.email = email;
