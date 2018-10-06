@@ -58,13 +58,12 @@ namespace VirtualLibrary
             this.label1 = new System.Windows.Forms.Label();
             this.buttonReturn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ColumnISBN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnAuthor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPressName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnGenre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -146,13 +145,12 @@ namespace VirtualLibrary
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeight = 40;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnISBN,
-            this.ColumnTitle,
-            this.ColumnAuthor,
-            this.ColumnPressName,
-            this.ColumnGenre,
-            this.ColumnPages,
-            this.ColumnQuantity});
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(20, 85);
             this.dataGridView1.Name = "dataGridView1";
@@ -160,55 +158,49 @@ namespace VirtualLibrary
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 50;
             this.dataGridView1.Size = new System.Drawing.Size(920, 455);
-            this.dataGridView1.TabIndex = 6;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.TabIndex = 17;
             // 
-            // ColumnISBN
+            // dataGridViewTextBoxColumn5
             // 
-            this.ColumnISBN.HeaderText = "ISBN";
-            this.ColumnISBN.Name = "ColumnISBN";
-            this.ColumnISBN.ReadOnly = true;
-            this.ColumnISBN.Width = 125;
+            this.dataGridViewTextBoxColumn5.HeaderText = "ISBN";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 125;
             // 
-            // ColumnTitle
+            // dataGridViewTextBoxColumn6
             // 
-            this.ColumnTitle.HeaderText = "Book Title";
-            this.ColumnTitle.Name = "ColumnTitle";
-            this.ColumnTitle.ReadOnly = true;
-            this.ColumnTitle.Width = 175;
+            this.dataGridViewTextBoxColumn6.HeaderText = "Book Title";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 175;
             // 
-            // ColumnAuthor
+            // dataGridViewTextBoxColumn7
             // 
-            this.ColumnAuthor.HeaderText = "Author";
-            this.ColumnAuthor.Name = "ColumnAuthor";
-            this.ColumnAuthor.ReadOnly = true;
-            this.ColumnAuthor.Width = 150;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Author";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 150;
             // 
-            // ColumnPressName
+            // dataGridViewTextBoxColumn8
             // 
-            this.ColumnPressName.HeaderText = "Publication";
-            this.ColumnPressName.Name = "ColumnPressName";
-            this.ColumnPressName.ReadOnly = true;
-            this.ColumnPressName.Width = 150;
+            this.dataGridViewTextBoxColumn8.HeaderText = "Publication";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 150;
             // 
-            // ColumnGenre
+            // dataGridViewTextBoxColumn9
             // 
-            this.ColumnGenre.HeaderText = "Genre";
-            this.ColumnGenre.Name = "ColumnGenre";
-            this.ColumnGenre.ReadOnly = true;
-            this.ColumnGenre.Width = 125;
+            this.dataGridViewTextBoxColumn9.HeaderText = "Date Taken";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 150;
             // 
-            // ColumnPages
+            // dataGridViewTextBoxColumn10
             // 
-            this.ColumnPages.HeaderText = "Pages";
-            this.ColumnPages.Name = "ColumnPages";
-            this.ColumnPages.ReadOnly = true;
-            // 
-            // ColumnQuantity
-            // 
-            this.ColumnQuantity.HeaderText = "Quantity";
-            this.ColumnQuantity.Name = "ColumnQuantity";
-            this.ColumnQuantity.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.HeaderText = "Due Date";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.dataGridViewTextBoxColumn10.Width = 150;
             // 
             // UserControlMyBooks
             // 
@@ -237,15 +229,14 @@ namespace VirtualLibrary
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button buttonReturn;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnISBN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTitle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAuthor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPressName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnGenre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPages;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQuantity;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
     }
 }

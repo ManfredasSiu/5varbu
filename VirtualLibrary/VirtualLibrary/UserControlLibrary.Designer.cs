@@ -64,8 +64,9 @@ namespace VirtualLibrary
             this.ColumnTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnAuthor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPressName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDateTaken = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDateDue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnGenre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPages = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -161,8 +162,9 @@ namespace VirtualLibrary
             this.ColumnTitle,
             this.ColumnAuthor,
             this.ColumnPressName,
-            this.ColumnDateTaken,
-            this.ColumnDateDue});
+            this.ColumnGenre,
+            this.ColumnPages,
+            this.ColumnQuantity});
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView2.Location = new System.Drawing.Point(20, 85);
             this.dataGridView2.Name = "dataGridView2";
@@ -200,19 +202,24 @@ namespace VirtualLibrary
             this.ColumnPressName.ReadOnly = true;
             this.ColumnPressName.Width = 150;
             // 
-            // ColumnDateTaken
+            // ColumnGenre
             // 
-            this.ColumnDateTaken.HeaderText = "Date Taken";
-            this.ColumnDateTaken.Name = "ColumnDateTaken";
-            this.ColumnDateTaken.ReadOnly = true;
-            this.ColumnDateTaken.Width = 150;
+            this.ColumnGenre.HeaderText = "Genre";
+            this.ColumnGenre.Name = "ColumnGenre";
+            this.ColumnGenre.ReadOnly = true;
+            this.ColumnGenre.Width = 125;
             // 
-            // ColumnDateDue
+            // ColumnPages
             // 
-            this.ColumnDateDue.HeaderText = "Due Date";
-            this.ColumnDateDue.Name = "ColumnDateDue";
-            this.ColumnDateDue.ReadOnly = true;
-            this.ColumnDateDue.Width = 150;
+            this.ColumnPages.HeaderText = "Pages";
+            this.ColumnPages.Name = "ColumnPages";
+            this.ColumnPages.ReadOnly = true;
+            // 
+            // ColumnQuantity
+            // 
+            this.ColumnQuantity.HeaderText = "Quantity";
+            this.ColumnQuantity.Name = "ColumnQuantity";
+            this.ColumnQuantity.ReadOnly = true;
             // 
             // UserControlLibrary
             // 
@@ -250,7 +257,8 @@ namespace VirtualLibrary
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAuthor;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPressName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDateTaken;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDateDue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnGenre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPages;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQuantity;
     }
 }
