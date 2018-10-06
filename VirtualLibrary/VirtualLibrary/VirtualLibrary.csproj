@@ -53,6 +53,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Emgu.Util.dll</HintPath>
     </Reference>
+    <Reference Include="MessagingToolkit.Barcode">
+      <HintPath>..\..\..\Bar\Barcode-DLL\MessagingToolkit.Barcode.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ProjectOxford.Common, Version=2.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ProjectOxford.Common.2.1.1\lib\netstandard1.1\Microsoft.ProjectOxford.Common.dll</HintPath>
     </Reference>
@@ -130,20 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Book.cs" />
-    <Compile Include="CurrentUserStatistics.cs" />
     <Compile Include="FaceApiCalls.cs" />
-    <Compile Include="FormBorrowBook.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormBorrowBook.Designer.cs">
-      <DependentUpon>FormBorrowBook.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormReturnBook.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormReturnBook.Designer.cs">
-      <DependentUpon>FormReturnBook.cs</DependentUpon>
-    </Compile>
     <Compile Include="ICallAzureAPI.cs" />
     <Compile Include="MainTry.cs">
       <SubType>Form</SubType>
@@ -155,6 +145,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ScannerWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScannerWindow.Designer.cs">
+      <DependentUpon>ScannerWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="Form1.cs">
@@ -179,42 +175,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticData.cs" />
-    <Compile Include="UserControlHome.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControlHome.Designer.cs">
-      <DependentUpon>UserControlHome.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControlLibrary.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControlLibrary.Designer.cs">
-      <DependentUpon>UserControlLibrary.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControlMyBooks.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControlMyBooks.Designer.cs">
-      <DependentUpon>UserControlMyBooks.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControlRecom.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControlRecom.Designer.cs">
-      <DependentUpon>UserControlRecom.cs</DependentUpon>
-    </Compile>
     <Compile Include="VoiceRecognition.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormBorrowBook.resx">
-      <DependentUpon>FormBorrowBook.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormReturnBook.resx">
-      <DependentUpon>FormReturnBook.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
@@ -227,17 +193,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControlHome.resx">
-      <DependentUpon>UserControlHome.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControlLibrary.resx">
-      <DependentUpon>UserControlLibrary.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControlMyBooks.resx">
-      <DependentUpon>UserControlMyBooks.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControlRecom.resx">
-      <DependentUpon>UserControlRecom.cs</DependentUpon>
+    <EmbeddedResource Include="ScannerWindow.resx">
+      <DependentUpon>ScannerWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -265,10 +222,6 @@
     <None Include="Properties\Icons\icons8-home-64.png" />
     <None Include="Properties\Icons\icons8-reading-64.png" />
     <None Include="Properties\Icons\icons8-hint-64.png" />
-    <None Include="Properties\Icons\icons8-menu-64.png" />
-    <None Include="Properties\Icons\icons8-menu-vertical-64.png" />
-    <None Include="Properties\Icons\menu64.png" />
-    <None Include="Properties\Icons\icons8-return-book-32.png" />
     <Content Include="RedPoint.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
