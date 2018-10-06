@@ -123,10 +123,10 @@ namespace VirtualLibrary
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             String[] userData = { reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3) };
+                            connection.Close();
                             return userData;
                         }
                     }
-                    connection.Close();
                 }
             }
             catch (SqlException e)
