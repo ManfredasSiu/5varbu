@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.components = new System.ComponentModel.Container();
+            this.panelLeft = new System.Windows.Forms.Panel();
             this.panelSide = new System.Windows.Forms.Panel();
             this.buttonRecom = new System.Windows.Forms.Button();
             this.buttonLibrary = new System.Windows.Forms.Button();
             this.buttonMyBooks = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
             this.panelLogo = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -50,7 +52,10 @@
             this.panelControls = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.labelDate = new System.Windows.Forms.Label();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.panelLeft.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelTop.SuspendLayout();
@@ -59,21 +64,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // panelLeft
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(68)))), ((int)(((byte)(33)))));
-            this.panel1.Controls.Add(this.panelSide);
-            this.panel1.Controls.Add(this.buttonRecom);
-            this.panel1.Controls.Add(this.buttonLibrary);
-            this.panel1.Controls.Add(this.buttonMyBooks);
-            this.panel1.Controls.Add(this.buttonHome);
-            this.panel1.Controls.Add(this.panelLogo);
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(240, 720);
-            this.panel1.TabIndex = 0;
+            this.panelLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(68)))), ((int)(((byte)(33)))));
+            this.panelLeft.Controls.Add(this.panelSide);
+            this.panelLeft.Controls.Add(this.buttonRecom);
+            this.panelLeft.Controls.Add(this.buttonLibrary);
+            this.panelLeft.Controls.Add(this.buttonMyBooks);
+            this.panelLeft.Controls.Add(this.buttonHome);
+            this.panelLeft.Controls.Add(this.panelLogo);
+            this.panelLeft.Controls.Add(this.flowLayoutPanel1);
+            this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelLeft.Location = new System.Drawing.Point(0, 0);
+            this.panelLeft.Name = "panelLeft";
+            this.panelLeft.Size = new System.Drawing.Size(240, 720);
+            this.panelLeft.TabIndex = 0;
             // 
             // panelSide
             // 
@@ -154,12 +159,30 @@
             // 
             // panelLogo
             // 
+            this.panelLogo.Controls.Add(this.button2);
             this.panelLogo.Controls.Add(this.label1);
             this.panelLogo.Controls.Add(this.pictureBox1);
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(240, 160);
             this.panelLogo.TabIndex = 2;
+            // 
+            // button2
+            // 
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Image = global::VirtualLibrary.Properties.Resources.menu642;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(10, 0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(64, 64);
+            this.button2.TabIndex = 4;
+            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button2.UseCompatibleTextRendering = true;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
@@ -284,6 +307,7 @@
             // panelInfo
             // 
             this.panelInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(68)))), ((int)(((byte)(33)))));
+            this.panelInfo.Controls.Add(this.labelDate);
             this.panelInfo.Controls.Add(this.UserName);
             this.panelInfo.Controls.Add(this.label3);
             this.panelInfo.Controls.Add(this.label4);
@@ -325,6 +349,23 @@
             this.button1.UseCompatibleTextRendering = true;
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // labelDate
+            // 
+            this.labelDate.AutoSize = true;
+            this.labelDate.Location = new System.Drawing.Point(828, 33);
+            this.labelDate.Name = "labelDate";
+            this.labelDate.Size = new System.Drawing.Size(89, 20);
+            this.labelDate.TabIndex = 2;
+            this.labelDate.Text = "yyyy/MM/dd";
+            // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // MainTry
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -332,12 +373,12 @@
             this.Controls.Add(this.panelControls);
             this.Controls.Add(this.panelInfo);
             this.Controls.Add(this.panelTop);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelLeft);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainTry";
             this.Text = "MainTry";
-            this.panel1.ResumeLayout(false);
+            this.panelLeft.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -353,7 +394,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelLeft;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panelLogo;
         private System.Windows.Forms.Panel panelTop;
@@ -375,5 +416,9 @@
         private System.Windows.Forms.Panel panelControls;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label labelDate;
+        private System.Windows.Forms.Timer timer2;
     }
 }

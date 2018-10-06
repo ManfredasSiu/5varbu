@@ -14,9 +14,16 @@ namespace VirtualLibrary
     {
         private LogicController logicC;
 
+        int PanelWidth;
+        bool isCollapsed;
+
         public MainTry(LogicController logicC)
         {
             InitializeComponent();
+            timer2.Start();
+            PanelWidth = panelLeft.Width;
+            isCollapsed = false;
+
             this.logicC = logicC;
             DataTable dt = new DataTable();
             dt.Columns.Add("Knygos autorius ");
@@ -85,6 +92,40 @@ namespace VirtualLibrary
         {
             this.Close();
         }
-        
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (isCollapsed)
+            {
+                panelLeft.Width = panelLeft.Width + 10;
+                if (panelLeft.Width >= PanelWidth)
+                {
+                    timer1.Stop();
+                    isCollapsed = false;
+                    this.Refresh();
+                }
+            }
+            else
+            {
+                panelLeft.Width = panelLeft.Width - 10;
+                if (panelLeft.Width <= 85)
+                {
+                    timer1.Stop();
+                    isCollapsed = true;
+                    this.Refresh();
+                }
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            DateTime dateTime = DateTime.UtcNow.Date;
+            labelDate.Text = dateTime.ToString("yyyy-MM-dd");
+        }
     }
 }
