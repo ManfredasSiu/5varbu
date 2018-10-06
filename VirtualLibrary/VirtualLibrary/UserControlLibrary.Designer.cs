@@ -53,13 +53,19 @@ namespace VirtualLibrary
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.buttonTake = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.buttonTake = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.ColumnISBN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnAuthor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPressName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDateTaken = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDateDue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -84,6 +90,30 @@ namespace VirtualLibrary
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(920, 65);
             this.panel4.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(30, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 21);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Library";
+            // 
+            // buttonTake
+            // 
+            this.buttonTake.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonTake.FlatAppearance.BorderSize = 0;
+            this.buttonTake.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTake.Image = global::VirtualLibrary.Properties.Resources.icons8_return_book_32;
+            this.buttonTake.Location = new System.Drawing.Point(769, 0);
+            this.buttonTake.Name = "buttonTake";
+            this.buttonTake.Size = new System.Drawing.Size(151, 65);
+            this.buttonTake.TabIndex = 13;
+            this.buttonTake.Text = "Borrow Book";
+            this.buttonTake.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.buttonTake.UseVisualStyleBackColor = true;
+            this.buttonTake.Click += new System.EventHandler(this.buttonTake_Click);
             // 
             // panel3
             // 
@@ -123,35 +153,66 @@ namespace VirtualLibrary
             // 
             // dataGridView2
             // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.ColumnHeadersHeight = 40;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnISBN,
+            this.ColumnTitle,
+            this.ColumnAuthor,
+            this.ColumnPressName,
+            this.ColumnDateTaken,
+            this.ColumnDateDue});
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView2.Location = new System.Drawing.Point(20, 85);
             this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowHeadersWidth = 50;
             this.dataGridView2.Size = new System.Drawing.Size(920, 455);
             this.dataGridView2.TabIndex = 12;
-            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
-            // buttonTake
+            // ColumnISBN
             // 
-            this.buttonTake.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonTake.FlatAppearance.BorderSize = 0;
-            this.buttonTake.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonTake.Image = global::VirtualLibrary.Properties.Resources.icons8_return_book_32;
-            this.buttonTake.Location = new System.Drawing.Point(769, 0);
-            this.buttonTake.Name = "buttonTake";
-            this.buttonTake.Size = new System.Drawing.Size(151, 65);
-            this.buttonTake.TabIndex = 13;
-            this.buttonTake.Text = "Borrow Book";
-            this.buttonTake.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.buttonTake.UseVisualStyleBackColor = true;
+            this.ColumnISBN.HeaderText = "ISBN";
+            this.ColumnISBN.Name = "ColumnISBN";
+            this.ColumnISBN.ReadOnly = true;
+            this.ColumnISBN.Width = 125;
             // 
-            // label1
+            // ColumnTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 21);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Library";
+            this.ColumnTitle.HeaderText = "Book Title";
+            this.ColumnTitle.Name = "ColumnTitle";
+            this.ColumnTitle.ReadOnly = true;
+            this.ColumnTitle.Width = 175;
+            // 
+            // ColumnAuthor
+            // 
+            this.ColumnAuthor.HeaderText = "Author";
+            this.ColumnAuthor.Name = "ColumnAuthor";
+            this.ColumnAuthor.ReadOnly = true;
+            this.ColumnAuthor.Width = 150;
+            // 
+            // ColumnPressName
+            // 
+            this.ColumnPressName.HeaderText = "Publication";
+            this.ColumnPressName.Name = "ColumnPressName";
+            this.ColumnPressName.ReadOnly = true;
+            this.ColumnPressName.Width = 150;
+            // 
+            // ColumnDateTaken
+            // 
+            this.ColumnDateTaken.HeaderText = "Date Taken";
+            this.ColumnDateTaken.Name = "ColumnDateTaken";
+            this.ColumnDateTaken.ReadOnly = true;
+            this.ColumnDateTaken.Width = 150;
+            // 
+            // ColumnDateDue
+            // 
+            this.ColumnDateDue.HeaderText = "Due Date";
+            this.ColumnDateDue.Name = "ColumnDateDue";
+            this.ColumnDateDue.ReadOnly = true;
+            this.ColumnDateDue.Width = 150;
             // 
             // UserControlLibrary
             // 
@@ -182,8 +243,14 @@ namespace VirtualLibrary
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button buttonTake;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnISBN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAuthor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPressName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDateTaken;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDateDue;
     }
 }

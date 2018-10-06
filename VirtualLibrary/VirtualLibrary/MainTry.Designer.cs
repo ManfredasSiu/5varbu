@@ -30,10 +30,17 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelSide = new System.Windows.Forms.Panel();
+            this.buttonRecom = new System.Windows.Forms.Button();
+            this.buttonLibrary = new System.Windows.Forms.Button();
+            this.buttonMyBooks = new System.Windows.Forms.Button();
+            this.buttonHome = new System.Windows.Forms.Button();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.buttonSettings = new System.Windows.Forms.Button();
+            this.buttonShutDown = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -43,20 +50,13 @@
             this.panelControls = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
-            this.buttonSettings = new System.Windows.Forms.Button();
-            this.buttonShutDown = new System.Windows.Forms.Button();
-            this.buttonRecom = new System.Windows.Forms.Button();
-            this.buttonLibrary = new System.Windows.Forms.Button();
-            this.buttonMyBooks = new System.Windows.Forms.Button();
-            this.buttonHome = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panelLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelTop.SuspendLayout();
             this.panelInfo.SuspendLayout();
             this.panelControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -83,6 +83,75 @@
             this.panelSide.Size = new System.Drawing.Size(10, 90);
             this.panelSide.TabIndex = 2;
             // 
+            // buttonRecom
+            // 
+            this.buttonRecom.FlatAppearance.BorderSize = 0;
+            this.buttonRecom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRecom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRecom.ForeColor = System.Drawing.Color.White;
+            this.buttonRecom.Image = global::VirtualLibrary.Properties.Resources.icons8_hint_641;
+            this.buttonRecom.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonRecom.Location = new System.Drawing.Point(10, 480);
+            this.buttonRecom.Name = "buttonRecom";
+            this.buttonRecom.Size = new System.Drawing.Size(230, 90);
+            this.buttonRecom.TabIndex = 3;
+            this.buttonRecom.Text = "   Recommended";
+            this.buttonRecom.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonRecom.UseVisualStyleBackColor = true;
+            this.buttonRecom.Click += new System.EventHandler(this.buttonRecom_Click);
+            // 
+            // buttonLibrary
+            // 
+            this.buttonLibrary.FlatAppearance.BorderSize = 0;
+            this.buttonLibrary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonLibrary.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLibrary.ForeColor = System.Drawing.Color.White;
+            this.buttonLibrary.Image = global::VirtualLibrary.Properties.Resources.icons8_book_shelf_641;
+            this.buttonLibrary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonLibrary.Location = new System.Drawing.Point(10, 390);
+            this.buttonLibrary.Name = "buttonLibrary";
+            this.buttonLibrary.Size = new System.Drawing.Size(230, 90);
+            this.buttonLibrary.TabIndex = 3;
+            this.buttonLibrary.Text = "   Library";
+            this.buttonLibrary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonLibrary.UseVisualStyleBackColor = true;
+            this.buttonLibrary.Click += new System.EventHandler(this.buttonLibrary_Click);
+            // 
+            // buttonMyBooks
+            // 
+            this.buttonMyBooks.FlatAppearance.BorderSize = 0;
+            this.buttonMyBooks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMyBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMyBooks.ForeColor = System.Drawing.Color.White;
+            this.buttonMyBooks.Image = global::VirtualLibrary.Properties.Resources.icons8_reading_641;
+            this.buttonMyBooks.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonMyBooks.Location = new System.Drawing.Point(10, 300);
+            this.buttonMyBooks.Name = "buttonMyBooks";
+            this.buttonMyBooks.Size = new System.Drawing.Size(230, 90);
+            this.buttonMyBooks.TabIndex = 3;
+            this.buttonMyBooks.Text = "   My Books";
+            this.buttonMyBooks.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonMyBooks.UseVisualStyleBackColor = true;
+            this.buttonMyBooks.Click += new System.EventHandler(this.buttonMyBooks_Click);
+            // 
+            // buttonHome
+            // 
+            this.buttonHome.FlatAppearance.BorderSize = 0;
+            this.buttonHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonHome.ForeColor = System.Drawing.Color.White;
+            this.buttonHome.Image = global::VirtualLibrary.Properties.Resources.icons8_home_641;
+            this.buttonHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonHome.Location = new System.Drawing.Point(10, 210);
+            this.buttonHome.Name = "buttonHome";
+            this.buttonHome.Size = new System.Drawing.Size(230, 90);
+            this.buttonHome.TabIndex = 3;
+            this.buttonHome.Text = "   Home";
+            this.buttonHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonHome.UseCompatibleTextRendering = true;
+            this.buttonHome.UseVisualStyleBackColor = true;
+            this.buttonHome.Click += new System.EventHandler(this.buttonHome_Click);
+            // 
             // panelLogo
             // 
             this.panelLogo.Controls.Add(this.label1);
@@ -103,6 +172,16 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "VL";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::VirtualLibrary.Properties.Resources.Logo641;
+            this.pictureBox1.Location = new System.Drawing.Point(65, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(126, 93);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Location = new System.Drawing.Point(246, 0);
@@ -121,6 +200,31 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(960, 52);
             this.panelTop.TabIndex = 1;
+            // 
+            // buttonSettings
+            // 
+            this.buttonSettings.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonSettings.FlatAppearance.BorderSize = 0;
+            this.buttonSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSettings.Image = global::VirtualLibrary.Properties.Resources.icons8_settings_321;
+            this.buttonSettings.Location = new System.Drawing.Point(856, 0);
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(52, 52);
+            this.buttonSettings.TabIndex = 2;
+            this.buttonSettings.UseVisualStyleBackColor = true;
+            // 
+            // buttonShutDown
+            // 
+            this.buttonShutDown.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonShutDown.FlatAppearance.BorderSize = 0;
+            this.buttonShutDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonShutDown.Image = global::VirtualLibrary.Properties.Resources.icons8_shutdown_321;
+            this.buttonShutDown.Location = new System.Drawing.Point(908, 0);
+            this.buttonShutDown.Name = "buttonShutDown";
+            this.buttonShutDown.Size = new System.Drawing.Size(52, 52);
+            this.buttonShutDown.TabIndex = 2;
+            this.buttonShutDown.UseVisualStyleBackColor = true;
+            this.buttonShutDown.Click += new System.EventHandler(this.buttonShutDown_Click);
             // 
             // label2
             // 
@@ -201,9 +305,9 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Location = new System.Drawing.Point(56, 68);
+            this.dataGridView1.Location = new System.Drawing.Point(485, 397);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(823, 452);
+            this.dataGridView1.Size = new System.Drawing.Size(394, 123);
             this.dataGridView1.TabIndex = 0;
             // 
             // button1
@@ -221,110 +325,6 @@
             this.button1.UseCompatibleTextRendering = true;
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // buttonSettings
-            // 
-            this.buttonSettings.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonSettings.FlatAppearance.BorderSize = 0;
-            this.buttonSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSettings.Image = global::VirtualLibrary.Properties.Resources.icons8_settings_321;
-            this.buttonSettings.Location = new System.Drawing.Point(856, 0);
-            this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Size = new System.Drawing.Size(52, 52);
-            this.buttonSettings.TabIndex = 2;
-            this.buttonSettings.UseVisualStyleBackColor = true;
-            // 
-            // buttonShutDown
-            // 
-            this.buttonShutDown.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonShutDown.FlatAppearance.BorderSize = 0;
-            this.buttonShutDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonShutDown.Image = global::VirtualLibrary.Properties.Resources.icons8_shutdown_321;
-            this.buttonShutDown.Location = new System.Drawing.Point(908, 0);
-            this.buttonShutDown.Name = "buttonShutDown";
-            this.buttonShutDown.Size = new System.Drawing.Size(52, 52);
-            this.buttonShutDown.TabIndex = 2;
-            this.buttonShutDown.UseVisualStyleBackColor = true;
-            this.buttonShutDown.Click += new System.EventHandler(this.buttonShutDown_Click);
-            // 
-            // buttonRecom
-            // 
-            this.buttonRecom.FlatAppearance.BorderSize = 0;
-            this.buttonRecom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRecom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRecom.ForeColor = System.Drawing.Color.White;
-            this.buttonRecom.Image = global::VirtualLibrary.Properties.Resources.icons8_hint_641;
-            this.buttonRecom.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonRecom.Location = new System.Drawing.Point(10, 480);
-            this.buttonRecom.Name = "buttonRecom";
-            this.buttonRecom.Size = new System.Drawing.Size(230, 90);
-            this.buttonRecom.TabIndex = 3;
-            this.buttonRecom.Text = "   Recommended";
-            this.buttonRecom.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonRecom.UseVisualStyleBackColor = true;
-            this.buttonRecom.Click += new System.EventHandler(this.buttonRecom_Click);
-            // 
-            // buttonLibrary
-            // 
-            this.buttonLibrary.FlatAppearance.BorderSize = 0;
-            this.buttonLibrary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLibrary.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonLibrary.ForeColor = System.Drawing.Color.White;
-            this.buttonLibrary.Image = global::VirtualLibrary.Properties.Resources.icons8_book_shelf_641;
-            this.buttonLibrary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonLibrary.Location = new System.Drawing.Point(10, 390);
-            this.buttonLibrary.Name = "buttonLibrary";
-            this.buttonLibrary.Size = new System.Drawing.Size(230, 90);
-            this.buttonLibrary.TabIndex = 3;
-            this.buttonLibrary.Text = "   Library";
-            this.buttonLibrary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonLibrary.UseVisualStyleBackColor = true;
-            this.buttonLibrary.Click += new System.EventHandler(this.buttonLibrary_Click);
-            // 
-            // buttonMyBooks
-            // 
-            this.buttonMyBooks.FlatAppearance.BorderSize = 0;
-            this.buttonMyBooks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonMyBooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMyBooks.ForeColor = System.Drawing.Color.White;
-            this.buttonMyBooks.Image = global::VirtualLibrary.Properties.Resources.icons8_reading_641;
-            this.buttonMyBooks.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonMyBooks.Location = new System.Drawing.Point(10, 300);
-            this.buttonMyBooks.Name = "buttonMyBooks";
-            this.buttonMyBooks.Size = new System.Drawing.Size(230, 90);
-            this.buttonMyBooks.TabIndex = 3;
-            this.buttonMyBooks.Text = "   My Books";
-            this.buttonMyBooks.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonMyBooks.UseVisualStyleBackColor = true;
-            this.buttonMyBooks.Click += new System.EventHandler(this.buttonMyBooks_Click);
-            // 
-            // buttonHome
-            // 
-            this.buttonHome.FlatAppearance.BorderSize = 0;
-            this.buttonHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonHome.ForeColor = System.Drawing.Color.White;
-            this.buttonHome.Image = global::VirtualLibrary.Properties.Resources.icons8_home_641;
-            this.buttonHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonHome.Location = new System.Drawing.Point(10, 210);
-            this.buttonHome.Name = "buttonHome";
-            this.buttonHome.Size = new System.Drawing.Size(230, 90);
-            this.buttonHome.TabIndex = 3;
-            this.buttonHome.Text = "   Home";
-            this.buttonHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonHome.UseCompatibleTextRendering = true;
-            this.buttonHome.UseVisualStyleBackColor = true;
-            this.buttonHome.Click += new System.EventHandler(this.buttonHome_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::VirtualLibrary.Properties.Resources.Logo641;
-            this.pictureBox1.Location = new System.Drawing.Point(65, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(126, 93);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
             // MainTry
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -340,13 +340,13 @@
             this.panel1.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             this.panelInfo.ResumeLayout(false);
             this.panelInfo.PerformLayout();
             this.panelControls.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

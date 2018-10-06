@@ -21,5 +21,13 @@ namespace VirtualLibrary
         {
 
         }
+
+        private void buttonReturn_Click(object sender, EventArgs e)
+        {
+            using (FormReturnBook frb = new FormReturnBook())
+            {
+                frb.ShowDialog();
+            }
+        }
     }
 }

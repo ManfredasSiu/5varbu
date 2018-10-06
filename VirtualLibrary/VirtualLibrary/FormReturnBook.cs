@@ -16,5 +16,11 @@ namespace VirtualLibrary
         {
             InitializeComponent();
         }
+
+        //Mygtuko paspaudimas turetu isimti knyga is MyBooks saraso ir Grazinti i library sarasa
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

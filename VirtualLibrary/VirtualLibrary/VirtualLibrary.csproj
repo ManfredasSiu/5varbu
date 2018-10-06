@@ -131,6 +131,18 @@
   <ItemGroup>
     <Compile Include="Book.cs" />
     <Compile Include="FaceApiCalls.cs" />
+    <Compile Include="FormBorrowBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBorrowBook.Designer.cs">
+      <DependentUpon>FormBorrowBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReturnBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReturnBook.Designer.cs">
+      <DependentUpon>FormReturnBook.cs</DependentUpon>
+    </Compile>
     <Compile Include="ICallAzureAPI.cs" />
     <Compile Include="MainTry.cs">
       <SubType>Form</SubType>
@@ -196,6 +208,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBorrowBook.resx">
+      <DependentUpon>FormBorrowBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReturnBook.resx">
+      <DependentUpon>FormReturnBook.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>

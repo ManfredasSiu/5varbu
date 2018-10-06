@@ -21,5 +21,13 @@ namespace VirtualLibrary
         {
 
         }
+
+        private void buttonTake_Click(object sender, EventArgs e)
+        {
+            using (FormBorrowBook fbb = new FormBorrowBook())
+            {
+                fbb.ShowDialog();
+            }
+        }
     }
 }

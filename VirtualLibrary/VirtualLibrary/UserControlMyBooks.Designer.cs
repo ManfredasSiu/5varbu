@@ -55,9 +55,16 @@ namespace VirtualLibrary
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.buttonReturn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonReturn = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ColumnISBN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnAuthor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPressName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnGenre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPages = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -109,14 +116,14 @@ namespace VirtualLibrary
             this.panel4.Size = new System.Drawing.Size(920, 65);
             this.panel4.TabIndex = 4;
             // 
-            // dataGridView1
+            // label1
             // 
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(20, 85);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(920, 455);
-            this.dataGridView1.TabIndex = 6;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(33, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 21);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "My Books";
             // 
             // buttonReturn
             // 
@@ -131,15 +138,77 @@ namespace VirtualLibrary
             this.buttonReturn.Text = "Return Book";
             this.buttonReturn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.buttonReturn.UseVisualStyleBackColor = true;
+            this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
             // 
-            // label1
+            // dataGridView1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 21);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "My Books";
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeight = 40;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnISBN,
+            this.ColumnTitle,
+            this.ColumnAuthor,
+            this.ColumnPressName,
+            this.ColumnGenre,
+            this.ColumnPages,
+            this.ColumnQuantity});
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(20, 85);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 50;
+            this.dataGridView1.Size = new System.Drawing.Size(920, 455);
+            this.dataGridView1.TabIndex = 6;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // ColumnISBN
+            // 
+            this.ColumnISBN.HeaderText = "ISBN";
+            this.ColumnISBN.Name = "ColumnISBN";
+            this.ColumnISBN.ReadOnly = true;
+            this.ColumnISBN.Width = 125;
+            // 
+            // ColumnTitle
+            // 
+            this.ColumnTitle.HeaderText = "Book Title";
+            this.ColumnTitle.Name = "ColumnTitle";
+            this.ColumnTitle.ReadOnly = true;
+            this.ColumnTitle.Width = 175;
+            // 
+            // ColumnAuthor
+            // 
+            this.ColumnAuthor.HeaderText = "Author";
+            this.ColumnAuthor.Name = "ColumnAuthor";
+            this.ColumnAuthor.ReadOnly = true;
+            this.ColumnAuthor.Width = 150;
+            // 
+            // ColumnPressName
+            // 
+            this.ColumnPressName.HeaderText = "Publication";
+            this.ColumnPressName.Name = "ColumnPressName";
+            this.ColumnPressName.ReadOnly = true;
+            this.ColumnPressName.Width = 150;
+            // 
+            // ColumnGenre
+            // 
+            this.ColumnGenre.HeaderText = "Genre";
+            this.ColumnGenre.Name = "ColumnGenre";
+            this.ColumnGenre.ReadOnly = true;
+            this.ColumnGenre.Width = 125;
+            // 
+            // ColumnPages
+            // 
+            this.ColumnPages.HeaderText = "Pages";
+            this.ColumnPages.Name = "ColumnPages";
+            this.ColumnPages.ReadOnly = true;
+            // 
+            // ColumnQuantity
+            // 
+            this.ColumnQuantity.HeaderText = "Quantity";
+            this.ColumnQuantity.Name = "ColumnQuantity";
+            this.ColumnQuantity.ReadOnly = true;
             // 
             // UserControlMyBooks
             // 
@@ -171,5 +240,12 @@ namespace VirtualLibrary
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button buttonReturn;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnISBN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAuthor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPressName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnGenre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPages;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQuantity;
     }
 }
