@@ -134,6 +134,18 @@
   <ItemGroup>
     <Compile Include="Book.cs" />
     <Compile Include="FaceApiCalls.cs" />
+    <Compile Include="FormBorrowBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBorrowBook.Designer.cs">
+      <DependentUpon>FormBorrowBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReturnBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReturnBook.Designer.cs">
+      <DependentUpon>FormReturnBook.cs</DependentUpon>
+    </Compile>
     <Compile Include="ICallAzureAPI.cs" />
     <Compile Include="MainTry.cs">
       <SubType>Form</SubType>
@@ -175,12 +187,42 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticData.cs" />
+    <Compile Include="UserControlHome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlHome.Designer.cs">
+      <DependentUpon>UserControlHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlLibrary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlLibrary.Designer.cs">
+      <DependentUpon>UserControlLibrary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlMyBooks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlMyBooks.Designer.cs">
+      <DependentUpon>UserControlMyBooks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlRecom.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlRecom.Designer.cs">
+      <DependentUpon>UserControlRecom.cs</DependentUpon>
+    </Compile>
     <Compile Include="VoiceRecognition.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBorrowBook.resx">
+      <DependentUpon>FormBorrowBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReturnBook.resx">
+      <DependentUpon>FormReturnBook.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
@@ -195,6 +237,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ScannerWindow.resx">
       <DependentUpon>ScannerWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlHome.resx">
+      <DependentUpon>UserControlHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlLibrary.resx">
+      <DependentUpon>UserControlLibrary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlMyBooks.resx">
+      <DependentUpon>UserControlMyBooks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlRecom.resx">
+      <DependentUpon>UserControlRecom.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
