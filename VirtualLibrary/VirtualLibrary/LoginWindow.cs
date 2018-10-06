@@ -75,7 +75,6 @@ namespace VirtualLibrary
                 var name = await FAC.RecognitionAsync(Application.StartupPath + "TempImg.jpg");
                 if (name != null)
                 {
-                    //StaticData.CurrentUser = new User(name, "sss");
                     String[] data = ADB.GetUser(name);
                 }
                 else this.Close();
