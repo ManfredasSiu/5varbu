@@ -19,7 +19,7 @@ namespace VirtualLibrary
 
         public FaceApiCalls()
         {
-            CreateGroup();
+            //CreateGroup();
             faceServiceClient = new FaceServiceClient(File.ReadAllText(Application.StartupPath + "/API/APIKEY.txt"), "https://northeurope.api.cognitive.microsoft.com/face/v1.0");
         }
 
