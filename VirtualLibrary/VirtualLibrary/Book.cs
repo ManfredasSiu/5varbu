@@ -8,5 +8,14 @@ namespace VirtualLibrary
 {
     class Book
     {
+        private String name, auth, code, or;
+
+        public Book (String name, String auth, String code, String or)
+        {
+            this.name = name;
+            this.auth = auth;
+            this.code = code;
+            this.or = or;
+        }
     }
 }

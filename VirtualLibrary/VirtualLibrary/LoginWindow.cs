@@ -19,13 +19,11 @@ namespace VirtualLibrary
         private Form1 main;
         Image<Gray, byte> GrayFace = null;
         Image<Bgr, Byte> frame= null;
-        string name = "";
         Capture cam;
         HaarCascade faceDetect;
-        Image<Gray, byte> result;
         int StartTime, EndTime;
-        MainWindow mainW;
         MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.6d, 0.6d);
+        public Object locket = null;
 
         public LoginWindow(LogicController logicC, Form1 main)
         {
@@ -43,7 +41,7 @@ namespace VirtualLibrary
             faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
             StartTime = DateTime.Now.TimeOfDay.Seconds;
             this.FormClosing += OnCloseRequest;
-            Application.Idle += new EventHandler(FaceRecognition);
+            Application.Idle += new EventHandler(FaceRecognitionAsync);
         }
 
         private void OnCloseRequest(object sender, EventArgs e)
@@ -54,7 +52,7 @@ namespace VirtualLibrary
                 MessageBox.Show("Didn't find your face :( \n Try again or Register");
             }
             cam.Dispose();
-            Application.Idle -= FaceRecognition;
+            Application.Idle -= FaceRecognitionAsync;
         }
 
         private void TransitionToMainW()
@@ -63,7 +61,30 @@ namespace VirtualLibrary
             this.Close();
         }
 
-        public void FaceRecognition(object sender, EventArgs e)
+        private bool block = false;
+
+        public async Task<string> startRecAsync()
+        {
+            block = true;
+            FaceApiCalls FAC = new FaceApiCalls();
+            try
+            {
+                var name = await FAC.RecognitionAsync(Application.StartupPath + "TempImg.jpg");
+                if (name != null)
+                    StaticData.CurrentUser = new User(name, "gsgsdgs");
+                else this.Close();
+                return name;
+            }
+            catch(Exception e)
+            {
+                StaticData.CurrentUser = null;
+                this.Close();
+                return null;
+            }
+            
+        }
+
+        public async void FaceRecognitionAsync(object sender, EventArgs e)
         {                      
              if(cam == null)
              {
@@ -79,22 +100,22 @@ namespace VirtualLibrary
             {
                 MessageBox.Show("Too many faces");
             }
-            foreach (MCvAvgComp f in facesDetectedNow[0])
+            else if(facesDetectedNow[0].Length != 0)
             {
-                result = frame.Copy(f.rect).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-                frame.Draw(f.rect, new Bgr(Color.Green), 3);
-                if (StaticData.training.ToArray().Length != 0)
+                cam.QueryFrame().Save(Application.StartupPath + "TempImg.jpg");
+                
+                if (StaticData.CurrentUser == null)
                 {
-                    MCvTermCriteria termCriteria = new MCvTermCriteria(StaticData.numLablels, 0.001);
-                    EigenObjectRecognizer recognizer = new EigenObjectRecognizer(StaticData.training.ToArray(), StaticData.labels.ToArray(), 2000, ref termCriteria);
-                    name = recognizer.Recognize(result);
-                    if (!name.Equals(""))
+                    if (block == false)
                     {
-                        StaticData.CurrentUser = new User(name, "fsdfsdgsd");
-                        TransitionToMainW();
+                        string name = null;
+                        name = await startRecAsync();
+                        if (StaticData.CurrentUser != null)
+                        {
+                            TransitionToMainW();
+                        }
                     }
                 }
-                break;
             }
             Camera.Image = frame;
             EndTime = DateTime.Now.TimeOfDay.Seconds;
