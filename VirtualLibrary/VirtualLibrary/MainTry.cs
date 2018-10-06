@@ -77,8 +77,7 @@ namespace VirtualLibrary
 
         private void buttonLibrary_Click(object sender, EventArgs e)
         {
-            //Laikinai cia kol nesumerginom brancho
-            ScanBarcode();
+            
 
 
             moveSidePanel(buttonLibrary);
@@ -97,13 +96,6 @@ namespace VirtualLibrary
         private void buttonShutDown_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-        
-        public void ScanBarcode()
-        {
-            this.Hide();
-            var Scanner = new ScannerWindow();
-            Scanner.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)

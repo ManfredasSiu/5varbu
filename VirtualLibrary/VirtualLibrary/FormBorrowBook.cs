@@ -20,7 +20,16 @@ namespace VirtualLibrary
         //Mygtuko paspaudimas turetu isimti knyga is Library saraso ir ivesti i MyBooks sarasa
         private void button1_Click(object sender, EventArgs e)
         {
+            //Laikinai cia kol nesumerginom brancho
+            ScanBarcode();
             this.Dispose();
+        }
+
+        public void ScanBarcode()
+        {
+            this.Hide();
+            var Scanner = new ScannerWindow();
+            Scanner.Show();
         }
     }
 }
