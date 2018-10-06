@@ -1,5 +1,6 @@
 ﻿using Emgu.CV;
 using Emgu.CV.Structure;
+using Microsoft.ProjectOxford.Face.Contract;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,12 +33,14 @@ namespace VirtualLibrary
         private int Hei = 640, Len = 480;
         private bool InProgress = false;
 
+        private AzureDatabase AzureDB;
         private LogicController LogicC;
         private Form1 main;
 
         public Form2(LogicController LogicC, Form1 main)
         {
             InitializeComponent();
+            AzureDB = new AzureDatabase();
             this.main = main;
             this.LogicC = LogicC;
             faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
@@ -61,8 +64,10 @@ namespace VirtualLibrary
         {
             if(StaticData.CurrentUser == null)  //Jei registracija nepavyko gryztam
                 main.Show();
-            cam.Dispose();
-            if(InProgress == true)              //Jei registracija vyksta ir isjungiamas langas pvz alt+f4
+            if (cam != null)
+                cam.Dispose();
+            LogicC.TempDirectoryController("Delete", textBox1.Text, null, 0);
+            if (InProgress == true)              //Jei registracija vyksta ir isjungiamas langas pvz alt+f4
                 RegProcess.Abort();
             Application.Idle -= FrameProcedure;
         }
@@ -138,13 +143,10 @@ namespace VirtualLibrary
                 MessageBox.Show("Username or pasword can't start with a space");
                 return 1;
             }
-            else
+            else if (AzureDB.SearchUser(textBox1.Text) == 2)
             {
-                if (StaticData.labels.Contains(textBox1.Text))
-                {
                     MessageBox.Show("Username is already taken");
                     return 1;
-                }
             }
             return 0;
         }
@@ -185,6 +187,7 @@ namespace VirtualLibrary
 
         public async void RegisterProcessAsync()
         {
+            FaceApiCalls FAC = new FaceApiCalls();
             InProgress = true;
             int iterator = 0;
             while (iterator < 10)
@@ -200,7 +203,7 @@ namespace VirtualLibrary
                     }
                     iterator++;
                     if (iterator % 2 == 1)
-                        Thread.Sleep(1000);
+                       Thread.Sleep(1000);
                     else
                     {   //Judinamas taskas, pagal nuotrauku skaiciu
                         if (iterator == 2)
@@ -213,9 +216,10 @@ namespace VirtualLibrary
                             redDot.Invoke(new MoveDot(MoveRedDot), new Point(redDot.Location.X, 64));
                         Thread.Sleep(500);
                     }
+                    
                 }
             }
-            FaceApiCalls FAC = new FaceApiCalls();
+            
             if (!await FAC.FaceSave(textBox1.Text))
             {
                 StaticData.CurrentUser = null;
@@ -223,14 +227,9 @@ namespace VirtualLibrary
                 this.Close();
                 return;
             }
-            User thisUser = new User(textBox1.Text, textBox2.Text);
+            AzureDB.AddUser(textBox1.Text, textBox2.Text, null, 0);
+            User thisUser = new User(textBox1.Text, null);
             StaticData.CurrentUser = thisUser;
-            if (LogicC.TempDirectoryController("Delete", textBox1.Text, null, 0) == 1)
-            {
-                this.Invoke(new closeForm(closeThisFormFromAnotherThread));
-                return;
-            }
-            File.AppendAllText(Application.StartupPath + "/names.txt","" + textBox1.Text + ",");
             InProgress = false;
             this.Invoke(new closeForm(closeThisFormFromAnotherThread));
         }
