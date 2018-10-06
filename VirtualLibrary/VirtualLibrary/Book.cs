@@ -8,7 +8,8 @@ namespace VirtualLibrary
 {
     class Book
     {
-        private String name, auth, code, or;
+        private String name, auth, code, or, genre, pressName;
+        private int pages;
 
         public Book (String name, String auth, String code, String or)
         {
@@ -16,6 +17,26 @@ namespace VirtualLibrary
             this.auth = auth;
             this.code = code;
             this.or = or;
+        }
+
+        public Book(String name, String auth, String code, String or, string genre, int pages, string pressName)
+        {
+            this.name = name;
+            this.auth = auth;
+            this.code = code;
+            this.genre = genre;
+            this.pages = pages;
+            this.pressName = pressName;
+        }
+
+        public string getGenre()
+        {
+            return this.genre;
+        }
+
+        public int getPages()
+        {
+            return this.pages;
         }
     }
 }

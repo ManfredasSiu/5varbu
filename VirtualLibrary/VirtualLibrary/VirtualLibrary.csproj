@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Book.cs" />
+    <Compile Include="CurrentUserStatistics.cs" />
     <Compile Include="FaceApiCalls.cs" />
     <Compile Include="FormBorrowBook.cs">
       <SubType>Form</SubType>
