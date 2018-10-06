@@ -32,6 +32,8 @@ namespace VirtualLibrary
             UserName.Text = StaticData.CurrentUser.getuserName();
         }
 
+
+
         private void OnCloseReq(object sender, EventArgs e)
         {
             Application.Exit();
@@ -46,7 +48,7 @@ namespace VirtualLibrary
         {
             this.Close();
         }
-
+        
         public void ScanBarcode()
         {
             this.Hide();
