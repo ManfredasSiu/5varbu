@@ -268,6 +268,8 @@
     <None Include="Properties\Icons\icons8-menu-vertical-64.png" />
     <None Include="Properties\Icons\menu64.png" />
     <None Include="Properties\Icons\icons8-return-book-32.png" />
+    <None Include="Properties\Icons\icons8-signin-64.png" />
+    <None Include="Properties\Icons\icons8-login-rounded-up-64.png" />
     <Content Include="RedPoint.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

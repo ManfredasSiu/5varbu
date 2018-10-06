@@ -259,6 +259,11 @@ namespace VirtualLibrary
 
         public delegate void ChangeText(String text);
 
+        private void buttonShutDown_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void ChText(String text)
         {
             Information.Text = text;

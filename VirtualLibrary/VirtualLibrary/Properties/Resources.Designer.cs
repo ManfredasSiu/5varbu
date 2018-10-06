@@ -123,6 +123,16 @@ namespace VirtualLibrary.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_login_rounded_up_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-login-rounded-up-64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_menu_64 {
             get {
                 object obj = ResourceManager.GetObject("icons8-menu-64", resourceCulture);
@@ -226,6 +236,16 @@ namespace VirtualLibrary.Properties {
         internal static System.Drawing.Bitmap icons8_shutdown_321 {
             get {
                 object obj = ResourceManager.GetObject("icons8-shutdown-321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_signin_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-signin-64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

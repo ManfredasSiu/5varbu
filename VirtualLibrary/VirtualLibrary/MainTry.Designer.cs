@@ -49,11 +49,11 @@
             this.UserName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panelInfo = new System.Windows.Forms.Panel();
+            this.labelDate = new System.Windows.Forms.Label();
             this.panelControls = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.labelDate = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.panelLeft.SuspendLayout();
             this.panelLogo.SuspendLayout();
@@ -318,6 +318,16 @@
             this.panelInfo.Size = new System.Drawing.Size(960, 108);
             this.panelInfo.TabIndex = 3;
             // 
+            // labelDate
+            // 
+            this.labelDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelDate.AutoSize = true;
+            this.labelDate.Location = new System.Drawing.Point(828, 33);
+            this.labelDate.Name = "labelDate";
+            this.labelDate.Size = new System.Drawing.Size(89, 20);
+            this.labelDate.TabIndex = 2;
+            this.labelDate.Text = "yyyy/MM/dd";
+            // 
             // panelControls
             // 
             this.panelControls.Controls.Add(this.dataGridView1);
@@ -352,15 +362,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // labelDate
-            // 
-            this.labelDate.AutoSize = true;
-            this.labelDate.Location = new System.Drawing.Point(828, 33);
-            this.labelDate.Name = "labelDate";
-            this.labelDate.Size = new System.Drawing.Size(89, 20);
-            this.labelDate.TabIndex = 2;
-            this.labelDate.Text = "yyyy/MM/dd";
             // 
             // timer2
             // 
