@@ -76,7 +76,7 @@ namespace VirtualLibrary
                 if (name != null)
                 {
                     String[] data = ADB.GetUser(name);
-                    StaticData.CurrentUser = new User(data[0], "gsgsdgs");
+                    StaticData.CurrentUser = new User(data[0], data[1], null, data[3], null, null);
                 }
                 else this.Close();
                 return name;
