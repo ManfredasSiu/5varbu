@@ -22,12 +22,9 @@ namespace VirtualLibrary
         Image<Bgr, Byte> frame;
         Capture cam;
         Image<Gray, byte> result;
-        Image<Gray, byte> TrainImg = null;
         Image<Gray, byte> GrayFace = null;
         PictureBox redDot = new PictureBox();
         MCvAvgComp[][] facesDetectedNow;
-
-        string name;
 
         private Thread RegProcess;
         private int Hei = 640, Len = 480;
