@@ -247,19 +247,8 @@ namespace VirtualLibrary
                             List<int> bookIDList = new List<int>();
                             while (reader.Read())
                             {
-                                bookIDList.Add((int)reader.GetValue(0));
+                                StaticData.CurrentUser.getUserBooks().Add(StaticData.Books.Find(x => x.ID == (int)reader.GetValue(0)));
                                 return;
-                            }
-                            foreach (int x in bookIDList)
-                            {
-                                foreach (Book y in StaticData.Books)
-                                {
-                                    if (x == y.ID)
-                                    {
-                                        StaticData.CurrentUser.getUserBooks().Add(y);
-                                        break;
-                                    }
-                                }
                             }
                         }
                         connection.Close();
