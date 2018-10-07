@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
@@ -224,8 +224,54 @@ namespace VirtualLibrary
             {
                 MessageBox.Show(e.Message);
                 return;
+
             }
-        }
+
+            public void GetAllUserBooks(string userName)
+            {
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                    {
+                        connection.Open();
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append("Select BookID from [dbo].[UserBook] ");
+                        sb.Append("WHERE UserID = " + StaticData.CurrentUser.ID + ";");
+                        String sql = sb.ToString();
+                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        {
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                List<int> bookIDList = new List<int>();
+                                while (reader.Read())
+                                {
+                                    bookIDList.Add((int)reader.GetValue(0));
+                                    return;
+                                }
+                                foreach (int x in bookIDList)
+                                {
+                                    foreach (Book y in StaticData.Books)
+                                    {
+                                        if (x == y.ID)
+                                        {
+                                            StaticData.CurrentUser.getUserBooks().Add(y);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            connection.Close();
+                        }
+
+                    }
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show(e.Message);
+                    return;
+                }
+            }
+            }
 
     }
 }
