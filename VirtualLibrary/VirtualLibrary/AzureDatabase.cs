@@ -30,7 +30,7 @@ namespace VirtualLibrary
                     StringBuilder sb = new StringBuilder();
                     sb.Append("INSERT INTO [dbo].[Book] ");
                     sb.Append("VALUES('" + name + "','" + author + "'," + barcode + "," + pages + ");");
-                    
+
                     String sql = sb.ToString();
                     using (var sqlCommand = new SqlCommand(sql, connection))
                     {
@@ -41,7 +41,7 @@ namespace VirtualLibrary
                     connection.Close();
                 }
             }
-            catch(SqlException e)
+            catch (SqlException e)
             {
                 MessageBox.Show(e.Message);
                 return 1;
@@ -227,6 +227,9 @@ namespace VirtualLibrary
 
             }
 
+        }
+    
+
             public void GetAllUserBooks(string userName)
             {
                 try
@@ -270,8 +273,8 @@ namespace VirtualLibrary
                     MessageBox.Show(e.Message);
                     return;
                 }
-            }
+            
             }
 
-    }
+    
 }
