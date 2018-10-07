@@ -63,6 +63,16 @@ namespace VirtualLibrary.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_book_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-book-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_book_shelf_64 {
             get {
                 object obj = ResourceManager.GetObject("icons8-book-shelf-64", resourceCulture);
@@ -76,6 +86,36 @@ namespace VirtualLibrary.Properties {
         internal static System.Drawing.Bitmap icons8_book_shelf_641 {
             get {
                 object obj = ResourceManager.GetObject("icons8-book-shelf-641", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_email_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-email-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_file_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-file-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_high_priority_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-high-priority-64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
