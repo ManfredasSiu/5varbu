@@ -41,5 +41,10 @@ namespace VirtualLibrary
         {
             return this.pages;
         }
+
+        public int getQuantity()
+        {
+            return this.quantity - 1;
+        }
     }
 }

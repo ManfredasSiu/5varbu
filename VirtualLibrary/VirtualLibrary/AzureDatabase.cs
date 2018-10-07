@@ -274,6 +274,57 @@ namespace VirtualLibrary
             }
 
         }
+        public void BorrowBook (Book addThis)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    StringBuilder sb2 = new StringBuilder();
+                    sb.Append("INSERT INTO [dbo].[UserBook] ");
+                    sb.Append("VALUES(" + StaticData.CurrentUser.ID + ", " + addThis.ID + ");");
+                    sb2.Append("UPDATE [dbo].[Book] ");
+                    sb2.Append("SET Quantity = Quantity-1 ");
+                    sb2.Append("WHERE Id = " + " addThis.ID" + ";");
+
+                    String sql = sb.ToString();
+                    String sql2 = sb2.ToString();
+                    using (var sqlCommand = new SqlCommand(sql, connection))
+                    {
+                        
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+                        Console.WriteLine(rowsAffected + " = rows affected.");
+                    }
+                    using (var sqlCommand = new SqlCommand(sql2, connection))
+                    {
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            { 
+                                foreach (Book x in StaticData.Books)
+                                {
+                                    if (x.ID == addThis.ID)
+                                    {
+                                        var book = StaticData.Books.Find(y => y.ID == x.ID);
+                                        book.getQuantity();
+
+                                    }
+                                }
+                            }
+                        }
+                        connection.Close();
+                    }
+                }
+            
+            }
+            catch
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
+        }
     }
 
     
