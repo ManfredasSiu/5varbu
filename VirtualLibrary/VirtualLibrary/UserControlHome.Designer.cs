@@ -30,21 +30,21 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -77,6 +77,25 @@
             this.panel1.Size = new System.Drawing.Size(220, 120);
             this.panel1.TabIndex = 1;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(41, 55);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(170, 21);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "aaaaa@AAAA.com";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(41, 25);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 21);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Email";
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(117)))), ((int)(((byte)(95)))));
@@ -87,6 +106,24 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(220, 120);
             this.panel2.TabIndex = 2;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(41, 55);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(46, 21);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "9999";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(41, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(94, 21);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Books read";
             // 
             // panel3
             // 
@@ -99,6 +136,24 @@
             this.panel3.Size = new System.Drawing.Size(220, 120);
             this.panel3.TabIndex = 3;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(41, 55);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 21);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "99999999";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(41, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(98, 21);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Pages read";
+            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(44)))), ((int)(((byte)(52)))));
@@ -110,32 +165,14 @@
             this.panel4.Size = new System.Drawing.Size(640, 226);
             this.panel4.TabIndex = 3;
             // 
-            // label2
+            // label6
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 14);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 21);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Books read";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(41, 14);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(98, 21);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Pages read";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 14);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 21);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Email";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(84, 107);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(414, 21);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Don\'t forget to return  the book \"title \"  before \"date\"";
             // 
             // label5
             // 
@@ -149,7 +186,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::VirtualLibrary.Properties.Resources.icons8_high_priority_64;
+            this.pictureBox1.Image = global::VirtualLibrary.Properties.Resources.icons8_high_priority_641;
             this.pictureBox1.Location = new System.Drawing.Point(14, 15);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(64, 64);
@@ -159,8 +196,8 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Image = global::VirtualLibrary.Properties.Resources.icons8_file_32;
-            this.pictureBox4.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox4.Image = global::VirtualLibrary.Properties.Resources.icons8_file_321;
+            this.pictureBox4.Location = new System.Drawing.Point(3, 14);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(32, 32);
             this.pictureBox4.TabIndex = 2;
@@ -168,58 +205,22 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = global::VirtualLibrary.Properties.Resources.icons8_book_32;
-            this.pictureBox3.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox3.Image = global::VirtualLibrary.Properties.Resources.icons8_book_321;
+            this.pictureBox3.Location = new System.Drawing.Point(3, 14);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::VirtualLibrary.Properties.Resources.icons8_email_32;
-            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox2.Image = global::VirtualLibrary.Properties.Resources.icons8_email_321;
+            this.pictureBox2.Location = new System.Drawing.Point(3, 14);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(32, 32);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(84, 107);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(414, 21);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Don\'t forget to return  the book \"title \"  before \"date\"";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(41, 55);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(170, 21);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "aaaaa@AAAA.com";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(41, 55);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(46, 21);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "9999";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(41, 55);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(82, 21);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "99999999";
             // 
             // UserControlHome
             // 

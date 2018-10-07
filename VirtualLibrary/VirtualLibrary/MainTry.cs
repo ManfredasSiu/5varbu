@@ -23,6 +23,8 @@ namespace VirtualLibrary
             timer2.Start();
             PanelWidth = panelLeft.Width;
             isCollapsed = false;
+            UserControlHome uch = new UserControlHome();
+            AddControlsToPanel(uch);
 
             this.logicC = logicC;
             DataTable dt = new DataTable();
