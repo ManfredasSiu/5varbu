@@ -37,6 +37,10 @@ namespace VirtualLibrary
             dataGridView1.DataSource = dt;
             this.FormClosing += OnCloseReq;
             UserName.Text = StaticData.CurrentUser.getuserName();
+            if (StaticData.CurrentUser.getPermission() == "1")
+                label6.Text = "ADMIN";
+            else
+                label6.Text = "Reader";
         }
 
 
