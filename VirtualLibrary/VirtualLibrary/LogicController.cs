@@ -15,7 +15,7 @@ namespace VirtualLibrary
     {//TODO: duomenis krauti i StaticData klase, sukurti ten reikiamus duomenu tipus
         public LogicController() //TODO: LOAD USER DATA; LOAD ALL BOOKS ;; SAVE USER DATA; SAVE ALL BOOKS
         {
-            LoadUsernames();
+            //LoadUsernames();
         }
 
         private void LoadUsernames()
@@ -47,7 +47,6 @@ namespace VirtualLibrary
                 }
                 catch(Exception e)
                 {
-                    MessageBox.Show(e.Message);
                     return 1;
                 }
             }

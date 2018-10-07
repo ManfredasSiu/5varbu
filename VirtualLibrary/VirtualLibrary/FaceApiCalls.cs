@@ -13,7 +13,6 @@ namespace VirtualLibrary
 {
     class FaceApiCalls : ICallAzureAPI
     {
-        string _imagePath;
         String _groupName = "Users", _groupId = "users";
         private IFaceServiceClient faceServiceClient;
 
@@ -28,8 +27,6 @@ namespace VirtualLibrary
             //await faceServiceClient.CreatePersonGroupAsync(_groupId, _groupName);
         }
 
-
-
         public async Task<bool> FaceSave(String vardas)
         { 
             CreatePersonResult person = await faceServiceClient.CreatePersonInPersonGroupAsync(_groupId, vardas);
@@ -40,10 +37,10 @@ namespace VirtualLibrary
                     try
                     {
                         await faceServiceClient.AddPersonFaceInPersonGroupAsync(_groupId, person.PersonId, s);
-                        return true;
                     }
                     catch(Exception e)
                     {
+                        Console.WriteLine(e.Message);
                         return false;
                     }
                 }

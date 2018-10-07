@@ -17,6 +17,8 @@ namespace VirtualLibrary
     {
         private LogicController logicC;
         private Form1 main;
+        private AzureDatabase ADB;
+
         Image<Gray, byte> GrayFace = null;
         Image<Bgr, Byte> frame= null;
         Capture cam;
@@ -27,6 +29,7 @@ namespace VirtualLibrary
 
         public LoginWindow(LogicController logicC, Form1 main)
         {
+            ADB = new AzureDatabase();
             InitializeComponent();
             this.main = main;
             try
@@ -70,12 +73,15 @@ namespace VirtualLibrary
             {
                 var name = await FAC.RecognitionAsync(Application.StartupPath + "TempImg.jpg");
                 if (name != null)
-                    StaticData.CurrentUser = new User(name, "gsgsdgs");
+                {
+                    String[] data = ADB.GetUser(name);
+                }
                 else this.Close();
                 return name;
             }
             catch(Exception e)
             {
+                MessageBox.Show(e.Message);
                 StaticData.CurrentUser = null;
                 this.Close();
                 return null;

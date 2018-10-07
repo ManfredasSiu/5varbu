@@ -8,7 +8,9 @@ namespace VirtualLibrary
 {
     class User
     {
-        private String userName, passWord, email;
+        private String userName, passWord, email,  permission;
+        
+        public int ID;
 
         private List<Book> UserBooks = new List<Book>();
 
@@ -28,6 +30,16 @@ namespace VirtualLibrary
             this.BooksRead = BooksRead;
         }
 
+        public User(int ID, String userName, String passWord, String email, String permission, List<Book> UserBooks, List<Book> BooksRead)
+        {
+            this.ID = ID;
+            this.userName = userName;
+            this.passWord = passWord;
+            this.email = email;
+            this.permission = permission;
+            this.UserBooks = UserBooks;
+            this.BooksRead = BooksRead;
+        }
         public String getuserName()
         {
             return this.userName;

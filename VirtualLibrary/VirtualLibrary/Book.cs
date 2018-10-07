@@ -8,24 +8,27 @@ namespace VirtualLibrary
 {
     class Book
     {
-        private String name, auth, code, or, genre, pressName;
-        private int pages;
+        private String name, auth, or, genre, pressName;
+        private int pages, quantity, code;
+
+        public int ID;
 
         public Book (String name, String auth, String code, String or)
         {
             this.name = name;
             this.auth = auth;
-            this.code = code;
             this.or = or;
         }
 
-        public Book(String name, String auth, String code, String or, string genre, int pages, string pressName)
+        public Book(String name, String auth, int code, string genre, int quantity, int pages, string pressName, int ID)
         {
+            this.ID = ID;
             this.name = name;
             this.auth = auth;
             this.code = code;
             this.genre = genre;
             this.pages = pages;
+            this.quantity = quantity;
             this.pressName = pressName;
         }
 

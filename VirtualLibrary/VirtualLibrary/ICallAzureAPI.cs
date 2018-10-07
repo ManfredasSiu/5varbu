@@ -10,7 +10,7 @@ namespace VirtualLibrary
     interface ICallAzureAPI
     {
         Task<bool> FaceSave(String vardas);
-
+      
         Task<Face[]> UploadAndDetetFaces(string imageFilePath);
 
         Task<String> RecognitionAsync(String TempImgPath);
