@@ -213,9 +213,9 @@ namespace VirtualLibrary
                             while (reader.Read())
                             {
                                 StaticData.Books.Add(new Book(reader.GetString(1), reader.GetString(2), (int)reader.GetValue(4), reader.GetString(5), (int)reader.GetValue(7), (int)reader.GetValue(6), reader.GetString(3), (int)reader.GetValue(0)));
-                                connection.Close();
                                 return;
                             }
+                            connection.Close();
                         }
                     }
                 }
@@ -226,55 +226,55 @@ namespace VirtualLibrary
                 return;
 
             }
-
         }
-    
 
-            public void GetAllUserBooks(string userName)
+
+        public void GetAllUserBooks(string userName)
+        {
+            try
             {
-                try
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
-                    using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Select BookID from [dbo].[UserBook] ");
+                    sb.Append("WHERE UserID = " + StaticData.CurrentUser.ID + ";");
+                    String sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        connection.Open();
-                        StringBuilder sb = new StringBuilder();
-                        sb.Append("Select BookID from [dbo].[UserBook] ");
-                        sb.Append("WHERE UserID = " + StaticData.CurrentUser.ID + ";");
-                        String sql = sb.ToString();
-                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            using (SqlDataReader reader = command.ExecuteReader())
+                            List<int> bookIDList = new List<int>();
+                            while (reader.Read())
                             {
-                                List<int> bookIDList = new List<int>();
-                                while (reader.Read())
+                                bookIDList.Add((int)reader.GetValue(0));
+                                return;
+                            }
+                            foreach (int x in bookIDList)
+                            {
+                                foreach (Book y in StaticData.Books)
                                 {
-                                    bookIDList.Add((int)reader.GetValue(0));
-                                    return;
-                                }
-                                foreach (int x in bookIDList)
-                                {
-                                    foreach (Book y in StaticData.Books)
+                                    if (x == y.ID)
                                     {
-                                        if (x == y.ID)
-                                        {
-                                            StaticData.CurrentUser.getUserBooks().Add(y);
-                                            break;
-                                        }
+                                        StaticData.CurrentUser.getUserBooks().Add(y);
+                                        break;
                                     }
                                 }
                             }
-                            connection.Close();
                         }
-
+                        connection.Close();
                     }
+
                 }
-                catch (SqlException e)
-                {
-                    MessageBox.Show(e.Message);
-                    return;
-                }
-            
             }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
+
+        }
+    }
 
     
 }
