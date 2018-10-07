@@ -177,7 +177,7 @@ namespace VirtualLibrary
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("DELETE FROM [dbo].[UserBook] a ");
-                    sb.Append("WHERE " + StaticData.CurrentUser.ID + " = a.UserID and " + delThis.ID + " = a.BookID;");
+                    sb.Append("WHERE " + StaticData.CurrentUser.ID + " = a.UserID and " + "a.BookID = " + delThis.ID +";");
                     String sql = sb.ToString();
                     using (var sqlCommand = new SqlCommand(sql, connection))
                     {
@@ -227,7 +227,6 @@ namespace VirtualLibrary
 
             }
         }
-
 
         public void GetAllUserBooks(string userName)
         {

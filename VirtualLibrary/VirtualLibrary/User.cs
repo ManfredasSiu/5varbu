@@ -50,6 +50,11 @@ namespace VirtualLibrary
             return UserBooks;
         }
 
+        public String getPermission()
+        {
+            return this.permission;
+        }
+
         public void AddReadBook(Book b)
         {
             BooksRead.Add(b);
