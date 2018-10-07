@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace VirtualLibrary
 {
-    public partial class FormBorrowBook : Form
+    public partial class FormUserQR : Form
     {
-        public FormBorrowBook()
+        public FormUserQR()
         {
             InitializeComponent();
         }
@@ -30,6 +30,16 @@ namespace VirtualLibrary
             this.Hide();
             var Scanner = new ScannerWindow();
             Scanner.Show();
+        }
+
+        private void FormBorrowBook_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonShutDown_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

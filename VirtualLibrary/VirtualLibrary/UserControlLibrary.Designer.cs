@@ -67,6 +67,8 @@ namespace VirtualLibrary
             this.ColumnGenre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPages = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonRemoveBook = new System.Windows.Forms.Button();
+            this.buttonAddBook = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -84,6 +86,8 @@ namespace VirtualLibrary
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(68)))), ((int)(((byte)(33)))));
+            this.panel4.Controls.Add(this.buttonAddBook);
+            this.panel4.Controls.Add(this.buttonRemoveBook);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.buttonTake);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -173,6 +177,7 @@ namespace VirtualLibrary
             this.dataGridView2.RowHeadersWidth = 50;
             this.dataGridView2.Size = new System.Drawing.Size(920, 455);
             this.dataGridView2.TabIndex = 12;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick_1);
             // 
             // ColumnISBN
             // 
@@ -221,6 +226,36 @@ namespace VirtualLibrary
             this.ColumnQuantity.Name = "ColumnQuantity";
             this.ColumnQuantity.ReadOnly = true;
             // 
+            // buttonRemoveBook
+            // 
+            this.buttonRemoveBook.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonRemoveBook.FlatAppearance.BorderSize = 0;
+            this.buttonRemoveBook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRemoveBook.Image = global::VirtualLibrary.Properties.Resources.icons8_return_book_32;
+            this.buttonRemoveBook.Location = new System.Drawing.Point(618, 0);
+            this.buttonRemoveBook.Name = "buttonRemoveBook";
+            this.buttonRemoveBook.Size = new System.Drawing.Size(151, 65);
+            this.buttonRemoveBook.TabIndex = 15;
+            this.buttonRemoveBook.Text = "Remove Book";
+            this.buttonRemoveBook.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.buttonRemoveBook.UseVisualStyleBackColor = true;
+            this.buttonRemoveBook.Click += new System.EventHandler(this.buttonRemoveBook_Click);
+            // 
+            // buttonAddBook
+            // 
+            this.buttonAddBook.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonAddBook.FlatAppearance.BorderSize = 0;
+            this.buttonAddBook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddBook.Image = global::VirtualLibrary.Properties.Resources.icons8_return_book_32;
+            this.buttonAddBook.Location = new System.Drawing.Point(467, 0);
+            this.buttonAddBook.Name = "buttonAddBook";
+            this.buttonAddBook.Size = new System.Drawing.Size(151, 65);
+            this.buttonAddBook.TabIndex = 16;
+            this.buttonAddBook.Text = "Add Book";
+            this.buttonAddBook.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.buttonAddBook.UseVisualStyleBackColor = true;
+            this.buttonAddBook.Click += new System.EventHandler(this.buttonAddBook_Click);
+            // 
             // UserControlLibrary
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -260,5 +295,7 @@ namespace VirtualLibrary
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnGenre;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPages;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQuantity;
+        private System.Windows.Forms.Button buttonAddBook;
+        private System.Windows.Forms.Button buttonRemoveBook;
     }
 }
