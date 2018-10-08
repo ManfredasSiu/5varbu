@@ -69,34 +69,34 @@ namespace VirtualLibrary
                  * Reikia atrasti knyga staticData.books liste,sumazinti quantity, prideti knyga i
                  * userbooks lista ir prideti knyga i [dbo].[UserBooks] lentele
                 **/
-                try
+                int.TryParse(textBox1.Text, out int bookID);
+                var book = StaticData.Books.Find(x => x.getCode() == bookID);
+                if (book != null)
                 {
-                    var book = StaticData.Books.Find(x => x.getCode() == int.Parse(textBox1.Text));
                     MessageBox.Show(textBox1.Text);
                     this.Close();
                 }
-                catch(Exception e)
+                else
                 {
                     MessageBox.Show("Nera knygos tokiu barkodu");
                 }
-                
-            }
+            } 
             catch(Exception e)
             {
                 if(textBox1.Text.Replace(" ", "") == "")
                     MessageBox.Show("Nuskanuoti nepavyko, iveskite barkoda ranka\nArba bandykite dar karta");
                 else
                 {
-                    try
-                    {
+                    
                         var book = StaticData.Books.Find(x => x.getCode() == int.Parse(textBox1.Text));
+                    if (book != null)
+                    {
                         MessageBox.Show(textBox1.Text);
                         this.Close();
                     }
-                    catch
-                    {
+                    else
                         MessageBox.Show("Nera knygos tokiu barkodu");
-                    }
+                    
                 }
             }
         }
