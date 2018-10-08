@@ -87,8 +87,8 @@ namespace VirtualLibrary
                     MessageBox.Show("Nuskanuoti nepavyko, iveskite barkoda ranka\nArba bandykite dar karta");
                 else
                 {
-                    
-                        var book = StaticData.Books.Find(x => x.getCode() == int.Parse(textBox1.Text));
+                    int.TryParse(textBox1.Text, out int bookID);
+                    var book = StaticData.Books.Find(x => x.getCode() == bookID);
                     if (book != null)
                     {
                         MessageBox.Show(textBox1.Text);
