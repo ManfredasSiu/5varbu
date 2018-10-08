@@ -47,9 +47,16 @@ namespace VirtualLibrary
             return this.quantity;
         }
 
-        public void setQuantity()
+        public void setQuantityPlius()
         {
-            this.quantity = this.quantity-1;
+            this.quantity = this.quantity + 1;
         }
+
+        public void setQuantityMinus()
+        {
+            this.quantity = this.quantity - 1;
+        }
+
+
     }
 }

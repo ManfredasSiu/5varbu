@@ -177,15 +177,29 @@ namespace VirtualLibrary
                 {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
+                    StringBuilder sb2 = new StringBuilder();
                     sb.Append("DELETE FROM [dbo].[UserBook] a ");
                     sb.Append("WHERE " + StaticData.CurrentUser.ID + " = a.UserID and " + "a.BookID = " + delThis.ID +";");
+                    sb2.Append("INSERT INTO [dbo].[BooksRead] ");
+                    sb2.Append("VALUES(" + StaticData.CurrentUser.ID + ", " + delThis.ID + ");");
+                        
                     String sql = sb.ToString();
+                    String sql2 = sb2.ToString();
+
                     using (var sqlCommand = new SqlCommand(sql, connection))
                     {
                         int rowsAffected = sqlCommand.ExecuteNonQuery();
                         Console.WriteLine(rowsAffected + " = rows affected.");
                     }
-                
+                    using (var sqlCommand = new SqlCommand(sql2, connection))
+                    {
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+                        Console.WriteLine(rowsAffected + " = rows affected.");
+                        var book = StaticData.Books.Find(y => y.ID == delThis.ID);
+                        book.setQuantityPlius();
+                        //reik ištrinti knygas iš listo  UserBooks tą knygą ir įdėt į BooksRead
+                    }
+
                     connection.Close();
                 }
             }
@@ -292,7 +306,8 @@ namespace VirtualLibrary
                         int rowsAffected = sqlCommand.ExecuteNonQuery();
                         Console.WriteLine(rowsAffected + " = rows affected.");
                         var book = StaticData.Books.Find(y => y.ID == addThis.ID);
-                        book.setQuantity();
+                        book.setQuantityMinus();
+                        //reikia knygą įdėti į UserBooks
      
                     }
                     connection.Close();
