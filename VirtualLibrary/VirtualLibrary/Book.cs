@@ -32,6 +32,11 @@ namespace VirtualLibrary
             this.pressName = pressName;
         }
 
+        public int getCode()
+        {
+            return this.code;
+        }
+
         public string getGenre()
         {
             return this.genre;
