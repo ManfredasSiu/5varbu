@@ -34,7 +34,7 @@ namespace VirtualLibrary
 
         private void buttonTake_Click(object sender, EventArgs e)
         {
-            using (FormUserQR fbb = new FormUserQR())
+            using (FormBorrowBooks fbb = new FormBorrowBooks())
             {
                 fbb.ShowDialog();
             }

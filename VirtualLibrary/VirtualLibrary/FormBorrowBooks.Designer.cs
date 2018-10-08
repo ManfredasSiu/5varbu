@@ -1,6 +1,6 @@
 ﻿namespace VirtualLibrary
 {
-    partial class FormUserQR
+    partial class FormBorrowBooks
     {
         /// <summary>
         /// Required designer variable.
@@ -79,6 +79,7 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(744, 521);
             this.panel4.TabIndex = 14;
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // buttonShutDown
             // 

@@ -150,11 +150,11 @@
     <Compile Include="FormAdminAddBook.Designer.cs">
       <DependentUpon>FormAdminAddBook.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormUserQR.cs">
+    <Compile Include="FormBorrowBooks.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormUserQR.Designer.cs">
-      <DependentUpon>FormUserQR.cs</DependentUpon>
+    <Compile Include="FormBorrowBooks.Designer.cs">
+      <DependentUpon>FormBorrowBooks.cs</DependentUpon>
     </Compile>
     <Compile Include="ICallAzureAPI.cs" />
     <Compile Include="MainTry.cs">
@@ -234,8 +234,8 @@
     <EmbeddedResource Include="FormAdminAddBook.resx">
       <DependentUpon>FormAdminAddBook.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormUserQR.resx">
-      <DependentUpon>FormUserQR.cs</DependentUpon>
+    <EmbeddedResource Include="FormBorrowBooks.resx">
+      <DependentUpon>FormBorrowBooks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
