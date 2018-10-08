@@ -10,17 +10,22 @@ using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using MessagingToolkit.Barcode;
+using OpenCvSharp;
+using OpenCvSharp.Extensions;
 
 namespace VirtualLibrary
 {
     public partial class FormBorrowBook : Form
     {
-        Capture cam;
+        VideoCapture capture;
+        Mat frame;
+        Bitmap img;
 
         public FormBorrowBook()
         {
             InitializeComponent();
-            cam = new Capture();
+            capture = new VideoCapture(0);
+            capture.Open(0);
             Application.Idle += FrameProcedure;
         }
 
@@ -30,7 +35,17 @@ namespace VirtualLibrary
 
         private void FrameProcedure(Object sender, EventArgs e)
         {
-            imageBox1.Image = cam.QueryFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+            frame = new Mat();
+            if (capture.IsOpened())
+            {
+                capture.Read(frame);
+                img = BitmapConverter.ToBitmap(frame);
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image.Dispose();
+                }
+                pictureBox1.Image = img;
+            }
         }
 
         //Mygtuko paspaudimas turetu isimti knyga is Library saraso ir ivesti i MyBooks sarasa
@@ -42,12 +57,11 @@ namespace VirtualLibrary
 
         public void ScanBarcode()
         {
-            Image<Bgr, byte> img = cam.QueryFrame();
             //Skenavimas
             Scanner = new BarcodeDecoder();
             try
             {
-                Result result = Scanner.Decode(new Bitmap((Image)imageBox1.Image));
+                Result result = Scanner.Decode(new Bitmap(img));
                 //Atskirai parodo nuskenuoto barkodo skaičius
                 MessageBox.Show(result.Text);
             }
