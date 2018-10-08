@@ -15,6 +15,16 @@ namespace VirtualLibrary
         public UserControlLibrary()
         {
             InitializeComponent();
+            if (StaticData.CurrentUser.getPermission()=="1")
+            {
+                buttonAddBook.Visible = true;
+                buttonRemoveBook.Visible = true;
+            }
+            else
+            {
+                buttonAddBook.Visible = false;
+                buttonRemoveBook.Visible = false;
+            }
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -53,13 +63,3 @@ namespace VirtualLibrary
         }
     }
 }
-/*if(StaticData.CurrentUser.Permission == '1')
-        {
-            buttonAddBook.Visible;
-            buttonRemoveBook.Visible;
-        }
-        else
-        {
-            !buttonAddBook.Visible;
-            !buttonRemoveBook.Visible;
-        }*/
