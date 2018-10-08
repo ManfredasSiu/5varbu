@@ -89,6 +89,11 @@ namespace VirtualLibrary
             
         }
 
+        private void buttonShutDown_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
         public async void FaceRecognitionAsync(object sender, EventArgs e)
         {                      
              if(cam == null)
