@@ -44,7 +44,12 @@ namespace VirtualLibrary
 
         public int getQuantity()
         {
-            return this.quantity - 1;
+            return this.quantity;
+        }
+
+        public void setQuantity()
+        {
+            this.quantity = this.quantity-1;
         }
     }
 }

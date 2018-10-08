@@ -228,7 +228,7 @@ namespace VirtualLibrary
             }
         }
 
-        public void GetAllUserBooks(string userName)
+        public void GetAllUserBooks()
         {
             try
             {
@@ -275,7 +275,7 @@ namespace VirtualLibrary
                     sb.Append("VALUES(" + StaticData.CurrentUser.ID + ", " + addThis.ID + ");");
                     sb2.Append("UPDATE [dbo].[Book] ");
                     sb2.Append("SET Quantity = Quantity-1 ");
-                    sb2.Append("WHERE Id = " + " addThis.ID" + ";");
+                    sb2.Append("WHERE Id = " +  addThis.ID + ";");
 
                     String sql = sb.ToString();
                     String sql2 = sb2.ToString();
@@ -287,27 +287,18 @@ namespace VirtualLibrary
                     }
                     using (var sqlCommand = new SqlCommand(sql2, connection))
                     {
-                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            { 
-                                foreach (Book x in StaticData.Books)
-                                {
-                                    if (x.ID == addThis.ID)
-                                    {
-                                        var book = StaticData.Books.Find(y => y.ID == x.ID);
-                                        book.getQuantity();
 
-                                    }
-                                }
-                            }
-                        }
-                        connection.Close();
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+                        Console.WriteLine(rowsAffected + " = rows affected.");
+                        var book = StaticData.Books.Find(y => y.ID == addThis.ID);
+                        book.setQuantity();
+     
                     }
+                    connection.Close();
                 }
             
             }
-            catch
+            catch(SqlException e)
             {
                 MessageBox.Show(e.Message);
                 return;
