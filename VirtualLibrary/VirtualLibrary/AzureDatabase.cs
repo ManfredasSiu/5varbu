@@ -168,8 +168,9 @@ namespace VirtualLibrary
             return 0;
         }
 
-        public int DelUserBook(Book delThis)
+        public int ReturnBook (Book delThis)
         {
+            //Reik sukurt lentelę, kur dėsim perskaitytas knygas - knygos ID ir reader ID
             try
             {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
@@ -184,7 +185,7 @@ namespace VirtualLibrary
                         int rowsAffected = sqlCommand.ExecuteNonQuery();
                         Console.WriteLine(rowsAffected + " = rows affected.");
                     }
-
+                
                     connection.Close();
                 }
             }
