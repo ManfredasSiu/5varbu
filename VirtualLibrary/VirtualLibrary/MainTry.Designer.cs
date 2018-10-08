@@ -51,7 +51,6 @@
             this.panelInfo = new System.Windows.Forms.Panel();
             this.labelDate = new System.Windows.Forms.Label();
             this.panelControls = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
@@ -60,8 +59,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelTop.SuspendLayout();
             this.panelInfo.SuspendLayout();
-            this.panelControls.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLeft
@@ -330,19 +327,11 @@
             // 
             // panelControls
             // 
-            this.panelControls.Controls.Add(this.dataGridView1);
             this.panelControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControls.Location = new System.Drawing.Point(240, 160);
             this.panelControls.Name = "panelControls";
             this.panelControls.Size = new System.Drawing.Size(960, 560);
             this.panelControls.TabIndex = 4;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.Location = new System.Drawing.Point(485, 397);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(394, 123);
-            this.dataGridView1.TabIndex = 0;
             // 
             // button1
             // 
@@ -387,8 +376,6 @@
             this.panelTop.PerformLayout();
             this.panelInfo.ResumeLayout(false);
             this.panelInfo.PerformLayout();
-            this.panelControls.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -415,7 +402,6 @@
         private System.Windows.Forms.Button buttonRecom;
         private System.Windows.Forms.Panel panelInfo;
         private System.Windows.Forms.Panel panelControls;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Timer timer1;
