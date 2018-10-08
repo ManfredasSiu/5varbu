@@ -52,7 +52,9 @@ namespace VirtualLibrary
         private void button1_Click(object sender, EventArgs e)
         {
             //Laikinai cia kol nesumerginom brancho
-            this.Dispose();
+            capture.Dispose();
+            Application.Idle -= FrameProcedure;
+            this.Close();
         }
 
         public void ScanBarcode()
@@ -62,12 +64,18 @@ namespace VirtualLibrary
             try
             {
                 Result result = Scanner.Decode(new Bitmap(img));
+                textBox1.Text = result.Text;
+                /**
+                 * Reikia atrasti knyga staticData.books liste,sumazinti quantity, prideti knyga i
+                 * userbooks lista ir prideti knyga i [dbo].[UserBooks] lentele
+                **/
                 //Atskirai parodo nuskenuoto barkodo skaičius
-                MessageBox.Show(result.Text);
+                MessageBox.Show(textBox1.Text);
+                this.Close();
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show("Nuskanuoti nepavyko, iveskite barkoda ranka\nArba bandykite dar karta");
             }
         }
 
