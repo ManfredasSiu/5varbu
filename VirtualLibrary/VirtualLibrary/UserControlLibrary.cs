@@ -48,6 +48,7 @@ namespace VirtualLibrary
             using (FormAdminRemoveBook farb = new FormAdminRemoveBook())
             {
                 farb.ShowDialog();
+                StaticData.CurrentUser.getPermission();
             }
         }
     }
