@@ -20,7 +20,7 @@ namespace VirtualLibrary
         VideoCapture capture;
         Mat frame;
         Bitmap img;
-        FormAdminAddBook FAdd;
+        FormAdminAddBook FAdd = null;
 
 
         public FormBorrowBooks()
@@ -70,12 +70,17 @@ namespace VirtualLibrary
             {
                 Result result = Scanner.Decode(new Bitmap(img));
                 textBox1.Text = result.Text;
+                
                 /**
                  * Reikia atrasti knyga staticData.books liste,sumazinti quantity, prideti knyga i
                  * userbooks lista ir prideti knyga i [dbo].[UserBooks] lentele
                 **/
-                int.TryParse(textBox1.Text, out int bookID);
-                var book = StaticData.Books.Find(x => x.getCode() == bookID);
+                if (FAdd != null)
+                {
+                    FAdd.setBarcodeTB(textBox1.Text);
+                    return;
+                }
+                var book = StaticData.Books.Find(x => x.getCode() == textBox1.Text);
                 if (book != null)
                 {
                     MessageBox.Show(textBox1.Text);
@@ -92,8 +97,13 @@ namespace VirtualLibrary
                     MessageBox.Show("Nuskanuoti nepavyko, iveskite barkoda ranka\nArba bandykite dar karta");
                 else
                 {
-                    int.TryParse(textBox1.Text, out int bookID);
-                    var book = StaticData.Books.Find(x => x.getCode() == bookID);
+                    if (FAdd != null)
+                    {
+                        FAdd.setBarcodeTB(textBox1.Text);
+                        Close();
+                        return;
+                    }
+                    var book = StaticData.Books.Find(x => x.getCode() == textBox1.Text);
                     if (book != null)
                     {
                         MessageBox.Show(textBox1.Text);
@@ -108,25 +118,15 @@ namespace VirtualLibrary
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if(whatToDo == null)
-                ScanBarcode();
+            ScanBarcode();
         }
-
-        private void FormBorrowBook_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void buttonShutDown_Click(object sender, EventArgs e)
         {
             capture.Dispose();
             Application.Idle -= FrameProcedure;
             this.Close();
         }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
     }
 }

@@ -12,43 +12,61 @@ namespace VirtualLibrary
 {
     public partial class FormAdminAddBook : Form
     {
+        public String Barcode { set; get; }
+        private AzureDatabase ADB = new AzureDatabase();
+
+        private Book addThis;
+
+
         public FormAdminAddBook()
         {
             InitializeComponent();
         }
 
+        public void setBarcodeTB(string barcode)
+        {
+            textBox7.Text = barcode;
+        }
+
         //Mygtuko paspaudimas turetu isimti knyga is MyBooks saraso ir Grazinti i library sarasa
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            if(CheckTBs() == 1)
+            {
+                MessageBox.Show("Nevisi laukai uzpildyti\nUzpildykite laukus pries tesdami");
+                return;
+            }
+            //ADB.AddBook(new Book(textBox1.Text, textBox2.Text, textBox7.Text, textBox5.Text, int.Parse(textBox6.Text), int.Parse(textBox4.Text), textBox3.Text, 0));
+            this.Close();
         }
 
-        private void FormReturnBook_Load(object sender, EventArgs e)
+        public int CheckTBs()
         {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
+            TextBox[] TBs = { textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7 };
+            foreach (TextBox tb in TBs)
+            {
+                if (tb.Text.Replace(" ", "") == "")
+                    return 1;
+            }
+            try
+            {
+                int.Parse(textBox6.Text);
+                int.Parse(textBox4.Text);
+            }
+            catch
+            {
+                return 1;
+            }
+            return 0;
         }
 
         private void buttonScanner_Click(object sender, EventArgs e)
         {
-            using (FormBorrowBooks fbb = new FormBorrowBooks())
+            using (FormBorrowBooks fbb = new FormBorrowBooks(this))
             {
                 fbb.ShowDialog();
             }
         }
+
     }
 }

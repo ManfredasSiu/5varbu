@@ -90,7 +90,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(744, 521);
             this.panel4.TabIndex = 14;
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // Scan
             // 
@@ -164,7 +163,6 @@
             this.Name = "FormBorrowBooks";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormBorrowBook";
-            this.Load += new System.EventHandler(this.FormBorrowBook_Load);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

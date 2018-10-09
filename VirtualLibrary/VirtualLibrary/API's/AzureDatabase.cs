@@ -20,7 +20,7 @@ namespace VirtualLibrary
             builder.InitialCatalog = "VirtualLib";
         }
 
-        public int AddBook(String name, String author, int barcode, int pages)
+        public int AddBook(String name, String author, String barcode, int pages)
         {
             try
             {
@@ -227,7 +227,7 @@ namespace VirtualLibrary
                         {
                             while (reader.Read())
                             {
-                                StaticData.Books.Add(new Book(reader.GetString(1), reader.GetString(2), (int)reader.GetValue(4), reader.GetString(5), (int)reader.GetValue(7), (int)reader.GetValue(6), reader.GetString(3), (int)reader.GetValue(0)));
+                                StaticData.Books.Add(new Book(reader.GetString(1), reader.GetString(2), reader.GetString(4), reader.GetString(5), (int)reader.GetValue(7), (int)reader.GetValue(6), reader.GetString(3), (int)reader.GetValue(0)));
                                 return;
                             }
                             connection.Close();
@@ -290,7 +290,7 @@ namespace VirtualLibrary
                     sb.Append("VALUES(" + StaticData.CurrentUser.ID + ", " + addThis.ID + ");");
                     sb2.Append("UPDATE [dbo].[Book] ");
                     sb2.Append("SET Quantity = Quantity-1 ");
-                    sb2.Append("WHERE Id = " +  addThis.ID + ";");
+                    sb2.Append("WHERE ID = " +  addThis.ID + ";");
 
                     String sql = sb.ToString();
                     String sql2 = sb2.ToString();

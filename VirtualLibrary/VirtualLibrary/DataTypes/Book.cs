@@ -8,8 +8,8 @@ namespace VirtualLibrary
 {
     class Book
     {
-        private String name, auth, or, genre, pressName;
-        private int pages, quantity, code;
+        private String name, auth, or, genre, pressName, code;
+        private int pages, quantity;
 
         public int ID;
 
@@ -20,7 +20,7 @@ namespace VirtualLibrary
             this.or = or;
         }
 
-        public Book(String name, String auth, int code, string genre, int quantity, int pages, string pressName, int ID)
+        public Book(String name, String auth, string code, string genre, int quantity, int pages, string pressName, int ID)
         {
             this.ID = ID;
             this.name = name;
@@ -32,7 +32,32 @@ namespace VirtualLibrary
             this.pressName = pressName;
         }
 
-        public int getCode()
+        public void setName(string name)
+        {
+            this.name = name;
+        }
+
+        public void setAuth(string auth)
+        {
+            this.auth = auth;
+        }
+
+        public void setCode(string code)
+        {
+            this.code = code;
+        }
+
+        public void setGenre(String genre)
+        {
+            this.genre = genre;
+        }
+
+        public void setPages(int pages)
+        {
+            this.pages = pages;
+        }
+
+        public string getCode()
         {
             return this.code;
         }

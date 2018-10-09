@@ -106,7 +106,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(164, 27);
             this.textBox1.TabIndex = 20;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -126,7 +125,6 @@
             this.label2.Size = new System.Drawing.Size(145, 33);
             this.label2.TabIndex = 22;
             this.label2.Text = "Add Book";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -216,7 +214,6 @@
             this.label8.Size = new System.Drawing.Size(48, 21);
             this.label8.TabIndex = 34;
             this.label8.Text = "ISBN:";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // textBox7
             // 
@@ -267,7 +264,6 @@
             this.Name = "FormAdminAddBook";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormReturnBook";
-            this.Load += new System.EventHandler(this.FormReturnBook_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
