@@ -78,6 +78,7 @@ namespace VirtualLibrary.Properties {
             get
             {
                 object obj = ResourceManager.GetObject("icons8-book-321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         internal static System.Drawing.Bitmap icons8_barcode_reader_64 {

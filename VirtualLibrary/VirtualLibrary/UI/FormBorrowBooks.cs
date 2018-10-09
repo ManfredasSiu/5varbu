@@ -21,7 +21,7 @@ namespace VirtualLibrary
         Mat frame;
         Bitmap img;
 
-        public FormBorrowBook()
+        public FormBorrowBooks()
         {
             InitializeComponent();
             capture = new VideoCapture(0);
