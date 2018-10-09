@@ -15,6 +15,16 @@ namespace VirtualLibrary
         public UserControlLibrary()
         {
             InitializeComponent();
+            if (StaticData.CurrentUser.getPermission()=="1")
+            {
+                buttonAddBook.Visible = true;
+                buttonRemoveBook.Visible = true;
+            }
+            else
+            {
+                buttonAddBook.Visible = false;
+                buttonRemoveBook.Visible = false;
+            }
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -24,9 +34,31 @@ namespace VirtualLibrary
 
         private void buttonTake_Click(object sender, EventArgs e)
         {
-            using (FormBorrowBook fbb = new FormBorrowBook())
+            using (FormBorrowBooks fbb = new FormBorrowBooks())
             {
                 fbb.ShowDialog();
+            }
+        }
+
+        private void dataGridView2_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void buttonAddBook_Click(object sender, EventArgs e)
+        {
+            using (FormAdminAddBook faab = new FormAdminAddBook())
+            {
+                faab.ShowDialog();
+            }
+        }
+
+        private void buttonRemoveBook_Click(object sender, EventArgs e)
+        {
+            using (FormAdminRemoveBook farb = new FormAdminRemoveBook())
+            {
+                farb.ShowDialog();
+                StaticData.CurrentUser.getPermission();
             }
         }
     }

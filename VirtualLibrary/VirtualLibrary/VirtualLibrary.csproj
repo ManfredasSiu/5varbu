@@ -153,17 +153,23 @@
     <Compile Include="AzureDatabase.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="FaceApiCalls.cs" />
-    <Compile Include="FormBorrowBook.cs">
+    <Compile Include="FormAdminRemoveBook.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormBorrowBook.Designer.cs">
-      <DependentUpon>FormBorrowBook.cs</DependentUpon>
+    <Compile Include="FormAdminRemoveBook.Designer.cs">
+      <DependentUpon>FormAdminRemoveBook.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormReturnBook.cs">
+    <Compile Include="FormAdminAddBook.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormReturnBook.Designer.cs">
-      <DependentUpon>FormReturnBook.cs</DependentUpon>
+    <Compile Include="FormAdminAddBook.Designer.cs">
+      <DependentUpon>FormAdminAddBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBorrowBooks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBorrowBooks.Designer.cs">
+      <DependentUpon>FormBorrowBooks.cs</DependentUpon>
     </Compile>
     <Compile Include="ICallAzureAPI.cs" />
     <Compile Include="MainTry.cs">
@@ -237,11 +243,14 @@
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormBorrowBook.resx">
-      <DependentUpon>FormBorrowBook.cs</DependentUpon>
+    <EmbeddedResource Include="FormAdminRemoveBook.resx">
+      <DependentUpon>FormAdminRemoveBook.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormReturnBook.resx">
-      <DependentUpon>FormReturnBook.cs</DependentUpon>
+    <EmbeddedResource Include="FormAdminAddBook.resx">
+      <DependentUpon>FormAdminAddBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBorrowBooks.resx">
+      <DependentUpon>FormBorrowBooks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
@@ -295,6 +304,7 @@
     <None Include="Properties\Icons\icons8-home-64.png" />
     <None Include="Properties\Icons\icons8-reading-64.png" />
     <None Include="Properties\Icons\icons8-hint-64.png" />
+    <None Include="Properties\Icons\icons8-barcode-reader-64.png" />
     <Content Include="RedPoint.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
