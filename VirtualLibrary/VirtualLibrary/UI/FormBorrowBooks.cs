@@ -22,6 +22,7 @@ namespace VirtualLibrary
         Bitmap img;
         FormAdminAddBook FAdd = null;
         UserControlLibrary UCL = null;
+        UserControlMyBooks UCMB = null;
         AzureDatabase ADB = new AzureDatabase();
 
         public FormBorrowBooks(UserControlLibrary UCL)
@@ -36,6 +37,7 @@ namespace VirtualLibrary
         public FormBorrowBooks(UserControlMyBooks UCMB)
         {
             InitializeComponent();
+            this.UCMB = UCMB;
             capture = new VideoCapture(0);
             capture.Open(0);
             Application.Idle += FrameProcedure;
@@ -80,25 +82,42 @@ namespace VirtualLibrary
             {
                 Result result = Scanner.Decode(new Bitmap(img));
                 textBox1.Text = result.Text;
-                
-                /**
-                 * Reikia atrasti knyga staticData.books liste,sumazinti quantity, prideti knyga i
-                 * userbooks lista ir prideti knyga i [dbo].[UserBooks] lentele
-                **/
                 if (FAdd != null)
                 {
                     FAdd.setBarcodeTB(textBox1.Text);
                     return;
                 }
                 var book = StaticData.Books.Find(x => x.getCode() == textBox1.Text);
-                if (book != null)
+                if(UCMB != null)
                 {
-                    if(book.getQuantity() > 0)
+                    if(book != null && StaticData.CurrentUser.getUserBooks().Contains(book))
+                    {
+                        book.setQuantityPlius();
+                        StaticData.CurrentUser.AddReadBook(book);
+                        StaticData.CurrentUser.removeUserBook(book);
+                        ADB.ReturnBook(book);
+                        UCMB.updateTable();
+                        this.Close();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Neturite tokios knygos\nArba knyga neegzistuoja bibliotekoje");
+                    }
+                }
+                else if (book != null && UCL != null)
+                {
+                    if(book.getQuantity() > 0 && StaticData.CurrentUser.getUserBooks().Contains(book) == false)
                     {
                         book.setQuantityMinus();
                         StaticData.CurrentUser.AddTakenBook(book);
                         ADB.BorrowBook(book);
                         UCL.UpdateTable();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sios knygos egzemplioriu nebera");
+                        return;
                     }
                     MessageBox.Show(textBox1.Text);
                     this.Close();
@@ -121,14 +140,36 @@ namespace VirtualLibrary
                         return;
                     }
                     var book = StaticData.Books.Find(x => x.getCode() == textBox1.Text);
-                    if (book != null)
+                    if (UCMB != null)
                     {
-                        if(book.getQuantity() > 0)
+                        if (book != null && StaticData.CurrentUser.getUserBooks().Contains(book))
+                        {
+                            book.setQuantityPlius();
+                            StaticData.CurrentUser.AddReadBook(book);
+                            StaticData.CurrentUser.removeUserBook(book);
+                            ADB.ReturnBook(book);
+                            UCMB.updateTable();
+                            this.Close();
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Neturite tokios knygos\nArba knyga neegzistuoja bibliotekoje");
+                        }
+                    }
+                    else if (book != null && UCL != null)
+                    {
+                        if(book.getQuantity() > 0 && StaticData.CurrentUser.getUserBooks().Contains(book) == false)
                         {
                             book.setQuantityMinus();
                             StaticData.CurrentUser.AddTakenBook(book);
                             ADB.BorrowBook(book);
                             UCL.UpdateTable();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sios knygos egzemplioriu nebera\nArba jau tokia knyga turite");
+                            return;
                         }
                         MessageBox.Show(textBox1.Text);
                         this.Close();
@@ -147,8 +188,9 @@ namespace VirtualLibrary
         
         private void buttonShutDown_Click(object sender, EventArgs e)
         {
-            capture.Dispose();
+
             Application.Idle -= FrameProcedure;
+            capture.Dispose();
             this.Close();
         }
         

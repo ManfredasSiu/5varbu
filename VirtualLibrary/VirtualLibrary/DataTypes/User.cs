@@ -37,8 +37,6 @@ namespace VirtualLibrary
             this.passWord = passWord;
             this.email = email;
             this.permission = permission;
-            this.UserBooks = UserBooks;
-            this.BooksRead = BooksRead;
         }
         public String getuserName()
         {
@@ -48,6 +46,16 @@ namespace VirtualLibrary
         public List<Book> getUserBooks()
         {
             return UserBooks;
+        }
+
+        public void removeUserBook(Book removeThis)
+        {
+            this.UserBooks.Remove(removeThis);
+        }
+
+        public void setUserBooks(List<Book> UserBooks)
+        {
+            this.UserBooks = UserBooks;
         }
 
         public String getPermission()

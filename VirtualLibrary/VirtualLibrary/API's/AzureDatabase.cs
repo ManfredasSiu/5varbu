@@ -178,15 +178,25 @@ namespace VirtualLibrary
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     StringBuilder sb2 = new StringBuilder();
-                    sb.Append("DELETE FROM [dbo].[UserBook] a ");
-                    sb.Append("WHERE " + StaticData.CurrentUser.ID + " = a.UserID and " + "a.BookID = " + delThis.ID +";");
+                    StringBuilder sb3 = new StringBuilder();
+                    sb.Append("DELETE FROM [dbo].[UserBook] ");
+                    sb.Append("WHERE UserID = " + StaticData.CurrentUser.ID + " and " + "BookID = " + delThis.ID +";");
                     sb2.Append("INSERT INTO [dbo].[BooksRead] ");
                     sb2.Append("VALUES(" + StaticData.CurrentUser.ID + ", " + delThis.ID + ");");
-                        
+                    sb3.Append("UPDATE [dbo].[Book] ");
+                    sb3.Append("SET Quantity = Quantity+1 ");
+                    sb3.Append("WHERE ID = " + delThis.ID + ";");
+
                     String sql = sb.ToString();
                     String sql2 = sb2.ToString();
+                    String sql3 = sb3.ToString();
 
                     using (var sqlCommand = new SqlCommand(sql, connection))
+                    {
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+                        Console.WriteLine(rowsAffected + " = rows affected.");
+                    }
+                    using (var sqlCommand = new SqlCommand(sql3, connection))
                     {
                         int rowsAffected = sqlCommand.ExecuteNonQuery();
                         Console.WriteLine(rowsAffected + " = rows affected.");
@@ -195,9 +205,6 @@ namespace VirtualLibrary
                     {
                         int rowsAffected = sqlCommand.ExecuteNonQuery();
                         Console.WriteLine(rowsAffected + " = rows affected.");
-                        var book = StaticData.Books.Find(y => y.ID == delThis.ID);
-                        book.setQuantityPlius();
-                        //reik ištrinti knygas iš listo  UserBooks tą knygą ir įdėt į BooksRead
                     }
 
                     connection.Close();
@@ -258,12 +265,12 @@ namespace VirtualLibrary
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            List<int> bookIDList = new List<int>();
+                            List<Book> bookIDList = new List<Book>();
                             while (reader.Read())
                             {
-                                StaticData.CurrentUser.getUserBooks().Add(StaticData.Books.Find(x => x.ID == (int)reader.GetValue(0)));
-                                return;
+                                bookIDList.Add(StaticData.Books.Find(x => x.ID == (int)reader.GetValue(0)));
                             }
+                            StaticData.CurrentUser.setUserBooks(bookIDList);
                         }
                         connection.Close();
                     }
