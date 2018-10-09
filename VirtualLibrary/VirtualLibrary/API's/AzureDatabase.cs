@@ -124,7 +124,7 @@ namespace VirtualLibrary
                         {
                             if (reader.Read())
                             {
-                                StaticData.CurrentUser = new User((int)reader.GetValue(0), (string)reader.GetValue(1), (string)reader.GetValue(2), null, (string)reader.GetValue(4), null, null);
+                                StaticData.CurrentUser = new User((int)reader.GetValue(0), (string)reader.GetValue(1), (string)reader.GetValue(2), null, (string)reader.GetValue(4));
                                 connection.Close();
                                 return null;//userData;
                             }
@@ -211,7 +211,7 @@ namespace VirtualLibrary
             return 0;
         }
 
-        public void GetAllBooks(string name)
+        public void GetAllBooks()
         {
             try
             {

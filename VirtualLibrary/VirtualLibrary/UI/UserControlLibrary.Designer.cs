@@ -177,7 +177,6 @@ namespace VirtualLibrary
             this.dataGridView2.RowHeadersWidth = 50;
             this.dataGridView2.Size = new System.Drawing.Size(920, 455);
             this.dataGridView2.TabIndex = 12;
-            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick_1);
             // 
             // ColumnISBN
             // 

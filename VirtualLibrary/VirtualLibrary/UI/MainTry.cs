@@ -13,6 +13,7 @@ namespace VirtualLibrary
     public partial class MainTry : Form
     {
         private LogicController logicC;
+        private AzureDatabase ADB;
 
         int PanelWidth;
         bool isCollapsed;
@@ -20,6 +21,7 @@ namespace VirtualLibrary
         public MainTry(LogicController logicC)
         {
             InitializeComponent();
+            ADB.GetAllBooks();
             timer2.Start();
             PanelWidth = panelLeft.Width;
             isCollapsed = false;
