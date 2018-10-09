@@ -88,12 +88,11 @@ namespace VirtualLibrary
                 this.Close();
                 return null;
             }
-            
         }
 
         private void buttonShutDown_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.Close();
         }
 
         public async void FaceRecognitionAsync(object sender, EventArgs e)

@@ -20,10 +20,21 @@ namespace VirtualLibrary
         VideoCapture capture;
         Mat frame;
         Bitmap img;
+        FormAdminAddBook FAdd;
+
 
         public FormBorrowBooks()
         {
             InitializeComponent();
+            capture = new VideoCapture(0);
+            capture.Open(0);
+            Application.Idle += FrameProcedure;
+        }
+
+        public FormBorrowBooks(FormAdminAddBook FAdd)
+        {
+            InitializeComponent();
+            this.FAdd = FAdd;
             capture = new VideoCapture(0);
             capture.Open(0);
             Application.Idle += FrameProcedure;
@@ -40,22 +51,16 @@ namespace VirtualLibrary
             {
                 capture.Read(frame);
                 img = BitmapConverter.ToBitmap(frame);
-                if (pictureBox1.Image != null)
+                if (pictureBox2.Image != null)
                 {
-                    pictureBox1.Image.Dispose();
+                    pictureBox2.Image.Dispose();
                 }
-                pictureBox1.Image = img;
+                pictureBox2.Image = img;
             }
         }
 
         //Mygtuko paspaudimas turetu isimti knyga is Library saraso ir ivesti i MyBooks sarasa
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //Laikinai cia kol nesumerginom brancho
-            capture.Dispose();
-            Application.Idle -= FrameProcedure;
-            this.Close();
-        }
+        
 
         public void ScanBarcode()
         {
@@ -103,7 +108,8 @@ namespace VirtualLibrary
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ScanBarcode();
+            if(whatToDo == null)
+                ScanBarcode();
         }
 
         private void FormBorrowBook_Load(object sender, EventArgs e)
@@ -113,7 +119,9 @@ namespace VirtualLibrary
 
         private void buttonShutDown_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            capture.Dispose();
+            Application.Idle -= FrameProcedure;
+            this.Close();
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e)
