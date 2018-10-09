@@ -31,11 +31,6 @@ namespace VirtualLibrary
             }
         }
 
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void buttonTake_Click(object sender, EventArgs e)
         {
             using (FormBorrowBooks fbb = new FormBorrowBooks())
@@ -43,11 +38,7 @@ namespace VirtualLibrary
                 fbb.ShowDialog();
             }
         }
-
-        private void dataGridView2_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
 
         private void buttonAddBook_Click(object sender, EventArgs e)
         {

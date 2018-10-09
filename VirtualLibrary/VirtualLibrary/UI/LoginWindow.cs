@@ -99,7 +99,7 @@ namespace VirtualLibrary
         {                      
              if(cam == null)
              {
-                StaticData.CurrentUser = new User(999,"Debug", "Debug", null, "1", null, null);
+                StaticData.CurrentUser = new User(999,"Debug", "Debug", null, "1");
                 TransitionToMainW();
                 return;
              }

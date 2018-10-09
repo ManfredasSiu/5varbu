@@ -36,7 +36,9 @@ namespace VirtualLibrary
                 MessageBox.Show("Nevisi laukai uzpildyti arba uzpildyti nelegaliai\nUzpildykite laukus pries tesdami");
                 return;
             }
-            ADB.AddBook(new Book(textBox1.Text, textBox2.Text, textBox7.Text, textBox5.Text, int.Parse(textBox6.Text), int.Parse(textBox4.Text), textBox3.Text, 0));
+            Book bookToAdd = new Book(textBox1.Text, textBox2.Text, textBox7.Text, textBox5.Text, int.Parse(textBox6.Text), int.Parse(textBox4.Text), textBox3.Text, 0);
+            ADB.AddBook(bookToAdd);
+            StaticData.Books.Add(bookToAdd);
             this.Close();
         }
 
