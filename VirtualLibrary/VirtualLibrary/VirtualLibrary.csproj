@@ -304,6 +304,16 @@
     <None Include="Properties\Icons\icons8-home-64.png" />
     <None Include="Properties\Icons\icons8-reading-64.png" />
     <None Include="Properties\Icons\icons8-hint-64.png" />
+    <None Include="Properties\Icons\icons8-menu-64.png" />
+    <None Include="Properties\Icons\icons8-menu-vertical-64.png" />
+    <None Include="Properties\Icons\menu64.png" />
+    <None Include="Properties\Icons\icons8-return-book-32.png" />
+    <None Include="Properties\Icons\icons8-signin-64.png" />
+    <None Include="Properties\Icons\icons8-login-rounded-up-64.png" />
+    <None Include="Properties\Icons\icons8-email-32.png" />
+    <None Include="Properties\Icons\icons8-book-32.png" />
+    <None Include="Properties\Icons\icons8-file-32.png" />
+    <None Include="Properties\Icons\icons8-high-priority-64.png" />
     <None Include="Properties\Icons\icons8-barcode-reader-64.png" />
     <Content Include="RedPoint.png" />
   </ItemGroup>

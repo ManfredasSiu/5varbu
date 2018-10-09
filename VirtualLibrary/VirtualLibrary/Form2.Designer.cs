@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.imageBox1 = new Emgu.CV.UI.ImageBox();
             this.RegisterButt = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,23 +38,16 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Information = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
+            this.imageBox1 = new Emgu.CV.UI.ImageBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // imageBox1
-            // 
-            this.imageBox1.Location = new System.Drawing.Point(12, 68);
-            this.imageBox1.Name = "imageBox1";
-            this.imageBox1.Size = new System.Drawing.Size(661, 370);
-            this.imageBox1.TabIndex = 2;
-            this.imageBox1.TabStop = false;
             // 
             // RegisterButt
             // 
-            this.RegisterButt.Location = new System.Drawing.Point(253, 3);
+            this.RegisterButt.Location = new System.Drawing.Point(324, 17);
             this.RegisterButt.Name = "RegisterButt";
-            this.RegisterButt.Size = new System.Drawing.Size(75, 23);
+            this.RegisterButt.Size = new System.Drawing.Size(94, 29);
             this.RegisterButt.TabIndex = 3;
             this.RegisterButt.Text = "Register";
             this.RegisterButt.UseVisualStyleBackColor = true;
@@ -63,43 +55,43 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(147, 3);
+            this.textBox1.Location = new System.Drawing.Point(170, 19);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.Size = new System.Drawing.Size(129, 27);
             this.textBox1.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 6);
+            this.label1.Location = new System.Drawing.Point(70, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 13);
+            this.label1.Size = new System.Drawing.Size(94, 21);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Prisijungimo vardas";
+            this.label1.Text = "User Name";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(80, 34);
+            this.label2.Location = new System.Drawing.Point(82, 48);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 13);
+            this.label2.Size = new System.Drawing.Size(82, 21);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Slaptazodis";
+            this.label2.Text = "Password";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(147, 34);
+            this.textBox2.Location = new System.Drawing.Point(170, 48);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.Size = new System.Drawing.Size(129, 27);
             this.textBox2.TabIndex = 8;
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(253, 32);
+            this.Cancel.Location = new System.Drawing.Point(324, 47);
             this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(75, 23);
+            this.Cancel.Size = new System.Drawing.Size(94, 33);
             this.Cancel.TabIndex = 9;
-            this.Cancel.Text = "Atsaukti";
+            this.Cancel.Text = "Cancel";
             this.Cancel.UseVisualStyleBackColor = true;
             this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
@@ -111,9 +103,9 @@
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.Cancel);
             this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Location = new System.Drawing.Point(51, 0);
+            this.panel1.Location = new System.Drawing.Point(18, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(346, 69);
+            this.panel1.Size = new System.Drawing.Size(756, 86);
             this.panel1.TabIndex = 10;
             // 
             // Information
@@ -126,19 +118,28 @@
             this.Information.Size = new System.Drawing.Size(0, 36);
             this.Information.TabIndex = 12;
             // 
+            // imageBox1
+            // 
+            this.imageBox1.Location = new System.Drawing.Point(18, 104);
+            this.imageBox1.Name = "imageBox1";
+            this.imageBox1.Size = new System.Drawing.Size(756, 397);
+            this.imageBox1.TabIndex = 2;
+            this.imageBox1.TabStop = false;
+            // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 451);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(787, 514);
             this.Controls.Add(this.Information);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.imageBox1);
+            this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form2";
             this.Text = "Form2";
-            ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

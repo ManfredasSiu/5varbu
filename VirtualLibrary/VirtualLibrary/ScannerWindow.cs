@@ -34,7 +34,7 @@ namespace VirtualLibrary
             if (SD.ShowDialog() == DialogResult.OK)
                 pictureBox.Image.Save(SD.FileName, System.Drawing.Imaging.ImageFormat.Png);
         }
-        */
+        */ 
 
         private void scanButtonClick(object sender, EventArgs e)
         {

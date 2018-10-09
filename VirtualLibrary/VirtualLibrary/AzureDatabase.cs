@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
@@ -30,7 +30,7 @@ namespace VirtualLibrary
                     StringBuilder sb = new StringBuilder();
                     sb.Append("INSERT INTO [dbo].[Book] ");
                     sb.Append("VALUES('" + name + "','" + author + "'," + barcode + "," + pages + ");");
-                    
+
                     String sql = sb.ToString();
                     using (var sqlCommand = new SqlCommand(sql, connection))
                     {
@@ -41,7 +41,7 @@ namespace VirtualLibrary
                     connection.Close();
                 }
             }
-            catch(SqlException e)
+            catch (SqlException e)
             {
                 MessageBox.Show(e.Message);
                 return 1;
@@ -168,21 +168,36 @@ namespace VirtualLibrary
             return 0;
         }
 
-        public int DelUserBook(Book delThis)
+        public int ReturnBook (Book delThis)
         {
+            //Reik sukurt lentelę, kur dėsim perskaitytas knygas - knygos ID ir reader ID
             try
             {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
+                    StringBuilder sb2 = new StringBuilder();
                     sb.Append("DELETE FROM [dbo].[UserBook] a ");
-                    sb.Append("WHERE " + StaticData.CurrentUser.ID + " = a.UserID and " + delThis.ID + " = a.BookID;");
+                    sb.Append("WHERE " + StaticData.CurrentUser.ID + " = a.UserID and " + "a.BookID = " + delThis.ID +";");
+                    sb2.Append("INSERT INTO [dbo].[BooksRead] ");
+                    sb2.Append("VALUES(" + StaticData.CurrentUser.ID + ", " + delThis.ID + ");");
+                        
                     String sql = sb.ToString();
+                    String sql2 = sb2.ToString();
+
                     using (var sqlCommand = new SqlCommand(sql, connection))
                     {
                         int rowsAffected = sqlCommand.ExecuteNonQuery();
                         Console.WriteLine(rowsAffected + " = rows affected.");
+                    }
+                    using (var sqlCommand = new SqlCommand(sql2, connection))
+                    {
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+                        Console.WriteLine(rowsAffected + " = rows affected.");
+                        var book = StaticData.Books.Find(y => y.ID == delThis.ID);
+                        book.setQuantityPlius();
+                        //reik ištrinti knygas iš listo  UserBooks tą knygą ir įdėt į BooksRead
                     }
 
                     connection.Close();
@@ -213,9 +228,9 @@ namespace VirtualLibrary
                             while (reader.Read())
                             {
                                 StaticData.Books.Add(new Book(reader.GetString(1), reader.GetString(2), (int)reader.GetValue(4), reader.GetString(5), (int)reader.GetValue(7), (int)reader.GetValue(6), reader.GetString(3), (int)reader.GetValue(0)));
-                                connection.Close();
                                 return;
                             }
+                            connection.Close();
                         }
                     }
                 }
@@ -224,8 +239,88 @@ namespace VirtualLibrary
             {
                 MessageBox.Show(e.Message);
                 return;
+
             }
         }
 
+        public void GetAllUserBooks()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Select BookID from [dbo].[UserBook] ");
+                    sb.Append("WHERE UserID = " + StaticData.CurrentUser.ID + ";");
+                    String sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            List<int> bookIDList = new List<int>();
+                            while (reader.Read())
+                            {
+                                StaticData.CurrentUser.getUserBooks().Add(StaticData.Books.Find(x => x.ID == (int)reader.GetValue(0)));
+                                return;
+                            }
+                        }
+                        connection.Close();
+                    }
+
+                }
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
+
+        }
+        public void BorrowBook (Book addThis)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    StringBuilder sb2 = new StringBuilder();
+                    sb.Append("INSERT INTO [dbo].[UserBook] ");
+                    sb.Append("VALUES(" + StaticData.CurrentUser.ID + ", " + addThis.ID + ");");
+                    sb2.Append("UPDATE [dbo].[Book] ");
+                    sb2.Append("SET Quantity = Quantity-1 ");
+                    sb2.Append("WHERE Id = " +  addThis.ID + ";");
+
+                    String sql = sb.ToString();
+                    String sql2 = sb2.ToString();
+                    using (var sqlCommand = new SqlCommand(sql, connection))
+                    {
+                        
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+                        Console.WriteLine(rowsAffected + " = rows affected.");
+                    }
+                    using (var sqlCommand = new SqlCommand(sql2, connection))
+                    {
+
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+                        Console.WriteLine(rowsAffected + " = rows affected.");
+                        var book = StaticData.Books.Find(y => y.ID == addThis.ID);
+                        book.setQuantityMinus();
+                        //reikia knygą įdėti į UserBooks
+     
+                    }
+                    connection.Close();
+                }
+            
+            }
+            catch(SqlException e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
+        }
     }
+
+    
 }

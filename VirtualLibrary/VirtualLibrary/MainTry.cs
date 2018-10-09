@@ -23,6 +23,8 @@ namespace VirtualLibrary
             timer2.Start();
             PanelWidth = panelLeft.Width;
             isCollapsed = false;
+            UserControlHome uch = new UserControlHome();
+            AddControlsToPanel(uch);
 
             this.logicC = logicC;
             DataTable dt = new DataTable();
@@ -37,6 +39,10 @@ namespace VirtualLibrary
             dataGridView1.DataSource = dt;
             this.FormClosing += OnCloseReq;
             UserName.Text = StaticData.CurrentUser.getuserName();
+            if (StaticData.CurrentUser.getPermission() == "1")
+                label6.Text = "ADMIN";
+            else
+                label6.Text = "Reader";
         }
 
 

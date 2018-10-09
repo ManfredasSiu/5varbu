@@ -53,5 +53,10 @@ namespace VirtualLibrary
             Form2 registerFaceWindow = new Form2(LogicC, this);
             registerFaceWindow.Show();
         }
+
+        private void buttonShutDown_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }
