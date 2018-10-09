@@ -25,15 +25,26 @@ namespace VirtualLibrary
                 buttonAddBook.Visible = false;
                 buttonRemoveBook.Visible = false;
             }
+            UpdateTable();
+        }
+
+        public void UpdateTable()
+        {
+            dataGridView2.Rows.Clear();
             foreach (Book item in StaticData.Books)
             {
-                dataGridView2.Rows.Add(item.ID, item.getName(), item.getAuthor(), item.getPressName(), item.getGenre(), item.getPages(), item.getQuantity());
+                dataGridView2.Rows.Add(item.getCode(), item.getName(), item.getAuthor(), item.getPressName(), item.getGenre(), item.getPages(), item.getQuantity());
             }
         }
 
         private void buttonTake_Click(object sender, EventArgs e)
         {
-            using (FormBorrowBooks fbb = new FormBorrowBooks())
+            TakeBookInit();
+        }
+
+        private void TakeBookInit()
+        {
+            using (FormBorrowBooks fbb = new FormBorrowBooks(this))
             {
                 fbb.ShowDialog();
             }
@@ -42,7 +53,12 @@ namespace VirtualLibrary
 
         private void buttonAddBook_Click(object sender, EventArgs e)
         {
-            using (FormAdminAddBook faab = new FormAdminAddBook())
+            AddBookInit();
+        }
+
+        private void AddBookInit()
+        {
+            using (FormAdminAddBook faab = new FormAdminAddBook(this))
             {
                 faab.ShowDialog();
             }

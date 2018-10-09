@@ -24,7 +24,7 @@ namespace VirtualLibrary
 
         private void buttonReturn_Click(object sender, EventArgs e)
         {
-            using (FormBorrowBooks fuqr = new FormBorrowBooks())
+            using (FormBorrowBooks fuqr = new FormBorrowBooks(this))
             {
                 fuqr.ShowDialog();
             }

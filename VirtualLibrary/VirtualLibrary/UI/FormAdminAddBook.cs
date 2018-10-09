@@ -15,12 +15,15 @@ namespace VirtualLibrary
         public String Barcode { set; get; }
         private AzureDatabase ADB = new AzureDatabase();
 
+        UserControlLibrary UCL = null;
+
         private Book addThis;
 
 
-        public FormAdminAddBook()
+        public FormAdminAddBook(UserControlLibrary UCL)
         {
             InitializeComponent();
+            this.UCL = UCL;
         }
 
         public void setBarcodeTB(string barcode)
@@ -39,6 +42,7 @@ namespace VirtualLibrary
             Book bookToAdd = new Book(textBox1.Text, textBox2.Text, textBox7.Text, textBox5.Text, int.Parse(textBox6.Text), int.Parse(textBox4.Text), textBox3.Text, 0);
             ADB.AddBook(bookToAdd);
             StaticData.Books.Add(bookToAdd);
+            UCL.UpdateTable();
             this.Close();
         }
 

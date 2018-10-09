@@ -31,7 +31,6 @@ namespace VirtualLibrary
             {
                 dt.Rows.Add(StaticData.Books[x], StaticData.Books[x + 1], StaticData.Books[x + 2], StaticData.Books[x + 3]);
             }
-            dataGridView1.DataSource = dt;
         }
 
         protected override void Dispose(bool disposing)

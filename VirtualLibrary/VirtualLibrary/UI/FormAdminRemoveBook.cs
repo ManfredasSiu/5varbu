@@ -45,10 +45,10 @@ namespace VirtualLibrary
 
         private void buttonScanner_Click(object sender, EventArgs e)
         {
-            using (FormBorrowBooks fbb = new FormBorrowBooks())
-            {
-                fbb.ShowDialog();
-            }
+            //using (FormBorrowBooks fbb = new FormBorrowBooks())
+            //{
+            //    fbb.ShowDialog();
+            //}
         }
     }
 }

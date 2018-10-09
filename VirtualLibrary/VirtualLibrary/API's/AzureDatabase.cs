@@ -225,11 +225,12 @@ namespace VirtualLibrary
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
+                            List<Book> tempBooks = new List<Book>();
                             while (reader.Read())
                             {
-                                StaticData.Books.Add(new Book(reader.GetString(1), reader.GetString(2), reader.GetString(4), reader.GetString(5), (int)reader.GetValue(7), (int)reader.GetValue(6), reader.GetString(3), (int)reader.GetValue(0)));
-                                return;
+                                tempBooks.Add(new Book(reader.GetString(1), reader.GetString(2), reader.GetString(4), reader.GetString(5), (int)reader.GetValue(7), (int)reader.GetValue(6), reader.GetString(3), (int)reader.GetValue(0)));
                             }
+                            StaticData.Books = tempBooks;
                             connection.Close();
                         }
                     }
@@ -239,7 +240,6 @@ namespace VirtualLibrary
             {
                 MessageBox.Show(e.Message);
                 return;
-
             }
         }
 
@@ -305,8 +305,6 @@ namespace VirtualLibrary
 
                         int rowsAffected = sqlCommand.ExecuteNonQuery();
                         Console.WriteLine(rowsAffected + " = rows affected.");
-                        var book = StaticData.Books.Find(y => y.ID == addThis.ID);
-                        book.setQuantityMinus();
                         //reikia knygą įdėti į UserBooks
      
                     }

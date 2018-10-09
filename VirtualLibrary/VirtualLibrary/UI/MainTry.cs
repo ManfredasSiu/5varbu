@@ -13,7 +13,7 @@ namespace VirtualLibrary
     public partial class MainTry : Form
     {
         private LogicController logicC;
-        private AzureDatabase ADB;
+        private AzureDatabase ADB = new AzureDatabase();
 
         int PanelWidth;
         bool isCollapsed;
@@ -29,16 +29,6 @@ namespace VirtualLibrary
             AddControlsToPanel(uch);
 
             this.logicC = logicC;
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Knygos autorius ");
-            dt.Columns.Add("Pavadinimas ");
-            dt.Columns.Add("Kodas ");
-            dt.Columns.Add("0/1 ");
-            for (int x = 0; x < StaticData.Books.Count(); x =+4)
-            {
-                dt.Rows.Add(StaticData.Books[x], StaticData.Books[x + 1], StaticData.Books[x + 2], StaticData.Books[x + 3]);
-            }
-            dataGridView1.DataSource = dt;
             this.FormClosing += OnCloseReq;
             UserName.Text = StaticData.CurrentUser.getuserName();
             if (StaticData.CurrentUser.getPermission() == "1")

@@ -21,9 +21,19 @@ namespace VirtualLibrary
         Mat frame;
         Bitmap img;
         FormAdminAddBook FAdd = null;
+        UserControlLibrary UCL = null;
+        AzureDatabase ADB = new AzureDatabase();
 
+        public FormBorrowBooks(UserControlLibrary UCL)
+        {
+            InitializeComponent();
+            this.UCL = UCL;
+            capture = new VideoCapture(0);
+            capture.Open(0);
+            Application.Idle += FrameProcedure;
+        }
 
-        public FormBorrowBooks()
+        public FormBorrowBooks(UserControlMyBooks UCMB)
         {
             InitializeComponent();
             capture = new VideoCapture(0);
@@ -83,6 +93,13 @@ namespace VirtualLibrary
                 var book = StaticData.Books.Find(x => x.getCode() == textBox1.Text);
                 if (book != null)
                 {
+                    if(book.getQuantity() > 0)
+                    {
+                        book.setQuantityMinus();
+                        StaticData.CurrentUser.AddTakenBook(book);
+                        ADB.BorrowBook(book);
+                        UCL.UpdateTable();
+                    }
                     MessageBox.Show(textBox1.Text);
                     this.Close();
                 }
@@ -106,6 +123,13 @@ namespace VirtualLibrary
                     var book = StaticData.Books.Find(x => x.getCode() == textBox1.Text);
                     if (book != null)
                     {
+                        if(book.getQuantity() > 0)
+                        {
+                            book.setQuantityMinus();
+                            StaticData.CurrentUser.AddTakenBook(book);
+                            ADB.BorrowBook(book);
+                            UCL.UpdateTable();
+                        }
                         MessageBox.Show(textBox1.Text);
                         this.Close();
                     }
