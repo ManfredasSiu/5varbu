@@ -31,12 +31,12 @@ namespace VirtualLibrary
         //Mygtuko paspaudimas turetu isimti knyga is MyBooks saraso ir Grazinti i library sarasa
         private void button1_Click(object sender, EventArgs e)
         {
-            if(CheckTBs() == 1)
+            if (CheckTBs() == 1)
             {
                 MessageBox.Show("Nevisi laukai uzpildyti\nUzpildykite laukus pries tesdami");
                 return;
             }
-            //ADB.AddBook(new Book(textBox1.Text, textBox2.Text, textBox7.Text, textBox5.Text, int.Parse(textBox6.Text), int.Parse(textBox4.Text), textBox3.Text, 0));
+            ADB.AddBook(new Book(textBox1.Text, textBox2.Text, textBox7.Text, textBox5.Text, int.Parse(textBox6.Text), int.Parse(textBox4.Text), textBox3.Text, 0));
             this.Close();
         }
 

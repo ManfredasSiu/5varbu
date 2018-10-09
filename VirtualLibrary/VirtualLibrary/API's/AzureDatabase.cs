@@ -20,7 +20,7 @@ namespace VirtualLibrary
             builder.InitialCatalog = "VirtualLib";
         }
 
-        public int AddBook(String name, String author, String barcode, int pages)
+        public int AddBook(Book AddThis)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace VirtualLibrary
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("INSERT INTO [dbo].[Book] ");
-                    sb.Append("VALUES('" + name + "','" + author + "'," + barcode + "," + pages + ");");
+                    sb.Append("VALUES('" + AddThis.getName() + "','" + AddThis.getAuthor() + "', '" + AddThis.getPressName() + "' , '" + AddThis.getCode() + "' , '" + AddThis.getGenre() + "'," + AddThis.getPages() +"," + AddThis.getQuantity() + ");");
 
                     String sql = sb.ToString();
                     using (var sqlCommand = new SqlCommand(sql, connection))
@@ -58,7 +58,7 @@ namespace VirtualLibrary
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("INSERT INTO [dbo].[User] ");
-                    sb.Append("VALUES('" + name + "', '" + Password + "', '" + email + "', " + Permission + ");");
+                    sb.Append("VALUES('" + name + "', '" + Password + "', '" + email + "', '" + Permission + "');");
                     String sql = sb.ToString();
                     using (var sqlCommand = new SqlCommand(sql, connection))
                     {

@@ -32,6 +32,21 @@ namespace VirtualLibrary
             this.pressName = pressName;
         }
 
+        public string getName()
+        {
+            return this.name;
+        }
+
+        public string getAuthor()
+        {
+            return this.auth;
+        }
+
+        public string getPressName()
+        {
+            return pressName;
+        }
+
         public void setName(string name)
         {
             this.name = name;
