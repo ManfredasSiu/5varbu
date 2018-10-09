@@ -48,6 +48,11 @@ namespace VirtualLibrary
             return UserBooks;
         }
 
+        public void setBooksRead(List<Book> BooksRead)
+        {
+            this.BooksRead = BooksRead;
+        }
+
         public void removeUserBook(Book removeThis)
         {
             this.UserBooks.Remove(removeThis);

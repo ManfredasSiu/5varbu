@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API%27s\AzureDatabase.cs" />
+    <Compile Include="Logic\CurrentUserStatistics.cs" />
     <Compile Include="DataTypes\Book.cs" />
     <Compile Include="API%27s\FaceApiCalls.cs" />
     <Compile Include="UI\FormAdminRemoveBook.cs">

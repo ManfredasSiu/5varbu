@@ -116,7 +116,8 @@ namespace VirtualLibrary
                 }
             }
             StaticData.CurrentUser.getBooksRead().Sort((x, y) => x.getPages().CompareTo(y.getPages()));
-            BiggestBook = StaticData.CurrentUser.getBooksRead().ToArray()[0];
+            if (StaticData.CurrentUser.getBooksRead().ToArray().Length > 0)
+                BiggestBook = StaticData.CurrentUser.getBooksRead().ToArray()[0];
         }
     }
 }

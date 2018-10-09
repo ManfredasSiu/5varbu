@@ -284,7 +284,43 @@ namespace VirtualLibrary
             }
 
         }
-        public void BorrowBook (Book addThis)
+
+        public void GetAllBooksRead()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Select BookID from [dbo].[Booksread] ");
+                    sb.Append("WHERE UserID = " + StaticData.CurrentUser.ID + ";");
+                    String sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            List<Book> bookIDList = new List<Book>();
+                            while (reader.Read())
+                            {
+                                bookIDList.Add(StaticData.Books.Find(x => x.ID == (int)reader.GetValue(0)));
+                            }
+                            StaticData.CurrentUser.setBooksRead(bookIDList);
+                        }
+                        connection.Close();
+                    }
+
+                }
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
+        }
+
+
+            public void BorrowBook (Book addThis)
         {
             try
             {
