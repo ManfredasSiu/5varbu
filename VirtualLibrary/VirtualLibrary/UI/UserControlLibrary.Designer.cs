@@ -51,8 +51,9 @@ namespace VirtualLibrary
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.buttonAddBook = new System.Windows.Forms.Button();
+            this.buttonRemoveBook = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonTake = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -67,21 +68,9 @@ namespace VirtualLibrary
             this.ColumnGenre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPages = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonRemoveBook = new System.Windows.Forms.Button();
-            this.buttonAddBook = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(20, 85);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(920, 455);
-            this.dataGridView1.TabIndex = 11;
             // 
             // panel4
             // 
@@ -96,12 +85,42 @@ namespace VirtualLibrary
             this.panel4.Size = new System.Drawing.Size(920, 65);
             this.panel4.TabIndex = 10;
             // 
+            // buttonAddBook
+            // 
+            this.buttonAddBook.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonAddBook.FlatAppearance.BorderSize = 0;
+            this.buttonAddBook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddBook.Image = global::VirtualLibrary.Properties.Resources.icons8_return_book_32;
+            this.buttonAddBook.Location = new System.Drawing.Point(467, 0);
+            this.buttonAddBook.Name = "buttonAddBook";
+            this.buttonAddBook.Size = new System.Drawing.Size(151, 65);
+            this.buttonAddBook.TabIndex = 16;
+            this.buttonAddBook.Text = "Add Book";
+            this.buttonAddBook.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.buttonAddBook.UseVisualStyleBackColor = true;
+            this.buttonAddBook.Click += new System.EventHandler(this.buttonAddBook_Click);
+            // 
+            // buttonRemoveBook
+            // 
+            this.buttonRemoveBook.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonRemoveBook.FlatAppearance.BorderSize = 0;
+            this.buttonRemoveBook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRemoveBook.Image = global::VirtualLibrary.Properties.Resources.icons8_return_book_32;
+            this.buttonRemoveBook.Location = new System.Drawing.Point(618, 0);
+            this.buttonRemoveBook.Name = "buttonRemoveBook";
+            this.buttonRemoveBook.Size = new System.Drawing.Size(151, 65);
+            this.buttonRemoveBook.TabIndex = 15;
+            this.buttonRemoveBook.Text = "Remove Book";
+            this.buttonRemoveBook.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.buttonRemoveBook.UseVisualStyleBackColor = true;
+            this.buttonRemoveBook.Click += new System.EventHandler(this.buttonRemoveBook_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(30, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 21);
+            this.label1.Size = new System.Drawing.Size(56, 20);
             this.label1.TabIndex = 14;
             this.label1.Text = "Library";
             // 
@@ -226,50 +245,18 @@ namespace VirtualLibrary
             this.ColumnQuantity.Name = "ColumnQuantity";
             this.ColumnQuantity.ReadOnly = true;
             // 
-            // buttonRemoveBook
-            // 
-            this.buttonRemoveBook.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonRemoveBook.FlatAppearance.BorderSize = 0;
-            this.buttonRemoveBook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRemoveBook.Image = global::VirtualLibrary.Properties.Resources.icons8_return_book_32;
-            this.buttonRemoveBook.Location = new System.Drawing.Point(618, 0);
-            this.buttonRemoveBook.Name = "buttonRemoveBook";
-            this.buttonRemoveBook.Size = new System.Drawing.Size(151, 65);
-            this.buttonRemoveBook.TabIndex = 15;
-            this.buttonRemoveBook.Text = "Remove Book";
-            this.buttonRemoveBook.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.buttonRemoveBook.UseVisualStyleBackColor = true;
-            this.buttonRemoveBook.Click += new System.EventHandler(this.buttonRemoveBook_Click);
-            // 
-            // buttonAddBook
-            // 
-            this.buttonAddBook.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonAddBook.FlatAppearance.BorderSize = 0;
-            this.buttonAddBook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAddBook.Image = global::VirtualLibrary.Properties.Resources.icons8_return_book_32;
-            this.buttonAddBook.Location = new System.Drawing.Point(467, 0);
-            this.buttonAddBook.Name = "buttonAddBook";
-            this.buttonAddBook.Size = new System.Drawing.Size(151, 65);
-            this.buttonAddBook.TabIndex = 16;
-            this.buttonAddBook.Text = "Add Book";
-            this.buttonAddBook.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.buttonAddBook.UseVisualStyleBackColor = true;
-            this.buttonAddBook.Click += new System.EventHandler(this.buttonAddBook_Click);
-            // 
             // UserControlLibrary
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "UserControlLibrary";
             this.Size = new System.Drawing.Size(960, 560);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
@@ -278,8 +265,6 @@ namespace VirtualLibrary
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;

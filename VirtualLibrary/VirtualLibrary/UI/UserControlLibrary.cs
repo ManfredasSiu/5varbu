@@ -25,6 +25,10 @@ namespace VirtualLibrary
                 buttonAddBook.Visible = false;
                 buttonRemoveBook.Visible = false;
             }
+            foreach (Book item in StaticData.Books)
+            {
+                dataGridView2.Rows.Add(item.ID, item.getName(), item.getAuthor(), item.getPressName(), item.getGenre(), item.getPages(), item.getQuantity());
+            }
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)

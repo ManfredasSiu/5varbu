@@ -33,7 +33,7 @@ namespace VirtualLibrary
         {
             if (CheckTBs() == 1)
             {
-                MessageBox.Show("Nevisi laukai uzpildyti\nUzpildykite laukus pries tesdami");
+                MessageBox.Show("Nevisi laukai uzpildyti arba uzpildyti nelegaliai\nUzpildykite laukus pries tesdami");
                 return;
             }
             ADB.AddBook(new Book(textBox1.Text, textBox2.Text, textBox7.Text, textBox5.Text, int.Parse(textBox6.Text), int.Parse(textBox4.Text), textBox3.Text, 0));
