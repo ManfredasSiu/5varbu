@@ -24,10 +24,15 @@ namespace VirtualLibrary
 
         private void buttonReturn_Click(object sender, EventArgs e)
         {
-            using (FormReturnBook frb = new FormReturnBook())
+            using (FormBorrowBooks fuqr = new FormBorrowBooks())
             {
-                frb.ShowDialog();
+                fuqr.ShowDialog();
             }
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

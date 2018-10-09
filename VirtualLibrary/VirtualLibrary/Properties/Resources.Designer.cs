@@ -73,9 +73,16 @@ namespace VirtualLibrary.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_book_321 {
-            get {
+        internal static System.Drawing.Bitmap icons8_book_321
+        {
+            get
+            {
                 object obj = ResourceManager.GetObject("icons8-book-321", resourceCulture);
+            }
+        }
+        internal static System.Drawing.Bitmap icons8_barcode_reader_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-barcode-reader-64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

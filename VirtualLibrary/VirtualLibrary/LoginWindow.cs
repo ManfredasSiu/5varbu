@@ -54,6 +54,8 @@ namespace VirtualLibrary
                 main.Show();
                 MessageBox.Show("Didn't find your face :( \n Try again or Register");
             }
+            if (cam != null)
+                cam.Dispose();
             Application.Idle -= FaceRecognitionAsync;
         }
 
@@ -98,7 +100,7 @@ namespace VirtualLibrary
         {                      
              if(cam == null)
              {
-                StaticData.CurrentUser = new User("Debug", "Debug");
+                StaticData.CurrentUser = new User(999,"Debug", "Debug", null, "1", null, null);
                 TransitionToMainW();
                 return;
              }

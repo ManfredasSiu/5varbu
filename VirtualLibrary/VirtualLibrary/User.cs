@@ -70,5 +70,10 @@ namespace VirtualLibrary
             return BooksRead;
         }
 
+        public String getPermission()
+        {
+            return this.permission;
+        }
+
     }
 }

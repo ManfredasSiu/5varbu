@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\OpenCvSharp3-AnyCPU.3.4.1.20180830\build\OpenCvSharp3-AnyCPU.props" Condition="Exists('..\packages\OpenCvSharp3-AnyCPU.3.4.1.20180830\build\OpenCvSharp3-AnyCPU.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -67,6 +70,18 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp3-AnyCPU.3.4.1.20180830\lib\net46\OpenCvSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp.Blob, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp3-AnyCPU.3.4.1.20180830\lib\net46\OpenCvSharp.Blob.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp3-AnyCPU.3.4.1.20180830\lib\net46\OpenCvSharp.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp.UserInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp3-AnyCPU.3.4.1.20180830\lib\net46\OpenCvSharp.UserInterface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -138,17 +153,23 @@
     <Compile Include="AzureDatabase.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="FaceApiCalls.cs" />
-    <Compile Include="FormBorrowBook.cs">
+    <Compile Include="FormAdminRemoveBook.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormBorrowBook.Designer.cs">
-      <DependentUpon>FormBorrowBook.cs</DependentUpon>
+    <Compile Include="FormAdminRemoveBook.Designer.cs">
+      <DependentUpon>FormAdminRemoveBook.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormReturnBook.cs">
+    <Compile Include="FormAdminAddBook.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormReturnBook.Designer.cs">
-      <DependentUpon>FormReturnBook.cs</DependentUpon>
+    <Compile Include="FormAdminAddBook.Designer.cs">
+      <DependentUpon>FormAdminAddBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBorrowBooks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBorrowBooks.Designer.cs">
+      <DependentUpon>FormBorrowBooks.cs</DependentUpon>
     </Compile>
     <Compile Include="ICallAzureAPI.cs" />
     <Compile Include="MainTry.cs">
@@ -222,11 +243,14 @@
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormBorrowBook.resx">
-      <DependentUpon>FormBorrowBook.cs</DependentUpon>
+    <EmbeddedResource Include="FormAdminRemoveBook.resx">
+      <DependentUpon>FormAdminRemoveBook.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormReturnBook.resx">
-      <DependentUpon>FormReturnBook.cs</DependentUpon>
+    <EmbeddedResource Include="FormAdminAddBook.resx">
+      <DependentUpon>FormAdminAddBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBorrowBooks.resx">
+      <DependentUpon>FormBorrowBooks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
@@ -290,7 +314,14 @@
     <None Include="Properties\Icons\icons8-book-32.png" />
     <None Include="Properties\Icons\icons8-file-32.png" />
     <None Include="Properties\Icons\icons8-high-priority-64.png" />
+    <None Include="Properties\Icons\icons8-barcode-reader-64.png" />
     <Content Include="RedPoint.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\OpenCvSharp3-AnyCPU.3.4.1.20180830\build\OpenCvSharp3-AnyCPU.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCvSharp3-AnyCPU.3.4.1.20180830\build\OpenCvSharp3-AnyCPU.props'))" />
+  </Target>
 </Project>
