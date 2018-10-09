@@ -54,6 +54,8 @@ namespace VirtualLibrary
                 main.Show();
                 MessageBox.Show("Didn't find your face :( \n Try again or Register");
             }
+            if (cam != null)
+                cam.Dispose();
             Application.Idle -= FaceRecognitionAsync;
         }
 
