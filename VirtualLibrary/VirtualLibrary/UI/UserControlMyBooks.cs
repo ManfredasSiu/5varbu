@@ -7,18 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VirtualLibrary.API_s;
 
 namespace VirtualLibrary
 {
     public partial class UserControlMyBooks : UserControl
     {
 
-        AzureDatabase AD = new AzureDatabase();
+        private IDataB ADB;
 
-        public UserControlMyBooks()
+        public UserControlMyBooks(IDataB ADB)
         {
+            this.ADB = ADB;
             InitializeComponent();
-            AD.GetAllUserBooks();
+            ADB.GetAllUserBooks();
             updateTable();
         }
 
@@ -43,7 +45,7 @@ namespace VirtualLibrary
 
         public void returnBookInit()
         {
-            using (FormBorrowBooks fuqr = new FormBorrowBooks(this))
+            using (FormBorrowBooks fuqr = new FormBorrowBooks(this, ADB))
             {
                 fuqr.ShowDialog();
             }

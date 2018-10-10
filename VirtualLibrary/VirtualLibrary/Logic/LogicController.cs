@@ -8,14 +8,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VirtualLibrary.API_s;
 
 namespace VirtualLibrary
 {
     public class LogicController//TODO:Reikia metodu failu su duomenim sukurimui ir loadinimui i kazkokius tai listus, parametras - prisijungimo vardas
     {//TODO: duomenis krauti i StaticData klase, sukurti ten reikiamus duomenu tipus
+
+        public IDataB DB = new AzureDatabase();
+
         public LogicController() //TODO: LOAD USER DATA; LOAD ALL BOOKS ;; SAVE USER DATA; SAVE ALL BOOKS
         {
           
+        }
+
+        public IDataB getDB()
+        {
+            return DB;
         }
 
         public int TempDirectoryController(string action, string name, Bitmap face, int iterator)

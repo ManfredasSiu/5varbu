@@ -7,14 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VirtualLibrary.API_s;
 
 namespace VirtualLibrary
 {
     public partial class UserControlLibrary : UserControl
     {
-        public UserControlLibrary()
+        private IDataB ADB; 
+
+        public UserControlLibrary( IDataB ADB)
         {
             InitializeComponent();
+            this.ADB = ADB;
+
             if (StaticData.CurrentUser.getPermission()=="1")
             {
                 buttonAddBook.Visible = true;
@@ -44,7 +49,7 @@ namespace VirtualLibrary
 
         private void TakeBookInit()
         {
-            using (FormBorrowBooks fbb = new FormBorrowBooks(this))
+            using (FormBorrowBooks fbb = new FormBorrowBooks(this, ADB))
             {
                 fbb.ShowDialog();
             }
@@ -58,7 +63,7 @@ namespace VirtualLibrary
 
         private void AddBookInit()
         {
-            using (FormAdminAddBook faab = new FormAdminAddBook(this))
+            using (FormAdminAddBook faab = new FormAdminAddBook(this, ADB))
             {
                 faab.ShowDialog();
             }

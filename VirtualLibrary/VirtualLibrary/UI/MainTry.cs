@@ -7,27 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VirtualLibrary.API_s;
 
 namespace VirtualLibrary
 {
     public partial class MainTry : Form
     {
         private LogicController logicC;
-        private AzureDatabase ADB = new AzureDatabase();
+        private IDataB ADB;
 
         int PanelWidth;
         bool isCollapsed;
 
-        public MainTry(LogicController logicC)
+        public MainTry(LogicController logicC, IDataB ADB)
         {
             InitializeComponent();
             ADB.GetAllBooks();
             timer2.Start();
             PanelWidth = panelLeft.Width;
             isCollapsed = false;
-            UserControlHome uch = new UserControlHome();
+            UserControlHome uch = new UserControlHome(ADB);
             AddControlsToPanel(uch);
-
+            this.ADB = ADB;
             this.logicC = logicC;
             this.FormClosing += OnCloseReq;
             UserName.Text = StaticData.CurrentUser.getuserName();
@@ -62,14 +63,14 @@ namespace VirtualLibrary
         private void buttonHome_Click(object sender, EventArgs e)
         {
             moveSidePanel(buttonHome);
-            UserControlHome uch = new UserControlHome();
+            UserControlHome uch = new UserControlHome(ADB);
             AddControlsToPanel(uch);
         }
 
         private void buttonMyBooks_Click(object sender, EventArgs e)
         {
             moveSidePanel(buttonMyBooks);
-            UserControlMyBooks ucmb = new UserControlMyBooks();
+            UserControlMyBooks ucmb = new UserControlMyBooks(ADB);
             AddControlsToPanel(ucmb);
         }
 
@@ -79,7 +80,7 @@ namespace VirtualLibrary
 
 
             moveSidePanel(buttonLibrary);
-            UserControlLibrary ucl = new UserControlLibrary();
+            UserControlLibrary ucl = new UserControlLibrary(ADB);
             AddControlsToPanel(ucl);
         }
 

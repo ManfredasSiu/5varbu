@@ -7,17 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VirtualLibrary.API_s;
 
 namespace VirtualLibrary
 {
     public partial class UserControlHome : UserControl
     {
-        AzureDatabase ADB = new AzureDatabase();
+        private IDataB ADB;
         CurrentUserStatistics CUS; 
 
 
-        public UserControlHome()
+        public UserControlHome(IDataB ADB)
         {
+            this.ADB = ADB;
             InitializeComponent();
             ADB.GetAllBooksRead();
             CUS = new CurrentUserStatistics();

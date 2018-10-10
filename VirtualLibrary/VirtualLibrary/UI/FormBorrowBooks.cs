@@ -12,6 +12,7 @@ using Emgu.CV.Structure;
 using MessagingToolkit.Barcode;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
+using VirtualLibrary.API_s;
 
 namespace VirtualLibrary
 {
@@ -23,29 +24,32 @@ namespace VirtualLibrary
         FormAdminAddBook FAdd = null;
         UserControlLibrary UCL = null;
         UserControlMyBooks UCMB = null;
-        AzureDatabase ADB = new AzureDatabase();
+        private IDataB ADB;
 
-        public FormBorrowBooks(UserControlLibrary UCL)
+        public FormBorrowBooks(UserControlLibrary UCL, IDataB ADB)
         {
             InitializeComponent();
+            this.ADB = ADB;
             this.UCL = UCL;
             capture = new VideoCapture(0);
             capture.Open(0);
             Application.Idle += FrameProcedure;
         }
 
-        public FormBorrowBooks(UserControlMyBooks UCMB)
+        public FormBorrowBooks(UserControlMyBooks UCMB, IDataB ADB)
         {
             InitializeComponent();
+            this.ADB = ADB;
             this.UCMB = UCMB;
             capture = new VideoCapture(0);
             capture.Open(0);
             Application.Idle += FrameProcedure;
         }
 
-        public FormBorrowBooks(FormAdminAddBook FAdd)
+        public FormBorrowBooks(FormAdminAddBook FAdd, IDataB ADB)
         {
             InitializeComponent();
+            this.ADB = ADB;
             this.FAdd = FAdd;
             capture = new VideoCapture(0);
             capture.Open(0);

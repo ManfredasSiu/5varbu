@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using VirtualLibrary.API_s;
 
 namespace VirtualLibrary
 {
@@ -17,7 +17,7 @@ namespace VirtualLibrary
     {
         private LogicController logicC;
         private Form1 main;
-        private AzureDatabase ADB;
+        private IDataB ADB;
 
         Image<Gray, byte> GrayFace = null;
         Image<Bgr, Byte> frame= null;
@@ -27,9 +27,9 @@ namespace VirtualLibrary
         MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.6d, 0.6d);
         public Object locket = null;
 
-        public LoginWindow(LogicController logicC, Form1 main)
+        public LoginWindow(LogicController logicC, Form1 main, IDataB ADB)
         {
-            ADB = new AzureDatabase();
+            this.ADB = ADB;
             InitializeComponent();
             this.main = main;
             try

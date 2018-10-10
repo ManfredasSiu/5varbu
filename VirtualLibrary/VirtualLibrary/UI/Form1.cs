@@ -35,7 +35,7 @@ namespace VirtualLibrary
         public void OpenMainWindow()
         {
             this.Hide();
-            mainW = new MainTry(LogicC);
+            mainW = new MainTry(LogicC, LogicC.getDB());
             mainW.Show();
         }
 
@@ -43,14 +43,14 @@ namespace VirtualLibrary
         {
             //OpenMainWindow();
             this.Hide();
-            var LoginW = new LoginWindow(LogicC, this);
+            var LoginW = new LoginWindow(LogicC, this, LogicC.getDB());
             LoginW.Show();
         }
 
         public void Register()
         {
             this.Hide();
-            Form2 registerFaceWindow = new Form2(LogicC, this);
+            Form2 registerFaceWindow = new Form2(LogicC, this, LogicC.getDB());
             registerFaceWindow.Show();
         }
 

@@ -7,22 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VirtualLibrary.API_s;
 
 namespace VirtualLibrary
 {
     public partial class FormAdminAddBook : Form
     {
         public String Barcode { set; get; }
-        private AzureDatabase ADB = new AzureDatabase();
+        private IDataB ADB;
 
         UserControlLibrary UCL = null;
 
-        private Book addThis;
 
-
-        public FormAdminAddBook(UserControlLibrary UCL)
+        public FormAdminAddBook(UserControlLibrary UCL, IDataB ADB)
         {
             InitializeComponent();
+            this.ADB = ADB;
             this.UCL = UCL;
         }
 
@@ -68,7 +68,7 @@ namespace VirtualLibrary
 
         private void buttonScanner_Click(object sender, EventArgs e)
         {
-            using (FormBorrowBooks fbb = new FormBorrowBooks(this))
+            using (FormBorrowBooks fbb = new FormBorrowBooks(this, ADB))
             {
                 fbb.ShowDialog();
             }

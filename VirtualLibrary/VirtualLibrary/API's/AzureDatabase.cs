@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace VirtualLibrary
+namespace VirtualLibrary 
 {
-    class AzureDatabase
+    class AzureDatabase : API_s.IDataB
     {
         SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
         public AzureDatabase()

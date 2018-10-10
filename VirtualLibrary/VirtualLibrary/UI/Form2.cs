@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VirtualLibrary.API_s;
 
 namespace VirtualLibrary
 {
@@ -30,14 +31,14 @@ namespace VirtualLibrary
         private int Hei = 640, Len = 480;
         private bool InProgress = false;
 
-        private AzureDatabase AzureDB;
+        private IDataB ADB;
         private LogicController LogicC;
         private Form1 main;
 
-        public Form2(LogicController LogicC, Form1 main)
+        public Form2(LogicController LogicC, Form1 main, IDataB ADB)
         {
             InitializeComponent();
-            AzureDB = new AzureDatabase();
+            this.ADB = ADB;
             this.main = main;
             this.LogicC = LogicC;
             faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
@@ -145,7 +146,7 @@ namespace VirtualLibrary
                 MessageBox.Show("Username or pasword can't start with a space");
                 return 1;
             }
-            else if (AzureDB.SearchUser(textBox1.Text) == 2)
+            else if (ADB.SearchUser(textBox1.Text) == 2)
             {
                     MessageBox.Show("Username is already taken");
                     return 1;
@@ -227,8 +228,8 @@ namespace VirtualLibrary
                 this.Close();
                 return;
             }
-            AzureDB.AddUser(textBox1.Text, textBox2.Text, null, 0);
-            AzureDB.GetUser(textBox1.Text);
+            ADB.AddUser(textBox1.Text, textBox2.Text, null, 0);
+            ADB.GetUser(textBox1.Text);
             InProgress = false;
             this.Invoke(new closeForm(closeThisFormFromAnotherThread));
         }
