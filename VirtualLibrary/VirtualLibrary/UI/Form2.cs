@@ -116,10 +116,15 @@ namespace VirtualLibrary
 
         private void RegisterButton_CLicked(object sender, EventArgs e)
         {
-            if(CheckTheTB() == 1) return;
+            RegistrationBehaviour();
+        }
 
-            if(CheckHowManyFaces() == 1) return;
-            
+        private void RegistrationBehaviour()
+        {
+            if (CheckTheTB() == 1) return;
+
+            if (CheckHowManyFaces() == 1) return;
+
             PrepareForRegister();
 
             InstantiateRedDot();
@@ -200,7 +205,7 @@ namespace VirtualLibrary
                     }
                     iterator++;
                     if (iterator % 2 == 1)
-                       Thread.Sleep(1000);
+                       Thread.Sleep(700);
                     else
                     {   //Judinamas taskas, pagal nuotrauku skaiciu
                         if (iterator == 2)
@@ -211,12 +216,10 @@ namespace VirtualLibrary
                             redDot.Invoke(new MoveDot(MoveRedDot), new Point(this.Width / 2, this.Height - 64));
                         else if (iterator == 8)
                             redDot.Invoke(new MoveDot(MoveRedDot), new Point(redDot.Location.X, 64));
-                        Thread.Sleep(500);
-                    }
-                    
+                        Thread.Sleep(200);
+                    }       
                 }
             }
-            
             if (!await FAC.FaceSave(textBox1.Text))
             {
                 StaticData.CurrentUser = null;
