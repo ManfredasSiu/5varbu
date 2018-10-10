@@ -225,8 +225,7 @@ namespace VirtualLibrary
                 return;
             }
             AzureDB.AddUser(textBox1.Text, textBox2.Text, null, 0);
-            User thisUser = new User(textBox1.Text, null);
-            StaticData.CurrentUser = thisUser;
+            AzureDB.GetUser(textBox1.Text);
             InProgress = false;
             this.Invoke(new closeForm(closeThisFormFromAnotherThread));
         }

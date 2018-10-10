@@ -23,7 +23,6 @@ namespace VirtualLibrary
             CUS = new CurrentUserStatistics();
             label8.Text = CUS.BooksRead.ToString();
             label9.Text = CUS.PagesRead.ToString();
-
         }
 
         private void UserControlHome_Load(object sender, EventArgs e)
