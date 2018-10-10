@@ -65,7 +65,6 @@ namespace VirtualLibrary
                         int rowsAffected = sqlCommand.ExecuteNonQuery();
                         Console.WriteLine(rowsAffected + " = rows affected.");
                     }
-
                     connection.Close();
                 }
             }

@@ -10,11 +10,11 @@ namespace VirtualLibrary
     {
         //--------------------
         //Overall Statistics
-        public int[] GenreBooksCount;
-        public int PagesRead;
-        public int BooksRead;
-        public double PagesPerBook;
-        public Book BiggestBook;
+        public int[] GenreBooksCount; // reik 5
+        public int PagesRead;//
+        public int BooksRead;//
+        public double PagesPerBook; 
+        public Book BiggestBook; 
         //Horror Statistics
         public int PagesReadH;
         public int BooksReadH;

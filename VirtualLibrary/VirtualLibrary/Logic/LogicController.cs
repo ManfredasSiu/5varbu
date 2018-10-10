@@ -47,18 +47,6 @@ namespace VirtualLibrary
             return 0;
         }
 
-        
-
-        public void LoadBooksData()
-        {
-            string labelsInfo = File.ReadAllText(Application.StartupPath + "/books/books.txt");
-            string[] Labels = labelsInfo.Split(',');
-            for (int x = 0; x < Labels.Count(); x = +4)
-            {
-                StaticData.Books.Add(new Book(Labels[x], Labels[x+1], Labels[x+2], Labels[x+3]));
-            }
-        }
-
 
     }
 }
