@@ -11,7 +11,7 @@ namespace VirtualLibrary
     class VoiceRecognition // neveikia kolkas
     {
 
-        SpeechRecognitionEngine SRecEng = new SpeechRecognitionEngine();
+        /*SpeechRecognitionEngine SRecEng = new SpeechRecognitionEngine();
         Form1 f;
 
         public VoiceRecognition(Form1 f)
@@ -44,6 +44,6 @@ namespace VirtualLibrary
             {
                 Application.Exit();
             }
-        }
+        }*/
     }
 }
