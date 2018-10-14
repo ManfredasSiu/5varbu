@@ -29,7 +29,8 @@ namespace VirtualLibrary
         }
         //*****ENDOFSINGLETON
 
-        LogicController LogicC = new LogicController();
+        public LogicController LogicC = new LogicController();
+
         public IMenu menuForm = null;
 
         public void SaveMenuForm(IMenu menuForm)

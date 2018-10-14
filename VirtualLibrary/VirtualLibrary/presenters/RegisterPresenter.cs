@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VirtualLibrary.API_s;
 using VirtualLibrary.Views;
 
 namespace VirtualLibrary.presenters
@@ -23,6 +24,9 @@ namespace VirtualLibrary.presenters
         Image<Gray, byte> GrayFace = null;
         MCvAvgComp[][] facesDetectedNow;
         HaarCascade faceDetect;
+        LogicController LogicC;
+        IDataB ADB;
+        Thread RegProcess;
 
         bool InProgress = false;
 
@@ -32,6 +36,8 @@ namespace VirtualLibrary.presenters
         {
             this.RegView = RegView;
             faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
+            LogicC = RefClass.Instance.LogicC;
+            this.ADB = LogicC.DB;
             try
             {
                 cam = new Capture();
@@ -116,6 +122,21 @@ namespace VirtualLibrary.presenters
             if (CheckTheTB() == 1) return;
 
             if (CheckHowManyFaces() == 1) return;
+
+            PrepareForRegister();
+
+            InstantiateRedDot();
+
+            RegProcess = new Thread(new ThreadStart(RegisterProcessAsync));
+            RegProcess.Start();
+        }
+
+        public void WinClose()
+        {
+            RefClass.Instance.menuForm.ShowForm();
+            LogicC.TempDirectoryController("Delete", RegView.NameText, null, 0);
+            if (InProgress == true)              //Jei registracija vyksta ir isjungiamas langas pvz alt+f4
+                RegProcess.Abort();
         }
 
         private int CheckTheTB()
@@ -131,6 +152,73 @@ namespace VirtualLibrary.presenters
                 return 1;
             }
             return 0;
+        }
+
+        public async void RegisterProcessAsync()
+        {
+            FaceApiCalls FAC = new FaceApiCalls();
+            InProgress = true;
+            int iterator = 0;
+            while (iterator < 10)
+            {
+                if (facesDetectedNow[0].Length == 1)
+                {
+                    if (iterator == 0)
+                        Thread.Sleep(1000); //Laikas klientui susiprasti, kad reikia sekti taska.
+                    if (LogicC.TempDirectoryController("Create", RegView.NameText, cam.QueryFrame().ToBitmap(), iterator) == 1) //Sukuriu direktorija arba ne
+                    {
+                        MessageBox.Show("Neuztenka vietos diske");
+                        RegView.CloseForm();
+                    }
+                    iterator++;
+                    if (iterator % 2 == 1)
+                        Thread.Sleep(700);
+                    else
+                    {   //Judinamas taskas, pagal nuotrauku skaiciu
+                        if (iterator == 2)
+                            redDot.Invoke(new MoveDot(MoveRedDot), new Point(64, redDot.Location.Y));
+                        else if (iterator == 4)
+                            redDot.Invoke(new MoveDot(MoveRedDot), new Point(RegView.Wdt - 64, redDot.Location.Y));
+                        else if (iterator == 6)
+                            redDot.Invoke(new MoveDot(MoveRedDot), new Point(RegView.Wdt / 2, RegView.Hgt - 64));
+                        else if (iterator == 8)
+                            redDot.Invoke(new MoveDot(MoveRedDot), new Point(redDot.Location.X, 64));
+                        Thread.Sleep(200);
+                    }
+                }
+            }
+            if (!await FAC.FaceSave(RegView.NameText))
+            {
+                StaticData.CurrentUser = null;
+                MessageBox.Show("Registracija nepavyko\nPerdaug veidu kadre\nArba serveris uzimtas");
+                ((Form)RegView).Invoke(new closeForm(closeThisFormFromAnotherThread));
+                return;
+            }
+            ADB.AddUser(RegView.NameText, RegView.password, null, 0);
+            ADB.GetUser(RegView.NameText);
+            InProgress = false;
+            ((Form)RegView).Invoke(new closeForm(closeThisFormFromAnotherThread));
+        }
+
+        public delegate void ChangeBackColor(Color color);
+
+        private void ChangeColor(Color color)
+        {
+            RegView.BGColor = color;
+        }
+
+        public delegate void closeForm();
+
+        private void closeThisFormFromAnotherThread()
+        {
+            RegView.CloseForm();
+        }
+
+        public delegate void MoveDot(Point newLoc);
+
+        private void MoveRedDot(Point newLoc)
+        {
+            redDot.Location = newLoc;
         }
     }
 }

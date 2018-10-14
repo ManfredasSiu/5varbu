@@ -9,5 +9,7 @@ namespace VirtualLibrary.Views
     public interface IMenu
     {
         void HideForm();
+
+        void ShowForm();
     }
 }
