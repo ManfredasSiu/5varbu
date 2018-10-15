@@ -46,7 +46,7 @@ namespace VirtualLibrary.presenters
             {
                 cam = null;
                 RegView.InitMessageBox("Neturi kameros, arba ji blogai prijungta, registracija negalima");
-                RegView.CloseForm(); //Uzdaromas langas, kamera nerasta
+                RegView.CloseForm();
             }
             Application.Idle += FrameProcedure;
         }
@@ -133,7 +133,10 @@ namespace VirtualLibrary.presenters
 
         public void WinClose()
         {
-            RefClass.Instance.menuForm.ShowForm();
+            if (StaticData.CurrentUser == null)
+                RefClass.Instance.menuForm.ShowForm();
+            else
+                RefClass.Instance.InitMainForm();
             LogicC.TempDirectoryController("Delete", RegView.NameText, null, 0);
             if (InProgress == true)              //Jei registracija vyksta ir isjungiamas langas pvz alt+f4
                 RegProcess.Abort();

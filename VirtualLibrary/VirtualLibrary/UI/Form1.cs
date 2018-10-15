@@ -31,18 +31,11 @@ namespace VirtualLibrary
             MenuPresenter MP = new MenuPresenter(this);
             MP.LoginButtonPressed();
         }
-
-        public void OpenMainWindow()
-        {
-        //    mainW = new MainTry(LogicC, LogicC.getDB());
-        //    mainW.Show();
-        }
-
+        
         public void HideForm()
         {
             this.Hide();
         }
-
 
         private void buttonShutDown_Click(object sender, EventArgs e)
         {

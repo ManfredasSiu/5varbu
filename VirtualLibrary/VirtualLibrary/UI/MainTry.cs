@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VirtualLibrary.API_s;
+using VirtualLibrary.Views;
 
 namespace VirtualLibrary
 {
-    public partial class MainTry : Form
+    public partial class MainTry : Form, IMain
     {
         private LogicController logicC;
         private IDataB ADB;
@@ -19,23 +20,14 @@ namespace VirtualLibrary
         int PanelWidth;
         bool isCollapsed;
 
-        public MainTry(LogicController logicC, IDataB ADB)
+        public string Status { set => label6.Text = value; }
+
+        public int panelWdt { get => panelLeft.Width; set => panelLeft.Width = value; }
+
+        public MainTry()
         {
             InitializeComponent();
-            ADB.GetAllBooks();
-            timer2.Start();
-            PanelWidth = panelLeft.Width;
-            isCollapsed = false;
-            UserControlHome uch = new UserControlHome(ADB);
-            AddControlsToPanel(uch);
-            this.ADB = ADB;
-            this.logicC = logicC;
             this.FormClosing += OnCloseReq;
-            UserName.Text = StaticData.CurrentUser.getuserName();
-            if (StaticData.CurrentUser.getPermission() == "1")
-                label6.Text = "ADMIN";
-            else
-                label6.Text = "Reader";
         }
 
 
@@ -44,8 +36,6 @@ namespace VirtualLibrary
         {
             Application.Exit();
         }
-
-
 
         private void moveSidePanel(Control btn)
         {
@@ -76,9 +66,6 @@ namespace VirtualLibrary
 
         private void buttonLibrary_Click(object sender, EventArgs e)
         {
-            
-
-
             moveSidePanel(buttonLibrary);
             UserControlLibrary ucl = new UserControlLibrary(ADB);
             AddControlsToPanel(ucl);
@@ -130,6 +117,16 @@ namespace VirtualLibrary
         {
             DateTime dateTime = DateTime.UtcNow.Date;
             labelDate.Text = dateTime.ToString("yyyy-MM-dd");
+        }
+
+        public void StartTmer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddControl(Control control)
+        {
+            throw new NotImplementedException();
         }
     }
 }

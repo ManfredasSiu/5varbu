@@ -44,7 +44,7 @@ namespace VirtualLibrary
 
         private RegisterPresenter registerPresenter;
 
-        public Form2(LogicController LogicC, IDataB ADB)
+        public Form2()
         {
             InitializeComponent();
             registerPresenter = new RegisterPresenter(this);

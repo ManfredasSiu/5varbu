@@ -155,6 +155,8 @@
     <Compile Include="Logic\CurrentUserStatistics.cs" />
     <Compile Include="DataTypes\Book.cs" />
     <Compile Include="API%27s\FaceApiCalls.cs" />
+    <Compile Include="presenters\LoginPresenter.cs" />
+    <Compile Include="presenters\MainPresenter.cs" />
     <Compile Include="presenters\MenuPresenter.cs" />
     <Compile Include="presenters\RegisterPresenter.cs" />
     <Compile Include="RefClass.cs" />
@@ -242,6 +244,8 @@
       <DependentUpon>UserControlRecom.cs</DependentUpon>
     </Compile>
     <Compile Include="Logic\VoiceRecognition.cs" />
+    <Compile Include="Views\ILogin.cs" />
+    <Compile Include="Views\IMain.cs" />
     <Compile Include="Views\IMenu.cs" />
     <Compile Include="Views\IRegister.cs" />
     <EmbeddedResource Include="UI\Form1.resx">

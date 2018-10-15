@@ -40,13 +40,13 @@ namespace VirtualLibrary
 
         public void InitLoginForm()
         {
-           // var LoginW = new LoginWindow(LogicC, LogicC.getDB());
-           // LoginW.Show();
+            var LoginW = new LoginWindow();
+            LoginW.Show();
         }
 
         public void InitRegisterForm()
         {
-            Form2 registerFaceWindow = new Form2(LogicC, LogicC.getDB());
+            Form2 registerFaceWindow = new Form2();
             registerFaceWindow.Show();
         }
 
