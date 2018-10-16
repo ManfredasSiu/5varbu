@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VirtualLibrary.presenters;
 using VirtualLibrary.Views;
 
 namespace VirtualLibrary
@@ -28,10 +29,25 @@ namespace VirtualLibrary
             }
         }
         //*****ENDOFSINGLETON
+    
+        //Logic classes
+
+        public CurrentUserStatistics InitStatistics()
+        {
+            return new CurrentUserStatistics();
+        }
 
         public LogicController LogicC = new LogicController();
 
+        //Forms
+
         public IMenu menuForm = null;
+
+        public IUControlMB MBControl = null;
+
+        public IUControlL LControl = null;
+
+        public IAddBook IABook = null;
 
         public void SaveMenuForm(IMenu menuForm)
         {
@@ -50,15 +66,43 @@ namespace VirtualLibrary
             registerFaceWindow.Show();
         }
 
-        public void InitHomeControl()
-        {
-
-        }
-
         public void InitMainForm()
         {
             var mainW = new MainTry();
             mainW.Show();
+        }
+
+        public IBorrow InitBorrowForm(String procedure)
+        {
+            return new FormBorrowBooks(procedure);
+        }
+
+        public IAddBook InitAddBookForm()
+        {
+            return IABook = new FormAdminAddBook();
+        }
+
+        //User Controls***
+
+        public IUControlH InitHomeControl()
+        {
+            IUControlH IUCH = new UserControlHome();
+            return IUCH;
+        }
+
+        public IUControlL InitLibControl()
+        {
+            return LControl = new UserControlLibrary();
+        }
+
+        public IUControlMB InitMBControl()
+        {
+            return MBControl = new UserControlMyBooks();
+        }
+
+        public IUControlR InitRecomControl()
+        {
+            return new UserControlRecom();
         }
     }
 }

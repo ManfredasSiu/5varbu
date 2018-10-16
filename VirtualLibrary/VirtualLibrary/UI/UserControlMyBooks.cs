@@ -8,29 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VirtualLibrary.API_s;
+using VirtualLibrary.Views;
+using VirtualLibrary.presenters;
 
 namespace VirtualLibrary
 {
-    public partial class UserControlMyBooks : UserControl
+    public partial class UserControlMyBooks : UserControl, IUControlMB
     {
+        public DataGridView DGW { get => dataGridView1; }
 
-        private IDataB ADB;
-
-        public UserControlMyBooks(IDataB ADB)
+        public UserControlMyBooks()
         {
-            this.ADB = ADB;
             InitializeComponent();
-            ADB.GetAllUserBooks();
-            updateTable();
-        }
-
-        public void updateTable()
-        {
-            dataGridView1.Rows.Clear();
-            foreach(Book item in StaticData.CurrentUser.getUserBooks())
-            {
-                dataGridView1.Rows.Add(item.getCode(), item.getName(), item.getAuthor(), item.getPressName(), null, null);
-            }
+            new UserControlMBPresenter(this);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -40,15 +30,7 @@ namespace VirtualLibrary
 
         private void buttonReturn_Click(object sender, EventArgs e)
         {
-            returnBookInit();
-        }
-
-        public void returnBookInit()
-        {
-            using (FormBorrowBooks fuqr = new FormBorrowBooks(this, ADB))
-            {
-                fuqr.ShowDialog();
-            }
+            new UserControlMBPresenter(this).returnBookInit();
         }
 
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)

@@ -8,74 +8,38 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VirtualLibrary.API_s;
+using VirtualLibrary.Views;
+using VirtualLibrary.presenters;
 
 namespace VirtualLibrary
 {
-    public partial class UserControlLibrary : UserControl
+    public partial class UserControlLibrary : UserControl, IUControlL
     {
-        private IDataB ADB; 
+        public bool AddBookVisible { set=> buttonAddBook.Visible = value; }
 
-        public UserControlLibrary( IDataB ADB)
+        public bool RemoveBookVisible { set=> buttonRemoveBook.Visible = value; }
+
+        public DataGridView Table => dataGridView2;
+
+        public UserControlLibrary()
         {
             InitializeComponent();
-            this.ADB = ADB;
-
-            if (StaticData.CurrentUser.getPermission()=="1")
-            {
-                buttonAddBook.Visible = true;
-                buttonRemoveBook.Visible = true;
-            }
-            else
-            {
-                buttonAddBook.Visible = false;
-                buttonRemoveBook.Visible = false;
-            }
-            UpdateTable();
-        }
-
-        public void UpdateTable()
-        {
-            dataGridView2.Rows.Clear();
-            foreach (Book item in StaticData.Books)
-            {
-                dataGridView2.Rows.Add(item.getCode(), item.getName(), item.getAuthor(), item.getPressName(), item.getGenre(), item.getPages(), item.getQuantity());
-            }
+            new UserControlLibraryPresenter(this);
         }
 
         private void buttonTake_Click(object sender, EventArgs e)
         {
-            TakeBookInit();
+            new UserControlLibraryPresenter(this).TakeBookInit();
         }
-
-        private void TakeBookInit()
-        {
-            using (FormBorrowBooks fbb = new FormBorrowBooks(this, ADB))
-            {
-                fbb.ShowDialog();
-            }
-        }
-        
 
         private void buttonAddBook_Click(object sender, EventArgs e)
         {
-            AddBookInit();
+            new UserControlLibraryPresenter(this).AddBookInit();
         }
-
-        private void AddBookInit()
-        {
-            using (FormAdminAddBook faab = new FormAdminAddBook(this, ADB))
-            {
-                faab.ShowDialog();
-            }
-        }
-
+        
         private void buttonRemoveBook_Click(object sender, EventArgs e)
         {
-            using (FormAdminRemoveBook farb = new FormAdminRemoveBook())
-            {
-                farb.ShowDialog();
-                StaticData.CurrentUser.getPermission();
-            }
+            new UserControlLibraryPresenter(this).RemoveBookInit();
         }
     }
 }

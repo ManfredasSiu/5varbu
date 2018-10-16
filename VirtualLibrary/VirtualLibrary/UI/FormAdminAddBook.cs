@@ -8,18 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VirtualLibrary.API_s;
+using VirtualLibrary.Views;
 
 namespace VirtualLibrary
 {
-    public partial class FormAdminAddBook : Form
+    public partial class FormAdminAddBook : Form, IAddBook
     {
         public String Barcode { set; get; }
         private IDataB ADB;
 
+        public string BarcodeField { set => textBox7.Text = value; }
+
         UserControlLibrary UCL = null;
 
 
-        public FormAdminAddBook(UserControlLibrary UCL, IDataB ADB)
+        public FormAdminAddBook()
         {
             InitializeComponent();
             this.ADB = ADB;
@@ -68,11 +71,14 @@ namespace VirtualLibrary
 
         private void buttonScanner_Click(object sender, EventArgs e)
         {
-            using (FormBorrowBooks fbb = new FormBorrowBooks(this, ADB))
-            {
-                fbb.ShowDialog();
-            }
+            var fbb = RefClass.Instance.InitBorrowForm("Add");
+            fbb.ShowAsDialog();
+            
         }
 
+        public void ShowAsDialog()
+        {
+            this.ShowAsDialog();
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace VirtualLibrary.presenters
             this.main = main;
             PanelWidth = main.panelLft;
             isCollapsed = false;
-            UserControlHome uch = new UserControlHome(ADB);
+            UserControlHome uch = new UserControlHome();
             main.NewControl = uch;
             main.UserName = StaticData.CurrentUser.getuserName();
             if (StaticData.CurrentUser.getPermission() == "1")
@@ -74,21 +74,20 @@ namespace VirtualLibrary.presenters
         public void LButtonBehaviour(Control btn)
         {
             moveSidePanel(btn);
-            UserControlLibrary ucl = new UserControlLibrary(ADB);
+            UserControlLibrary ucl = new UserControlLibrary();
             AddControlsToPanel(ucl);
         }
 
         public void HButtonBehaviour(Control btn)
         {
             moveSidePanel(btn);
-            UserControlHome uch = new UserControlHome(ADB);
-            AddControlsToPanel(uch);
+            AddControlsToPanel((UserControl)RefClass.Instance.InitHomeControl());
         }
 
         public void MBButtonBehaviour(Control btn)
         {
             moveSidePanel(btn);
-            UserControlMyBooks ucmb = new UserControlMyBooks(ADB);
+            UserControlMyBooks ucmb = new UserControlMyBooks();
             AddControlsToPanel(ucmb);
         }
 
