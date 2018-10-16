@@ -9,14 +9,24 @@ namespace VirtualLibrary.Views
 {
     interface IMain
     {
-        void StartTmer();
-        
-        void AddControl(Control control);
-        
-        string Name { set; get; }
+        Control NewControl { set; }
+
+        string Date { set; }
+
+        void ClearControlsFromPanel();
+
+        string UserName { set; get; }
 
         string Status { set; }
 
-        int panelWdt { get; set; }
+        int panelLft { get; set; }
+
+        int panelSideTop { set; }
+
+        int panelSideHgh { set; }
+
+        Timer Tmr1 { get; set; }
+
+        void refresh();
     }
 }

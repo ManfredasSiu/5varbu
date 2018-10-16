@@ -8,75 +8,74 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VirtualLibrary.API_s;
+using VirtualLibrary.presenters;
 using VirtualLibrary.Views;
 
 namespace VirtualLibrary
 {
     public partial class MainTry : Form, IMain
     {
-        private LogicController logicC;
-        private IDataB ADB;
-
-        int PanelWidth;
-        bool isCollapsed;
 
         public string Status { set => label6.Text = value; }
 
-        public int panelWdt { get => panelLeft.Width; set => panelLeft.Width = value; }
+        public int panelLft { get => panelLeft.Width; set => panelLeft.Width = value; }
+
+        public int panelSideTop { set => panelSide.Top = value; }
+
+        public int panelSideHgh { set => panelSide.Height = value; }
+
+        public Control NewControl { set => panelControls.Controls.Add(value); }
+
+        public string Date { set => labelDate.Text = value; }
+
+        public Timer Tmr1 { get => timer1; set => throw new NotImplementedException(); }
+
+        string IMain.UserName { get => UserName.Text; set => UserName.Text = value; }
+
+        MainPresenter MP;
+
+        public void refresh()
+        {
+            this.Refresh();
+        }
 
         public MainTry()
         {
             InitializeComponent();
+            MP = new MainPresenter(this);
             this.FormClosing += OnCloseReq;
         }
 
-
+        public void ClearControlsFromPanel()
+        {
+            panelControls.Controls.Clear();
+        }
 
         private void OnCloseReq(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
-        private void moveSidePanel(Control btn)
-        {
-            panelSide.Top = btn.Top;
-            panelSide.Height = btn.Height;
-        }
-
-        private void AddControlsToPanel(Control c)
-        {
-            c.Dock = DockStyle.Fill;
-            panelControls.Controls.Clear();
-            panelControls.Controls.Add(c);
-        }
+        
 
         private void buttonHome_Click(object sender, EventArgs e)
         {
-            moveSidePanel(buttonHome);
-            UserControlHome uch = new UserControlHome(ADB);
-            AddControlsToPanel(uch);
+            MP.HButtonBehaviour(buttonHome);
         }
 
         private void buttonMyBooks_Click(object sender, EventArgs e)
         {
-            moveSidePanel(buttonMyBooks);
-            UserControlMyBooks ucmb = new UserControlMyBooks(ADB);
-            AddControlsToPanel(ucmb);
+            MP.MBButtonBehaviour(buttonMyBooks);
         }
 
         private void buttonLibrary_Click(object sender, EventArgs e)
         {
-            moveSidePanel(buttonLibrary);
-            UserControlLibrary ucl = new UserControlLibrary(ADB);
-            AddControlsToPanel(ucl);
+            MP.LButtonBehaviour(buttonLibrary);
         }
 
 
         private void buttonRecom_Click(object sender, EventArgs e)
         {
-            moveSidePanel(buttonRecom);
-            UserControlRecom ucr = new UserControlRecom();
-            AddControlsToPanel(ucr);
+            MP.RButtonBehaviour(buttonRecom);
         }
         
         private void buttonShutDown_Click(object sender, EventArgs e)
@@ -91,42 +90,13 @@ namespace VirtualLibrary
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (isCollapsed)
-            {
-                panelLeft.Width = panelLeft.Width + 10;
-                if (panelLeft.Width >= PanelWidth)
-                {
-                    timer1.Stop();
-                    isCollapsed = false;
-                    this.Refresh();
-                }
-            }
-            else
-            {
-                panelLeft.Width = panelLeft.Width - 10;
-                if (panelLeft.Width <= 85)
-                {
-                    timer1.Stop();
-                    isCollapsed = true;
-                    this.Refresh();
-                }
-            }
+            
+            MP.timer1Ticks();
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            DateTime dateTime = DateTime.UtcNow.Date;
-            labelDate.Text = dateTime.ToString("yyyy-MM-dd");
-        }
-
-        public void StartTmer()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddControl(Control control)
-        {
-            throw new NotImplementedException();
+            MP.timer2Ticks();
         }
     }
 }

@@ -50,9 +50,14 @@ namespace VirtualLibrary
             registerFaceWindow.Show();
         }
 
+        public void InitHomeControl()
+        {
+
+        }
+
         public void InitMainForm()
         {
-            var mainW = new MainTry(LogicC, LogicC.getDB());
+            var mainW = new MainTry();
             mainW.Show();
         }
     }
