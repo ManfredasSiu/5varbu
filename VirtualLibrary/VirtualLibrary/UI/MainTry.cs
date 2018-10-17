@@ -28,7 +28,7 @@ namespace VirtualLibrary
 
         public string Date { set => labelDate.Text = value; }
 
-        public Timer Tmr1 { get => timer1; set => throw new NotImplementedException(); }
+        public Timer Tmr1 { get => timer1; set => timer1 = value; }
 
         string IMain.UserName { get => UserName.Text; set => UserName.Text = value; }
 

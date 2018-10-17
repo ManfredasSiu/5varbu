@@ -21,15 +21,15 @@ namespace VirtualLibrary.presenters
         public void LoginButtonPressed()
         {
             MenuView.HideForm();
-            RefClass.Instance.SaveMenuForm(MenuView);
-            RefClass.Instance.InitLoginForm();
+            RefClass.Instance.SaveMenuForm(MenuView);  //Issaugoma meniu forma tolesniem naudojimam
+            RefClass.Instance.InitLoginForm();         //Login forma
         }
 
         public void RegisterButtonPressed()
         {
             MenuView.HideForm();
-            RefClass.Instance.SaveMenuForm(MenuView);
-            RefClass.Instance.InitRegisterForm();
+            RefClass.Instance.SaveMenuForm(MenuView); //Issaugoma meniu forma tolesniem naudojimam
+            RefClass.Instance.InitRegisterForm();     //Register Forma
         }
     }
 }

@@ -35,7 +35,7 @@ namespace VirtualLibrary.presenters
         public RegisterPresenter(IRegister RegView)
         {
             this.RegView = RegView;
-            faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
+            faceDetect = new HaarCascade("haarcascade_frontalface_default.xml"); //Skirta veidu atpazinimui
             LogicC = RefClass.Instance.LogicC;
             this.ADB = LogicC.DB;
             try
@@ -51,7 +51,7 @@ namespace VirtualLibrary.presenters
             Application.Idle += FrameProcedure;
         }
 
-        private void FrameProcedure(Object sender, EventArgs e)
+        private void FrameProcedure(Object sender, EventArgs e) //Analogiskaip kaip ir login formoj
         {
             if (cam.Equals(null))
                 return;
@@ -69,7 +69,7 @@ namespace VirtualLibrary.presenters
 
         private void InstantiateRedDot()
         {
-            //Raudonas taskas
+            //Raudonas taskas, jo sukurimas
             Bitmap bim = new Bitmap(Image.FromFile(Application.StartupPath + "/Images/RedPoint.png"), 64, 64);
             redDot.Name = "RedDot";
             redDot.Size = new Size(64, 64);
@@ -79,7 +79,7 @@ namespace VirtualLibrary.presenters
             redDot.BringToFront();
         }
 
-        private void PrepareForRegister()
+        private void PrepareForRegister()  //Registracijos proceso paruosimas
         {
             RegView.MaximizeForm();
             RegView.HideInputPanel();
@@ -88,7 +88,7 @@ namespace VirtualLibrary.presenters
             RegView.ImgBoxSize = new Size(321, 241);
         }
 
-        private int CheckHowManyFaces()
+        private int CheckHowManyFaces()  //Security blokai veidu atzvilgiu
         {
             if (facesDetectedNow[0].Length == 0)
             {
@@ -103,7 +103,7 @@ namespace VirtualLibrary.presenters
             return 0;
         }
 
-        private void BackGroundColorChange()
+        private void BackGroundColorChange()  //backgroundo spalvos keitimas
         {
             if (InProgress == true && facesDetectedNow[0].Length != 1)
             {
@@ -117,7 +117,7 @@ namespace VirtualLibrary.presenters
             }
         }
 
-        public void RegisterButtonPressed()
+        public void RegisterButtonPressed()   //Register mygtuko logika
         {
             if (CheckTheTB() == 1) return;
 
@@ -131,7 +131,7 @@ namespace VirtualLibrary.presenters
             RegProcess.Start();
         }
 
-        public void WinClose()
+        public void WinClose()  //Formos uzdarymo metodas
         {
             if (StaticData.CurrentUser == null)
                 RefClass.Instance.menuForm.ShowForm();
@@ -142,7 +142,7 @@ namespace VirtualLibrary.presenters
                 RegProcess.Abort();
         }
 
-        private int CheckTheTB()
+        private int CheckTheTB() //Security blokai textbox atzvilgiu
         {
             if (RegView.NameText.Replace(" ", "") == "")
             {
@@ -190,19 +190,22 @@ namespace VirtualLibrary.presenters
                     }
                 }
             }
-            if (!await FAC.FaceSave(RegView.NameText))
+            if (!await FAC.FaceSave(RegView.NameText))  //Veidas issaugomas
             {
                 StaticData.CurrentUser = null;
-                MessageBox.Show("Registracija nepavyko\nPerdaug veidu kadre\nArba serveris uzimtas");
+                MessageBox.Show("Registracija nepavyko\nPerdaug veidu kadre\nArba serveris uzimtas"); //Jei issaugoti nepavyko gryztame i menu
                 ((Form)RegView).Invoke(new closeForm(closeThisFormFromAnotherThread));
                 return;
             }
+            //Informacija padedama i duomenu baze
             ADB.AddUser(RegView.NameText, RegView.password, null, 0);
             ADB.GetUser(RegView.NameText);
+
             InProgress = false;
             ((Form)RegView).Invoke(new closeForm(closeThisFormFromAnotherThread));
         }
 
+        //Delegate funkcijos skirtos atlitki tam tikrus veiksmus is ktio thredo
         public delegate void ChangeBackColor(Color color);
 
         private void ChangeColor(Color color)

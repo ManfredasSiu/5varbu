@@ -34,40 +34,41 @@ namespace VirtualLibrary.presenters
             {
                 cam = null;
             }
-            faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");
-            StartTime = DateTime.Now.TimeOfDay.Seconds;
-            Application.Idle += new EventHandler(FaceRecognitionAsync);
+            faceDetect = new HaarCascade("haarcascade_frontalface_default.xml");  //HaarCascade skirta veido bruozam nustatyti         
+            StartTime = DateTime.Now.TimeOfDay.Seconds;                           //Laikmatis
+            Application.Idle += new EventHandler(FaceRecognitionAsync);           //Main threadas dirba su veido detectinimu
         }
 
-        public async void FaceRecognitionAsync(object sender, EventArgs e)
+        //Veido atradimo funkcija***
+        public async void FaceRecognitionAsync(object sender, EventArgs e) 
         {
-            if (cam == null)
+            if (cam == null) //Tikrinama ar pavyko sukurti kamera
             {
                 //StaticData.CurrentUser = new User(999, "Debug", "Debug", null, "1");
                 loginview.CloseForm();
                 //RefClass.Instance.InitMainForm();  //Vladislav atsikometuok abudu
                 return;
             }
-            frame = cam.QueryFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-            loginview.image = frame;
-            GrayFace = frame.Convert<Gray, Byte>();
-            MCvAvgComp[][] facesDetectedNow = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(640 / 4, 480 / 4));
-            if (facesDetectedNow[0].Length > 1)
+            frame = cam.QueryFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC); //Nuotrauka paruosiama atpazinimui
+            loginview.image = frame;                                                        //Keiciami freimai
+            GrayFace = frame.Convert<Gray, Byte>();                                         //Nuotrauka nudazoma pilkai
+            MCvAvgComp[][] facesDetectedNow = GrayFace.DetectHaarCascade(faceDetect, 1.2, 10, Emgu.CV.CvEnum.HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(640 / 4, 480 / 4)); //Visu veidu atradimas
+            if (facesDetectedNow[0].Length > 1)                                             //Ar veidu nera perdaug?
             {
                 MessageBox.Show("Too many faces");
             }
-            else if (facesDetectedNow[0].Length != 0)
+            else if (facesDetectedNow[0].Length != 0)                                       //Ar veidu apskritai yra?
             {
-                cam.QueryFrame().Save(Application.StartupPath + "TempImg.jpg");
+                cam.QueryFrame().Save(Application.StartupPath + "TempImg.jpg");             //Veidas issaugomas laikinai
                 if (StaticData.CurrentUser == null)
                 {
                     if (block == false)
                     {
-                        string name = null;
-                        name = await startRecAsync();
+                        string name = null; 
+                        name = await startRecAsync();                                       //Gaunamas vartotojo vardas arba null jei nera      
                         if (StaticData.CurrentUser != null)
                         {
-                            loginview.CloseForm();
+                            loginview.CloseForm();                                          //Jei vartotojas rastas atidaroma pagrindime programos forma
                             RefClass.Instance.InitMainForm();
                         }
                     }
@@ -77,18 +78,19 @@ namespace VirtualLibrary.presenters
             EndTime = DateTime.Now.TimeOfDay.Seconds;
             if (EndTime - StartTime >= 20 || (EndTime - StartTime >= -40 && EndTime - StartTime < 0))
             {
-                loginview.CloseForm();
+                loginview.CloseForm();                                                      //Jei baigesi laikas griztame
             }
         }
+        //***
 
         public void OnCloseForm(object sender, EventArgs e)
         {
-            if (cam == null && StaticData.CurrentUser == null)
+            if (cam == null && StaticData.CurrentUser == null)                       //Jei nera kameros
             {
                 MessageBox.Show("Neturite Kameros\nprijunkite kamera ir bandykite dar syki");
                 RefClass.Instance.menuForm.ShowForm();
             }
-            else if (StaticData.CurrentUser == null)
+            else if (StaticData.CurrentUser == null)                                 //Jei kamera yra bet vartotojas nerastas
             {
                 RefClass.Instance.menuForm.ShowForm();
                 MessageBox.Show("Didn't find your face :( \n Try again or Register");
@@ -98,16 +100,16 @@ namespace VirtualLibrary.presenters
             Application.Idle -= FaceRecognitionAsync;
         }
 
-        public async Task<string> startRecAsync()
+        public async Task<string> startRecAsync()   //Feido atpazinimo metodas
         {
             block = true;
             FaceApiCalls FAC = new FaceApiCalls();
             try
             {
-                var name = await FAC.RecognitionAsync(Application.StartupPath + "TempImg.jpg");
+                var name = await FAC.RecognitionAsync(Application.StartupPath + "TempImg.jpg");  //Siunciama uzklausa i API
                 if (name != null)
                 {
-                    String[] data = RefClass.Instance.LogicC.DB.GetUser(name);
+                    String[] data = RefClass.Instance.LogicC.DB.GetUser(name);                   //Uzkraunamas vartotojas
                 }
                 else loginview.CloseForm();
                 return name;

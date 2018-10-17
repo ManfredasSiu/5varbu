@@ -33,11 +33,15 @@ namespace VirtualLibrary.presenters
                 main.Status = "Reader";
         }
 
+        //Data(?)
+
         public void timer2Ticks()
         {
             DateTime dateTime = DateTime.UtcNow.Date;
             main.Date = dateTime.ToString("yyyy-MM-dd");
         }
+
+        //Soninio sliderio logika
 
         public void timer1Ticks()
         {
@@ -62,6 +66,8 @@ namespace VirtualLibrary.presenters
                 }
             }
         }
+
+        //Logika skirtingiems user controlams prideti i pagrindini langa
 
         public void RButtonBehaviour(Control btn)
         {
