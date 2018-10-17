@@ -60,6 +60,7 @@ namespace VirtualLibrary.presenters
                 StaticData.CurrentUser.removeUserBook(book);
                 ADB.ReturnBook(book);
                 borrowView.CloseForm();
+                RefClass.Instance.MBControl.UpdateTable();
                 Application.Idle -= FrameProcedure;
                 return;
             }
@@ -81,6 +82,7 @@ namespace VirtualLibrary.presenters
                 book.setQuantityMinus();
                 StaticData.CurrentUser.AddTakenBook(book);
                 ADB.BorrowBook(book);
+                RefClass.Instance.LControl.UpdateTable();
                 Application.Idle -= FrameProcedure;
                 borrowView.CloseForm();
             }

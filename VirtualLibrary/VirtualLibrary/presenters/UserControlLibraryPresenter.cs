@@ -46,14 +46,12 @@ namespace VirtualLibrary.presenters
 
         public void TakeBookInit()
         {
-            var fbb = RefClass.Instance.InitBorrowForm("Borrow");
-            fbb.ShowAsDialog();
+            RefClass.Instance.InitBorrowForm("Borrow");
         }
 
         public void AddBookInit()
         {
-            var faab = RefClass.Instance.InitAddBookForm();
-            faab.ShowAsDialog();
+            RefClass.Instance.InitAddBookForm();
         }
 
         public void RemoveBookInit()

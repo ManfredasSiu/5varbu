@@ -43,9 +43,9 @@ namespace VirtualLibrary.presenters
         {
             if (cam == null)
             {
-                StaticData.CurrentUser = new User(999, "Debug", "Debug", null, "1");
+                //StaticData.CurrentUser = new User(999, "Debug", "Debug", null, "1");
                 loginview.CloseForm();
-                RefClass.Instance.InitMainForm();
+                //RefClass.Instance.InitMainForm();  //Vladislav atsikometuok abudu
                 return;
             }
             frame = cam.QueryFrame().Resize(640, 480, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
@@ -83,7 +83,12 @@ namespace VirtualLibrary.presenters
 
         public void OnCloseForm(object sender, EventArgs e)
         {
-            if (StaticData.CurrentUser == null)
+            if (cam == null && StaticData.CurrentUser == null)
+            {
+                MessageBox.Show("Neturite Kameros\nprijunkite kamera ir bandykite dar syki");
+                RefClass.Instance.menuForm.ShowForm();
+            }
+            else if (StaticData.CurrentUser == null)
             {
                 RefClass.Instance.menuForm.ShowForm();
                 MessageBox.Show("Didn't find your face :( \n Try again or Register");

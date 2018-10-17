@@ -11,5 +11,6 @@ namespace VirtualLibrary.Views
     {
         DataGridView DGW { get; }
 
+        void UpdateTable();
     }
 }

@@ -17,14 +17,19 @@ namespace VirtualLibrary.presenters
         public UserControlHomePresenter(IUControlH IUCH)
         {
             this.IUCH = IUCH;
+            LoadDataForStatistics();
+            PresentStatistics();
+        }
+
+        private void LoadDataForStatistics()
+        {
             this.ADB = RefClass.Instance.LogicC.DB;
             ADB.GetAllBooksRead();
-            CUS = RefClass.Instance.InitStatistics();
-            PresentStatistics();
         }
 
         private void PresentStatistics()
         {
+            CUS = RefClass.Instance.InitStatistics();
             IUCH.BooksRead = CUS.BooksRead.ToString();
             IUCH.PagesRead = CUS.PagesRead.ToString();
         }

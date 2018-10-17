@@ -11,7 +11,6 @@ namespace VirtualLibrary.presenters
 {
     class MainPresenter
     {
-
         IDataB ADB;
         IMain main;
 
@@ -67,15 +66,13 @@ namespace VirtualLibrary.presenters
         public void RButtonBehaviour(Control btn)
         {
             moveSidePanel(btn);
-            UserControlRecom ucr = new UserControlRecom();
-            AddControlsToPanel(ucr);
+            AddControlsToPanel((UserControl)RefClass.Instance.InitRecomControl());
         }
 
         public void LButtonBehaviour(Control btn)
         {
             moveSidePanel(btn);
-            UserControlLibrary ucl = new UserControlLibrary();
-            AddControlsToPanel(ucl);
+            AddControlsToPanel((UserControl)RefClass.Instance.InitLibControl());
         }
 
         public void HButtonBehaviour(Control btn)
@@ -87,8 +84,7 @@ namespace VirtualLibrary.presenters
         public void MBButtonBehaviour(Control btn)
         {
             moveSidePanel(btn);
-            UserControlMyBooks ucmb = new UserControlMyBooks();
-            AddControlsToPanel(ucmb);
+            AddControlsToPanel((UserControl)RefClass.Instance.InitMBControl());
         }
 
         private void moveSidePanel(Control btn)

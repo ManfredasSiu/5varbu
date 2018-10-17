@@ -8,77 +8,45 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VirtualLibrary.API_s;
+using VirtualLibrary.presenters;
 using VirtualLibrary.Views;
 
 namespace VirtualLibrary
 {
     public partial class FormAdminAddBook : Form, IAddBook
     {
-        public String Barcode { set; get; }
-        private IDataB ADB;
+        public string BarcodeField { get => textBox7.Text; set => textBox7.Text = value; }
 
-        public string BarcodeField { set => textBox7.Text = value; }
+        public string NameField => textBox1.Text;
 
-        UserControlLibrary UCL = null;
+        public string PressField => textBox3.Text;
 
+        public string Pagesfield => textBox4.Text;
+
+        public string QuantityField => textBox6.Text;
+
+        public string GenreField => textBox5.Text;
+
+        public string AuthorField => textBox2.Text;
 
         public FormAdminAddBook()
         {
             InitializeComponent();
-            this.ADB = ADB;
-            this.UCL = UCL;
         }
 
-        public void setBarcodeTB(string barcode)
-        {
-            textBox7.Text = barcode;
-        }
-
-        //Mygtuko paspaudimas turetu isimti knyga is MyBooks saraso ir Grazinti i library sarasa
         private void button1_Click(object sender, EventArgs e)
         {
-            if (CheckTBs() == 1)
-            {
-                MessageBox.Show("Nevisi laukai uzpildyti arba uzpildyti nelegaliai\nUzpildykite laukus pries tesdami");
-                return;
-            }
-            Book bookToAdd = new Book(textBox1.Text, textBox2.Text, textBox7.Text, textBox5.Text, int.Parse(textBox6.Text), int.Parse(textBox4.Text), textBox3.Text, 0);
-            ADB.AddBook(bookToAdd);
-            ADB.GetAllBooks();
-            UCL.UpdateTable();
-            this.Close();
-        }
-
-        public int CheckTBs()
-        {
-            TextBox[] TBs = { textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7 };
-            foreach (TextBox tb in TBs)
-            {
-                if (tb.Text.Replace(" ", "") == "")
-                    return 1;
-            }
-            try
-            {
-                int.Parse(textBox6.Text);
-                int.Parse(textBox4.Text);
-            }
-            catch
-            {
-                return 1;
-            }
-            return 0;
+            new AddBookPresenter(this).AddBookButton();
         }
 
         private void buttonScanner_Click(object sender, EventArgs e)
         {
-            var fbb = RefClass.Instance.InitBorrowForm("Add");
-            fbb.ShowAsDialog();
-            
+            RefClass.Instance.InitBorrowForm("Add");
         }
 
-        public void ShowAsDialog()
+        public void CloseForm()
         {
-            this.ShowAsDialog();
+            this.Close();
         }
     }
 }

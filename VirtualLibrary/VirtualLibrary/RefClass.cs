@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using VirtualLibrary.presenters;
 using VirtualLibrary.Views;
 
@@ -72,14 +73,16 @@ namespace VirtualLibrary
             mainW.Show();
         }
 
-        public IBorrow InitBorrowForm(String procedure)
+        public void InitBorrowForm(String procedure)
         {
-            return new FormBorrowBooks(procedure);
+            var BorrBook = new FormBorrowBooks(procedure);
+            BorrBook.ShowDialog();
         }
 
-        public IAddBook InitAddBookForm()
+        public void InitAddBookForm()
         {
-            return IABook = new FormAdminAddBook();
+            IABook = new FormAdminAddBook();
+            ((Form)IABook).ShowDialog();
         }
 
         //User Controls***

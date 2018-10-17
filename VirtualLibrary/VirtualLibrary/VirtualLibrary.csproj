@@ -155,12 +155,15 @@
     <Compile Include="Logic\CurrentUserStatistics.cs" />
     <Compile Include="DataTypes\Book.cs" />
     <Compile Include="API%27s\FaceApiCalls.cs" />
+    <Compile Include="presenters\AddBookPresenter.cs" />
+    <Compile Include="presenters\BorrowBookPresenter.cs" />
     <Compile Include="presenters\LoginPresenter.cs" />
     <Compile Include="presenters\MainPresenter.cs" />
     <Compile Include="presenters\MenuPresenter.cs" />
     <Compile Include="presenters\RegisterPresenter.cs" />
     <Compile Include="presenters\UserControlHomePresenter.cs" />
     <Compile Include="presenters\UserControlLibraryPresenter.cs" />
+    <Compile Include="presenters\UserControlMBPresenter.cs" />
     <Compile Include="RefClass.cs" />
     <Compile Include="UI\FormAdminRemoveBook.cs">
       <SubType>Form</SubType>
@@ -240,6 +243,7 @@
       <DependentUpon>UserControlRecom.cs</DependentUpon>
     </Compile>
     <Compile Include="Logic\VoiceRecognition.cs" />
+    <Compile Include="Views\IAddBook.cs" />
     <Compile Include="Views\IBorrow.cs" />
     <Compile Include="Views\ILogin.cs" />
     <Compile Include="Views\IMain.cs" />

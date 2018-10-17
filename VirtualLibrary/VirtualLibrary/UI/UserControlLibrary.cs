@@ -24,6 +24,11 @@ namespace VirtualLibrary
         public UserControlLibrary()
         {
             InitializeComponent();
+            UpdateTable();
+        }
+
+        public void UpdateTable()
+        {
             new UserControlLibraryPresenter(this);
         }
 

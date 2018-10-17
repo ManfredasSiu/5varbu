@@ -8,8 +8,21 @@ namespace VirtualLibrary.Views
 {
     public interface IAddBook
     {
-        void ShowAsDialog();
 
-        String BarcodeField { set; }
+        void CloseForm();
+
+        string BarcodeField { set; get; }
+
+        string NameField { get; }
+
+        string PressField { get; }
+
+        string Pagesfield { get; }
+
+        string QuantityField { get; }
+
+        string GenreField { get; }
+
+        string AuthorField { get; }
     }
 }

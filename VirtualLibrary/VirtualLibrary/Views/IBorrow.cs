@@ -9,8 +9,6 @@ namespace VirtualLibrary.Views
 {
     public interface IBorrow
     {
-        void ShowAsDialog();
-
         void CloseForm();
 
         Image NewFrame { set; get; }

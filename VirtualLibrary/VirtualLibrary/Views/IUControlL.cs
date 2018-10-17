@@ -13,6 +13,8 @@ namespace VirtualLibrary.Views
 
         bool RemoveBookVisible { set; }
 
+        void UpdateTable();
+
         DataGridView Table { get; }
     }
 }

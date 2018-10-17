@@ -30,8 +30,7 @@ namespace VirtualLibrary.presenters
 
         public void returnBookInit()
         {
-            var fugr = RefClass.Instance.InitBorrowForm("Return");
-            fugr.ShowAsDialog();
+            RefClass.Instance.InitBorrowForm("Return");
         }
     }
 }

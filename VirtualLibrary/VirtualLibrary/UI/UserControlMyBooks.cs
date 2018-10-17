@@ -20,6 +20,11 @@ namespace VirtualLibrary
         public UserControlMyBooks()
         {
             InitializeComponent();
+            UpdateTable();
+        }
+
+        public void UpdateTable()
+        {
             new UserControlMBPresenter(this);
         }
 
