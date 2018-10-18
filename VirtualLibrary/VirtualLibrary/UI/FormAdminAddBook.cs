@@ -41,7 +41,7 @@ namespace VirtualLibrary
 
         private void buttonScanner_Click(object sender, EventArgs e)
         {
-            RefClass.Instance.InitBorrowForm("Add");
+            RefClass.Instance.InitScannerForm("Add");
         }
 
         public void CloseForm()

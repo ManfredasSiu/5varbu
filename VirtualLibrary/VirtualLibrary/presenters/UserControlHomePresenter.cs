@@ -17,20 +17,23 @@ namespace VirtualLibrary.presenters
         public UserControlHomePresenter(IUControlH IUCH)
         {
             this.IUCH = IUCH;
+
             LoadDataForStatistics();
             PresentStatistics();
         }
 
         private void LoadDataForStatistics()
         {
-            this.ADB = RefClass.Instance.LogicC.DB;
+            this.ADB = RefClass.Instance.LogicC.DB;         //Gaunamos visos perskaitytos knygos
             ADB.GetAllBooksRead();
         }
 
         private void PresentStatistics()
         {
-            CUS = RefClass.Instance.InitStatistics();
-            IUCH.BooksRead = CUS.BooksRead.ToString();
+            CUS = RefClass.Instance.InitStatistics();  //Statistikos modelis
+
+            //Statistika atspausdinama i main panele
+            IUCH.BooksRead = CUS.BooksRead.ToString(); 
             IUCH.PagesRead = CUS.PagesRead.ToString();
         }
 

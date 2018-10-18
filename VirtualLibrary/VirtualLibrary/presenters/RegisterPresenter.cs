@@ -24,7 +24,7 @@ namespace VirtualLibrary.presenters
         Image<Gray, byte> GrayFace = null;
         MCvAvgComp[][] facesDetectedNow;
         HaarCascade faceDetect;
-        LogicController LogicC;
+        DataController LogicC;
         IDataB ADB;
         Thread RegProcess;
 

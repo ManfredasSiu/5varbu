@@ -20,7 +20,13 @@ namespace VirtualLibrary.presenters
             RefreshControl();
         }
 
-        private void RefreshControl()
+        private void RefreshControl() //Lenteliu ir mygtuku atnaujinimas
+        {
+            UpdateButtons();
+            UpdateTable();
+        }
+
+        private void UpdateButtons() //Mygtuku "perpiesimas"
         {
             if (StaticData.CurrentUser.getPermission() == "1")
             {
@@ -32,21 +38,23 @@ namespace VirtualLibrary.presenters
                 IUCL.AddBookVisible = false;
                 IUCL.RemoveBookVisible = false;
             }
-            UpdateTable();
         }
 
-        private void UpdateTable()
+        private void UpdateTable()  //Lenteles "perpiesimas"
         {
             IUCL.Table.Rows.Clear();
             foreach (Book item in StaticData.Books)
             {
-                IUCL.Table.Rows.Add(item.getCode(), item.getName(), item.getAuthor(), item.getPressName(), item.getGenre(), item.getPages(), item.getQuantity());
+                IUCL.Table.Rows.Add(item.getCode(), item.getName(), item.getAuthor(), 
+                    item.getPressName(), item.getGenre(), item.getPages(), item.getQuantity());
             }
         }
 
+
+        //Paemimo, pridejimo (ir sunaikinimo) langu inicijavimas
         public void TakeBookInit()
         {
-            RefClass.Instance.InitBorrowForm("Borrow");
+            RefClass.Instance.InitScannerForm("Borrow");
         }
 
         public void AddBookInit()

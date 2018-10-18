@@ -19,14 +19,18 @@ namespace VirtualLibrary.presenters
 
         public MainPresenter(IMain main)
         {
-            ADB = RefClass.Instance.LogicC.DB;
+            ADB = RefClass.Instance.LogicC.DB;       //Uzkraunamos knygos is duombazes
             ADB.GetAllBooks();
+
             this.main = main;
+
             PanelWidth = main.panelLft;
             isCollapsed = false;
-            UserControlHome uch = new UserControlHome();
-            main.NewControl = uch;
-            main.UserName = StaticData.CurrentUser.getuserName();
+
+            AddControlsToPanel((UserControl)RefClass.Instance.InitHomeControl()); //Inicijuojama Home user control
+
+            //Atspausdinama reikiama info apie useri
+            main.UserName = StaticData.CurrentUser.getuserName();  
             if (StaticData.CurrentUser.getPermission() == "1")
                 main.Status = "ADMIN";
             else
@@ -67,7 +71,7 @@ namespace VirtualLibrary.presenters
             }
         }
 
-        //Logika skirtingiems user controlams prideti i pagrindini langa
+        //Logika skirtingiems user controlams prideti i pagrindini langa ***
 
         public void RButtonBehaviour(Control btn)
         {
@@ -93,17 +97,19 @@ namespace VirtualLibrary.presenters
             AddControlsToPanel((UserControl)RefClass.Instance.InitMBControl());
         }
 
-        private void moveSidePanel(Control btn)
+        private void moveSidePanel(Control btn)// Perkeliama sonine panele prie reikiamo mygtuko
         {
             main.panelSideTop = btn.Top;
             main.panelSideHgh = btn.Height;
         }
 
-        private void AddControlsToPanel(Control c)
+        private void AddControlsToPanel(Control c) //UserControl pridedama i centrine panele
         {
             c.Dock = DockStyle.Fill;
             main.ClearControlsFromPanel();
             main.NewControl = c;
         }
+
+        //***
     }
 }

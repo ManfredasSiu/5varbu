@@ -27,14 +27,15 @@ namespace VirtualLibrary.presenters
                 MessageBox.Show("Nevisi laukai uzpildyti arba uzpildyti nelegaliai\nUzpildykite laukus pries tesdami");
                 return;
             }
-            Book bookToAdd = new Book(AB.NameField, AB.AuthorField, AB.BarcodeField, AB.GenreField, int.Parse(AB.QuantityField), int.Parse(AB.Pagesfield), AB.PressField, 0);
-            ADB.AddBook(bookToAdd);
-            ADB.GetAllBooks();
-            RefClass.Instance.LControl.UpdateTable();
+            Book bookToAdd = new Book(AB.NameField, AB.AuthorField, AB.BarcodeField, AB.GenreField,
+                                      int.Parse(AB.QuantityField), int.Parse(AB.Pagesfield), AB.PressField, 0); //Knyga pridedama i laikinaja saugykla
+            ADB.AddBook(bookToAdd);  //Knyga irasoma i DB
+            ADB.GetAllBooks();  
+            RefClass.Instance.LControl.UpdateTable();  //Atnaujinama Library lentele
             AB.CloseForm();
         }
 
-        public int CheckTBs()
+        public int CheckTBs()  //Tikrinama ar texfieldai visi uzpildyti ir ar uzpildyti legaliai
         {
             String[] TBs = { AB.NameField, AB.AuthorField, AB.PressField, AB.Pagesfield, AB.GenreField, AB.QuantityField, AB.BarcodeField };
             foreach (string tb in TBs)

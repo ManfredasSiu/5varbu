@@ -100,7 +100,7 @@ namespace VirtualLibrary.presenters
             Application.Idle -= FaceRecognitionAsync;
         }
 
-        public async Task<string> startRecAsync()   //Feido atpazinimo metodas
+        public async Task<string> startRecAsync()   //Veido atpazinimo metodas
         {
             block = true;
             FaceApiCalls FAC = new FaceApiCalls();

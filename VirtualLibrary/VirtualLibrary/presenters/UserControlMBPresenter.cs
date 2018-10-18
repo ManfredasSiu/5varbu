@@ -17,20 +17,21 @@ namespace VirtualLibrary.presenters
         {
             this.IUCMB = IUCMB;
             this.ADB = RefClass.Instance.LogicC.DB;
-            ADB.GetAllUserBooks();
-            updateTable();
+            ADB.GetAllUserBooks();             //Gaunavos visos user knygos
+            updateTable();                     //Perpiesiama lentele
         }
 
-        public void updateTable()
+        public void updateTable()//Perpiesiama lentele
         {
             IUCMB.DGW.Rows.Clear();
             foreach (Book item in StaticData.CurrentUser.getUserBooks())
                 IUCMB.DGW.Rows.Add(item.getCode(), item.getName(), item.getAuthor(), item.getPressName(), null, null);
         }
 
+        //Knygos atidavimo logika
         public void returnBookInit()
         {
-            RefClass.Instance.InitBorrowForm("Return");
+            RefClass.Instance.InitScannerForm("Return");
         }
     }
 }

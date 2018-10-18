@@ -38,7 +38,7 @@ namespace VirtualLibrary
             return new CurrentUserStatistics();
         }
 
-        public LogicController LogicC = new LogicController();
+        public DataController LogicC = new DataController();
 
         //Forms
 
@@ -73,7 +73,7 @@ namespace VirtualLibrary
             mainW.Show();
         }
 
-        public void InitBorrowForm(String procedure)
+        public void InitScannerForm(String procedure)
         {
             var BorrBook = new FormBorrowBooks(procedure);
             BorrBook.ShowDialog();

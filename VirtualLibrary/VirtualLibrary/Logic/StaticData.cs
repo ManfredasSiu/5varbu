@@ -13,6 +13,5 @@ namespace VirtualLibrary
         public static string[] labels;
         public static User CurrentUser;
         public static List<Book> Books = new List<Book>();
-        //labas
     }
 }

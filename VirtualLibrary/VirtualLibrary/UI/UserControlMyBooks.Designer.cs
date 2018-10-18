@@ -15,9 +15,9 @@ namespace VirtualLibrary
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         /// 
-        private LogicController logicC;
+        private DataController logicC;
 
-        public UserControlMyBooks(LogicController logicC)
+        public UserControlMyBooks(DataController logicC)
         {
             InitializeComponent();
             this.logicC = logicC;

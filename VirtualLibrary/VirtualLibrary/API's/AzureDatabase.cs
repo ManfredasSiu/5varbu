@@ -14,7 +14,7 @@ namespace VirtualLibrary
         SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
         public AzureDatabase()
         {
-            builder.DataSource = "virlib.database.windows.net";
+            builder.DataSource = "virlib.database.windows.net";  
             builder.UserID = "ILBooks";
             builder.Password = File.ReadAllText(Application.StartupPath + "/SQLPassword.txt");
             builder.InitialCatalog = "VirtualLib";
@@ -24,12 +24,13 @@ namespace VirtualLibrary
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) 
                 {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("INSERT INTO [dbo].[Book] ");
-                    sb.Append("VALUES('" + AddThis.getName() + "','" + AddThis.getAuthor() + "', '" + AddThis.getPressName() + "' , '" + AddThis.getCode() + "' , '" + AddThis.getGenre() + "'," + AddThis.getPages() +"," + AddThis.getQuantity() + ");");
+                    sb.Append("VALUES('" + AddThis.getName() + "','" + AddThis.getAuthor() + "', '" +
+                        AddThis.getPressName() + "' , '" + AddThis.getCode() + "' , '" + AddThis.getGenre() + "'," + AddThis.getPages() +"," + AddThis.getQuantity() + ");");
 
                     String sql = sb.ToString();
                     using (var sqlCommand = new SqlCommand(sql, connection))
