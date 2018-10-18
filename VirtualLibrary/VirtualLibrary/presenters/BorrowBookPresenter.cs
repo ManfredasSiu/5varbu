@@ -115,7 +115,7 @@ namespace VirtualLibrary.presenters
                 else if (procedure == "Add")
                     AddBookLogic(borrowView.barcodeText);
             }
-            catch (Exception e)      //Jei ne bandoma ieskoti barkodo textfielde
+            catch       //Jei ne bandoma ieskoti barkodo textfielde
             {
                 if (borrowView.barcodeText == "")
                     MessageBox.Show("Nuskanuoti nepavyko, iveskite barkoda ranka\nArba bandykite dar karta");

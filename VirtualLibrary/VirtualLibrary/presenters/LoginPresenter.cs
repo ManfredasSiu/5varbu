@@ -30,7 +30,7 @@ namespace VirtualLibrary.presenters
             {
                 cam = new Capture();
             }
-            catch (Exception e)
+            catch 
             {
                 cam = null;
             }

@@ -27,7 +27,7 @@ namespace VirtualLibrary
                     face.Save(Application.StartupPath + "/" + name + "Temp" + "/" + name + "" + iterator + ".jpg");
 
                 }
-                catch (Exception e)
+                catch 
                 {
                     return 1;
                 }
@@ -38,7 +38,7 @@ namespace VirtualLibrary
                 {   
                     Directory.Delete(Application.StartupPath + "/" + name + "Temp", true);
                 }
-                catch(Exception e)
+                catch
                 {
                     return 1;
                 }

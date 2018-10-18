@@ -155,6 +155,7 @@
     <Compile Include="Logic\CurrentUserStatistics.cs" />
     <Compile Include="DataTypes\Book.cs" />
     <Compile Include="API%27s\FaceApiCalls.cs" />
+    <Compile Include="Logic\DataController.cs" />
     <Compile Include="presenters\AddBookPresenter.cs" />
     <Compile Include="presenters\BorrowBookPresenter.cs" />
     <Compile Include="presenters\LoginPresenter.cs" />
@@ -164,7 +165,7 @@
     <Compile Include="presenters\UserControlHomePresenter.cs" />
     <Compile Include="presenters\UserControlLibraryPresenter.cs" />
     <Compile Include="presenters\UserControlMBPresenter.cs" />
-    <Compile Include="RefClass.cs" />
+    <Compile Include="API%27s\RefClass.cs" />
     <Compile Include="UI\FormAdminRemoveBook.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,7 +209,6 @@
     <Compile Include="UI\Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Logic\LogicController.cs" />
     <Compile Include="UI\LoginWindow.cs">
       <SubType>Form</SubType>
     </Compile>
