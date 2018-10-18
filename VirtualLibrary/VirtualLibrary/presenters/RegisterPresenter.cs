@@ -42,7 +42,7 @@ namespace VirtualLibrary.presenters
             {
                 cam = new Capture();
             }
-            catch (Exception e)
+            catch 
             {
                 cam = null;
                 RegView.InitMessageBox("Neturi kameros, arba ji blogai prijungta, registracija negalima");
