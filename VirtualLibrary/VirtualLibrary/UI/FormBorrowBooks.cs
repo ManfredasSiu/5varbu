@@ -12,187 +12,45 @@ using Emgu.CV.Structure;
 using MessagingToolkit.Barcode;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
+using VirtualLibrary.API_s;
+using VirtualLibrary.presenters;
+using VirtualLibrary.Views;
 
 namespace VirtualLibrary
 {
-    public partial class FormBorrowBooks : Form
+    public partial class FormBorrowBooks : Form, IBorrow
     {
-        VideoCapture capture;
-        Mat frame;
-        Bitmap img;
-        FormAdminAddBook FAdd = null;
-        UserControlLibrary UCL = null;
-        UserControlMyBooks UCMB = null;
-        AzureDatabase ADB = new AzureDatabase();
-
-        public FormBorrowBooks(UserControlLibrary UCL)
-        {
-            InitializeComponent();
-            this.UCL = UCL;
-            capture = new VideoCapture(0);
-            capture.Open(0);
-            Application.Idle += FrameProcedure;
-        }
-
-        public FormBorrowBooks(UserControlMyBooks UCMB)
-        {
-            InitializeComponent();
-            this.UCMB = UCMB;
-            capture = new VideoCapture(0);
-            capture.Open(0);
-            Application.Idle += FrameProcedure;
-        }
-
-        public FormBorrowBooks(FormAdminAddBook FAdd)
-        {
-            InitializeComponent();
-            this.FAdd = FAdd;
-            capture = new VideoCapture(0);
-            capture.Open(0);
-            Application.Idle += FrameProcedure;
-        }
-
-        BarcodeDecoder Scanner;
-        OpenFileDialog OD;
-        SaveFileDialog SD;
-
-        private void FrameProcedure(Object sender, EventArgs e)
-        {
-            frame = new Mat();
-            if (capture.IsOpened())
-            {
-                capture.Read(frame);
-                img = BitmapConverter.ToBitmap(frame);
-                if (pictureBox2.Image != null)
-                {
-                    pictureBox2.Image.Dispose();
-                }
-                pictureBox2.Image = img;
-            }
-        }
-
-        //Mygtuko paspaudimas turetu isimti knyga is Library saraso ir ivesti i MyBooks sarasa
         
+        private BorrowBookPresenter BBP;
 
-        public void ScanBarcode()
+        public FormBorrowBooks(String procedure)
         {
-            //Skenavimas
-            Scanner = new BarcodeDecoder();
-            try
-            {
-                Result result = Scanner.Decode(new Bitmap(img));
-                textBox1.Text = result.Text;
-                if (FAdd != null)
-                {
-                    FAdd.setBarcodeTB(textBox1.Text);
-                    return;
-                }
-                var book = StaticData.Books.Find(x => x.getCode() == textBox1.Text);
-                if(UCMB != null)
-                {
-                    if(book != null && StaticData.CurrentUser.getUserBooks().Contains(book))
-                    {
-                        book.setQuantityPlius();
-                        StaticData.CurrentUser.AddReadBook(book);
-                        StaticData.CurrentUser.removeUserBook(book);
-                        ADB.ReturnBook(book);
-                        UCMB.updateTable();
-                        this.Close();
-                        return;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Neturite tokios knygos\nArba knyga neegzistuoja bibliotekoje");
-                    }
-                }
-                else if (book != null && UCL != null)
-                {
-                    if(book.getQuantity() > 0 && StaticData.CurrentUser.getUserBooks().Contains(book) == false)
-                    {
-                        book.setQuantityMinus();
-                        StaticData.CurrentUser.AddTakenBook(book);
-                        ADB.BorrowBook(book);
-                        UCL.UpdateTable();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Sios knygos egzemplioriu nebera");
-                        return;
-                    }
-                    MessageBox.Show(textBox1.Text);
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Nera knygos tokiu barkodu");
-                }
-            } 
-            catch(Exception e)
-            {
-                if(textBox1.Text.Replace(" ", "") == "")
-                    MessageBox.Show("Nuskanuoti nepavyko, iveskite barkoda ranka\nArba bandykite dar karta");
-                else
-                {
-                    if (FAdd != null)
-                    {
-                        FAdd.setBarcodeTB(textBox1.Text);
-                        Close();
-                        return;
-                    }
-                    var book = StaticData.Books.Find(x => x.getCode() == textBox1.Text);
-                    if (UCMB != null)
-                    {
-                        if (book != null && StaticData.CurrentUser.getUserBooks().Contains(book))
-                        {
-                            book.setQuantityPlius();
-                            StaticData.CurrentUser.AddReadBook(book);
-                            StaticData.CurrentUser.removeUserBook(book);
-                            ADB.ReturnBook(book);
-                            UCMB.updateTable();
-                            this.Close();
-                            return;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Neturite tokios knygos\nArba knyga neegzistuoja bibliotekoje");
-                        }
-                    }
-                    else if (book != null && UCL != null)
-                    {
-                        if(book.getQuantity() > 0 && StaticData.CurrentUser.getUserBooks().Contains(book) == false)
-                        {
-                            book.setQuantityMinus();
-                            StaticData.CurrentUser.AddTakenBook(book);
-                            ADB.BorrowBook(book);
-                            UCL.UpdateTable();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Sios knygos egzemplioriu nebera\nArba jau tokia knyga turite");
-                            return;
-                        }
-                        MessageBox.Show(textBox1.Text);
-                        this.Close();
-                    }
-                    else
-                        MessageBox.Show("Nera knygos tokiu barkodu");
-                    
-                }
-            }
+            InitializeComponent();
+            BBP = new BorrowBookPresenter(procedure, this);
         }
+
+        public Image NewFrame { get => pictureBox2.Image; set => pictureBox2.Image = value; }
+
+        public string barcodeText { get => textBox1.Text.Replace(" ", ""); set => textBox1.Text = value; }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ScanBarcode();
+            BBP.ScanBarcode();
         }
         
         private void buttonShutDown_Click(object sender, EventArgs e)
         {
+            BBP.ExitScanner();
+        }
 
-            Application.Idle -= FrameProcedure;
-            capture.Dispose();
+        public void ShowAsDialog()
+        {
+            this.ShowDialog();
+        }
+
+        public void CloseForm()
+        {
             this.Close();
         }
-        
     }
 }

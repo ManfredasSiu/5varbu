@@ -8,55 +8,43 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Speech.Recognition;
+using VirtualLibrary.presenters;
+using VirtualLibrary.Views;
 
 namespace VirtualLibrary
 {
-    public partial class Form1 : Form     //Pagrindinis Langas, reikes veliau gal padaryt forgot password arba login with username UI
+    public partial class Form1 : Form, IMenu     //Pagrindinis Langas, reikes veliau gal padaryt forgot password arba login with username UI
     {
-        private LogicController LogicC = new LogicController();
-        private MainTry mainW;
-
         public Form1()
         {
             InitializeComponent();
-            //VoiceRecognition VRec = new VoiceRecognition(this);
         }
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            Register();
+            MenuPresenter MP = new MenuPresenter(this);
+            MP.RegisterButtonPressed();
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            Login();
+            MenuPresenter MP = new MenuPresenter(this);
+            MP.LoginButtonPressed();
         }
-
-        public void OpenMainWindow()
+        
+        public void HideForm()
         {
             this.Hide();
-            mainW = new MainTry(LogicC);
-            mainW.Show();
-        }
-
-        public void Login()
-        {
-            //OpenMainWindow();
-            this.Hide();
-            var LoginW = new LoginWindow(LogicC, this);
-            LoginW.Show();
-        }
-
-        public void Register()
-        {
-            this.Hide();
-            Form2 registerFaceWindow = new Form2(LogicC, this);
-            registerFaceWindow.Show();
         }
 
         private void buttonShutDown_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        public void ShowForm()
+        {
+            this.Show();
         }
     }
 }

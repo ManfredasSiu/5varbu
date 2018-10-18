@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VirtualLibrary
 {
-    class Book
+    public class Book //Knygos data type
     {
         private String name, auth, or, genre, pressName, code;
         private int pages, quantity;

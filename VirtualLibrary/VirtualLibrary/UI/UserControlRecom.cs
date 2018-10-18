@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VirtualLibrary.Views;
 
 namespace VirtualLibrary
 {
-    public partial class UserControlRecom : UserControl
+    public partial class UserControlRecom : UserControl, IUControlR
     {
         public UserControlRecom()
         {

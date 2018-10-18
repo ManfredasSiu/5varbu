@@ -7,22 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VirtualLibrary.API_s;
+using VirtualLibrary.Views;
+using VirtualLibrary.presenters;
 
 namespace VirtualLibrary
 {
-    public partial class UserControlHome : UserControl
+    public partial class UserControlHome : UserControl, IUControlH
     {
-        AzureDatabase ADB = new AzureDatabase();
-        CurrentUserStatistics CUS; 
+        
+        public string BooksRead { set => label8.Text = value; }
 
+        public string PagesRead { set => label9.Text = value; }
 
         public UserControlHome()
         {
             InitializeComponent();
-            ADB.GetAllBooksRead();
-            CUS = new CurrentUserStatistics();
-            label8.Text = CUS.BooksRead.ToString();
-            label9.Text = CUS.PagesRead.ToString();
+            var UCHP = new UserControlHomePresenter(this); 
         }
 
         private void UserControlHome_Load(object sender, EventArgs e)
