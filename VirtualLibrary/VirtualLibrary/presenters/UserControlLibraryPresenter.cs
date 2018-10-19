@@ -3,51 +3,70 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using VirtualLibrary.API_s;
 using VirtualLibrary.Views;
 
 namespace VirtualLibrary.presenters
 {
-    class UserControlLibraryPresenter
+    public class UserControlLibraryPresenter
     {
         IUControlL IUCL;
         IDataB ADB;
 
         public UserControlLibraryPresenter(IUControlL IUCL)
         {
-            this.IUCL = IUCL;
-            this.ADB = RefClass.Instance.LogicC.DB;
-            RefreshControl();
+            try
+            {
+                this.IUCL = IUCL;
+                this.ADB = RefClass.Instance.LogicC.DB;
+                RefreshControl();
+            }
+            catch
+            {
+                return;
+            }
         }
 
         private void RefreshControl() //Lenteliu ir mygtuku atnaujinimas
         {
-            UpdateButtons();
-            UpdateTable();
+            if(!UpdateButtons(StaticData.CurrentUser))
+                Application.Exit();
+            UpdateTable(StaticData.Books);
         }
 
-        private void UpdateButtons() //Mygtuku "perpiesimas"
+        public bool UpdateButtons(User status) //Mygtuku "perpiesimas"
         {
-            if (StaticData.CurrentUser.getPermission() == "1")
+            if (status.getPermission() == "1")
             {
                 IUCL.AddBookVisible = true;
                 IUCL.RemoveBookVisible = true;
+                return true;
             }
-            else
+            else if (status.getPermission() == "0")
             {
                 IUCL.AddBookVisible = false;
                 IUCL.RemoveBookVisible = false;
+                return true;
             }
+            else
+                return false;
         }
 
-        private void UpdateTable()  //Lenteles "perpiesimas"
+        public bool UpdateTable(List<Book> items)  //Lenteles "perpiesimas"
         {
             IUCL.Table.Rows.Clear();
-            foreach (Book item in StaticData.Books)
+            if (items.ToArray().Length > 0)
             {
-                IUCL.Table.Rows.Add(item.getCode(), item.getName(), item.getAuthor(), 
-                    item.getPressName(), item.getGenre(), item.getPages(), item.getQuantity());
+                foreach (Book item in items)
+                {
+                    IUCL.Table.Rows.Add(item.getCode(), item.getName(), item.getAuthor(),
+                        item.getPressName(), item.getGenre(), item.getPages(), item.getQuantity());
+                }
+                return true;
             }
+            else
+                return false;
         }
 
 

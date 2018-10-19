@@ -8,24 +8,36 @@ using VirtualLibrary.Views;
 
 namespace VirtualLibrary.presenters
 {
-    class UserControlMBPresenter
+    public class UserControlMBPresenter
     {
         IDataB ADB;
         IUControlMB IUCMB;
 
         public UserControlMBPresenter(IUControlMB IUCMB)
         {
-            this.IUCMB = IUCMB;
-            this.ADB = RefClass.Instance.LogicC.DB;
-            ADB.GetAllUserBooks();             //Gaunavos visos user knygos
-            updateTable();                     //Perpiesiama lentele
+            try
+            {
+                this.IUCMB = IUCMB;
+                this.ADB = RefClass.Instance.LogicC.DB;
+                ADB.GetAllUserBooks();             //Gaunavos visos user knygos
+                updateTable(StaticData.CurrentUser.getUserBooks());                     //Perpiesiama lentele
+            }
+            catch
+            {
+                return;
+            }
         }
 
-        public void updateTable()//Perpiesiama lentele
+        public bool updateTable(List<Book> items)//Perpiesiama lentele
         {
             IUCMB.DGW.Rows.Clear();
-            foreach (Book item in StaticData.CurrentUser.getUserBooks())
-                IUCMB.DGW.Rows.Add(item.getCode(), item.getName(), item.getAuthor(), item.getPressName(), null, null);
+            if (items.ToArray().Length > 0)
+            {
+                foreach (Book item in items)
+                    IUCMB.DGW.Rows.Add(item.getCode(), item.getName(), item.getAuthor(), item.getPressName(), null, null);
+                return true;
+            }
+            else return false;
         }
 
         //Knygos atidavimo logika

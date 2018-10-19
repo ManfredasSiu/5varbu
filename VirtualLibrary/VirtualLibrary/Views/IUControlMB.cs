@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace VirtualLibrary.Views
 {
-    interface IUControlMB
+    public interface IUControlMB
     {
         DataGridView DGW { get; }
 

@@ -78,7 +78,7 @@ namespace VirtualLibrary.presenters
             moveSidePanel(btn);
             AddControlsToPanel((UserControl)RefClass.Instance.InitRecomControl());
         }
-
+      
         public void LButtonBehaviour(Control btn)
         {
             moveSidePanel(btn);

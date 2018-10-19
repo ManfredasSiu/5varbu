@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace VirtualLibrary
 {
-    class User
+    public class User
     {
-        private String userName, passWord, email,  permission;
+        public String userName, passWord, email,  permission;
         
         public int ID;
 

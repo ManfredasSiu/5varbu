@@ -88,14 +88,14 @@ namespace VirtualLibrary.presenters
             RegView.ImgBoxSize = new Size(321, 241);
         }
 
-        private int CheckHowManyFaces()  //Security blokai veidu atzvilgiu
+        private int CheckHowManyFaces(int FaceArrayLength)  //Security blokai veidu atzvilgiu
         {
-            if (facesDetectedNow[0].Length == 0)
+            if (FaceArrayLength == 0)
             {
                 RegView.InitMessageBox("Veidas nerastas, bandykite dar karta");
                 return 1;
             }
-            else if (facesDetectedNow[0].Length > 1)
+            else if (FaceArrayLength > 1)
             {
                 RegView.InitMessageBox("Kadre perdaug veidu");
                 return 1;
@@ -119,9 +119,9 @@ namespace VirtualLibrary.presenters
 
         public void RegisterButtonPressed()   //Register mygtuko logika
         {
-            if (CheckTheTB() == 1) return;
+            if (CheckTheTB(RegView.password, RegView.NameText) == 1) return;
 
-            if (CheckHowManyFaces() == 1) return;
+            if (CheckHowManyFaces(facesDetectedNow[0].Length) == 1) return;
 
             PrepareForRegister();
 
@@ -142,14 +142,14 @@ namespace VirtualLibrary.presenters
                 RegProcess.Abort();
         }
 
-        private int CheckTheTB() //Security blokai textbox atzvilgiu
+        private int CheckTheTB(String pass, String Nam) //Security blokai textbox atzvilgiu
         {
-            if (RegView.NameText.Replace(" ", "") == "")
+            if (Nam.Replace(" ", "") == "")
             {
                 RegView.InitMessageBox("Username Field is empty");
                 return 1;
             }
-            else if (RegView.password.Replace(" ", "") == "")
+            else if (pass.Replace(" ", "") == "")
             {
                 RegView.InitMessageBox("Password Field is empty");
                 return 1;
