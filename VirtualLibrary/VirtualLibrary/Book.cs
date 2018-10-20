@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VirtualLibrary
 {
-    class Book
+    public partial class Book
     {
         private String name, auth, or, genre, pressName;
         private int pages, quantity, code;

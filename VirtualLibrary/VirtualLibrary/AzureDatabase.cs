@@ -20,6 +20,39 @@ namespace VirtualLibrary
             builder.InitialCatalog = "VirtualLib";
         }
 
+
+        public void GetAllBooks(string name)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Select * from [dbo].[Book];");
+                    String sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                StaticData.Books.Add(new Book(reader.GetString(1), reader.GetString(2), (int)reader.GetValue(4), reader.GetString(5), (int)reader.GetValue(7), (int)reader.GetValue(6), reader.GetString(3), (int)reader.GetValue(0)));
+                                return;
+                            }
+                            connection.Close();
+                        }
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+
+            }
+        }
+
         public int AddBook(String name, String author, int barcode, int pages)
         {
             try
@@ -111,6 +144,10 @@ namespace VirtualLibrary
         {
             try
             {
+
+
+
+
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
                     connection.Open();
@@ -211,37 +248,7 @@ namespace VirtualLibrary
             return 0;
         }
 
-        public void GetAllBooks(string name)
-        {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    connection.Open();
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("Select * from [dbo].[Book];");
-                    String sql = sb.ToString();
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                StaticData.Books.Add(new Book(reader.GetString(1), reader.GetString(2), (int)reader.GetValue(4), reader.GetString(5), (int)reader.GetValue(7), (int)reader.GetValue(6), reader.GetString(3), (int)reader.GetValue(0)));
-                                return;
-                            }
-                            connection.Close();
-                        }
-                    }
-                }
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show(e.Message);
-                return;
-
-            }
-        }
+       
 
         public void GetAllUserBooks()
         {
