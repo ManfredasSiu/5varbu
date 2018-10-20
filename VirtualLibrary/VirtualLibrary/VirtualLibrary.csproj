@@ -159,7 +159,6 @@
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
     <Compile Include="FaceApiCalls.cs" />
-    <Compile Include="FormAdminRemoveBook.cs">
     <Compile Include="API%27s\AzureDatabase.cs" />
     <Compile Include="API%27s\IDataB.cs" />
     <Compile Include="Logic\CurrentUserStatistics.cs" />
