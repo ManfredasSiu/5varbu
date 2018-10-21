@@ -22,6 +22,8 @@ namespace VirtualLibrary.presenters
             ADB = RefClass.Instance.LogicC.DB;       //Uzkraunamos knygos is duombazes
             ADB.GetAllBooks();
 
+            ADB.GetAllUserBooks();
+
             this.main = main;
 
             PanelWidth = main.panelLft;

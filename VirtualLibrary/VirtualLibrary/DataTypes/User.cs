@@ -8,7 +8,7 @@ namespace VirtualLibrary
 {
     public partial class User
     {
-        private String userName, passWord, email,  permission;
+        public String userName, passWord, email,  permission;
         
         public int ID;
 

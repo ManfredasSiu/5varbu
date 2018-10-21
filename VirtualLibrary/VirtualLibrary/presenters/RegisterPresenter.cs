@@ -149,6 +149,11 @@ namespace VirtualLibrary.presenters
                 RegView.InitMessageBox("Username Field is empty");
                 return 1;
             }
+            else if (ADB.SearchUser(RegView.NameText.Replace(" ", "")) == 2)
+            {
+                RegView.InitMessageBox("Username already excists");
+                return 1;
+            }
             else if (RegView.password.Replace(" ", "") == "")
             {
                 RegView.InitMessageBox("Password Field is empty");

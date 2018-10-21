@@ -151,14 +151,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AzureDatabase.cs" />
-    <Compile Include="Book.cs" />
     <Compile Include="DataClasses1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
-    <Compile Include="FaceApiCalls.cs" />
     <Compile Include="API%27s\AzureDatabase.cs" />
     <Compile Include="API%27s\IDataB.cs" />
     <Compile Include="Logic\CurrentUserStatistics.cs" />
