@@ -9,7 +9,7 @@ using VirtualLibrary.Views;
 
 namespace VirtualLibrary.presenters
 {
-    class MainPresenter
+    public class MainPresenter
     {
         IDataB ADB;
         IMain main;
@@ -19,31 +19,36 @@ namespace VirtualLibrary.presenters
 
         public MainPresenter(IMain main)
         {
-            this.main = main;
-            ADB = RefClass.Instance.LogicC.DB;
             try
             {
-                LoadData(ADB);
+                this.main = main;
+                ADB = RefClass.Instance.LogicC.DB;
+                try
+                {
+                    LoadData(ADB);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                    Application.Exit();
+                }
+
+                PanelWidth = main.panelLft;
+                isCollapsed = false;
+
+                AddControlsToPanel((UserControl)RefClass.Instance.InitHomeControl()); //Inicijuojama Home user control
+
+                //Atspausdinama reikiama info apie useri
+
+                if (LoadUIPermission(StaticData.CurrentUser) == 0)
+                {
+                    MessageBox.Show("Nepavyko uzkrauti duomenu, paleiskite programa is naujo");
+                    Application.Exit();
+                }
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.StackTrace);
-                MessageBox.Show(e.StackTrace);
-                Application.Exit();
-            }
-            
-
-            PanelWidth = main.panelLft;
-            isCollapsed = false;
-
-            AddControlsToPanel((UserControl)RefClass.Instance.InitHomeControl()); //Inicijuojama Home user control
-
-            //Atspausdinama reikiama info apie useri
-
-            if (LoadUIPermission(StaticData.CurrentUser) == 0)
-            {
-                MessageBox.Show("Nepavyko uzkrauti duomenu, paleiskite programa is naujo");
-                Application.Exit();
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -84,8 +89,8 @@ namespace VirtualLibrary.presenters
 
         public void timer2Ticks()
         {
-            DateTime dateTime = DateTime.UtcNow.Date;
-            main.Date = dateTime.ToString("yyyy-MM-dd");
+            DateTime dateTime = DateTime.Now;
+            main.Date = dateTime.ToString();
         }
 
         //Soninio sliderio logika

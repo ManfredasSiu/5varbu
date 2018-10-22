@@ -30,6 +30,8 @@ namespace VirtualLibrary
 
         public Timer Tmr1 { get => timer1; set => timer1 = value; }
 
+        public Timer Tmr2 { get => timer2; }
+
         string IMain.UserName { get => UserName.Text; set => UserName.Text = value; }
 
         MainPresenter MP;
