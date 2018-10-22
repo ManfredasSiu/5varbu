@@ -11,16 +11,17 @@ namespace VirtualLibrary
 {
     public class AzureDatabase : API_s.IDataB
     {
-        DataClasses1DataContext db;
-        public AzureDatabase(DataClasses1DataContext db)
+        public AzureDatabase()
         {
-            this.db = db;
+           
         }
        
         public int AddBook(Book AddThis)
         {
             try
-            {                Book book = new Book();
+            {
+                DataClasses1DataContext db = new DataClasses1DataContext();
+                Book book = new Book();
                 book.Name = AddThis.getName();
                 book.Author = AddThis.getAuthor();
                 book.Press = AddThis.getPressName();
@@ -44,6 +45,7 @@ namespace VirtualLibrary
             try
             {
                 string s = Convert.ToString(Permission);
+                DataClasses1DataContext db = new DataClasses1DataContext();
                 User user = new User();
                 user.Name = name;
                 user.Password = Password;
@@ -64,6 +66,7 @@ namespace VirtualLibrary
         {
             try
             {
+                DataClasses1DataContext db = new DataClasses1DataContext();
                 var naudotojas = from u in db.Users
                                 where u.Name == name
                                 select u;
@@ -81,6 +84,7 @@ namespace VirtualLibrary
         {
             try
             {
+                DataClasses1DataContext db = new DataClasses1DataContext();
                 var naudotojas = from u in db.Users
                                  where u.Name == name
                                  select u;
@@ -110,6 +114,7 @@ namespace VirtualLibrary
             //Reik sukurt lentelę, kur dėsim perskaitytas knygas - knygos ID ir reader ID
             try
             {
+                DataClasses1DataContext db = new DataClasses1DataContext();
                 var knyga = from u in db.UserBooks
                             where u.UserID == StaticData.CurrentUser.ID && u.BookID == delThis.ID
                             select u;
@@ -144,6 +149,7 @@ namespace VirtualLibrary
         {
             try
             {
+                DataClasses1DataContext db = new DataClasses1DataContext();
                 var knygos = from u in db.UserBooks
                              where u.UserID == StaticData.CurrentUser.ID
                              select u;
@@ -171,6 +177,7 @@ namespace VirtualLibrary
         {
             try
             {
+                DataClasses1DataContext db = new DataClasses1DataContext();
                 var knygos = from u in db.BooksReads
                              where u.UserID == StaticData.CurrentUser.ID
                              select u;
@@ -199,6 +206,7 @@ namespace VirtualLibrary
         {
             try
             {
+                DataClasses1DataContext db = new DataClasses1DataContext();
                 UserBook book = new UserBook();
                 book.UserID = StaticData.CurrentUser.ID;
                 book.BookID = addThis.ID;
@@ -225,6 +233,7 @@ namespace VirtualLibrary
             {
                 try
                 {
+                    DataClasses1DataContext db = new DataClasses1DataContext();
                     var knygos = from u in db.Books
                                  select u;
                     List<Book> templist = new List<Book>();
