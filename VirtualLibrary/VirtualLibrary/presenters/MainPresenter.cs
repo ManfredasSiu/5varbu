@@ -32,7 +32,7 @@ namespace VirtualLibrary.presenters
                 MessageBox.Show(e.StackTrace);
                 Application.Exit();
             }
-            
+            main.Tmr2.Start();
 
             PanelWidth = main.panelLft;
             isCollapsed = false;
@@ -84,8 +84,8 @@ namespace VirtualLibrary.presenters
 
         public void timer2Ticks()
         {
-            DateTime dateTime = DateTime.UtcNow.Date;
-            main.Date = dateTime.ToString("yyyy-MM-dd");
+            DateTime dateTime = DateTime.Now;
+            main.Date = dateTime.ToString();
         }
 
         //Soninio sliderio logika

@@ -26,6 +26,8 @@ namespace VirtualLibrary.Views
         int panelSideHgh { set; }
 
         Timer Tmr1 { get; set; }
+        
+        Timer Tmr2 { get; }
 
         void refresh();
     }
