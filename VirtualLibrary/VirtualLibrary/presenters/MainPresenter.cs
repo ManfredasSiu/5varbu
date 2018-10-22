@@ -19,6 +19,8 @@ namespace VirtualLibrary.presenters
 
         public MainPresenter(IMain main)
         {
+
+            this.main = main;
             ADB = RefClass.Instance.LogicC.DB;
             try
             {
@@ -26,11 +28,11 @@ namespace VirtualLibrary.presenters
             }
             catch(Exception e)
             {
-                MessageBox.Show("Nepavyko uzkrauti duomenu, paleiskite programa is naujo");
+                Console.WriteLine(e.StackTrace);
+                MessageBox.Show(e.StackTrace);
                 Application.Exit();
             }
             
-            this.main = main;
 
             PanelWidth = main.panelLft;
             isCollapsed = false;
@@ -60,7 +62,7 @@ namespace VirtualLibrary.presenters
             else { return 0; }
         }
 
-        public void LoadData(IDataB DB)
+        public int LoadData(IDataB DB)
         {
             try
             {
@@ -70,8 +72,9 @@ namespace VirtualLibrary.presenters
                 StaticData.CurrentUser.setBooksRead(DB.GetAllBooksRead());
                 StaticData.CurrentUser.setUserBooks(DB.GetAllUserBooks());
                 main.UserName = StaticData.CurrentUser.getuserName();
+                return 0;
             }
-            catch
+            catch (Exception e)
             {
                 throw;
             }
