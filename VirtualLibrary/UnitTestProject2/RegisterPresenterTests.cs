@@ -39,7 +39,7 @@ namespace UnitTestProject2
         public void CheckTheTB_NoVarnings_Return0()
         {
             RegisterPresenter RP = new RegisterPresenter(new Form2());
-            int result = RP.CheckTheTB("password", "name", new AzureDatabase(new DataClasses1DataContext()));
+            int result = RP.CheckTheTB("password", "name", new AzureDatabase());
             Assert.AreEqual(result, 0);
         }
 
@@ -47,7 +47,7 @@ namespace UnitTestProject2
         public void CheckTheTB_NameFieldIsEmpty_Return3()
         {
             RegisterPresenter RP = new RegisterPresenter(new Form2());
-            int result = RP.CheckTheTB("password", "", new AzureDatabase(new DataClasses1DataContext()));
+            int result = RP.CheckTheTB("password", "", new AzureDatabase());
             Assert.AreEqual(result, 1);
         }
 
@@ -55,7 +55,7 @@ namespace UnitTestProject2
         public void CheckTheTB_PasswordFieldIsEmpty_Return3()
         {
             RegisterPresenter RP = new RegisterPresenter(new Form2());
-            int result = RP.CheckTheTB("", "name", new AzureDatabase(new DataClasses1DataContext()));
+            int result = RP.CheckTheTB("", "name", new AzureDatabase());
             Assert.AreEqual(result, 3);
         }
 
@@ -63,7 +63,7 @@ namespace UnitTestProject2
         public void CheckTheTB_NameHasIlegalChar_Return4()
         {
             RegisterPresenter RP = new RegisterPresenter(new Form2());
-            int result = RP.CheckTheTB("notemp", "%%%Name#@$", new AzureDatabase(new DataClasses1DataContext()));
+            int result = RP.CheckTheTB("notemp", "%%%Name#@$", new AzureDatabase());
             Assert.AreEqual(result, 4);
         }
     }

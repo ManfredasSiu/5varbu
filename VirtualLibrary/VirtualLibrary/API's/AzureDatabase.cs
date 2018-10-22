@@ -12,11 +12,16 @@ namespace VirtualLibrary
     public class AzureDatabase : API_s.IDataB
     {
         DataClasses1DataContext db;
-        public AzureDatabase(DataClasses1DataContext db)
+        public AzureDatabase()
         {
-            this.db = db;
+            this.db = CreateDC();
         }
        
+
+        public DataClasses1DataContext CreateDC()
+        {
+            return new DataClasses1DataContext();
+        }
         public int AddBook(Book AddThis)
         {
             try

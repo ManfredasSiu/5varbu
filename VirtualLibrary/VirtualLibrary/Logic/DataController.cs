@@ -15,7 +15,7 @@ namespace VirtualLibrary
     public class DataController
     {
 
-        public IDataB DB = new AzureDatabase(new DataClasses1DataContext());
+        public IDataB DB = new AzureDatabase();
 
         public int TempDirectoryController(string action, string name, Bitmap face, int iterator)
         {
