@@ -79,7 +79,7 @@ namespace VirtualLibrary.presenters
                 main.UserName = StaticData.CurrentUser.getuserName();
                 return 0;
             }
-            catch (Exception e)
+            catch
             {
                 throw;
             }
