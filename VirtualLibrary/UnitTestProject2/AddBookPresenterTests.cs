@@ -37,5 +37,15 @@ namespace UnitTestProject2
 
             Assert.AreEqual(result, 2);
         }
+
+        [TestMethod]
+        public void CheckTBs_OneOrMoreFieldsHasSpecChars_Return3()
+        {
+            var ABP = new AddBookPresenter(new FormAdminAddBook());
+
+            var result = ABP.CheckTBs("1", "2", "$$$$3", "4", "5", "6", "7");
+
+            Assert.AreEqual(result, 3);
+        }
     }
 }
