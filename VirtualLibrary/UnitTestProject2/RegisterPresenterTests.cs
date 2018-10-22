@@ -9,7 +9,7 @@ using VirtualLibrary.presenters;
 namespace UnitTestProject2
 {
     [TestClass]
-    public class RegisterPresenterTest
+    public class RegisterPresenterTests
     {
         [TestMethod]
         public void CheckHowManyFaces_FacesNotFound_Return1()

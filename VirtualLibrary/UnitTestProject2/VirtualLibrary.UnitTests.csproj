@@ -50,7 +50,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RegisterPresenterTest.cs" />
+    <Compile Include="RegisterPresenterTests.cs" />
     <Compile Include="AddBookPresenterTests.cs" />
     <Compile Include="UserControlMBPresenterTests.cs" />
     <Compile Include="UserControlLibraryPresenterTests.cs" />
