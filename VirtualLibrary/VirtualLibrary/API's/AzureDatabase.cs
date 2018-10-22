@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace VirtualLibrary 
 {
-    class AzureDatabase : API_s.IDataB
+    public class AzureDatabase : API_s.IDataB
     {
         SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
         public AzureDatabase()

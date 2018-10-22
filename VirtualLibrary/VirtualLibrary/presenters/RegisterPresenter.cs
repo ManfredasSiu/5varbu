@@ -13,7 +13,7 @@ using VirtualLibrary.Views;
 
 namespace VirtualLibrary.presenters
 {
-    class RegisterPresenter
+    public class RegisterPresenter
     {
         IRegister RegView;
         Image<Bgr, Byte> frame;
@@ -34,21 +34,28 @@ namespace VirtualLibrary.presenters
 
         public RegisterPresenter(IRegister RegView)
         {
-            this.RegView = RegView;
-            faceDetect = new HaarCascade("haarcascade_frontalface_default.xml"); //Skirta veidu atpazinimui
-            LogicC = RefClass.Instance.LogicC;
-            this.ADB = LogicC.DB;
             try
             {
-                cam = new Capture();
+                this.RegView = RegView;
+                faceDetect = new HaarCascade("haarcascade_frontalface_default.xml"); //Skirta veidu atpazinimui
+                LogicC = RefClass.Instance.LogicC;
+                this.ADB = LogicC.DB;
+                try
+                {
+                    cam = new Capture();
+                }
+                catch
+                {
+                    cam = null;
+                    RegView.InitMessageBox("Neturi kameros, arba ji blogai prijungta, registracija negalima");
+                    RegView.CloseForm();
+                }
+                Application.Idle += FrameProcedure;
             }
-            catch 
+            catch
             {
-                cam = null;
-                RegView.InitMessageBox("Neturi kameros, arba ji blogai prijungta, registracija negalima");
-                RegView.CloseForm();
+                return;
             }
-            Application.Idle += FrameProcedure;
         }
 
         private void FrameProcedure(Object sender, EventArgs e) //Analogiskaip kaip ir login formoj
@@ -88,17 +95,15 @@ namespace VirtualLibrary.presenters
             RegView.ImgBoxSize = new Size(321, 241);
         }
 
-        private int CheckHowManyFaces(int FaceArrayLength)  //Security blokai veidu atzvilgiu
+        public int CheckHowManyFaces(int FaceArrayLength)  //Security blokai veidu atzvilgiu
         {
             if (FaceArrayLength == 0)
             {
-                RegView.InitMessageBox("Veidas nerastas, bandykite dar karta");
                 return 1;
             }
             else if (FaceArrayLength > 1)
             {
-                RegView.InitMessageBox("Kadre perdaug veidu");
-                return 1;
+                return 2;
             }
             return 0;
         }
@@ -119,9 +124,39 @@ namespace VirtualLibrary.presenters
 
         public void RegisterButtonPressed()   //Register mygtuko logika
         {
-            if (CheckTheTB(RegView.password, RegView.NameText) == 1) return;
+            int check = CheckTheTB(RegView.password, RegView.NameText, ADB);
 
-            if (CheckHowManyFaces(facesDetectedNow[0].Length) == 1) return;
+            if (check == 1)
+            {
+                RegView.InitMessageBox("Username Field is empty");
+                return;
+            }
+
+            else if (check == 2)
+            {
+                RegView.InitMessageBox("This username already exists");
+                return;
+            }
+
+            else if (check == 3)
+            {
+                RegView.InitMessageBox("Password Field is empty");
+                return;
+            }
+
+            check = CheckHowManyFaces(facesDetectedNow[0].Length);
+
+            if (check == 1)
+            {
+                RegView.InitMessageBox("Veidas nerastas, bandykite dar karta");
+                return;
+            }
+
+            else if (check == 2)
+            {
+                RegView.InitMessageBox("Kadre perdaug veidu");
+                return;
+            }
 
             PrepareForRegister();
 
@@ -142,17 +177,21 @@ namespace VirtualLibrary.presenters
                 RegProcess.Abort();
         }
 
-        private int CheckTheTB(String pass, String Nam) //Security blokai textbox atzvilgiu
+        public int CheckTheTB(String pass, String Nam, IDataB DB) //Security blokai textbox atzvilgiu
         {
             if (Nam.Replace(" ", "") == "")
             {
-                RegView.InitMessageBox("Username Field is empty");
                 return 1;
             }
+            
+            else if (DB.SearchUser(Nam) == 2)
+            {
+                return 2;
+            }   
+            
             else if (pass.Replace(" ", "") == "")
             {
-                RegView.InitMessageBox("Password Field is empty");
-                return 1;
+                return 3;
             }
             return 0;
         }
