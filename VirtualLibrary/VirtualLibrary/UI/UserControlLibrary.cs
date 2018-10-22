@@ -21,6 +21,10 @@ namespace VirtualLibrary
 
         public DataGridView Table => dataGridView2;
 
+        public Control addBtn => buttonAddBook;
+
+        public Control removeBtn => buttonRemoveBook;
+
         public UserControlLibrary()
         {
             InitializeComponent();

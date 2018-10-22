@@ -150,7 +150,6 @@ namespace VirtualLibrary.presenters
                     return;
             }
 
-
             PrepareForRegister();
 
             InstantiateRedDot();

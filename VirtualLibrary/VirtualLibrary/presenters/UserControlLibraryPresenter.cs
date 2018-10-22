@@ -43,8 +43,8 @@ namespace VirtualLibrary.presenters
         {
             if (status.getPermission() == "1")
             {
-                IUCL.AddBookVisible = true;
-                IUCL.RemoveBookVisible = true;
+                IUCL.removeBtn.Dispose();
+                IUCL.addBtn.Dispose();
                 return true;
             }
             else if (status.getPermission() == "0")

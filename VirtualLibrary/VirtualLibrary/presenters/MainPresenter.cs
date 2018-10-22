@@ -19,11 +19,17 @@ namespace VirtualLibrary.presenters
 
         public MainPresenter(IMain main)
         {
-            ADB = RefClass.Instance.LogicC.DB;       //Uzkraunamos knygos is duombazes
-            StaticData.Books = ADB.GetAllBooks();
-            StaticData.CurrentUser.setBooksRead(ADB.GetAllBooksRead());
-            StaticData.CurrentUser.setUserBooks(ADB.GetAllUserBooks());
-
+            ADB = RefClass.Instance.LogicC.DB;
+            try
+            {
+                LoadData(ADB);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Nepavyko uzkrauti duomenu, paleiskite programa is naujo");
+                Application.Exit();
+            }
+            
             this.main = main;
 
             PanelWidth = main.panelLft;
@@ -32,11 +38,43 @@ namespace VirtualLibrary.presenters
             AddControlsToPanel((UserControl)RefClass.Instance.InitHomeControl()); //Inicijuojama Home user control
 
             //Atspausdinama reikiama info apie useri
-            main.UserName = StaticData.CurrentUser.getuserName();  
-            if (StaticData.CurrentUser.getPermission() == "1")
+            if (LoadUIPermission(StaticData.CurrentUser) == 0)
+            {
+                MessageBox.Show("Nepavyko uzkrauti duomenu, paleiskite programa is naujo");
+                Application.Exit();
+            }
+        }
+
+        public int LoadUIPermission(User user)
+        {
+            if (user.getPermission() == "1")
+            {
                 main.Status = "ADMIN";
-            else
+                return 0;
+            }
+            else if(user.getPermission() == "0")
+            {
                 main.Status = "Reader";
+                return 1;
+            }
+            else { return 0; }
+        }
+
+        public void LoadData(IDataB DB)
+        {
+            try
+            {
+                       //Uzkraunamos knygos is duombazes
+                StaticData.Books = DB.GetAllBooks();
+                //Uzkraunami userio duomenys
+                StaticData.CurrentUser.setBooksRead(DB.GetAllBooksRead());
+                StaticData.CurrentUser.setUserBooks(DB.GetAllUserBooks());
+                main.UserName = StaticData.CurrentUser.getuserName();
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         //Data(?)

@@ -22,8 +22,9 @@ namespace VirtualLibrary.presenters
                 StaticData.CurrentUser.setUserBooks(ADB.GetAllUserBooks());             //Gaunavos visos user knygos
                 updateTable(StaticData.CurrentUser.getUserBooks());                     //Perpiesiama lentele
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e.Message);
                 return;
             }
             this.IUCMB = IUCMB;
