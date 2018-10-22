@@ -29,7 +29,7 @@ namespace VirtualLibrary.presenters
             this.IUCMB = IUCMB;
             this.ADB = RefClass.Instance.LogicC.DB;
             StaticData.CurrentUser.setUserBooks(ADB.GetAllUserBooks());             //Gaunavos visos user knygos
-            updateTable();                     //Perpiesiama lentele
+            updateTable(StaticData.CurrentUser.getUserBooks());                     //Perpiesiama lentele
         }
 
         public bool updateTable(List<Book> items)//Perpiesiama lentele

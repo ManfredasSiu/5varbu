@@ -15,10 +15,10 @@ namespace VirtualLibrary
 
         public int ID;
 
-        public Book()
-        {
+       // public Book()
+        //{
 
-        }
+        //}
 
         public Book(String name, String auth, string code, string genre, int quantity, int pages, string pressName, int ID)
         {
