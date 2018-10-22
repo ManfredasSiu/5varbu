@@ -20,9 +20,9 @@ namespace VirtualLibrary.presenters
         public MainPresenter(IMain main)
         {
             ADB = RefClass.Instance.LogicC.DB;       //Uzkraunamos knygos is duombazes
-            ADB.GetAllBooks();
-
-            ADB.GetAllUserBooks();
+            StaticData.Books = ADB.GetAllBooks();
+            StaticData.CurrentUser.setBooksRead(ADB.GetAllBooksRead());
+            StaticData.CurrentUser.setUserBooks(ADB.GetAllUserBooks());
 
             this.main = main;
 

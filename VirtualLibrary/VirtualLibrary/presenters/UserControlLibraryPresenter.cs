@@ -17,6 +17,7 @@ namespace VirtualLibrary.presenters
         {
             this.IUCL = IUCL;
             this.ADB = RefClass.Instance.LogicC.DB;
+            StaticData.Books = ADB.GetAllBooks();
             RefreshControl();
         }
 

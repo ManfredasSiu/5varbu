@@ -35,13 +35,13 @@ namespace VirtualLibrary
                 book.Quantity = AddThis.getQuantity();
                 db.Books.InsertOnSubmit(book);
                 db.SubmitChanges();
+                return 0;
             }
             catch (SqlException e)
             {
                 MessageBox.Show(e.Message);
                 return 1;
             }
-            return 0;
         }
 
         public int AddUser(String name, String Password, String email, int Permission)
@@ -57,13 +57,13 @@ namespace VirtualLibrary
                 user.Permission = s;
                 db.Users.InsertOnSubmit(user);
                 db.SubmitChanges();
+                return 0;
             }
             catch (SqlException e)
             {
                 MessageBox.Show(e.Message);
                 return 1;
-            }
-            return 0;
+            } 
         }
 
         public int SearchUser(string name)
@@ -74,17 +74,17 @@ namespace VirtualLibrary
                 var naudotojas = from u in db.Users
                                 where u.Name == name
                                 select u;
-                if (naudotojas.ToArray().Length != 0) { return 2; }    
+                if (naudotojas.ToArray().Length != 0) { return 2; }
+                return 0;
             }
             catch (SqlException e)
             {
                 MessageBox.Show(e.Message);
                 return 1;
             }
-            return 0;
         }
 
-        public String[] GetUser(string name)
+        public User GetUser(string name)
         {
             try
             {
@@ -92,19 +92,18 @@ namespace VirtualLibrary
                 var naudotojas = from u in db.Users
                                  where u.Name == name
                                  select u;
-
+               // User[] naud = naudotojas.ToArray();
                 User user = new User();
                 foreach (var item in naudotojas)
-                { 
+                {
                     user.ID = item.Id;
                     user.userName = item.Name;
                     user.passWord = item.Password;
                     user.email = item.Email;
                     user.permission = item.Permission;
                 }
-                //cia gal nelogiskas foreach??
-                StaticData.CurrentUser = user;
-                return null;
+                //StaticData.CurrentUser = user;
+                return user; //????
             }
             catch (SqlException e)
             {
@@ -141,20 +140,16 @@ namespace VirtualLibrary
                     item.Quantity++;
                 }
                 db.SubmitChanges();
-
-                
+                return 0;
             }
             catch (SqlException e)
             {
                 MessageBox.Show(e.Message);
                 return 1;
             }
-            return 0;
         }
 
-        
-
-        public void GetAllUserBooks()
+        public List<Book> GetAllUserBooks()
         {
             try
             {
@@ -171,18 +166,18 @@ namespace VirtualLibrary
                     //ar nereikia kitų parametrų?
                     bookIDList.Add(StaticData.Books.Find(x => x.ID == item.BookID));
                 }
-                StaticData.CurrentUser.setUserBooks(bookIDList);
-                return;
+                //StaticData.CurrentUser.setUserBooks(bookIDList);
+                return bookIDList;
             }
             catch (SqlException e)
             {
                 MessageBox.Show(e.Message);
-                return;
+                return null;
             }
 
         }
 
-        public void GetAllBooksRead()
+        public List<Book> GetAllBooksRead()
         {
             try
             {
@@ -200,18 +195,18 @@ namespace VirtualLibrary
                     bookIDList.Add(StaticData.Books.Find(x => x.ID == item.BookID));
                 }
                 
-                StaticData.CurrentUser.setBooksRead(bookIDList);
-                return;
+               // StaticData.CurrentUser.setBooksRead(bookIDList);
+                return bookIDList;
             }
             catch (SqlException e)
             {
                 MessageBox.Show(e.Message);
-                return;
+                return null;
             }
         }
 
 
-        public void BorrowBook (Book addThis)
+        public int BorrowBook (Book addThis)
         {
             try
             {
@@ -229,15 +224,16 @@ namespace VirtualLibrary
                     item.Quantity--;
                 }
                 db.SubmitChanges();
+                return 0;
             }
             catch(SqlException e)
             {
                 MessageBox.Show(e.Message);
-                return;
+                return 1;
             }
         }
 
-        public void GetAllBooks()
+        public List<Book> GetAllBooks()
             {
                 try
                 {
@@ -248,7 +244,7 @@ namespace VirtualLibrary
                     foreach (var item in knygos)
                     {
                         Book book = new Book();
-                        book.ID = item.ID;
+                        book.ID = item.Id;
                         book.name = item.Name;
                         book.auth = item.Author;
                         book.pressName = item.Press;
@@ -258,13 +254,12 @@ namespace VirtualLibrary
                         book.quantity = item.Quantity;
                         templist.Add(book);
                     }
-                    StaticData.Books = templist;
-                return;
+                    return templist;
                 }
                 catch (SqlException e)
                 {
                     MessageBox.Show(e.Message);
-                    return;
+                    return null;
                 }
             }
         }

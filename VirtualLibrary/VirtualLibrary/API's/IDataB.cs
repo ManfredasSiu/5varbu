@@ -14,16 +14,16 @@ namespace VirtualLibrary.API_s
 
         int SearchUser(string name);
 
-        String[] GetUser(string name);
+        User GetUser(string name);
 
         int ReturnBook(Book delThis);
 
-        void GetAllBooks();
+        List<Book> GetAllBooks();
 
-        void GetAllUserBooks();
+        List<Book> GetAllUserBooks();
 
-        void GetAllBooksRead();
+        List<Book> GetAllBooksRead();
 
-        void BorrowBook(Book addThis);
+        int BorrowBook(Book addThis);
     }
 }
