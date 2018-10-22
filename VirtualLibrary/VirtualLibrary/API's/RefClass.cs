@@ -38,6 +38,11 @@ namespace VirtualLibrary
             return new CurrentUserStatistics();
         }
 
+        public ICallAzureAPI InitAzureFaceApi()
+        {
+            return new FaceApiCalls();
+        }
+
         public DataController LogicC = new DataController();
 
         //Forms

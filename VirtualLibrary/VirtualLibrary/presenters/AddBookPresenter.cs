@@ -9,7 +9,7 @@ using VirtualLibrary.Views;
 
 namespace VirtualLibrary.presenters
 {
-    class AddBookPresenter
+    public class AddBookPresenter
     {
         IAddBook AB;
         IDataB ADB;
@@ -22,7 +22,7 @@ namespace VirtualLibrary.presenters
 
         public void AddBookButton()
         {
-            if (CheckTBs() == 1)
+            if (CheckTBs(AB.NameField, AB.AuthorField, AB.PressField, AB.Pagesfield, AB.GenreField, AB.QuantityField, AB.BarcodeField) == 1)
             {
                 MessageBox.Show("Nevisi laukai uzpildyti arba uzpildyti nelegaliai\nUzpildykite laukus pries tesdami");
                 return;
@@ -35,9 +35,9 @@ namespace VirtualLibrary.presenters
             AB.CloseForm();
         }
 
-        public int CheckTBs()  //Tikrinama ar texfieldai visi uzpildyti ir ar uzpildyti legaliai
+        public int CheckTBs(string NameField, string AuthorField, string PressField, string Pagesfield, string GenreField, string  QuantityField, string BarcodeField)  //Tikrinama ar texfieldai visi uzpildyti ir ar uzpildyti legaliai
         {
-            String[] TBs = { AB.NameField, AB.AuthorField, AB.PressField, AB.Pagesfield, AB.GenreField, AB.QuantityField, AB.BarcodeField };
+            String[] TBs = { NameField, AuthorField, PressField, Pagesfield, GenreField, QuantityField, BarcodeField };
             foreach (string tb in TBs)
             {
                 if (tb.Replace(" ", "") == "")
@@ -45,12 +45,12 @@ namespace VirtualLibrary.presenters
             }
             try
             {
-                int.Parse(AB.QuantityField);
-                int.Parse(AB.Pagesfield);
+                int.Parse(QuantityField);
+                int.Parse(Pagesfield);
             }
             catch
             {
-                return 1;
+                return 2;
             }
             return 0;
         }

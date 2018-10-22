@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RegisterPresenterTest.cs" />
+    <Compile Include="AddBookPresenterTests.cs" />
     <Compile Include="UserControlMBPresenterTests.cs" />
     <Compile Include="UserControlLibraryPresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

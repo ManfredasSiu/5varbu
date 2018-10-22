@@ -58,5 +58,13 @@ namespace UnitTestProject2
             int result = RP.CheckTheTB("", "name", new AzureDatabase());
             Assert.AreEqual(result, 3);
         }
+
+        [TestMethod]
+        public void CheckTheTB_NameHasIlegalChar_Return4()
+        {
+            RegisterPresenter RP = new RegisterPresenter(new Form2());
+            int result = RP.CheckTheTB("notemp", "%%%Name#@$", new AzureDatabase());
+            Assert.AreEqual(result, 4);
+        }
     }
 }

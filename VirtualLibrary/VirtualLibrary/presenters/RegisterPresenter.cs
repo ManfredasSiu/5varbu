@@ -136,6 +136,9 @@ namespace VirtualLibrary.presenters
                 case 3:
                     RegView.InitMessageBox("Password Field is empty");
                     return;
+                case 4:
+                    RegView.InitMessageBox("Yra nelegaliu simboliu vardo eiluteje");
+                    return;
             }
         
             check = CheckHowManyFaces(facesDetectedNow[0].Length);
@@ -171,6 +174,7 @@ namespace VirtualLibrary.presenters
 
         public int CheckTheTB(String pass, String Nam, IDataB DB) //Security blokai textbox atzvilgiu
         {
+            var noSpecials = new System.Text.RegularExpressions.Regex("^[a-zA-Z0-9]*$");
             if (Nam.Replace(" ", "") == "")
             {
                 return 1;
@@ -179,16 +183,21 @@ namespace VirtualLibrary.presenters
             {
                 return 2;
             }
+
             else if (pass.Replace(" ", "") == "")
             {
                 return 3;
+            }
+            else if(!noSpecials.IsMatch(Nam))
+            {
+                return 4;
             }
             return 0;
         }
 
         public async void RegisterProcessAsync()
         {
-            FaceApiCalls FAC = new FaceApiCalls();
+            var FAC = RefClass.Instance.InitAzureFaceApi();
             InProgress = true;
             int iterator = 0;
             while (iterator < 10)

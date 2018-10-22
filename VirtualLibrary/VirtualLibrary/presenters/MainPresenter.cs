@@ -64,7 +64,7 @@ namespace VirtualLibrary.presenters
         {
             try
             {
-                       //Uzkraunamos knygos is duombazes
+                //Uzkraunamos knygos is duombazes
                 StaticData.Books = DB.GetAllBooks();
                 //Uzkraunami userio duomenys
                 StaticData.CurrentUser.setBooksRead(DB.GetAllBooksRead());

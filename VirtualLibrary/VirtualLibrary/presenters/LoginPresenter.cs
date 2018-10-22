@@ -103,7 +103,7 @@ namespace VirtualLibrary.presenters
         public async Task<string> startRecAsync()   //Veido atpazinimo metodas
         {
             block = true;
-            FaceApiCalls FAC = new FaceApiCalls();
+            var FAC = RefClass.Instance.InitAzureFaceApi();
             try
             {
                 var name = await FAC.RecognitionAsync(Application.StartupPath + "TempImg.jpg");  //Siunciama uzklausa i API
