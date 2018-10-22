@@ -183,12 +183,10 @@ namespace VirtualLibrary.presenters
             {
                 return 1;
             }
-            
             else if (DB.SearchUser(Nam) == 2)
             {
                 return 2;
-            }   
-            
+            }
             else if (pass.Replace(" ", "") == "")
             {
                 return 3;

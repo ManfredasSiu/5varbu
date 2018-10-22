@@ -109,7 +109,8 @@ namespace VirtualLibrary.presenters
                 var name = await FAC.RecognitionAsync(Application.StartupPath + "TempImg.jpg");  //Siunciama uzklausa i API
                 if (name != null)
                 {
-                    String[] data = RefClass.Instance.LogicC.DB.GetUser(name);                   //Uzkraunamas vartotojas
+                    User data = RefClass.Instance.LogicC.DB.GetUser(name);
+                    StaticData.CurrentUser = data;      //Uzkraunamas vartotojas
                 }
                 else loginview.CloseForm();
                 return name;

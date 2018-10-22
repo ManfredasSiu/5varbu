@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace VirtualLibrary
 {
-    public class User
+
+    public partial class User
     {
         public String userName, passWord, email,  permission;
         
@@ -82,7 +83,6 @@ namespace VirtualLibrary
         {
             return BooksRead;
         }
-        
 
     }
 }
