@@ -9,7 +9,7 @@ using VirtualLibrary.Views;
 
 namespace VirtualLibrary.presenters
 {
-    class MainPresenter
+    public class MainPresenter
     {
         IDataB ADB;
         IMain main;

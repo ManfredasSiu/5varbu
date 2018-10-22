@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace VirtualLibrary.Views
 {
-    interface IMain
+    public interface IMain
     {
         Control NewControl { set; }
 
