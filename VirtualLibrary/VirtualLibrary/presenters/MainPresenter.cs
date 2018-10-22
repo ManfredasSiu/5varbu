@@ -9,7 +9,7 @@ using VirtualLibrary.Views;
 
 namespace VirtualLibrary.presenters
 {
-    class MainPresenter
+    public class MainPresenter
     {
         IDataB ADB;
         IMain main;
@@ -19,7 +19,6 @@ namespace VirtualLibrary.presenters
 
         public MainPresenter(IMain main)
         {
-
             this.main = main;
             ADB = RefClass.Instance.LogicC.DB;
             try
@@ -40,6 +39,7 @@ namespace VirtualLibrary.presenters
             AddControlsToPanel((UserControl)RefClass.Instance.InitHomeControl()); //Inicijuojama Home user control
 
             //Atspausdinama reikiama info apie useri
+
             if (LoadUIPermission(StaticData.CurrentUser) == 0)
             {
                 MessageBox.Show("Nepavyko uzkrauti duomenu, paleiskite programa is naujo");
