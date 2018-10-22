@@ -17,7 +17,7 @@ namespace VirtualLibrary.presenters
         {
             this.IUCMB = IUCMB;
             this.ADB = RefClass.Instance.LogicC.DB;
-            ADB.GetAllUserBooks();             //Gaunavos visos user knygos
+            StaticData.CurrentUser.setUserBooks(ADB.GetAllUserBooks());             //Gaunavos visos user knygos
             updateTable();                     //Perpiesiama lentele
         }
 
