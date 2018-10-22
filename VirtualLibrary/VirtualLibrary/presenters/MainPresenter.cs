@@ -50,7 +50,7 @@ namespace VirtualLibrary.presenters
             if (user.getPermission() == "1")
             {
                 main.Status = "ADMIN";
-                return 0;
+                return 2;
             }
             else if(user.getPermission() == "0")
             {
