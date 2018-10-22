@@ -45,6 +45,7 @@ namespace VirtualLibrary.presenters
             if (cam == null) //Tikrinama ar pavyko sukurti kamera
             {
                 //StaticData.CurrentUser = new User(999, "Debug", "Debug", null, "1");
+
                 loginview.CloseForm();
                 //RefClass.Instance.InitMainForm();  //Vladislav atsikometuok abudu
                 return;

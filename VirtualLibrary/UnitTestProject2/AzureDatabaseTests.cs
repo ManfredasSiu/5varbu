@@ -1,4 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Transactions;
+using VirtualLibrary;
+using VirtualLibrary.API_s;
 
 namespace UnitTestProject2
 {
@@ -8,13 +11,28 @@ namespace UnitTestProject2
     [TestClass]
     public class AzureDatabaseTests
     {
-        
-        [TestMethod]
-        public void TestMethod1()
+        private TransactionScope scope;
+
+        [TestInitialize]
+        public void Initialize()
         {
-            //
-            // TODO: Add test logic here
-            //
+            this.scope = new TransactionScope();
+        }
+
+        [TestMethod]
+        public void AddBook_ValidBookAdded_Return0()
+        {
+            IDataB ADB = new AzureDatabase();
+
+            var result = ADB.AddBook(new Book("1", "2", "3","7", 4, 5, "6", 0));
+
+            Assert.AreEqual(result, 0);
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            this.scope.Dispose();
         }
     }
 }
