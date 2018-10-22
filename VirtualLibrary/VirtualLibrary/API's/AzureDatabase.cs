@@ -16,7 +16,7 @@ namespace VirtualLibrary
         {
             builder.DataSource = "virlib.database.windows.net";  
             builder.UserID = "ILBooks";
-            builder.Password = File.ReadAllText(Application.StartupPath + "/SQLPassword.txt");
+            builder.Password = File.ReadAllText("C:\\Users\\manfr\\OneDrive\\Documents\\GitHub\\5varbu\\VirtualLibrary\\VirtualLibrary\\bin\\Debug\\SQLPassword.txt");
             builder.InitialCatalog = "VirtualLib";
         }
        

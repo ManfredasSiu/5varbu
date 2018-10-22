@@ -30,7 +30,7 @@ namespace VirtualLibrary.presenters
             Book bookToAdd = new Book(AB.NameField, AB.AuthorField, AB.BarcodeField, AB.GenreField,
                                       int.Parse(AB.QuantityField), int.Parse(AB.Pagesfield), AB.PressField, 0); //Knyga pridedama i laikinaja saugykla
             ADB.AddBook(bookToAdd);  //Knyga irasoma i DB
-            ADB.GetAllBooks();  
+            StaticData.Books = ADB.GetAllBooks();  
             RefClass.Instance.LControl.UpdateTable();  //Atnaujinama Library lentele
             AB.CloseForm();
         }

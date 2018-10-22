@@ -125,38 +125,31 @@ namespace VirtualLibrary.presenters
         public void RegisterButtonPressed()   //Register mygtuko logika
         {
             int check = CheckTheTB(RegView.password, RegView.NameText, ADB);
-
-            if (check == 1)
+            switch(check)
             {
-                RegView.InitMessageBox("Username Field is empty");
-                return;
+                case 1:
+                    RegView.InitMessageBox("Username Field is empty");
+                    return;
+                case 2:
+                    RegView.InitMessageBox("This username already exists");
+                    return;
+                case 3:
+                    RegView.InitMessageBox("Password Field is empty");
+                    return;
             }
-
-            else if (check == 2)
-            {
-                RegView.InitMessageBox("This username already exists");
-                return;
-            }
-
-            else if (check == 3)
-            {
-                RegView.InitMessageBox("Password Field is empty");
-                return;
-            }
-
+        
             check = CheckHowManyFaces(facesDetectedNow[0].Length);
 
-            if (check == 1)
+            switch (check)
             {
-                RegView.InitMessageBox("Veidas nerastas, bandykite dar karta");
-                return;
+                case 1:
+                    RegView.InitMessageBox("Face not found. Try again");
+                    return;
+                case 2:
+                    RegView.InitMessageBox("Too many faces");
+                    return;
             }
 
-            else if (check == 2)
-            {
-                RegView.InitMessageBox("Kadre perdaug veidu");
-                return;
-            }
 
             PrepareForRegister();
 
