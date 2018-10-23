@@ -44,7 +44,7 @@ namespace UnitTestProject2
         }
 
         [TestMethod]
-        public void CheckTheTB_NameFieldIsEmpty_Return3()
+        public void CheckTheTB_NameFieldIsEmpty_Return1()
         {
             RegisterPresenter RP = new RegisterPresenter(new Form2());
             int result = RP.CheckTheTB("password", "", new AzureDatabase());
