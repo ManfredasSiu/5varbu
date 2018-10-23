@@ -85,6 +85,59 @@ namespace UnitTestProject2
             Assert.AreEqual(result, 1);
         }
 
+        [TestMethod]
+        public void ReturnBook_ValidBook_Return0()
+        {
+            IDataB ADB = new AzureDatabase();
+            //Fake data
+            ADB.AddUser("1", "2", "3", 0);
+            var Fakeuser = ADB.GetUser("1");
+            var Fakebook = new Book("1", "2", "3", "7", 4, 5, "6", 0) { code = "80085" };
+            ADB.AddBook(Fakebook);
+            ADB.BorrowBook(Fakebook, Fakeuser);
+            var result = ADB.ReturnBook(Fakebook, Fakeuser);
+            Assert.AreEqual(result, 0);
+        }
+
+        [TestMethod]
+        public void ReturnBook_CanNotReturnBook_Return1()
+        {
+            IDataB ADB = new AzureDatabase();
+            //Fake data
+            ADB.AddUser("1", "2", "3", 0);
+            var Fakeuser = ADB.GetUser("1");
+            var Fakeuser1 = ADB.GetUser("2");
+            var Fakebook = new Book("1", "2", "3", "7", 4, 5, "6", 0) { code = "80085" };
+            ADB.AddBook(Fakebook);
+            ADB.BorrowBook(Fakebook, Fakeuser);
+            var result = ADB.ReturnBook(Fakebook, Fakeuser1);
+            Assert.AreEqual(result, 1);
+         }
+
+        [TestMethod]
+        public void GetAllUserBooks_Books_ReturnList()
+        {
+            IDataB ADB = new AzureDatabase();
+            //Fake data
+            ADB.AddUser("1", "2", "3", 0);
+            var Fakeuser = ADB.GetUser("1"); 
+            var Fakebook = new Book("1", "2", "3", "7", 4, 5, "6", 0) { code = "80085" };
+            ADB.AddBook(Fakebook);
+            ADB.BorrowBook(Fakebook, Fakeuser);
+            var result = ADB.GetAllUserBooks(Fakeuser);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetAllUserBooks_Books_DoNotReturnList()
+        {
+            IDataB ADB = new AzureDatabase();
+            //Fake data
+          
+            var result = ADB.GetAllUserBooks(new User {ID =-1});
+            Assert.IsNull(result);
+        }
+
         [TestCleanup]
         public void TestCleanup()
         {
