@@ -152,7 +152,7 @@ namespace VirtualLibrary
             try
             {
                 var knygos = from u in db.UserBooks
-                             join g in db.Books on u.BookID equals g.ID
+                             join g in db.Books on u.BookID equals g.Id
                              where u.UserID == user.ID
                              select g;
 
@@ -215,12 +215,12 @@ namespace VirtualLibrary
         }
 
 
-        public int BorrowBook (Book addThis)
+        public int BorrowBook (Book addThis, User user)
         {
             try
             {
                 UserBook book = new UserBook();
-                book.UserID = StaticData.CurrentUser.ID;
+                book.UserID = user.ID;
                 book.BookID = addThis.ID;
                 db.UserBooks.InsertOnSubmit(book);
                 db.SubmitChanges();

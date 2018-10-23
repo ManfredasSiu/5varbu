@@ -22,8 +22,8 @@ namespace VirtualLibrary.API_s
 
         List<Book> GetAllUserBooks(User user);
 
-        List<Book> GetAllBooksRead();
+        List<Book> GetAllBooksRead(User user);
 
-        int BorrowBook(Book addThis);
+        int BorrowBook(Book addThis, User user);
     }
 }
