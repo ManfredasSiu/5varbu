@@ -97,6 +97,8 @@ namespace VirtualLibrary.presenters
         public void ExitScanner()
         {
             Application.Idle -= FrameProcedure;
+            if (RefClass.Instance.VR != null && procedure == "Borrow")
+                RefClass.Instance.VR.block = true;
             capture.Dispose();
             borrowView.CloseForm();
         }

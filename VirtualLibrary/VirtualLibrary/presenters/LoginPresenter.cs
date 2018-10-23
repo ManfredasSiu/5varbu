@@ -93,8 +93,8 @@ namespace VirtualLibrary.presenters
             }
             else if (StaticData.CurrentUser == null)                                 //Jei kamera yra bet vartotojas nerastas
             {
-                RefClass.Instance.menuForm.ShowForm();
                 MessageBox.Show("Didn't find your face :( \n Try again or Register");
+                RefClass.Instance.menuForm.ShowForm();
             }
             if (cam != null)
                 cam.Dispose();

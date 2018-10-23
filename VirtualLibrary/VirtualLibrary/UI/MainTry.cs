@@ -42,8 +42,6 @@ namespace VirtualLibrary
 
         public Control ButtonRecom => buttonRecom;
 
-        public bool CanAccess => this.IsAccessible;
-
         MainPresenter MP;
 
         public void refresh()
@@ -68,6 +66,7 @@ namespace VirtualLibrary
             Application.Exit();
         }
         
+
 
         private void buttonHome_Click(object sender, EventArgs e)
         {
@@ -109,6 +108,11 @@ namespace VirtualLibrary
         private void timer2_Tick(object sender, EventArgs e)
         {
             MP.timer2Ticks();
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            RefClass.Instance.VR.Allow = !RefClass.Instance.VR.Allow;
         }
     }
 }

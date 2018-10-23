@@ -37,8 +37,6 @@ namespace VirtualLibrary.Views
 
         Timer Tmr2 { get; }
 
-        bool CanAccess { get; }
-
         void refresh();
     }
 }

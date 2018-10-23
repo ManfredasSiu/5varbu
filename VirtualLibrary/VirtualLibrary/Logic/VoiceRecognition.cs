@@ -15,6 +15,7 @@ namespace VirtualLibrary
         SpeechRecognitionEngine SRecEng = new SpeechRecognitionEngine();
         MenuPresenter MP;
         public bool block { set; get; }
+        public bool Allow { set; get; }
 
         public VoiceRecognition(MenuPresenter MP)
         {
@@ -60,7 +61,7 @@ namespace VirtualLibrary
 
         private void MainVoiceRec(Object sender, SpeechRecognizedEventArgs e)
         {
-            if (block)
+            if (block == true && Allow == true)
             {
                 if (e.Result.Text.Equals("Home"))
                 {
