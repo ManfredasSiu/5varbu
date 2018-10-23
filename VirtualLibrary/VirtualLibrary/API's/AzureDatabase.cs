@@ -79,7 +79,7 @@ namespace VirtualLibrary
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return 1;
             }
         }
@@ -106,7 +106,7 @@ namespace VirtualLibrary
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return null;
             }
          
@@ -176,7 +176,7 @@ namespace VirtualLibrary
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return null;
             }
 
@@ -209,7 +209,7 @@ namespace VirtualLibrary
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return null;
             }
         }
@@ -236,7 +236,7 @@ namespace VirtualLibrary
             }
             catch(SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return 1;
             }
         }
@@ -265,7 +265,7 @@ namespace VirtualLibrary
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(e.Message);
+                    Console.WriteLine(e.Message);
                     return null;
                 }
             }

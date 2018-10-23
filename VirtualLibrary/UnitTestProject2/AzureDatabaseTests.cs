@@ -48,10 +48,40 @@ namespace UnitTestProject2
         }
 
         [TestMethod]
-        public void AddUser_ValidUserAdded_Return1()
+        public void AddUser_InvalidUserAdded_Return1()
         {
             IDataB ADB = new AzureDatabase();
             var result = ADB.AddUser(null, null, null, 0);
+            Assert.AreEqual(result, 1);
+        }
+
+        [TestMethod]
+        public void BorrowBook_ValidBook_Return0()
+        {
+            IDataB ADB = new AzureDatabase();
+            //Fake data
+            ADB.AddUser("1", "2", "3", 0);
+            var Fakeuser = ADB.GetUser("1");
+            var Fakebook = new Book("1", "2", "3", "7", 4, 5, "6", 0) { code = "80085" };
+            ADB.AddBook(Fakebook);
+            //---
+
+            var result = ADB.BorrowBook(Fakebook, Fakeuser);
+
+            Assert.AreEqual(result, 0);
+        }
+
+        [TestMethod]
+        public void BorrowBook_BookDoesntExist_Return1()
+        {
+            IDataB ADB = new AzureDatabase();
+            //Fake data
+            ADB.AddUser("1", "2", "3", 0);
+            var Fakeuser = ADB.GetUser("1");
+            //---
+
+            var result = ADB.BorrowBook(new Book { ID = -1, code = null }, Fakeuser);
+
             Assert.AreEqual(result, 1);
         }
 
