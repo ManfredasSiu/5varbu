@@ -112,13 +112,13 @@ namespace VirtualLibrary
          
         }
 
-        public int ReturnBook (Book delThis)
+        public int ReturnBook (Book delThis, User user)
         {
             //Reik sukurt lentelę, kur dėsim perskaitytas knygas - knygos ID ir reader ID
             try
             {
                 var knyga = from u in db.UserBooks
-                            where u.UserID == StaticData.CurrentUser.ID && u.BookID == delThis.ID
+                            where u.UserID == user.ID && u.BookID == delThis.ID
                             select u;
                 foreach(var item in knyga)
                 {
@@ -126,7 +126,7 @@ namespace VirtualLibrary
                 }
                 db.SubmitChanges();
                 BooksRead book = new BooksRead();
-                book.UserID = StaticData.CurrentUser.ID;
+                book.UserID = user.ID;
                 book.BookID = delThis.ID;
                 db.BooksReads.InsertOnSubmit(book);
                 db.SubmitChanges();
@@ -142,26 +142,36 @@ namespace VirtualLibrary
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return 1;
             }
         }
 
-        public List<Book> GetAllUserBooks()
+        public List<Book> GetAllUserBooks(User user)
         {
             try
             {
                 var knygos = from u in db.UserBooks
-                             where u.UserID == StaticData.CurrentUser.ID
-                             select u;
+                             join g in db.Books on u.BookID equals g.ID
+                             where u.UserID == user.ID
+                             select g;
 
                 List<Book> bookIDList = new List<Book>();
+
+                //Book book = new Book();
                 foreach (var item in knygos)
                 {
                     Book book = new Book();
                     book.ID = item.Id;
-                    //ar nereikia kitų parametrų?
-                    bookIDList.Add(StaticData.Books.Find(x => x.ID == item.BookID));
+                    book.name = item.Name;
+                    book.auth = item.Author;
+                    book.pressName = item.Press;
+                    book.code = item.Barcode;
+                    book.genre = item.Genre;
+                    book.pages = item.Pages;
+                    book.quantity = item.Quantity;
+                    bookIDList.Add(book);
+                    //bookIDList.Add(StaticData.Books.Find(x => x.ID == item.BookID));
                 }
                 //StaticData.CurrentUser.setUserBooks(bookIDList);
                 return bookIDList;

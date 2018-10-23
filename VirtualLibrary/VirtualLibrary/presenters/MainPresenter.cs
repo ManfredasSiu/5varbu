@@ -80,7 +80,7 @@ namespace VirtualLibrary.presenters
                 StaticData.Books = DB.GetAllBooks();
                 //Uzkraunami userio duomenys
                 StaticData.CurrentUser.setBooksRead(DB.GetAllBooksRead());
-                StaticData.CurrentUser.setUserBooks(DB.GetAllUserBooks());
+                StaticData.CurrentUser.setUserBooks(DB.GetAllUserBooks(StaticData.CurrentUser));
                 main.UserName = StaticData.CurrentUser.getuserName();
                 return 0;
             }

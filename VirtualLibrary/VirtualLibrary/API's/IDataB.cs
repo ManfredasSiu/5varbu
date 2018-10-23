@@ -16,11 +16,11 @@ namespace VirtualLibrary.API_s
 
         User GetUser(string name);
 
-        int ReturnBook(Book delThis);
+        int ReturnBook(Book delThis, User user);
 
         List<Book> GetAllBooks();
 
-        List<Book> GetAllUserBooks();
+        List<Book> GetAllUserBooks(User user);
 
         List<Book> GetAllBooksRead();
 

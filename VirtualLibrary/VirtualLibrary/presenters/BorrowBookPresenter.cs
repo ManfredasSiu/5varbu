@@ -58,7 +58,7 @@ namespace VirtualLibrary.presenters
                 book.setQuantityPlius();                   //Pridedamas knygos kiekis
                 StaticData.CurrentUser.AddReadBook(book);  //Knyga pridedama prie perskaitytu knygu
                 StaticData.CurrentUser.removeUserBook(book); //Knyga isimama is vartotojo skaitomu knygu
-                ADB.ReturnBook(book);                        //Visa tai padaroma duomenu bazeje
+                ADB.ReturnBook(book, StaticData.CurrentUser);                        //Visa tai padaroma duomenu bazeje
                 borrowView.CloseForm();
                 RefClass.Instance.MBControl.UpdateTable();  //Atnaujinama vartotojo lentele
                 Application.Idle -= FrameProcedure;
