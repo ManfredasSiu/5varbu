@@ -245,6 +245,7 @@
             this.buttonShutDown.Size = new System.Drawing.Size(40, 40);
             this.buttonShutDown.TabIndex = 36;
             this.buttonShutDown.UseVisualStyleBackColor = true;
+            this.buttonShutDown.Click += new System.EventHandler(this.buttonShutdown_Click);
             // 
             // FormAdminAddBook
             // 
