@@ -23,6 +23,8 @@ namespace VirtualLibrary.presenters
             {
                 this.main = main;
                 ADB = RefClass.Instance.LogicC.DB;
+                VoiceRecognition VR = new VoiceRecognition(this);
+                VR.block = true;
                 try
                 {
                     LoadData(ADB);
@@ -126,27 +128,27 @@ namespace VirtualLibrary.presenters
 
         //Logika skirtingiems user controlams prideti i pagrindini langa ***
 
-        public void RButtonBehaviour(Control btn)
+        public void RButtonBehaviour()
         {
-            moveSidePanel(btn);
+            moveSidePanel(main.ButtonRecom);
             AddControlsToPanel((UserControl)RefClass.Instance.InitRecomControl());
         }
       
-        public void LButtonBehaviour(Control btn)
+        public void LButtonBehaviour()
         {
-            moveSidePanel(btn);
+            moveSidePanel(main.ButtonLibrary);
             AddControlsToPanel((UserControl)RefClass.Instance.InitLibControl());
         }
 
-        public void HButtonBehaviour(Control btn)
+        public void HButtonBehaviour()
         {
-            moveSidePanel(btn);
+            moveSidePanel(main.ButtonHome);
             AddControlsToPanel((UserControl)RefClass.Instance.InitHomeControl());
         }
 
-        public void MBButtonBehaviour(Control btn)
+        public void MBButtonBehaviour()
         {
-            moveSidePanel(btn);
+            moveSidePanel(main.ButtonMyBooks);
             AddControlsToPanel((UserControl)RefClass.Instance.InitMBControl());
         }
 

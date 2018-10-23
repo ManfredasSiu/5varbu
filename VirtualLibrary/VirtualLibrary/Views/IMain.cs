@@ -11,6 +11,14 @@ namespace VirtualLibrary.Views
     {
         Control NewControl { set; }
 
+        Control ButtonHome { get; }
+
+        Control ButtonMyBooks { get; }
+
+        Control ButtonLibrary { get; }
+
+        Control ButtonRecom { get; }
+
         string Date { set; }
 
         void ClearControlsFromPanel();
@@ -26,7 +34,7 @@ namespace VirtualLibrary.Views
         int panelSideHgh { set; }
 
         Timer Tmr1 { get; set; }
-        
+
         Timer Tmr2 { get; }
 
         void refresh();

@@ -34,6 +34,14 @@ namespace VirtualLibrary
 
         string IMain.UserName { get => UserName.Text; set => UserName.Text = value; }
 
+        public Control ButtonHome => buttonHome;
+
+        public Control ButtonMyBooks => buttonMyBooks;
+
+        public Control ButtonLibrary => buttonLibrary;
+
+        public Control ButtonRecom => buttonRecom;
+
         MainPresenter MP;
 
         public void refresh()
@@ -61,23 +69,23 @@ namespace VirtualLibrary
 
         private void buttonHome_Click(object sender, EventArgs e)
         {
-            MP.HButtonBehaviour(buttonHome);
+            MP.HButtonBehaviour();
         }
 
         private void buttonMyBooks_Click(object sender, EventArgs e)
         {
-            MP.MBButtonBehaviour(buttonMyBooks);
+            MP.MBButtonBehaviour();
         }
 
         private void buttonLibrary_Click(object sender, EventArgs e)
         {
-            MP.LButtonBehaviour(buttonLibrary);
+            MP.LButtonBehaviour();
         }
 
 
         private void buttonRecom_Click(object sender, EventArgs e)
         {
-            MP.RButtonBehaviour(buttonRecom);
+            MP.RButtonBehaviour();
         }
         
         private void buttonShutDown_Click(object sender, EventArgs e)
