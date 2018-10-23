@@ -30,7 +30,7 @@ namespace UnitTestProject2
         }
 
         [TestMethod]
-        public void AddBook_ValidBookAdded_Return1()
+        public void AddBook_InvalidBookAdded_Return1()
         {
             IDataB ADB = new AzureDatabase();
 
@@ -100,22 +100,7 @@ namespace UnitTestProject2
         }
 
         [TestMethod]
-        public void ReturnBook_CanNotReturnBook_Return1()
-        {
-            IDataB ADB = new AzureDatabase();
-            //Fake data
-            ADB.AddUser("1", "2", "3", 0);
-            var Fakeuser = ADB.GetUser("1");
-            var Fakeuser1 = ADB.GetUser("2");
-            var Fakebook = new Book("1", "2", "3", "7", 4, 5, "6", 0) { code = "80085" };
-            ADB.AddBook(Fakebook);
-            ADB.BorrowBook(Fakebook, Fakeuser);
-            var result = ADB.ReturnBook(Fakebook, Fakeuser1);
-            Assert.AreEqual(result, 1);
-         }
-
-        [TestMethod]
-        public void GetAllUserBooks_Books_ReturnList()
+        public void GetAllUserBooks_ValidInput_ReturnList()
         {
             IDataB ADB = new AzureDatabase();
             //Fake data
@@ -129,12 +114,48 @@ namespace UnitTestProject2
         }
 
         [TestMethod]
-        public void GetAllUserBooks_Books_DoNotReturnList()
+        public void SearchUser_UserFound_Return2()
         {
             IDataB ADB = new AzureDatabase();
             //Fake data
-          
-            var result = ADB.GetAllUserBooks(new User {ID =-1});
+            ADB.AddUser("1", "2", "3", 0);
+
+            var result = ADB.SearchUser("1");
+
+            Assert.AreEqual(result, 2);
+        }
+
+        [TestMethod]
+        public void SearchUser_UserNotFound_Return0()
+        {
+            IDataB ADB = new AzureDatabase();
+
+            var result = ADB.SearchUser("%%%");
+
+            Assert.AreEqual(result, 0);
+        }
+
+        [TestMethod]
+        public void GetUser_UserFound_ReturnUser()
+        {
+            IDataB ADB = new AzureDatabase();
+            //Fake data
+            ADB.AddUser("1", "2", "3", 0);
+
+            var result = ADB.GetUser("1");
+
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetUser_UserNotFound_ReturnNull()
+        {
+            IDataB ADB = new AzureDatabase();
+            //Fake data
+            //ADB.AddUser("1", "2", "3", 0);
+
+            var result = ADB.GetUser("%%%");
+
             Assert.IsNull(result);
         }
 

@@ -32,7 +32,9 @@ namespace VirtualLibrary
         {
             if (block)
             {
-                if (e.Result.Text.Equals("Register"))
+                //Patikrinamos kokios komandos ir iskvieciami reikiami metodai is presenteriu
+
+                if (e.Result.Text.Equals("Register")) 
                 {
                     MP.RegisterButtonPressed();
                 }

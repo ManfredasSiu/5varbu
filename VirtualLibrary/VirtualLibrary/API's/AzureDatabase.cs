@@ -91,18 +91,21 @@ namespace VirtualLibrary
                 var naudotojas = from u in db.Users
                                  where u.Name == name
                                  select u;
-               // User[] naud = naudotojas.ToArray();
-                User user = new User();
-                foreach (var item in naudotojas)
+                if (naudotojas.ToArray().Length > 0)
                 {
-                    user.ID = item.Id;
-                    user.userName = item.Name;
-                    user.passWord = item.Password;
-                    user.email = item.Email;
-                    user.permission = item.Permission;
+                    User user = new User();
+                    foreach (var item in naudotojas)
+                    {
+                        user.ID = item.Id;
+                        user.userName = item.Name;
+                        user.passWord = item.Password;
+                        user.email = item.Email;
+                        user.permission = item.Permission;
+                    }
+                    return user;
                 }
-                //StaticData.CurrentUser = user;
-                return user; //????
+                else
+                    return null;
             }
             catch (SqlException e)
             {

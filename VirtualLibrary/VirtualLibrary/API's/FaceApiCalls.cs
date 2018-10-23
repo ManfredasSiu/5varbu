@@ -27,36 +27,38 @@ namespace VirtualLibrary
             //await faceServiceClient.CreatePersonGroupAsync(_groupId, _groupName);
         }
 
-        public async Task<bool> FaceSave(String vardas)
+        public async Task<bool> FaceSave(String vardas) //Veido issaugojimas Resource grupeje
         { 
-            CreatePersonResult person = await faceServiceClient.CreatePersonInPersonGroupAsync(_groupId, vardas);
-            foreach (string imagePath in Directory.GetFiles(Application.StartupPath + "/" + vardas + "TEMP"))
+            CreatePersonResult person = await faceServiceClient.CreatePersonInPersonGroupAsync(_groupId, vardas); //Userio sukurimas
+            foreach (string imagePath in Directory.GetFiles(Application.StartupPath + "/" + vardas + "TEMP"))     //Iteruojama visa direktorija
             {
                 using (Stream s = File.OpenRead(imagePath))
                 {
                     try
                     {
-                        await faceServiceClient.AddPersonFaceInPersonGroupAsync(_groupId, person.PersonId, s);
+                        await faceServiceClient.AddPersonFaceInPersonGroupAsync(_groupId, person.PersonId, s);  //Veido pridejimas
                     }
                     catch(Exception e)
                     {
                         Console.WriteLine(e.Message);
-                        //return false;
+                        await faceServiceClient.DeletePersonAsync(_groupId, person.PersonId); //Jei issaugoti veido nepavyko - istrinti zmogu is grupes
+                        return false;
                     }
                 }
             }
             try
             {
-                await faceServiceClient.TrainPersonGroupAsync(_groupId);
+                await faceServiceClient.TrainPersonGroupAsync(_groupId); //Grupe istreniruojama su nauju veidu
                 return true;
             }
             catch(Exception e)
             {
+                await faceServiceClient.DeletePersonAsync(_groupId, person.PersonId); //Jei treniravimas nepavyko - istrinti zmogu is grupes
                 return false;
             }
         }
 
-        public async Task<Face[]> UploadAndDetetFaces(string imageFilePath)
+        public async Task<Face[]> UploadAndDetetFaces(string imageFilePath) //Veido atradimas
         {
             try
             {
@@ -66,11 +68,11 @@ namespace VirtualLibrary
                         true,
                         true,
                         new FaceAttributeType[] {
-                    FaceAttributeType.Gender,
-                    FaceAttributeType.Age,
-                    FaceAttributeType.Emotion
+                    FaceAttributeType.Gender,             //Gaunama lytis
+                    FaceAttributeType.Age,                //Metai
+                    FaceAttributeType.Emotion             //Veido emocija
                         });
-                    return faces.ToArray();
+                    return faces.ToArray();               //Grazinami visi nuotraukoje rasti veidai su ju atributais
                 }
             }
             catch (Exception ex)
@@ -80,18 +82,18 @@ namespace VirtualLibrary
             }
         }
 
-        public async Task<String> RecognitionAsync(String TempImgPath)
+        public async Task<String> RecognitionAsync(String TempImgPath) //Veido atpazinimo uzklausa
         {
 
-            Face[] faces = await UploadAndDetetFaces(TempImgPath);
-            var faceIds = faces.Select(face => face.FaceId).ToArray();
+            Face[] faces = await UploadAndDetetFaces(TempImgPath); //Nuotraukoje atrandami veidai
+            var faceIds = faces.Select(face => face.FaceId).ToArray(); //Veidu identifikaciniai numeriai perkeliami i kintamaji
 
             foreach (var identifyResult in await faceServiceClient.IdentifyAsync(_groupId, faceIds))
             {
                 if (identifyResult.Candidates.Length != 0)
                 {
-                    var candidateId = identifyResult.Candidates[0].PersonId;
-                    var person = await faceServiceClient.GetPersonInPersonGroupAsync(_groupId, candidateId);
+                    var candidateId = identifyResult.Candidates[0].PersonId;  //Gauname visus atrastus veidus ir paimame veida arciausiai kameros
+                    var person = await faceServiceClient.GetPersonInPersonGroupAsync(_groupId, candidateId); //Gauname naudotojo informacija pagal jo veida
                     return person.Name;
                     // user identificated: person.name is the associated name
                 }
