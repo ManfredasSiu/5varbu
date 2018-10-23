@@ -60,7 +60,7 @@ namespace VirtualLibrary
 
         private void MainVoiceRec(Object sender, SpeechRecognizedEventArgs e)
         {
-            if (block)
+            if (Main.main.CanAccess)
             {
                 if (e.Result.Text.Equals("Home"))
                 {
@@ -100,7 +100,6 @@ namespace VirtualLibrary
             SRecEng.SetInputToDefaultAudioDevice();
             SRecEng.RecognizeAsync(RecognizeMode.Multiple);
             Console.WriteLine("Info::::" + SRecEng.RecognizerInfo);
-            
         }
         //-----
     }

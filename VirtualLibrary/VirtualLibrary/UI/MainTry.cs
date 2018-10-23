@@ -42,6 +42,8 @@ namespace VirtualLibrary
 
         public Control ButtonRecom => buttonRecom;
 
+        public bool CanAccess => this.IsAccessible;
+
         MainPresenter MP;
 
         public void refresh()

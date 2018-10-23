@@ -12,7 +12,7 @@ namespace VirtualLibrary.presenters
     public class MainPresenter
     {
         IDataB ADB;
-        IMain main;
+        public IMain main { get; set; }
 
         bool isCollapsed;
         int PanelWidth;
