@@ -49,6 +49,8 @@ namespace VirtualLibrary.presenters
                     cam = null;
                     RegView.InitMessageBox("Neturi kameros, arba ji blogai prijungta, registracija negalima");
                     RegView.CloseForm();
+                    RefClass.Instance.menuForm.ShowForm();
+                    return;
                 }
                 Application.Idle += FrameProcedure;
             }

@@ -5,45 +5,53 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Speech.Recognition;
 using System.Windows.Forms;
+using VirtualLibrary.presenters;
 
 namespace VirtualLibrary
 {
     class VoiceRecognition // neveikia kolkas
     {
 
-        /*SpeechRecognitionEngine SRecEng = new SpeechRecognitionEngine();
-        Form1 f;
+        SpeechRecognitionEngine SRecEng = new SpeechRecognitionEngine();
+        MenuPresenter MP;
+        public bool block { set; get; }
 
-        public VoiceRecognition(Form1 f)
+        public VoiceRecognition(MenuPresenter MP)
         {
-            this.f = f;
+            
+            this.MP = MP;
             SRecEng = new SpeechRecognitionEngine();
             Choices commands = new Choices();
             commands.Add(new string[] { "Register", "Connect", "Exit" });
             GrammarBuilder gBuild = new GrammarBuilder();
+            gBuild.Culture = new System.Globalization.CultureInfo("en-GB");
             gBuild.Append(commands);Console.WriteLine(SpeechRecognitionEngine.InstalledRecognizers());
             Grammar gram = new Grammar(gBuild);
             SRecEng.LoadGrammarAsync(gram);
             SRecEng.SetInputToDefaultAudioDevice();
-            SRecEng.RecognizeAsync(RecognizeMode.Single);
-
+            SRecEng.RecognizeAsync(RecognizeMode.Multiple);
+            Console.WriteLine("Info::::" + SRecEng.RecognizerInfo);
             SRecEng.SpeechRecognized += VoiceRecBehaviourOnStart;
+
         }
 
         private void VoiceRecBehaviourOnStart(Object sender, SpeechRecognizedEventArgs e)
         {
-            if(e.Result.Text.Equals("Register"))
+            if (block)
             {
-                f.Register();
+                if (e.Result.Text.Equals("Register"))
+                {
+                    MP.RegisterButtonPressed();
+                }
+                if (e.Result.Text.Equals("Connect"))
+                {
+                    MP.LoginButtonPressed();
+                }
+                if (e.Result.Text.Equals("Exit"))
+                {
+                    Application.Exit();
+                }
             }
-            if(e.Result.Text.Equals("Connect"))
-            {
-                f.Login();
-            }
-            if(e.Result.Text.Equals("Exit"))
-            {
-                Application.Exit();
-            }
-        }*/
+        }
     }
 }

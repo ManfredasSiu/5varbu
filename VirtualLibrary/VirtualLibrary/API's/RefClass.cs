@@ -69,7 +69,8 @@ namespace VirtualLibrary
         public void InitRegisterForm()
         {
             Form2 registerFaceWindow = new Form2();
-            registerFaceWindow.Show();
+            if(!registerFaceWindow.IsDisposed)
+                registerFaceWindow.Show();
         }
 
         public void InitMainForm()
