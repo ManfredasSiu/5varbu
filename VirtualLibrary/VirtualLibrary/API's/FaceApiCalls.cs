@@ -41,7 +41,7 @@ namespace VirtualLibrary
                     catch(Exception e)
                     {
                         Console.WriteLine(e.Message);
-                        return false;
+                        //return false;
                     }
                 }
             }
@@ -94,10 +94,6 @@ namespace VirtualLibrary
                     var person = await faceServiceClient.GetPersonInPersonGroupAsync(_groupId, candidateId);
                     return person.Name;
                     // user identificated: person.name is the associated name
-                }
-                else
-                {
-                    // user not recognized
                 }
             }
             return null;

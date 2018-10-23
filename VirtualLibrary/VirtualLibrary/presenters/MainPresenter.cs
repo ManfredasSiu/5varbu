@@ -32,7 +32,12 @@ namespace VirtualLibrary.presenters
                     Console.WriteLine(e.StackTrace);
                     Application.Exit();
                 }
-
+                try
+                {
+                    main.Tmr2.Start();
+                }
+                catch
+                { throw; }
                 PanelWidth = main.panelLft;
                 isCollapsed = false;
 
