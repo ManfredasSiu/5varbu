@@ -30,8 +30,10 @@ namespace VirtualLibrary
             }
         }
         //*****ENDOFSINGLETON
-    
+
         //Logic classes
+
+        public VoiceRecognition VR;
 
         public CurrentUserStatistics InitStatistics()
         {
@@ -41,6 +43,18 @@ namespace VirtualLibrary
         public ICallAzureAPI InitAzureFaceApi()
         {
             return new FaceApiCalls();
+        }
+
+        public VoiceRecognition InitVoiceRecMenu(MenuPresenter MP)
+        {
+            VR = new VoiceRecognition(MP);
+            return VR;
+        }
+
+        public VoiceRecognition InitVoiceRecMain(MainPresenter MP)
+        {
+            VR = new VoiceRecognition(MP);
+            return VR;
         }
 
         public DataController LogicC = new DataController();

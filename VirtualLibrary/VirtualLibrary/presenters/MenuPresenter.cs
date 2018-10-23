@@ -18,7 +18,7 @@ namespace VirtualLibrary.presenters
         public MenuPresenter(IMenu MenuView)
         {
             this.MenuView = MenuView;
-            VR = new VoiceRecognition(this);
+            VR = RefClass.Instance.InitVoiceRecMenu(this);
             VR.block = true;
         }
 

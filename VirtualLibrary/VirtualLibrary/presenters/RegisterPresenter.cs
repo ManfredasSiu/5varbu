@@ -172,6 +172,7 @@ namespace VirtualLibrary.presenters
             LogicC.TempDirectoryController("Delete", RegView.NameText, null, 0);
             if (InProgress == true)              //Jei registracija vyksta ir isjungiamas langas pvz alt+f4
                 RegProcess.Abort();
+            Application.Idle -= FrameProcedure;
         }
 
         public int CheckTheTB(String pass, String Nam, IDataB DB) //Security blokai textbox atzvilgiu

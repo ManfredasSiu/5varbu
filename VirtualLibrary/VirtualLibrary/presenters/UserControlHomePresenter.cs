@@ -26,6 +26,8 @@ namespace VirtualLibrary.presenters
         {
             this.ADB = RefClass.Instance.LogicC.DB;         //Gaunamos visos perskaitytos knygos
             StaticData.CurrentUser.setUserBooks(ADB.GetAllBooksRead(StaticData.CurrentUser));
+            if (RefClass.Instance.VR != null)
+                RefClass.Instance.VR.block = true;
         }
 
         private void PresentStatistics()

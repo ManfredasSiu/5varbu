@@ -60,7 +60,7 @@ namespace VirtualLibrary
 
         private void MainVoiceRec(Object sender, SpeechRecognizedEventArgs e)
         {
-            if (Main.main.CanAccess)
+            if (block)
             {
                 if (e.Result.Text.Equals("Home"))
                 {

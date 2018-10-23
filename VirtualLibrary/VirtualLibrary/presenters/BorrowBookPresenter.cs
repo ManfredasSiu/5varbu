@@ -27,6 +27,8 @@ namespace VirtualLibrary.presenters
         public BorrowBookPresenter(String procedure, IBorrow borrowView)
         {
             this.procedure = procedure;
+            if (RefClass.Instance.VR != null)
+                RefClass.Instance.VR.block = false;
             this.borrowView = borrowView;
             this.ADB = RefClass.Instance.LogicC.DB;
             capture = new VideoCapture(0);

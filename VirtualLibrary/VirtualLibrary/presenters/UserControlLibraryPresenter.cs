@@ -19,17 +19,17 @@ namespace VirtualLibrary.presenters
             try
             {
                 this.IUCL = IUCL;
+                if (RefClass.Instance.VR != null)
+                    RefClass.Instance.VR.block = true;
                 this.ADB = RefClass.Instance.LogicC.DB;
+                StaticData.Books = ADB.GetAllBooks();
                 RefreshControl();
             }
             catch
             {
                 return;
             }
-            this.IUCL = IUCL;
-            this.ADB = RefClass.Instance.LogicC.DB;
             StaticData.Books = ADB.GetAllBooks();
-            RefreshControl();
         }
 
         private void RefreshControl() //Lenteliu ir mygtuku atnaujinimas
@@ -43,14 +43,15 @@ namespace VirtualLibrary.presenters
         {
             if (status.getPermission() == "1")
             {
-                IUCL.removeBtn.Dispose();
-                IUCL.addBtn.Dispose();
+                IUCL.AddBookVisible = true;
+                IUCL.RemoveBookVisible = true;
                 return true;
             }
             else if (status.getPermission() == "0")
             {
-                IUCL.AddBookVisible = false;
-                IUCL.RemoveBookVisible = false;
+
+                IUCL.removeBtn.Dispose();
+                IUCL.addBtn.Dispose();
                 return true;
             }
             else

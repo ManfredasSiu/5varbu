@@ -19,6 +19,8 @@ namespace VirtualLibrary.presenters
             {
                 this.IUCMB = IUCMB;
                 this.ADB = RefClass.Instance.LogicC.DB;
+                if (RefClass.Instance.VR != null)
+                    RefClass.Instance.VR.block = true;
                 StaticData.CurrentUser.setUserBooks(ADB.GetAllUserBooks(StaticData.CurrentUser));             //Gaunavos visos user knygos
                 updateTable(StaticData.CurrentUser.getUserBooks());                     //Perpiesiama lentele
             }
@@ -27,10 +29,6 @@ namespace VirtualLibrary.presenters
                 Console.WriteLine(e.Message);
                 return;
             }
-            this.IUCMB = IUCMB;
-            this.ADB = RefClass.Instance.LogicC.DB;
-           // StaticData.CurrentUser.setUserBooks(ADB.GetAllUserBooks());             //Gaunavos visos user knygos
-            updateTable(StaticData.CurrentUser.getUserBooks());                     //Perpiesiama lentele
         }
 
         public bool updateTable(List<Book> items)//Perpiesiama lentele

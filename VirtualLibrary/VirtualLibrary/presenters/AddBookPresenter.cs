@@ -17,6 +17,8 @@ namespace VirtualLibrary.presenters
         public AddBookPresenter(IAddBook AB)
         {
             this.ADB = RefClass.Instance.LogicC.DB;
+            if (RefClass.Instance.VR != null)
+                RefClass.Instance.VR.block = false;
             this.AB = AB;
         }
 
