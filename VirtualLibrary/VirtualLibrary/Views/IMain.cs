@@ -7,9 +7,17 @@ using System.Windows.Forms;
 
 namespace VirtualLibrary.Views
 {
-    interface IMain
+    public interface IMain
     {
         Control NewControl { set; }
+
+        Control ButtonHome { get; }
+
+        Control ButtonMyBooks { get; }
+
+        Control ButtonLibrary { get; }
+
+        Control ButtonRecom { get; }
 
         string Date { set; }
 
@@ -26,6 +34,8 @@ namespace VirtualLibrary.Views
         int panelSideHgh { set; }
 
         Timer Tmr1 { get; set; }
+
+        Timer Tmr2 { get; }
 
         void refresh();
     }

@@ -9,22 +9,24 @@ using System.Windows.Forms;
 
 namespace VirtualLibrary 
 {
-    class AzureDatabase : API_s.IDataB
+    public class AzureDatabase : API_s.IDataB
     {
-        SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+        DataClasses1DataContext db;
         public AzureDatabase()
         {
-            builder.DataSource = "virlib.database.windows.net";  
-            builder.UserID = "ILBooks";
-            builder.Password = File.ReadAllText(Application.StartupPath + "/SQLPassword.txt");
-            builder.InitialCatalog = "VirtualLib";
+            this.db = CreateDC();
         }
        
+
+        public DataClasses1DataContext CreateDC()
+        {
+            return new DataClasses1DataContext();
+        }
         public int AddBook(Book AddThis)
         {
             try
             {
-                DataClasses1DataContext db = new DataClasses1DataContext();
+                
                 Book book = new Book();
                 book.Name = AddThis.getName();
                 book.Author = AddThis.getAuthor();
@@ -39,7 +41,7 @@ namespace VirtualLibrary
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return 1;
             }
         }
@@ -49,7 +51,6 @@ namespace VirtualLibrary
             try
             {
                 string s = Convert.ToString(Permission);
-                DataClasses1DataContext db = new DataClasses1DataContext();
                 User user = new User();
                 user.Name = name;
                 user.Password = Password;
@@ -61,7 +62,7 @@ namespace VirtualLibrary
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return 1;
             } 
         }
@@ -70,7 +71,6 @@ namespace VirtualLibrary
         {
             try
             {
-                DataClasses1DataContext db = new DataClasses1DataContext();
                 var naudotojas = from u in db.Users
                                 where u.Name == name
                                 select u;
@@ -79,7 +79,7 @@ namespace VirtualLibrary
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return 1;
             }
         }
@@ -88,39 +88,40 @@ namespace VirtualLibrary
         {
             try
             {
-                DataClasses1DataContext db = new DataClasses1DataContext();
                 var naudotojas = from u in db.Users
                                  where u.Name == name
                                  select u;
-               // User[] naud = naudotojas.ToArray();
-                User user = new User();
-                foreach (var item in naudotojas)
+                if (naudotojas.ToArray().Length > 0)
                 {
-                    user.ID = item.Id;
-                    user.userName = item.Name;
-                    user.passWord = item.Password;
-                    user.email = item.Email;
-                    user.permission = item.Permission;
+                    User user = new User();
+                    foreach (var item in naudotojas)
+                    {
+                        user.ID = item.Id;
+                        user.userName = item.Name;
+                        user.passWord = item.Password;
+                        user.email = item.Email;
+                        user.permission = item.Permission;
+                    }
+                    return user;
                 }
-                //StaticData.CurrentUser = user;
-                return user; //????
+                else
+                    return null;
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return null;
             }
          
         }
 
-        public int ReturnBook (Book delThis)
+        public int ReturnBook (Book delThis, User user)
         {
             //Reik sukurt lentelę, kur dėsim perskaitytas knygas - knygos ID ir reader ID
             try
             {
-                DataClasses1DataContext db = new DataClasses1DataContext();
                 var knyga = from u in db.UserBooks
-                            where u.UserID == StaticData.CurrentUser.ID && u.BookID == delThis.ID
+                            where u.UserID == user.ID && u.BookID == delThis.ID
                             select u;
                 foreach(var item in knyga)
                 {
@@ -128,7 +129,7 @@ namespace VirtualLibrary
                 }
                 db.SubmitChanges();
                 BooksRead book = new BooksRead();
-                book.UserID = StaticData.CurrentUser.ID;
+                book.UserID = user.ID;
                 book.BookID = delThis.ID;
                 db.BooksReads.InsertOnSubmit(book);
                 db.SubmitChanges();
@@ -144,75 +145,85 @@ namespace VirtualLibrary
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return 1;
             }
         }
 
-        public List<Book> GetAllUserBooks()
+        public List<Book> GetAllUserBooks(User user)
         {
             try
             {
-                DataClasses1DataContext db = new DataClasses1DataContext();
                 var knygos = from u in db.UserBooks
-                             where u.UserID == StaticData.CurrentUser.ID
-                             select u;
+                             join g in db.Books on u.BookID equals g.Id
+                             where u.UserID == user.ID
+                             select g;
 
                 List<Book> bookIDList = new List<Book>();
+
+                //Book book = new Book();
                 foreach (var item in knygos)
                 {
                     Book book = new Book();
                     book.ID = item.Id;
-                    //ar nereikia kitų parametrų?
-                    bookIDList.Add(StaticData.Books.Find(x => x.ID == item.BookID));
+                    book.name = item.Name;
+                    book.auth = item.Author;
+                    book.pressName = item.Press;
+                    book.code = item.Barcode;
+                    book.genre = item.Genre;
+                    book.pages = item.Pages;
+                    book.quantity = item.Quantity;
+                    bookIDList.Add(book);
                 }
-                //StaticData.CurrentUser.setUserBooks(bookIDList);
                 return bookIDList;
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return null;
             }
 
         }
 
-        public List<Book> GetAllBooksRead()
+        public List<Book> GetAllBooksRead(User user)
         {
             try
             {
-                DataClasses1DataContext db = new DataClasses1DataContext();
                 var knygos = from u in db.BooksReads
-                             where u.UserID == StaticData.CurrentUser.ID
-                             select u;
+                             join g in db.Books on u.BookID equals g.Id
+                             where u.UserID == user.ID
+                             select g;
 
                 List<Book> bookIDList = new List<Book>();
                 foreach (var item in knygos)
                 {
                     Book book = new Book();
                     book.ID = item.Id;
-                    //ar nereikia kitų parametrų
-                    bookIDList.Add(StaticData.Books.Find(x => x.ID == item.BookID));
+                    book.name = item.Name;
+                    book.auth = item.Author;
+                    book.pressName = item.Press;
+                    book.code = item.Barcode;
+                    book.genre = item.Genre;
+                    book.pages = item.Pages;
+                    book.quantity = item.Quantity;
+                    bookIDList.Add(book);
                 }
-                
-               // StaticData.CurrentUser.setBooksRead(bookIDList);
                 return bookIDList;
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return null;
             }
         }
 
 
-        public int BorrowBook (Book addThis)
+        public int BorrowBook (Book addThis, User user)
         {
             try
             {
-                DataClasses1DataContext db = new DataClasses1DataContext();
                 UserBook book = new UserBook();
-                book.UserID = StaticData.CurrentUser.ID;
+                book.UserID = user.ID;
                 book.BookID = addThis.ID;
                 db.UserBooks.InsertOnSubmit(book);
                 db.SubmitChanges();
@@ -228,7 +239,7 @@ namespace VirtualLibrary
             }
             catch(SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Console.WriteLine(e.Message);
                 return 1;
             }
         }
@@ -237,7 +248,6 @@ namespace VirtualLibrary
             {
                 try
                 {
-                    DataClasses1DataContext db = new DataClasses1DataContext();
                     var knygos = from u in db.Books
                                  select u;
                     List<Book> templist = new List<Book>();
@@ -258,7 +268,7 @@ namespace VirtualLibrary
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(e.Message);
+                    Console.WriteLine(e.Message);
                     return null;
                 }
             }

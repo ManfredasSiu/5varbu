@@ -9,42 +9,95 @@ using VirtualLibrary.Views;
 
 namespace VirtualLibrary.presenters
 {
-    class MainPresenter
+    public class MainPresenter
     {
         IDataB ADB;
-        IMain main;
+        public IMain main { get; set; }
 
         bool isCollapsed;
         int PanelWidth;
 
         public MainPresenter(IMain main)
         {
-            ADB = RefClass.Instance.LogicC.DB;       //Uzkraunamos knygos is duombazes
-            StaticData.Books = ADB.GetAllBooks();
-            StaticData.CurrentUser.setBooksRead(ADB.GetAllBooksRead());
-            StaticData.CurrentUser.setUserBooks(ADB.GetAllUserBooks());
+            try
+            {
+                this.main = main;
+                ADB = RefClass.Instance.LogicC.DB;
+                VoiceRecognition VR = RefClass.Instance.InitVoiceRecMain(this);
+                VR.block = true;
+                try
+                {
+                    LoadData(ADB);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                    Application.Exit();
+                }
+                try
+                {
+                    main.Tmr2.Start();
+                }
+                catch
+                { throw; }
+                PanelWidth = main.panelLft;
+                isCollapsed = false;
 
-            this.main = main;
+                AddControlsToPanel((UserControl)RefClass.Instance.InitHomeControl()); //Inicijuojama Home user control
 
-            PanelWidth = main.panelLft;
-            isCollapsed = false;
+                //Atspausdinama reikiama info apie useri
 
-            AddControlsToPanel((UserControl)RefClass.Instance.InitHomeControl()); //Inicijuojama Home user control
+                if (LoadUIPermission(StaticData.CurrentUser) == 0)
+                {
+                    MessageBox.Show("Nepavyko uzkrauti duomenu, paleiskite programa is naujo");
+                    Application.Exit();
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
 
-            //Atspausdinama reikiama info apie useri
-            main.UserName = StaticData.CurrentUser.getuserName();  
-            if (StaticData.CurrentUser.getPermission() == "1")
+        public int LoadUIPermission(User user)
+        {
+            if (user.getPermission() == "1")
+            {
                 main.Status = "ADMIN";
-            else
+                return 2;
+            }
+            else if(user.getPermission() == "0")
+            {
                 main.Status = "Reader";
+                return 1;
+            }
+            else { return 0; }
+        }
+
+        public int LoadData(IDataB DB)
+        {
+            try
+            {
+                //Uzkraunamos knygos is duombazes
+                StaticData.Books = DB.GetAllBooks();
+                //Uzkraunami userio duomenys
+                StaticData.CurrentUser.setBooksRead(DB.GetAllBooksRead(StaticData.CurrentUser));
+                StaticData.CurrentUser.setUserBooks(DB.GetAllUserBooks(StaticData.CurrentUser));
+                main.UserName = StaticData.CurrentUser.getuserName();
+                return 0;
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         //Data(?)
 
         public void timer2Ticks()
         {
-            DateTime dateTime = DateTime.UtcNow.Date;
-            main.Date = dateTime.ToString("yyyy-MM-dd");
+            DateTime dateTime = DateTime.Now;
+            main.Date = dateTime.ToString();
         }
 
         //Soninio sliderio logika
@@ -75,27 +128,27 @@ namespace VirtualLibrary.presenters
 
         //Logika skirtingiems user controlams prideti i pagrindini langa ***
 
-        public void RButtonBehaviour(Control btn)
+        public void RButtonBehaviour()
         {
-            moveSidePanel(btn);
+            moveSidePanel(main.ButtonRecom);
             AddControlsToPanel((UserControl)RefClass.Instance.InitRecomControl());
         }
-
-        public void LButtonBehaviour(Control btn)
+      
+        public void LButtonBehaviour()
         {
-            moveSidePanel(btn);
+            moveSidePanel(main.ButtonLibrary);
             AddControlsToPanel((UserControl)RefClass.Instance.InitLibControl());
         }
 
-        public void HButtonBehaviour(Control btn)
+        public void HButtonBehaviour()
         {
-            moveSidePanel(btn);
+            moveSidePanel(main.ButtonHome);
             AddControlsToPanel((UserControl)RefClass.Instance.InitHomeControl());
         }
 
-        public void MBButtonBehaviour(Control btn)
+        public void MBButtonBehaviour()
         {
-            moveSidePanel(btn);
+            moveSidePanel(main.ButtonMyBooks);
             AddControlsToPanel((UserControl)RefClass.Instance.InitMBControl());
         }
 

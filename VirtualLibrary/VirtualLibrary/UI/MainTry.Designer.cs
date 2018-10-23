@@ -235,6 +235,7 @@
             this.buttonSettings.Size = new System.Drawing.Size(52, 52);
             this.buttonSettings.TabIndex = 2;
             this.buttonSettings.UseVisualStyleBackColor = true;
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
             // buttonShutDown
             // 

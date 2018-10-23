@@ -45,6 +45,7 @@ namespace VirtualLibrary.presenters
             if (cam == null) //Tikrinama ar pavyko sukurti kamera
             {
                 //StaticData.CurrentUser = new User(999, "Debug", "Debug", null, "1");
+
                 loginview.CloseForm();
                 //RefClass.Instance.InitMainForm();  //Vladislav atsikometuok abudu
                 return;
@@ -92,8 +93,8 @@ namespace VirtualLibrary.presenters
             }
             else if (StaticData.CurrentUser == null)                                 //Jei kamera yra bet vartotojas nerastas
             {
-                RefClass.Instance.menuForm.ShowForm();
                 MessageBox.Show("Didn't find your face :( \n Try again or Register");
+                RefClass.Instance.menuForm.ShowForm();
             }
             if (cam != null)
                 cam.Dispose();
@@ -103,7 +104,7 @@ namespace VirtualLibrary.presenters
         public async Task<string> startRecAsync()   //Veido atpazinimo metodas
         {
             block = true;
-            FaceApiCalls FAC = new FaceApiCalls();
+            var FAC = RefClass.Instance.InitAzureFaceApi();
             try
             {
                 var name = await FAC.RecognitionAsync(Application.StartupPath + "TempImg.jpg");  //Siunciama uzklausa i API

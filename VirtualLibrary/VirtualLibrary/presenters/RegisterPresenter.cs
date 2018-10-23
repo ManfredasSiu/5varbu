@@ -13,7 +13,7 @@ using VirtualLibrary.Views;
 
 namespace VirtualLibrary.presenters
 {
-    class RegisterPresenter
+    public class RegisterPresenter
     {
         IRegister RegView;
         Image<Bgr, Byte> frame;
@@ -34,21 +34,30 @@ namespace VirtualLibrary.presenters
 
         public RegisterPresenter(IRegister RegView)
         {
-            this.RegView = RegView;
-            faceDetect = new HaarCascade("haarcascade_frontalface_default.xml"); //Skirta veidu atpazinimui
-            LogicC = RefClass.Instance.LogicC;
-            this.ADB = LogicC.DB;
             try
             {
-                cam = new Capture();
+                this.RegView = RegView;
+                faceDetect = new HaarCascade("haarcascade_frontalface_default.xml"); //Skirta veidu atpazinimui
+                LogicC = RefClass.Instance.LogicC;
+                this.ADB = LogicC.DB;
+                try
+                {
+                    cam = new Capture();
+                }
+                catch
+                {
+                    cam = null;
+                    RegView.InitMessageBox("Neturi kameros, arba ji blogai prijungta, registracija negalima");
+                    RegView.CloseForm();
+                    RefClass.Instance.menuForm.ShowForm();
+                    return;
+                }
+                Application.Idle += FrameProcedure;
             }
-            catch 
+            catch
             {
-                cam = null;
-                RegView.InitMessageBox("Neturi kameros, arba ji blogai prijungta, registracija negalima");
-                RegView.CloseForm();
+                return;
             }
-            Application.Idle += FrameProcedure;
         }
 
         private void FrameProcedure(Object sender, EventArgs e) //Analogiskaip kaip ir login formoj
@@ -88,17 +97,15 @@ namespace VirtualLibrary.presenters
             RegView.ImgBoxSize = new Size(321, 241);
         }
 
-        private int CheckHowManyFaces()  //Security blokai veidu atzvilgiu
+        public int CheckHowManyFaces(int FaceArrayLength)  //Security blokai veidu atzvilgiu
         {
-            if (facesDetectedNow[0].Length == 0)
+            if (FaceArrayLength == 0)
             {
-                RegView.InitMessageBox("Veidas nerastas, bandykite dar karta");
                 return 1;
             }
-            else if (facesDetectedNow[0].Length > 1)
+            else if (FaceArrayLength > 1)
             {
-                RegView.InitMessageBox("Kadre perdaug veidu");
-                return 1;
+                return 2;
             }
             return 0;
         }
@@ -119,9 +126,34 @@ namespace VirtualLibrary.presenters
 
         public void RegisterButtonPressed()   //Register mygtuko logika
         {
-            if (CheckTheTB() == 1) return;
+            int check = CheckTheTB(RegView.password, RegView.NameText, ADB);
+            switch(check)
+            {
+                case 1:
+                    RegView.InitMessageBox("Username Field is empty");
+                    return;
+                case 2:
+                    RegView.InitMessageBox("This username already exists");
+                    return;
+                case 3:
+                    RegView.InitMessageBox("Password Field is empty");
+                    return;
+                case 4:
+                    RegView.InitMessageBox("Yra nelegaliu simboliu vardo eiluteje");
+                    return;
+            }
+        
+            check = CheckHowManyFaces(facesDetectedNow[0].Length);
 
-            if (CheckHowManyFaces() == 1) return;
+            switch (check)
+            {
+                case 1:
+                    RegView.InitMessageBox("Face not found. Try again");
+                    return;
+                case 2:
+                    RegView.InitMessageBox("Too many faces");
+                    return;
+            }
 
             PrepareForRegister();
 
@@ -140,31 +172,35 @@ namespace VirtualLibrary.presenters
             LogicC.TempDirectoryController("Delete", RegView.NameText, null, 0);
             if (InProgress == true)              //Jei registracija vyksta ir isjungiamas langas pvz alt+f4
                 RegProcess.Abort();
+            Application.Idle -= FrameProcedure;
         }
 
-        private int CheckTheTB() //Security blokai textbox atzvilgiu
+        public int CheckTheTB(String pass, String Nam, IDataB DB) //Security blokai textbox atzvilgiu
         {
-            if (RegView.NameText.Replace(" ", "") == "")
+            var noSpecials = new System.Text.RegularExpressions.Regex("^[a-zA-Z0-9]*$");
+            if (Nam.Replace(" ", "") == "")
             {
-                RegView.InitMessageBox("Username Field is empty");
                 return 1;
             }
-            else if (ADB.SearchUser(RegView.NameText.Replace(" ", "")) == 2)
+            else if (DB.SearchUser(Nam) == 2)
             {
-                RegView.InitMessageBox("Username already excists");
-                return 1;
+                return 2;
             }
-            else if (RegView.password.Replace(" ", "") == "")
+
+            else if (pass.Replace(" ", "") == "")
             {
-                RegView.InitMessageBox("Password Field is empty");
-                return 1;
+                return 3;
+            }
+            else if(!noSpecials.IsMatch(Nam))
+            {
+                return 4;
             }
             return 0;
         }
 
         public async void RegisterProcessAsync()
         {
-            FaceApiCalls FAC = new FaceApiCalls();
+            var FAC = RefClass.Instance.InitAzureFaceApi();
             InProgress = true;
             int iterator = 0;
             while (iterator < 10)

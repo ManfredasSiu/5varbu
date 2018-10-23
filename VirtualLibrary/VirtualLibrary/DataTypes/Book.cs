@@ -15,12 +15,10 @@ namespace VirtualLibrary
 
         public int ID;
 
-        public Book (String name, String auth, String code, String or)
-        {
-            this.name = name;
-            this.auth = auth;
-            this.or = or;
-        }
+       // public Book()
+        //{
+
+        //}
 
         public Book(String name, String auth, string code, string genre, int quantity, int pages, string pressName, int ID)
         {

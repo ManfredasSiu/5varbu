@@ -20,8 +20,6 @@ namespace VirtualLibrary
 {
     public partial class Form2 : Form, IRegister    //Register Langas, padarysiu irgi su face recognition
     {
-        MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_TRIPLEX, 0.6d, 0.6d);
-
         PictureBox redDot = new PictureBox();
 
         public Image<Bgr, byte> Frame { get => throw new NotImplementedException(); set => imageBox1.Image = value; }

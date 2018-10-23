@@ -58,7 +58,7 @@ namespace VirtualLibrary.presenters
                 book.setQuantityPlius();                   //Pridedamas knygos kiekis
                 StaticData.CurrentUser.AddReadBook(book);  //Knyga pridedama prie perskaitytu knygu
                 StaticData.CurrentUser.removeUserBook(book); //Knyga isimama is vartotojo skaitomu knygu
-                ADB.ReturnBook(book);                        //Visa tai padaroma duomenu bazeje
+                ADB.ReturnBook(book, StaticData.CurrentUser);                        //Visa tai padaroma duomenu bazeje
                 borrowView.CloseForm();
                 RefClass.Instance.MBControl.UpdateTable();  //Atnaujinama vartotojo lentele
                 Application.Idle -= FrameProcedure;
@@ -81,7 +81,7 @@ namespace VirtualLibrary.presenters
             {
                 book.setQuantityMinus();                   //Sumazinama knygos quantity
                 StaticData.CurrentUser.AddTakenBook(book); //Pridedama paimta knyga
-                ADB.BorrowBook(book);                      //Visa tia padaroma duombazeje
+                ADB.BorrowBook(book, StaticData.CurrentUser);                      //Visa tia padaroma duombazeje
                 RefClass.Instance.LControl.UpdateTable();  //atnaujinama lentele
                 Application.Idle -= FrameProcedure;
                 borrowView.CloseForm();
@@ -95,6 +95,8 @@ namespace VirtualLibrary.presenters
         public void ExitScanner()
         {
             Application.Idle -= FrameProcedure;
+            if (RefClass.Instance.VR != null && procedure == "Borrow" || procedure == "Return")
+                RefClass.Instance.VR.block = true;
             capture.Dispose();
             borrowView.CloseForm();
         }

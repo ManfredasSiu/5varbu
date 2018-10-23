@@ -13,6 +13,10 @@ namespace VirtualLibrary.Views
 
         bool RemoveBookVisible { set; }
 
+        Control addBtn { get; }
+
+        Control removeBtn { get; }
+
         void UpdateTable();
 
         DataGridView Table { get; }

@@ -44,6 +44,14 @@ namespace VirtualLibrary
             RefClass.Instance.InitScannerForm("Add");
         }
 
+        private void buttonShutdown_Click(object sender, EventArgs e)
+        {
+
+            if (RefClass.Instance.VR != null)
+                RefClass.Instance.VR.block = true;
+            this.Close();
+        }
+
         public void CloseForm()
         {
             this.Close();

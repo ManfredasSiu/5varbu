@@ -5,45 +5,105 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Speech.Recognition;
 using System.Windows.Forms;
+using VirtualLibrary.presenters;
 
 namespace VirtualLibrary
 {
     class VoiceRecognition // neveikia kolkas
     {
+        //-----For Menu Presenter
+        SpeechRecognitionEngine SRecEng = new SpeechRecognitionEngine();
+        MenuPresenter MP;
+        public bool block { set; get; }
+        public bool Allow { set; get; }
 
-        /*SpeechRecognitionEngine SRecEng = new SpeechRecognitionEngine();
-        Form1 f;
-
-        public VoiceRecognition(Form1 f)
+        public VoiceRecognition(MenuPresenter MP)
         {
-            this.f = f;
-            SRecEng = new SpeechRecognitionEngine();
+            this.MP = MP;
+            
             Choices commands = new Choices();
             commands.Add(new string[] { "Register", "Connect", "Exit" });
+            UniversalInit(commands);
+            SRecEng.SpeechRecognized += MenuVoiceRec;
+
+        }
+
+        private void MenuVoiceRec(Object sender, SpeechRecognizedEventArgs e)
+        {
+            if (block)
+            {
+                //Patikrinamos kokios komandos ir iskvieciami reikiami metodai is presenteriu
+
+                if (e.Result.Text.Equals("Register")) 
+                {
+                    MP.RegisterButtonPressed();
+                }
+                if (e.Result.Text.Equals("Connect"))
+                {
+                    MP.LoginButtonPressed();
+                }
+                if (e.Result.Text.Equals("Exit"))
+                {
+                    Application.Exit();
+                }
+            }
+        }
+        //-----
+
+        //-----For Main
+        MainPresenter Main;
+        public VoiceRecognition(MainPresenter Main)
+        {
+            this.Main = Main;
+            Choices commands = new Choices();
+            commands.Add(new string[] { "Home", "My Books", "Library", "Recommended" , "Exit" });
+            UniversalInit(commands);
+            SRecEng.SpeechRecognized += MainVoiceRec;
+        }
+
+        private void MainVoiceRec(Object sender, SpeechRecognizedEventArgs e)
+        {
+            if (block == true && Allow == true)
+            {
+                if (e.Result.Text.Equals("Home"))
+                {
+                    Main.HButtonBehaviour();
+                }
+                else if (e.Result.Text.Equals("My Books"))
+                {
+                    Main.MBButtonBehaviour();
+                }
+                else if (e.Result.Text.Equals("Library"))
+                {
+                    Main.LButtonBehaviour();
+                }
+                else if (e.Result.Text.Equals("Recommended"))
+                {
+                    Main.RButtonBehaviour();
+                }
+                else if (e.Result.Text.Equals("Exit"))
+                {
+                    Application.Exit();
+                }
+            }
+        }
+
+        //-----
+
+        //-----Universal
+        private void UniversalInit(Choices commands)
+        {
+            SRecEng = new SpeechRecognitionEngine();
             GrammarBuilder gBuild = new GrammarBuilder();
-            gBuild.Append(commands);Console.WriteLine(SpeechRecognitionEngine.InstalledRecognizers());
+            gBuild.Culture = new System.Globalization.CultureInfo("en-GB");
+            gBuild.Append(commands);
+            Console.WriteLine(SpeechRecognitionEngine.InstalledRecognizers());
             Grammar gram = new Grammar(gBuild);
             SRecEng.LoadGrammarAsync(gram);
             SRecEng.SetInputToDefaultAudioDevice();
-            SRecEng.RecognizeAsync(RecognizeMode.Single);
-
-            SRecEng.SpeechRecognized += VoiceRecBehaviourOnStart;
+            SRecEng.RecognizeAsync(RecognizeMode.Multiple);
+            Console.WriteLine("Info::::" + SRecEng.RecognizerInfo);
         }
-
-        private void VoiceRecBehaviourOnStart(Object sender, SpeechRecognizedEventArgs e)
-        {
-            if(e.Result.Text.Equals("Register"))
-            {
-                f.Register();
-            }
-            if(e.Result.Text.Equals("Connect"))
-            {
-                f.Login();
-            }
-            if(e.Result.Text.Equals("Exit"))
-            {
-                Application.Exit();
-            }
-        }*/
+        //-----
     }
 }

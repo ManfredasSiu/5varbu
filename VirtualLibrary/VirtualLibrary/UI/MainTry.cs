@@ -30,7 +30,17 @@ namespace VirtualLibrary
 
         public Timer Tmr1 { get => timer1; set => timer1 = value; }
 
+        public Timer Tmr2 { get => timer2; }
+
         string IMain.UserName { get => UserName.Text; set => UserName.Text = value; }
+
+        public Control ButtonHome => buttonHome;
+
+        public Control ButtonMyBooks => buttonMyBooks;
+
+        public Control ButtonLibrary => buttonLibrary;
+
+        public Control ButtonRecom => buttonRecom;
 
         MainPresenter MP;
 
@@ -57,25 +67,26 @@ namespace VirtualLibrary
         }
         
 
+
         private void buttonHome_Click(object sender, EventArgs e)
         {
-            MP.HButtonBehaviour(buttonHome);
+            MP.HButtonBehaviour();
         }
 
         private void buttonMyBooks_Click(object sender, EventArgs e)
         {
-            MP.MBButtonBehaviour(buttonMyBooks);
+            MP.MBButtonBehaviour();
         }
 
         private void buttonLibrary_Click(object sender, EventArgs e)
         {
-            MP.LButtonBehaviour(buttonLibrary);
+            MP.LButtonBehaviour();
         }
 
 
         private void buttonRecom_Click(object sender, EventArgs e)
         {
-            MP.RButtonBehaviour(buttonRecom);
+            MP.RButtonBehaviour();
         }
         
         private void buttonShutDown_Click(object sender, EventArgs e)
@@ -97,6 +108,11 @@ namespace VirtualLibrary
         private void timer2_Tick(object sender, EventArgs e)
         {
             MP.timer2Ticks();
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            RefClass.Instance.VR.Allow = !RefClass.Instance.VR.Allow;
         }
     }
 }
