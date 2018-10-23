@@ -152,7 +152,7 @@ namespace VirtualLibrary
             try
             {
                 var knygos = from u in db.UserBooks
-                             join g in db.Books on u.BookID equals g.ID
+                             join g in db.Books on u.BookID equals g.Id
                              where u.UserID == user.ID
                              select g;
 
@@ -171,9 +171,7 @@ namespace VirtualLibrary
                     book.pages = item.Pages;
                     book.quantity = item.Quantity;
                     bookIDList.Add(book);
-                    //bookIDList.Add(StaticData.Books.Find(x => x.ID == item.BookID));
                 }
-                //StaticData.CurrentUser.setUserBooks(bookIDList);
                 return bookIDList;
             }
             catch (SqlException e)
@@ -184,24 +182,29 @@ namespace VirtualLibrary
 
         }
 
-        public List<Book> GetAllBooksRead()
+        public List<Book> GetAllBooksRead(User user)
         {
             try
             {
                 var knygos = from u in db.BooksReads
-                             where u.UserID == StaticData.CurrentUser.ID
-                             select u;
+                             join g in db.Books on u.BookID equals g.Id
+                             where u.UserID == user.ID
+                             select g;
 
                 List<Book> bookIDList = new List<Book>();
                 foreach (var item in knygos)
                 {
                     Book book = new Book();
                     book.ID = item.Id;
-                    //ar nereikia kitų parametrų
-                    bookIDList.Add(StaticData.Books.Find(x => x.ID == item.BookID));
+                    book.name = item.Name;
+                    book.auth = item.Author;
+                    book.pressName = item.Press;
+                    book.code = item.Barcode;
+                    book.genre = item.Genre;
+                    book.pages = item.Pages;
+                    book.quantity = item.Quantity;
+                    bookIDList.Add(book);
                 }
-                
-               // StaticData.CurrentUser.setBooksRead(bookIDList);
                 return bookIDList;
             }
             catch (SqlException e)
@@ -212,12 +215,12 @@ namespace VirtualLibrary
         }
 
 
-        public int BorrowBook (Book addThis)
+        public int BorrowBook (Book addThis, User user)
         {
             try
             {
                 UserBook book = new UserBook();
-                book.UserID = StaticData.CurrentUser.ID;
+                book.UserID = user.ID;
                 book.BookID = addThis.ID;
                 db.UserBooks.InsertOnSubmit(book);
                 db.SubmitChanges();

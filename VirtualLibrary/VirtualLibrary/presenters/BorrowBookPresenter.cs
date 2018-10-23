@@ -81,7 +81,7 @@ namespace VirtualLibrary.presenters
             {
                 book.setQuantityMinus();                   //Sumazinama knygos quantity
                 StaticData.CurrentUser.AddTakenBook(book); //Pridedama paimta knyga
-                ADB.BorrowBook(book);                      //Visa tia padaroma duombazeje
+                ADB.BorrowBook(book, StaticData.CurrentUser);                      //Visa tia padaroma duombazeje
                 RefClass.Instance.LControl.UpdateTable();  //atnaujinama lentele
                 Application.Idle -= FrameProcedure;
                 borrowView.CloseForm();
