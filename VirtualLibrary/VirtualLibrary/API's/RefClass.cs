@@ -96,12 +96,16 @@ namespace VirtualLibrary
         public void InitScannerForm(String procedure)
         {
             var BorrBook = new FormBorrowBooks(procedure);
+            if (RefClass.Instance.VR != null && procedure == "Borrow" || procedure == "Return")
+                RefClass.Instance.VR.block = false;
             BorrBook.ShowDialog();
         }
 
         public void InitAddBookForm()
         {
             IABook = new FormAdminAddBook();
+            if (RefClass.Instance.VR != null)
+                RefClass.Instance.VR.block = false;
             ((Form)IABook).ShowDialog();
         }
 

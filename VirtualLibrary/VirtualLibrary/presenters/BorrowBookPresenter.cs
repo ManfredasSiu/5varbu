@@ -27,8 +27,6 @@ namespace VirtualLibrary.presenters
         public BorrowBookPresenter(String procedure, IBorrow borrowView)
         {
             this.procedure = procedure;
-            if (RefClass.Instance.VR != null)
-                RefClass.Instance.VR.block = false;
             this.borrowView = borrowView;
             this.ADB = RefClass.Instance.LogicC.DB;
             capture = new VideoCapture(0);
@@ -97,7 +95,7 @@ namespace VirtualLibrary.presenters
         public void ExitScanner()
         {
             Application.Idle -= FrameProcedure;
-            if (RefClass.Instance.VR != null && procedure == "Borrow")
+            if (RefClass.Instance.VR != null && procedure == "Borrow" || procedure == "Return")
                 RefClass.Instance.VR.block = true;
             capture.Dispose();
             borrowView.CloseForm();
