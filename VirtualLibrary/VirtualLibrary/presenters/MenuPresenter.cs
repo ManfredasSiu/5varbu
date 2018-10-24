@@ -19,17 +19,17 @@ namespace VirtualLibrary.presenters
         {
             this.MenuView = MenuView;
             VR = RefClass.Instance.InitVoiceRecMenu(this);
-            VR.block = true;
+            VR.SetBlockFlagTrue();
         }
 
         public void RestartVR()
         {
-            VR.block = true;
+            VR.SetBlockFlagTrue();
         }
 
         public void LoginButtonPressed()
         {
-            VR.block = false;
+            VR.SetBlockFlagFalse();
             MenuView.HideForm();
             RefClass.Instance.SaveMenuForm(MenuView);  //Issaugoma meniu forma tolesniem naudojimam
             RefClass.Instance.InitLoginForm();         //Login forma
@@ -37,7 +37,7 @@ namespace VirtualLibrary.presenters
 
         public void RegisterButtonPressed()
         {
-            VR.block = false;
+            VR.SetBlockFlagFalse();
             MenuView.HideForm();
             RefClass.Instance.SaveMenuForm(MenuView); //Issaugoma meniu forma tolesniem naudojimam
             RefClass.Instance.InitRegisterForm();     //Register Forma

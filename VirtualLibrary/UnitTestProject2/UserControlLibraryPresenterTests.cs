@@ -14,7 +14,7 @@ namespace UnitTestProject2
         {
             UserControlLibraryPresenter UCLP = new UserControlLibraryPresenter(new UserControlLibrary());
 
-            var result = UCLP.UpdateButtons(new User("", "") { permission = "1"});
+            var result = UCLP.UpdateButtons(status: new User("", "") { permission = "1"});
 
             Assert.IsTrue(result);
         }
@@ -24,7 +24,7 @@ namespace UnitTestProject2
         {
             UserControlLibraryPresenter UCLP = new UserControlLibraryPresenter(new UserControlLibrary());
 
-            var result = UCLP.UpdateButtons(new User("", "") { permission = "0" });
+            var result = UCLP.UpdateButtons(status: new User("", "") { permission = "0" });
 
             Assert.IsTrue(result);
         }
@@ -34,7 +34,7 @@ namespace UnitTestProject2
         {
             UserControlLibraryPresenter UCLP = new UserControlLibraryPresenter(new UserControlLibrary());
 
-            var result = UCLP.UpdateButtons(new User("", "") { permission = null });
+            var result = UCLP.UpdateButtons(status: new User("", "") { permission = null });
 
             Assert.IsFalse(result);
         }
@@ -45,7 +45,7 @@ namespace UnitTestProject2
             UserControlLibraryPresenter UCLP = new UserControlLibraryPresenter(new UserControlLibrary());
 
             List<Book> books = new List<Book>();
-            var result = UCLP.UpdateTable(books);
+            var result = UCLP.UpdateTable(items: books);
 
             Assert.IsFalse(result);
         }
@@ -56,7 +56,7 @@ namespace UnitTestProject2
             UserControlLibraryPresenter UCLP = new UserControlLibraryPresenter(new UserControlLibrary());
 
             List<Book> books = new List<Book>() { new Book() };
-            var result = UCLP.UpdateTable(books);
+            var result = UCLP.UpdateTable(items: books);
 
             Assert.IsTrue(result);
         }

@@ -20,7 +20,7 @@ namespace UnitTestProject2
             var UCMBP = new UserControlMBPresenter(new UserControlMyBooks());
 
             List<Book> UB = new List<Book>() { new Book() };
-            var result = UCMBP.updateTable(UB);
+            var result = UCMBP.updateTable(items: UB);
 
             Assert.IsTrue(result);
         }
@@ -31,7 +31,7 @@ namespace UnitTestProject2
             var UCMBP = new UserControlMBPresenter(new UserControlMyBooks());
 
             List<Book> UB = new List<Book>();
-            var result = UCMBP.updateTable(UB);
+            var result = UCMBP.updateTable(items: UB);
 
             Assert.IsFalse(result);
         }

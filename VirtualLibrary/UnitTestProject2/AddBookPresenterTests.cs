@@ -13,7 +13,7 @@ namespace UnitTestProject2
         {
             var ABP = new AddBookPresenter(new FormAdminAddBook());
 
-            var result = ABP.CheckTBs("1", "2", "3", "4", "5", "6", "");
+            var result = ABP.CheckTBs(NameField: "1", AuthorField: "2", PressField: "3", Pagesfield: "4", GenreField: "5", QuantityField: "6", BarcodeField: "");
 
             Assert.AreEqual(result, 1);
         }
@@ -23,7 +23,7 @@ namespace UnitTestProject2
         {
             var ABP = new AddBookPresenter(new FormAdminAddBook());
 
-            var result = ABP.CheckTBs("1", "2", "3", "4", "5", "6", "7");
+            var result = ABP.CheckTBs(NameField: "1", AuthorField: "2", PressField: "3", Pagesfield: "4", GenreField: "5", QuantityField: "6", BarcodeField: "7");
 
             Assert.AreEqual(result, 0);
         }
@@ -33,7 +33,7 @@ namespace UnitTestProject2
         {
             var ABP = new AddBookPresenter(new FormAdminAddBook());
 
-            var result = ABP.CheckTBs("1", "2", "3", "NoParse", "5", "NoParse", "7");
+            var result = ABP.CheckTBs(NameField: "1", AuthorField: "2", PressField: "3", Pagesfield: "NoParse", GenreField: "5", QuantityField: "NoParse", BarcodeField: "6");
 
             Assert.AreEqual(result, 2);
         }
@@ -43,7 +43,7 @@ namespace UnitTestProject2
         {
             var ABP = new AddBookPresenter(new FormAdminAddBook());
 
-            var result = ABP.CheckTBs("1", "2", "$$$$3", "4", "5", "6", "7");
+            var result = ABP.CheckTBs(NameField: "1", AuthorField: "2", PressField: "%%%3", Pagesfield: "4", GenreField: "5", QuantityField: "6", BarcodeField: "5");
 
             Assert.AreEqual(result, 3);
         }

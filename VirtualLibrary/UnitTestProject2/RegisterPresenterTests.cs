@@ -15,7 +15,7 @@ namespace UnitTestProject2
         public void CheckHowManyFaces_FacesNotFound_Return1()
         {
             RegisterPresenter RP = new RegisterPresenter(new Form2());
-            int result = RP.CheckHowManyFaces(0);
+            int result = RP.CheckHowManyFaces(FaceArrayLength: 0);
             Assert.AreEqual(result, 1);
         }
 
@@ -23,7 +23,7 @@ namespace UnitTestProject2
         public void CheckHowManyFaces_OneFace_Return0()
         {
             RegisterPresenter RP = new RegisterPresenter(new Form2());
-            int result = RP.CheckHowManyFaces(1);
+            int result = RP.CheckHowManyFaces(FaceArrayLength: 1);
             Assert.AreEqual(result, 0);
         }
 
@@ -31,15 +31,15 @@ namespace UnitTestProject2
         public void CheckHowManyFaces_MoreThanOneFace_Return2()
         {
             RegisterPresenter RP = new RegisterPresenter(new Form2());
-            int result = RP.CheckHowManyFaces(2);
+            int result = RP.CheckHowManyFaces(FaceArrayLength: 2);
             Assert.AreEqual(result, 2);
         }
 
         [TestMethod]
-        public void CheckTheTB_NoVarnings_Return0()
+        public void CheckTheTB_NoWarnings_Return0()
         {
             RegisterPresenter RP = new RegisterPresenter(new Form2());
-            int result = RP.CheckTheTB("password", "name", new AzureDatabase());
+            int result = RP.CheckTheTB(Nam: "name", pass: "Pass", DB: new AzureDatabase());
             Assert.AreEqual(result, 0);
         }
 
@@ -47,7 +47,7 @@ namespace UnitTestProject2
         public void CheckTheTB_NameFieldIsEmpty_Return1()
         {
             RegisterPresenter RP = new RegisterPresenter(new Form2());
-            int result = RP.CheckTheTB("password", "", new AzureDatabase());
+            int result = RP.CheckTheTB(Nam: "", pass: "password", DB: new AzureDatabase());
             Assert.AreEqual(result, 1);
         }
 
@@ -55,7 +55,7 @@ namespace UnitTestProject2
         public void CheckTheTB_PasswordFieldIsEmpty_Return3()
         {
             RegisterPresenter RP = new RegisterPresenter(new Form2());
-            int result = RP.CheckTheTB("", "name", new AzureDatabase());
+            int result = RP.CheckTheTB(Nam: "name", pass: "", DB: new AzureDatabase());
             Assert.AreEqual(result, 3);
         }
 
@@ -63,7 +63,7 @@ namespace UnitTestProject2
         public void CheckTheTB_NameHasIlegalChar_Return4()
         {
             RegisterPresenter RP = new RegisterPresenter(new Form2());
-            int result = RP.CheckTheTB("notemp", "%%%Name#@$", new AzureDatabase());
+            int result = RP.CheckTheTB(Nam: "%%%Name#@$", pass: "notEmp", DB: new AzureDatabase());
             Assert.AreEqual(result, 4);
         }
     }

@@ -20,7 +20,7 @@ namespace VirtualLibrary.presenters
             {
                 this.IUCL = IUCL;
                 if (RefClass.Instance.VR != null)
-                    RefClass.Instance.VR.block = true;
+                    RefClass.Instance.VR.SetBlockFlagTrue();
                 this.ADB = RefClass.Instance.LogicC.DB;
                 StaticData.Books = ADB.GetAllBooks();
                 RefreshControl();

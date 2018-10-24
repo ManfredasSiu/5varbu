@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace VirtualLibrary
 {
-    static class StaticData  //Visi uzkrauti duomenys
+    static class StaticData  //Visi uzkrauti duomenys (Dabar prisijunges useris ir visos bibliotekos knygos)
     {
-        public static string[] labels;
         public static User CurrentUser;
         public static List<Book> Books = new List<Book>();
     }
