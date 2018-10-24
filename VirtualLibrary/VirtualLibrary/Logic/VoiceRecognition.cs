@@ -11,19 +11,23 @@ namespace VirtualLibrary
 {
     class VoiceRecognition // neveikia kolkas
     {
+
+        //enum flagai
         [Flags]
         public enum SecureBlocks
         {
-            none = 0x0,
+            none = 0,
             BLOCK = 2,
             ALLOW = 4
         }
 
         public SecureBlocks SB;
 
-        //-----For Menu Presenter
+        
         SpeechRecognitionEngine SRecEng = new SpeechRecognitionEngine();
         MenuPresenter MP;
+
+        // Flagu nustatymas is isoriniu klasiu
 
         public void SetBlockFlagTrue()
         {
@@ -49,14 +53,16 @@ namespace VirtualLibrary
         {
             SB ^= SecureBlocks.ALLOW;
         }
+        //--------
 
-        public VoiceRecognition(MenuPresenter MP)
+        //-----For Menu Presenter
+        public VoiceRecognition(MenuPresenter MP) //Konstruktorius skirtas isskirtinai menu langui
         {
             this.MP = MP;
             Choices commands = new Choices();
-            commands.Add(new string[] { "Register", "Connect", "Exit" });
+            commands.Add(new string[] { "Register", "Connect", "Exit" }); // Comandos register, Connect, Exit
             UniversalInit(commands);
-            SRecEng.SpeechRecognized += MenuVoiceRec;
+            SRecEng.SpeechRecognized += MenuVoiceRec; //Iskvieciam metoda MenuVoiceRec() kai balsas atpazistamas
 
         }
 
@@ -84,16 +90,17 @@ namespace VirtualLibrary
 
         //-----For Main
         MainPresenter Main;
-        public VoiceRecognition(MainPresenter Main)
+        public VoiceRecognition(MainPresenter Main)  // Konstruktorius skirtas main langui
         {
             this.Main = Main;
             Choices commands = new Choices();
+            // komandos Home, My Books, Library, Recommended (,Exit<Deprecated>)
             commands.Add(new string[] { "Home", "My Books", "Library", "Recommended" , "Exit" });
             UniversalInit(commands);
-            SRecEng.SpeechRecognized += MainVoiceRec;
+            SRecEng.SpeechRecognized += MainVoiceRec; //Atpazinus balsa iskvieciama MainVoiceRec()
         }
 
-        private void MainVoiceRec(Object sender, SpeechRecognizedEventArgs e)
+        private void MainVoiceRec(Object sender, SpeechRecognizedEventArgs e) //Security blokai ir logika skirta atpazintom komandom
         {
             if ((SB & SecureBlocks.BLOCK) != 0 && (SB & SecureBlocks.ALLOW) != 0)
             {
@@ -123,18 +130,33 @@ namespace VirtualLibrary
         //-----
 
         //-----Universal
-        private void UniversalInit(Choices commands)
+        private void UniversalInit(Choices commands) //Universalus "konstruktorius" iskvieciamas is visu public konstruktoriu,
+            //kadangi si informacija kartojas
         {
-            SRecEng = new SpeechRecognitionEngine();
-            GrammarBuilder gBuild = new GrammarBuilder();
-            SB = SecureBlocks.BLOCK;
-            gBuild.Culture = new System.Globalization.CultureInfo("en-GB");
-            gBuild.Append(commands);
-            Console.WriteLine(SpeechRecognitionEngine.InstalledRecognizers());
-            Grammar gram = new Grammar(gBuild);
-            SRecEng.LoadGrammarAsync(gram);
-            SRecEng.SetInputToDefaultAudioDevice();
-            SRecEng.RecognizeAsync(RecognizeMode.Multiple);
+            SRecEng = new SpeechRecognitionEngine();                 //Sukuriamas engine
+
+            GrammarBuilder gBuild = new GrammarBuilder();            //Gramatikos builderis, panasu i string builder
+
+            SB = SecureBlocks.BLOCK;                                 //Inicijuojamas pirmasis flagas 
+
+            gBuild.Culture = new System.Globalization.CultureInfo("en-GB"); //Pridedama kultura pagal kuria atpazinsime zodzius
+            gBuild.Append(commands);                                 //Pridedame komandas
+
+            Console.WriteLine(SpeechRecognitionEngine.InstalledRecognizers()); //Msg developeriui patikrinti ar yra recognizeriu
+
+            Grammar gram = new Grammar(gBuild);                      //Sukuriama "gramatika"
+
+            SRecEng.LoadGrammarAsync(gram);                          //Gramatika uskraunama i engine
+            try
+            {
+                SRecEng.SetInputToDefaultAudioDevice();                  //Paimama numatytoji vaizdo irasymo priemone rasta kompiuteryje
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            SRecEng.RecognizeAsync(RecognizeMode.Multiple);             //Atpazinimo tipas (multiple commands arba single commands)
+
             Console.WriteLine("Info::::" + SRecEng.RecognizerInfo);
         }
         //-----

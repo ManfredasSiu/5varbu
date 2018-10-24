@@ -83,7 +83,7 @@ namespace VirtualLibrary
             }
         }
 
-        private void SortBooks()
+        private void SortBooks() //Knygos isskirstomos i tam skirtus statistinius kintamuosius
         {
             foreach (Book bk in StaticData.CurrentUser.getBooksRead())
             {
@@ -96,8 +96,8 @@ namespace VirtualLibrary
                 }
                 if (bk.getGenre() == "Comedy")
                 {
-                    BooksReadCr++;
-                    PagesReadCr += bk.getPages();
+                    BooksReadCo++;
+                    PagesReadCo += bk.getPages();
                 }
                 if (bk.getGenre() == "Documentary")
                 {
@@ -115,6 +115,8 @@ namespace VirtualLibrary
                     PagesReadCr += bk.getPages();
                 }
             }
+            if(BooksRead != 0)
+                PagesPerBook = PagesRead / BooksRead;
             StaticData.CurrentUser.getBooksRead().Sort((x, y) => x.getPages().CompareTo(y.getPages()));
             if (StaticData.CurrentUser.getBooksRead().ToArray().Length > 0)
                 BiggestBook = StaticData.CurrentUser.getBooksRead().ToArray()[0];

@@ -31,6 +31,7 @@ namespace VirtualLibrary.presenters
             this.ADB = RefClass.Instance.LogicC.DB;
             capture = new VideoCapture(0);
             capture.Open(0);                              //Kameros inicijavimas
+            frame = new Mat();
             Application.Idle += FrameProcedure;
         }
 
@@ -38,7 +39,6 @@ namespace VirtualLibrary.presenters
 
         private void FrameProcedure(Object sender, EventArgs e)  //Live freimai
         {
-            frame = new Mat();
             if (capture.IsOpened())
             {
                 capture.Read(frame);
@@ -53,7 +53,7 @@ namespace VirtualLibrary.presenters
 
         private void ReturnLogic(Book book)                //Knygos atidavimo su barkodu logika
         {
-            if (book != null && StaticData.CurrentUser.getUserBooks().Contains(book) && procedure == "Return")
+            if (book != null && StaticData.CurrentUser.getUserBooks().Find(x => x.getCode() == borrowView.barcodeText) != null && procedure == "Return")
             {
                 book.setQuantityPlius();                   //Pridedamas knygos kiekis
                 StaticData.CurrentUser.AddReadBook(book);  //Knyga pridedama prie perskaitytu knygu
@@ -77,7 +77,7 @@ namespace VirtualLibrary.presenters
 
         private void BorrowLogic(Book book)    //Knygos pasiskolinimo logika
         {
-            if (book.getQuantity() > 0 && StaticData.CurrentUser.getUserBooks().Contains(book) == false)
+            if (book.getQuantity() > 0 && StaticData.CurrentUser.getUserBooks().Find(x => x.getCode() == borrowView.barcodeText) == null)
             {
                 book.setQuantityMinus();                   //Sumazinama knygos quantity
                 StaticData.CurrentUser.AddTakenBook(book); //Pridedama paimta knyga

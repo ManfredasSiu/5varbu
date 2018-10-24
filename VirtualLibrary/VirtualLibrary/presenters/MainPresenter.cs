@@ -22,8 +22,8 @@ namespace VirtualLibrary.presenters
             try
             {
                 this.main = main;
-                ADB = RefClass.Instance.LogicC.DB;
-                VoiceRecognition VR = RefClass.Instance.InitVoiceRecMain(this);
+                ADB = RefClass.Instance.LogicC.DB;                              //Gaunama Duombaze
+                VoiceRecognition VR = RefClass.Instance.InitVoiceRecMain(this); //Gaunama balso atpazinimo klase
                 VR.SetBlockFlagTrue();
                 try
                 {
@@ -59,7 +59,7 @@ namespace VirtualLibrary.presenters
             }
         }
 
-        public int LoadUIPermission(User user)
+        public int LoadUIPermission(User user) //Atspausdinama reikiama informacija pagal userio info
         {
             if (user.getPermission() == "1")
             {
@@ -128,29 +128,31 @@ namespace VirtualLibrary.presenters
 
         //Logika skirtingiems user controlams prideti i pagrindini langa ***
 
-        public void RButtonBehaviour()
+        public void RButtonBehaviour() //Recom
         {
             moveSidePanel(main.ButtonRecom);
             AddControlsToPanel((UserControl)RefClass.Instance.InitRecomControl());
         }
       
-        public void LButtonBehaviour()
+        public void LButtonBehaviour()  //Library
         {
             moveSidePanel(main.ButtonLibrary);
             AddControlsToPanel((UserControl)RefClass.Instance.InitLibControl());
         }
 
-        public void HButtonBehaviour()
+        public void HButtonBehaviour() //Home
         {
             moveSidePanel(main.ButtonHome);
             AddControlsToPanel((UserControl)RefClass.Instance.InitHomeControl());
         }
 
-        public void MBButtonBehaviour()
+        public void MBButtonBehaviour() //My Books
         {
             moveSidePanel(main.ButtonMyBooks);
             AddControlsToPanel((UserControl)RefClass.Instance.InitMBControl());
         }
+        //------
+
 
         private void moveSidePanel(Control btn)// Perkeliama sonine panele prie reikiamo mygtuko
         {
@@ -164,7 +166,5 @@ namespace VirtualLibrary.presenters
             main.ClearControlsFromPanel();
             main.NewControl = c;
         }
-
-        //***
     }
 }

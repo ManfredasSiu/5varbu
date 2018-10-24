@@ -17,6 +17,8 @@ namespace VirtualLibrary
 
         public IDataB DB = new AzureDatabase();
 
+        //Laikinosios direktorijos kontroleris. Sukurta direktorija skirta paruosti veidams sistemos treniravimui
+        //Direktorija istrinama baigus registracijos procesa.
         public int TempDirectoryController(string action, string name, Bitmap face, int iterator)
         {
             if (action == "Create")
@@ -25,7 +27,6 @@ namespace VirtualLibrary
                 {
                     Directory.CreateDirectory(Application.StartupPath + "/" + name + "Temp");
                     face.Save(Application.StartupPath + "/" + name + "Temp" + "/" + name + "" + iterator + ".jpg");
-
                 }
                 catch 
                 {
