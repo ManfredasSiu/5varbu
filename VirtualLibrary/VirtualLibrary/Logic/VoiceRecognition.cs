@@ -11,16 +11,48 @@ namespace VirtualLibrary
 {
     class VoiceRecognition // neveikia kolkas
     {
+        [Flags]
+        public enum SecureBlocks
+        {
+            none = 0x0,
+            BLOCK = 2,
+            ALLOW = 4
+        }
+
+        public SecureBlocks SB;
+
         //-----For Menu Presenter
         SpeechRecognitionEngine SRecEng = new SpeechRecognitionEngine();
         MenuPresenter MP;
-        public bool block { set; get; }
-        public bool Allow { set; get; }
+
+        public void SetBlockFlagTrue()
+        {
+            SB |= SecureBlocks.BLOCK;
+        }
+
+        public void SetBlockFlagFalse()
+        {
+            SB &= ~SecureBlocks.BLOCK;
+        }
+
+        public void SetALLOWFlagTrue()
+        {
+            SB |= SecureBlocks.ALLOW;
+        }
+
+        public void SetALLOWFlagFalse()
+        {
+            SB &= ~SecureBlocks.ALLOW;
+        }
+
+        public void SetALLOWFlagSwitch()
+        {
+            SB ^= SecureBlocks.ALLOW;
+        }
 
         public VoiceRecognition(MenuPresenter MP)
         {
             this.MP = MP;
-            
             Choices commands = new Choices();
             commands.Add(new string[] { "Register", "Connect", "Exit" });
             UniversalInit(commands);
@@ -30,7 +62,7 @@ namespace VirtualLibrary
 
         private void MenuVoiceRec(Object sender, SpeechRecognizedEventArgs e)
         {
-            if (block)
+            if ((SB & SecureBlocks.BLOCK) != 0)
             {
                 //Patikrinamos kokios komandos ir iskvieciami reikiami metodai is presenteriu
 
@@ -63,7 +95,7 @@ namespace VirtualLibrary
 
         private void MainVoiceRec(Object sender, SpeechRecognizedEventArgs e)
         {
-            if (block == true && Allow == true)
+            if ((SB & SecureBlocks.BLOCK) != 0 && (SB & SecureBlocks.ALLOW) != 0)
             {
                 if (e.Result.Text.Equals("Home"))
                 {
@@ -81,10 +113,10 @@ namespace VirtualLibrary
                 {
                     Main.RButtonBehaviour();
                 }
-                else if (e.Result.Text.Equals("Exit"))
+               /* else if (e.Result.Text.Equals("Exit"))
                 {
                     Application.Exit();
-                }
+                }*/
             }
         }
 
@@ -95,6 +127,7 @@ namespace VirtualLibrary
         {
             SRecEng = new SpeechRecognitionEngine();
             GrammarBuilder gBuild = new GrammarBuilder();
+            SB = SecureBlocks.BLOCK;
             gBuild.Culture = new System.Globalization.CultureInfo("en-GB");
             gBuild.Append(commands);
             Console.WriteLine(SpeechRecognitionEngine.InstalledRecognizers());

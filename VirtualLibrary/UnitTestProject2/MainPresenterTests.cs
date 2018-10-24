@@ -17,7 +17,7 @@ namespace UnitTestProject2
         {
             var MP = new MainPresenter(new MainTry());
 
-            var result = MP.LoadUIPermission(new User("", "") { permission = "1" });
+            var result = MP.LoadUIPermission(user: new User("", "") { permission = "1" });
             Assert.AreEqual(result, 2);
         }
 
@@ -26,7 +26,7 @@ namespace UnitTestProject2
         {
             var MP = new MainPresenter(new MainTry());
 
-            var result = MP.LoadUIPermission(new User("", "") { permission = "0" });
+            var result = MP.LoadUIPermission(user: new User("", "") { permission = "0" });
 
             Assert.AreEqual(result, 1);
         }
@@ -36,7 +36,7 @@ namespace UnitTestProject2
         {
             var MP = new MainPresenter(new MainTry());
 
-            var result = MP.LoadUIPermission(new User("", ""));
+            var result = MP.LoadUIPermission(user: new User("", ""));
 
             Assert.AreEqual(result, 0);
         }

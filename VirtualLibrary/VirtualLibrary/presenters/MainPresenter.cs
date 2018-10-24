@@ -24,7 +24,7 @@ namespace VirtualLibrary.presenters
                 this.main = main;
                 ADB = RefClass.Instance.LogicC.DB;
                 VoiceRecognition VR = RefClass.Instance.InitVoiceRecMain(this);
-                VR.block = true;
+                VR.SetBlockFlagTrue();
                 try
                 {
                     LoadData(ADB);

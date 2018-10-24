@@ -48,7 +48,7 @@ namespace VirtualLibrary
         {
 
             if (RefClass.Instance.VR != null)
-                RefClass.Instance.VR.block = true;
+                RefClass.Instance.VR.SetBlockFlagTrue();
             this.Close();
         }
 

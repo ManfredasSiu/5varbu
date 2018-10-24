@@ -112,7 +112,7 @@ namespace VirtualLibrary
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            RefClass.Instance.VR.Allow = !RefClass.Instance.VR.Allow;
+            RefClass.Instance.VR.SetALLOWFlagSwitch();
         }
     }
 }

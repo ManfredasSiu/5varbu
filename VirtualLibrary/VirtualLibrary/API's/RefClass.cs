@@ -97,7 +97,7 @@ namespace VirtualLibrary
         {
             var BorrBook = new FormBorrowBooks(procedure);
             if (RefClass.Instance.VR != null && procedure == "Borrow" || procedure == "Return")
-                RefClass.Instance.VR.block = false;
+                RefClass.Instance.VR.SetBlockFlagFalse();
             BorrBook.ShowDialog();
         }
 
@@ -105,7 +105,7 @@ namespace VirtualLibrary
         {
             IABook = new FormAdminAddBook();
             if (RefClass.Instance.VR != null)
-                RefClass.Instance.VR.block = false;
+                RefClass.Instance.VR.SetBlockFlagFalse();
             ((Form)IABook).ShowDialog();
         }
 

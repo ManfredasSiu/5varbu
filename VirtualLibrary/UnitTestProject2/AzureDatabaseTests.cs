@@ -15,7 +15,7 @@ namespace UnitTestProject2
 
         [TestInitialize]
         public void Initialize()
-        {
+        {//Transaction scope, kad nesugadinti duombazes
             this.scope = new TransactionScope();
         }
 
@@ -24,7 +24,7 @@ namespace UnitTestProject2
         {
             IDataB ADB = new AzureDatabase();
 
-            var result = ADB.AddBook(new Book("1", "2", "3","7", 4, 5, "6", 0));
+            var result = ADB.AddBook(AddThis: new Book("1", "2", "3","7", 4, 5, "6", 0));
 
             Assert.AreEqual(result, 0);
         }
@@ -34,7 +34,7 @@ namespace UnitTestProject2
         {
             IDataB ADB = new AzureDatabase();
 
-            var result = ADB.AddBook(new Book(null, null, null, null, 4, 5, null, 0));
+            var result = ADB.AddBook(AddThis: new Book(null, null, null, null, 4, 5, null, 0));
 
             Assert.AreEqual(result, 1);
         }
@@ -43,7 +43,7 @@ namespace UnitTestProject2
         public void AddUser_ValidUserAdded_Return0()
         {
             IDataB ADB = new AzureDatabase();
-            var result = ADB.AddUser("1", "2", "3", 0);
+            var result = ADB.AddUser(name: "1", Password: "2", email: "3", Permission: 0);
             Assert.AreEqual(result, 0);
         }
 
@@ -66,7 +66,7 @@ namespace UnitTestProject2
             ADB.AddBook(Fakebook);
             //---
 
-            var result = ADB.BorrowBook(Fakebook, Fakeuser);
+            var result = ADB.BorrowBook(addThis: Fakebook, user: Fakeuser);
 
             Assert.AreEqual(result, 0);
         }
@@ -80,7 +80,7 @@ namespace UnitTestProject2
             var Fakeuser = ADB.GetUser("1");
             //---
 
-            var result = ADB.BorrowBook(new Book { ID = -1, code = null }, Fakeuser);
+            var result = ADB.BorrowBook(addThis: new Book { ID = -1, code = null }, user: Fakeuser);
 
             Assert.AreEqual(result, 1);
         }
@@ -95,7 +95,10 @@ namespace UnitTestProject2
             var Fakebook = new Book("1", "2", "3", "7", 4, 5, "6", 0) { code = "80085" };
             ADB.AddBook(Fakebook);
             ADB.BorrowBook(Fakebook, Fakeuser);
-            var result = ADB.ReturnBook(Fakebook, Fakeuser);
+            //---
+
+            var result = ADB.ReturnBook(delThis: Fakebook, user: Fakeuser);
+
             Assert.AreEqual(result, 0);
         }
 
@@ -109,7 +112,10 @@ namespace UnitTestProject2
             var Fakebook = new Book("1", "2", "3", "7", 4, 5, "6", 0) { code = "80085" };
             ADB.AddBook(Fakebook);
             ADB.BorrowBook(Fakebook, Fakeuser);
-            var result = ADB.GetAllUserBooks(Fakeuser);
+            //---
+
+            var result = ADB.GetAllUserBooks(user: Fakeuser);
+
             Assert.IsNotNull(result);
         }
 
@@ -120,7 +126,7 @@ namespace UnitTestProject2
             //Fake data
             ADB.AddUser("1", "2", "3", 0);
 
-            var result = ADB.SearchUser("1");
+            var result = ADB.SearchUser(name: "1");
 
             Assert.AreEqual(result, 2);
         }
@@ -130,7 +136,7 @@ namespace UnitTestProject2
         {
             IDataB ADB = new AzureDatabase();
 
-            var result = ADB.SearchUser("%%%");
+            var result = ADB.SearchUser(name: "%%%");
 
             Assert.AreEqual(result, 0);
         }
@@ -141,8 +147,9 @@ namespace UnitTestProject2
             IDataB ADB = new AzureDatabase();
             //Fake data
             ADB.AddUser("1", "2", "3", 0);
+            //---
 
-            var result = ADB.GetUser("1");
+            var result = ADB.GetUser(name: "1");
 
             Assert.IsNotNull(result);
         }
@@ -151,10 +158,8 @@ namespace UnitTestProject2
         public void GetUser_UserNotFound_ReturnNull()
         {
             IDataB ADB = new AzureDatabase();
-            //Fake data
-            //ADB.AddUser("1", "2", "3", 0);
 
-            var result = ADB.GetUser("%%%");
+            var result = ADB.GetUser(name: "%%%");
 
             Assert.IsNull(result);
         }

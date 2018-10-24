@@ -38,7 +38,7 @@ namespace VirtualLibrary.presenters
         public int CheckTBs(string NameField, string AuthorField, string PressField, string Pagesfield, string GenreField, string  QuantityField, string BarcodeField)  //Tikrinama ar texfieldai visi uzpildyti ir ar uzpildyti legaliai
         {
             String[] TBs = { NameField, AuthorField, PressField, Pagesfield, GenreField, QuantityField, BarcodeField };
-            var noSpecials = new System.Text.RegularExpressions.Regex("^[a-zA-Z0-9]*$");
+            var noSpecials = new System.Text.RegularExpressions.Regex("^[a-zA-Z0-9]*$"); //Regexas ivedimui be specealiu simboliu
             foreach (string tb in TBs)
             {
                 if (tb.Replace(" ", "") == "")

@@ -96,7 +96,7 @@ namespace VirtualLibrary.presenters
         {
             Application.Idle -= FrameProcedure;
             if (RefClass.Instance.VR != null && procedure == "Borrow" || procedure == "Return")
-                RefClass.Instance.VR.block = true;
+                RefClass.Instance.VR.SetBlockFlagTrue();
             capture.Dispose();
             borrowView.CloseForm();
         }
