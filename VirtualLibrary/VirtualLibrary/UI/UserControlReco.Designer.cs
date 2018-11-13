@@ -51,25 +51,26 @@
             // 
             // a
             // 
-            this.a.HeaderText = "Column1";
+            this.a.FillWeight = 150F;
+            this.a.HeaderText = "Book Title";
             this.a.Name = "a";
             this.a.Width = 150;
             // 
             // b
             // 
-            this.b.HeaderText = "Column1";
+            this.b.HeaderText = "Author";
             this.b.Name = "b";
             this.b.Width = 150;
             // 
             // c
             // 
-            this.c.HeaderText = "Column1";
+            this.c.HeaderText = "Pages";
             this.c.Name = "c";
             this.c.Width = 150;
             // 
             // d
             // 
-            this.d.HeaderText = "Column1";
+            this.d.HeaderText = "Genre";
             this.d.Name = "d";
             this.d.Width = 150;
             // 
