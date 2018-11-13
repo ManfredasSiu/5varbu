@@ -2,6 +2,7 @@
 using Microsoft.ProjectOxford.Face.Contract;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace VirtualLibrary
         public FaceApiCalls()
         {
             //CreateGroup();
-            faceServiceClient = new FaceServiceClient(File.ReadAllText(Application.StartupPath + "/API/APIKEY.txt"), "https://northeurope.api.cognitive.microsoft.com/face/v1.0");
+            faceServiceClient = new FaceServiceClient(ConfigurationManager.AppSettings.Get("apikey"), ConfigurationManager.AppSettings.Get("path"));
         }
 
         private async void CreateGroup()
