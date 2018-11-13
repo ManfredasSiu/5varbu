@@ -131,7 +131,7 @@ namespace VirtualLibrary.presenters
         public void RButtonBehaviour() //Recom
         {
             moveSidePanel(main.ButtonRecom);
-            AddControlsToPanel((UserControl)RefClass.Instance.InitRecomControl());
+            AddControlsToPanel((UserControl)RefClass.Instance.InitRecoControl());
         }
       
         public void LButtonBehaviour()  //Library

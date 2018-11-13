@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VirtualLibrary.presenters;
+using VirtualLibrary.UI;
 using VirtualLibrary.Views;
 
 namespace VirtualLibrary
@@ -69,6 +70,8 @@ namespace VirtualLibrary
 
         public IAddBook IABook = null;
 
+        public IUControlR RecoControl = null;
+
         public void SaveMenuForm(IMenu menuForm)
         {
             this.menuForm = menuForm;
@@ -127,9 +130,9 @@ namespace VirtualLibrary
             return MBControl = new UserControlMyBooks();
         }
 
-        public IUControlR InitRecomControl()
+        public IUControlR InitRecoControl()
         {
-            return new UserControlRecom();
+            return RecoControl = new UserControlReco();
         }
     }
 }

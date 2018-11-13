@@ -172,6 +172,7 @@
     <Compile Include="presenters\UserControlLibraryPresenter.cs" />
     <Compile Include="presenters\UserControlMBPresenter.cs" />
     <Compile Include="API%27s\RefClass.cs" />
+    <Compile Include="presenters\UserControlRecoPresenter.cs" />
     <Compile Include="UI\FormAdminRemoveBook.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,13 +243,13 @@
     <Compile Include="UI\UserControlMyBooks.Designer.cs">
       <DependentUpon>UserControlMyBooks.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControlRecom.cs">
+    <Compile Include="Logic\VoiceRecognition.cs" />
+    <Compile Include="UI\UserControlReco.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\UserControlRecom.Designer.cs">
-      <DependentUpon>UserControlRecom.cs</DependentUpon>
+    <Compile Include="UI\UserControlReco.Designer.cs">
+      <DependentUpon>UserControlReco.cs</DependentUpon>
     </Compile>
-    <Compile Include="Logic\VoiceRecognition.cs" />
     <Compile Include="Views\IAddBook.cs" />
     <Compile Include="Views\IBorrow.cs" />
     <Compile Include="Views\ILogin.cs" />
@@ -294,8 +295,8 @@
     <EmbeddedResource Include="UI\UserControlMyBooks.resx">
       <DependentUpon>UserControlMyBooks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UserControlRecom.resx">
-      <DependentUpon>UserControlRecom.cs</DependentUpon>
+    <EmbeddedResource Include="UI\UserControlReco.resx">
+      <DependentUpon>UserControlReco.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DataClasses1.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
